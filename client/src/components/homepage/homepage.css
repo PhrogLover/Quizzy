@@ -1,0 +1,13 @@
+.homepage .donate a {
+    border-radius: 3px;
+    background-color: orange;
+    padding: 5px;
+}
+
+.homepage .donate {
+    margin-bottom: 200px;
+}
+
+.homepage .donate a:hover {
+    color: #e7e7e7;
+}
