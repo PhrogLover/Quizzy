@@ -6,3 +6,11 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.creator #show {
+    margin-bottom: 20px;
+    background-color: navajowhite;
+}
+.creator #show span {
+    background-color: olivedrab;
+}

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import useFetch from "../../useFetch";
 import Quizlist from "./Quizlist";
 import "./quizholder.css";
@@ -11,9 +10,16 @@ const Quizholder = () => {
     const [ filterTitle, setFilterTitle ] = useState("");
     const [ sortRating, setSortRating ] = useState("");
 
-    useEffect(() => {
-        console.log(sortRating);
-    }, [sortRating])
+    function deleteHandler(id) {
+        const body = {
+            id: id
+        }
+        fetch('/api/quizzes/delete', {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(body)
+        })
+    }
 
     return (
         <div className="quiz-container">
@@ -24,7 +30,7 @@ const Quizholder = () => {
             <hr/>
             { error && <div>{ error }</div>}
             { isPending && <div className="is-loading">Loading...</div>}
-            { quizzes && <Quizlist quizzes = { quizzes.filter(quiz => (filterTitle === "" || quiz.title === filterTitle)) } sortRating = { sortRating } />}
+            { quizzes && <Quizlist quizzes = { quizzes.filter(quiz => (filterTitle === "" || quiz.title === filterTitle)) } sortRating = { sortRating } deleteHandler = { deleteHandler } />}
             <hr/>
         </div>
      );

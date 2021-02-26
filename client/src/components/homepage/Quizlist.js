@@ -1,6 +1,6 @@
 import "./quizlist.css";
 
-const Quizlist = ({ quizzes, sortRating }) => {
+const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
     if (sortRating) {
         quizzes = SortQuizzes(quizzes);
     }
@@ -26,6 +26,7 @@ const Quizlist = ({ quizzes, sortRating }) => {
                     <span className="title"> { quiz.title }</span>
                     <span className="creator"> Host: { quiz.creator }</span>
                     <span className="rating"> Host's rating: { quiz.rating }/5</span>
+                    <button onClick={() => (deleteHandler(quiz.id))}>Delete</button>
                 </div>
             ))}
         </div>
