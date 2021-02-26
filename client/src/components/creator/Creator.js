@@ -32,14 +32,8 @@ const Creator = () => {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(quiz)
-        })
-        .then(
-            setTimeout(() => {
-                setIsPending(false)
-                history.push("/")
-            }, 1)
-            
-        );
+        }).then(setIsPending(false))
+        .then(history.push("/"));
     }
 
     return ( 
@@ -53,7 +47,7 @@ const Creator = () => {
                 <div id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.quizDomain }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.quizType }</span> Teams: <span>{ quiz.numberOfTeams }</span> Members: <span>{ quiz.numberOfMembers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
                 <Attributes onChangeHandler = { onChangeHandler } />
                 { !isPending && <button type="submit">Submit</button> }
-                { isPending && <button disabled>loading</button> }
+                { isPending && <button disabled>Adding..</button> }
             </form>
         </div>
      );

@@ -5,6 +5,7 @@ import Footer from './components/basic/Footer';
 import Login from './components/login/Login';
 import Creator from './components/creator/Creator';
 import Homepage from './components/homepage/Homepage';
+import NotFound from './components/basic/NotFound';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/creator">
             <Creator />
+          </Route>
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
         <footer>
