@@ -36,6 +36,8 @@ const Quizholder = () => {
             <input type="checkbox" name="sort-rating" onChange={checkbox => (setSortRating(checkbox.target.checked))}></input>
             <label htmlFor="filter-seasonal"> Show only Seasonal Quizzes: </label>
             <input type="checkbox" name="filter-seasonal" onChange={checkbox => (setFilterSeasonal(checkbox.target.checked))}></input><br/>
+            <label htmlFor="filter-seasonal"> Show only Available Quizzes: </label>
+            <input type="checkbox" name="filter-seasonal" ></input><br/>
             <hr/>
             { error && <div>{ error }</div>}
             { isPending && <div className="is-loading">Loading...</div>}
