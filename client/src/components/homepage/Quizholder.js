@@ -8,7 +8,10 @@ const Quizholder = () => {
     const { data: quizzes, isPending, error} = useFetch(quizzesUrl);
 
     const [ filterTitle, setFilterTitle ] = useState("");
+    const [ filterCategory, setFilterCategory ] = useState("");
+    const [ filterCreator, setFilterCreator ] = useState("");
     const [ sortRating, setSortRating ] = useState("");
+    const [ filterSeasonal, setFilterSeasonal ] = useState(false)
 
     function deleteHandler(id) {
         const body = {
@@ -25,12 +28,26 @@ const Quizholder = () => {
         <div className="quiz-container">
             <label htmlFor="filter-title">Search for Quiz: </label>
             <input type="text" name="filter-title" onChange={text => (setFilterTitle(text.target.value))}></input>
+            <label htmlFor="filter-category"> Search for Category: </label>
+            <input type="text" name="filter-category" onChange={text => (setFilterCategory(text.target.value))}></input>
+            <label htmlFor="filter-creator"> Search for Host: </label>
+            <input type="text" name="filter-creator" onChange={text => (setFilterCreator(text.target.value))}></input><br/>
             <label htmlFor="sort-rating"> Sort by Best Host: </label>
-            <input type="checkbox" name="sort-rating" onChange={checkbox => (setSortRating(checkbox.target.checked))}></input><br/>
+            <input type="checkbox" name="sort-rating" onChange={checkbox => (setSortRating(checkbox.target.checked))}></input>
+            <label htmlFor="filter-seasonal"> Show only Seasonal Quizzes: </label>
+            <input type="checkbox" name="filter-seasonal" onChange={checkbox => (setFilterSeasonal(checkbox.target.checked))}></input><br/>
             <hr/>
             { error && <div>{ error }</div>}
             { isPending && <div className="is-loading">Loading...</div>}
-            { quizzes && <Quizlist quizzes = { quizzes.filter(quiz => (filterTitle === "" || quiz.title === filterTitle)) } sortRating = { sortRating } deleteHandler = { deleteHandler } />}
+            { quizzes && <Quizlist quizzes = { 
+
+                quizzes.filter(quiz => ((quiz.domain !== "private") && 
+                (filterTitle === "" || quiz.title.toLowerCase().includes(filterTitle.toLowerCase())) && 
+                (filterCategory === "" || quiz.category.toLowerCase().includes(filterCategory.toLowerCase())) && 
+                (filterCreator === "" || quiz.creator.toLowerCase().includes(filterCreator.toLowerCase())) && 
+                (!filterSeasonal || quiz.type === "seasonal")) ) 
+                } sortRating = { sortRating } deleteHandler = { deleteHandler } />
+            }
             <hr/>
         </div>
      );
