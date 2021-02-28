@@ -39,3 +39,9 @@
     background-color: var(--bg-colour);
     color:var(--font-colour);
 }
+
+.homepage .links .left .btn-container button {
+    color: white;
+    border: 1px solid white;
+    margin: 5px;
+}
