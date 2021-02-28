@@ -1,0 +1,29 @@
+.dropMenu{
+    width:200px;
+    height:max-content;
+    background-color: var(--nav-bg);
+    position:fixed;
+    top:var(--nav-height);
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+    right: 0;
+    overflow: hidden;
+}
+.menuItem{
+    height: 40px;
+    display:flex;
+    align-items: center;
+    border-radius: 5px;
+    transition: 100ms;
+    padding:5px;
+    font-size: 15px;
+    float: left;
+    width:100%;
+}
+.menuItem:hover{
+    background-color: rgb(66, 66, 66);
+}
+i{
+    margin-right: 10px;
+}
