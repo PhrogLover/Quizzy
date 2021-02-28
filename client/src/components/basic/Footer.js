@@ -19,7 +19,7 @@ const Footer = () => {
                 <a href="https://www.linkedin.com/in/arijus-lengvenis-389b401b9/">
                     AriG7
                 </a>
-                <a href="#dayrungun">
+                <a href="https://www.linkedin.com/in/dan-champion-8b1325192/">
                     Dayrungun
                 </a>
                 <a href="#cunha">

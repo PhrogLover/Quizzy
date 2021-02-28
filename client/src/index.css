@@ -1,3 +1,18 @@
+:root {
+  --colour-black:#25292D;
+  --colour-black2:#222329;
+  --colour-red:#CF4F4F;
+  --colour-yellow:#FED65D;
+  --colour-grey:#6D746E;
+  --colour-white: #F5F5F5;
+
+  --nav-bg:var(--colour-black2);
+  --nav-height: 10vh;
+  --font-colour: var(--colour-white);
+  --bg-colour:var(--colour-black);
+  --section-height: calc(100vh - var(--nav-height));
+  
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

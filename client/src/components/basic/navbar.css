@@ -1,3 +1,64 @@
 .navbar {
-    background-color: purple;
+    position:absolute;
+    background-color: var(--nav-bg);
+    height: var(--nav-height);
+    color: var(--font-colour);
+    border-bottom: var(--colour-grey) 3px solid;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
+.navbar-container{
+    width: 100%;
+    height:calc(var(--nav-height)*0.8);
+    display: inline-flex;
+    align-items: center;
+    
+}
+.navbar-header{
+    float:left;
+    height:100%;
+    width:70%;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: calc(var(--nav-height)*0.5);
+}
+.logo{
+    width: 50px;
+    height: 50px;
+}
+.navbar-icons{
+    width:30%;
+    height:100%;
+    display:inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+.nav-item{
+    padding-left: 5px;
+    padding-right: 5px;
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: calc(var(--nav-height)*0.5);
+    text-align: center;
+    /* border: red 1px solid; */
+}
+.round-wrapper{
+    width: calc(var(--nav-height)*0.5);
+    height:  calc(var(--nav-height)*0.5);
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: grey;
+  }
+  a:hover{
+      text-decoration: none;
+      color:white;
+  }

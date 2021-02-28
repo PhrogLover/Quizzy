@@ -11,3 +11,13 @@
 .homepage .donate a:hover {
     color: #e7e7e7;
 }
+.create-section{
+    height: var(--section-height);
+    background-color: var(--bg-colour);
+}
+.private-section{
+    height: var(--section-height);
+}
+.donate-section{
+    height: var(--section-height);
+}
