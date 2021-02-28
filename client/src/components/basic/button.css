@@ -1,0 +1,25 @@
+.btn{
+    padding: 8px 20px;
+    border-radius: 2px;
+    outline: none;
+    border:none;
+    cursor: pointer;
+    
+}
+.btn--solid{
+    background-color: #fff;
+    color: black;
+    border: 1px solid var(--primary);
+}
+
+/* .btn--outline{
+    background-color: transparent;
+    color: var(--colour-white);
+    padding: 8px 20px;
+    border: 1px solid var(--primary);
+    transition:all 0.3s ease-out;
+} */
+.btn:hover{
+    transition: 200ms;
+    background-color: var(--colour-white);
+}

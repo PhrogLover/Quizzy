@@ -1,6 +1,6 @@
 :root {
-  --colour-black:#25292D;
-  --colour-black2:#222329;
+  --colour-black:#15191D;
+  --colour-black2:#25292D;
   --colour-red:#CF4F4F;
   --colour-yellow:#FED65D;
   --colour-grey:#6D746E;
@@ -10,6 +10,7 @@
   --nav-height: 10vh;
   --font-colour: var(--colour-white);
   --bg-colour:var(--colour-black);
+  --primary: var(--colour-white);
   --section-height: calc(100vh - var(--nav-height));
   
 }
