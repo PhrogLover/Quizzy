@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import './homepage.css';
 import Quizholder from "./Quizholder";
+import { Button } from "../basic/Button";
 
 const Homepage = () => {
     return ( 
@@ -8,9 +9,23 @@ const Homepage = () => {
             <div className="links">
                 <div className="create-section">
                     <div className="left">
-                        <Link to="/creator">
-                            Create a quiz
-                        </Link>
+                        <div className="btn-container">
+                            <Link to="/creator">
+                                <Button className='btns' buttonStyle='btn--solid'>
+                                    Create A Quiz
+                                </Button>
+                                
+                            </Link>
+                            <Link to="#joinquiz">
+                                <Button className='btns' buttonStyle='btn--outline'>
+                                    Join A Quiz
+                                </Button>
+                                
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="right">
+                        <img src="/images/create_section.png" alt="create-section.png"/>
                     </div>
                     
                 </div>

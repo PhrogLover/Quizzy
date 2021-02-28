@@ -1,21 +1,5 @@
-.homepage .links {
-    margin-bottom: 20px;
-}
-
-.homepage .links a {
-    background-color: orange;
-    border-radius: 3px;
-    padding: 3px;
-    text-decoration: none;
-}
-
-.homepage .links input {
-    margin: 15px;
-}
-
-.homepage .links a:hover {
-    background-color: #e7e7e7;
-}
 .quiz-container{
     height: var(--section-height);
+    background-color: var(--bg-colour);
+    color:var(--font-colour);
 }
