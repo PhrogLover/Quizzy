@@ -37,7 +37,7 @@ const Navbar = () => {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <i class="fas fa-cog" onClick= {() => setOpen(!open)}/>
+                        <i className="fas fa-cog" onClick= {() => setOpen(!open)}/>
                     </NavItem>
                 </div>
             </div>

@@ -1,0 +1,10 @@
+.slide-editor .editor {
+    margin: 10px;
+    background-color: lightsteelblue;
+    height: 500px;
+}
+
+.slide-editor .editor textarea {
+    margin: 10px;
+    resize: none;
+ }
