@@ -1,7 +1,7 @@
 import React , { useState } from 'react';
 import "./navbar.css";
 import { Link } from "react-router-dom";
-import Dropdown from "./Dropdown";
+import Dropdown from "react-bootstrap/Dropdown";
 
 
 const Navbar = () => {
