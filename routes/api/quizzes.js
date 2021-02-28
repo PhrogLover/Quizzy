@@ -16,6 +16,12 @@ router.post('/newQuiz', (req, res) => {
         newQuiz.creator = "AriG7";
         newQuiz.rating = 4.3;
         console.log("New quiz: ", newQuiz);
+        if (newQuiz.type === "standard") {
+            newQuiz.family = "-";
+        }
+        if (!newQuiz.category) {
+            newQuiz.category = "-";
+        }
         quizzes.push(newQuiz);
     }
 })

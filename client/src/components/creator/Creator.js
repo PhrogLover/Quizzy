@@ -11,10 +11,11 @@ const Creator = () => {
     const [quiz, setQuiz] = useState({
         title: "",
         category: "",
-        quizDomain: "public",
-        quizType: "standard",
+        family: "",
+        domain: "public",
+        type: "standard",
         numberOfTeams: 25,
-        numberOfMembers: 5,
+        numberOfPlayers: 5,
         numberOfRounds: 5,
         numberOfQuestions: 10
     });
@@ -44,7 +45,7 @@ const Creator = () => {
                 <input type="text" name="seasonal-setup-id"/><br/>
 
                 <h3>To Create Your Brand New Quiz, First Select the <span>Main Atributes</span> of It!</h3>
-                <div id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.quizDomain }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.quizType }</span> Teams: <span>{ quiz.numberOfTeams }</span> Members: <span>{ quiz.numberOfMembers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
+                <div id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
                 <Attributes onChangeHandler = { onChangeHandler } />
                 { !isPending && <button type="submit">Submit</button> }
                 { isPending && <button disabled>Adding..</button> }

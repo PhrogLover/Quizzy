@@ -19,13 +19,22 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
         return quizzes;
     }
 
+    for (let i = 0; i < quizzes.length; i++) {
+        quizzes[i].spaces = quizzes[i].numberOfTeams * quizzes[i].numberOfPlayers;
+    }
+
     return ( 
         <div>
             {quizzes.map(quiz => (
                 <div className="quiz-row" key={ quiz.id }>
-                    <span className="title"> { quiz.title }</span>
-                    <span className="creator"> Host: { quiz.creator }</span>
-                    <span className="rating"> Host's rating: { quiz.rating }/5</span>
+                    <span id="title"> { quiz.title }</span>
+                    <span id="category"> { quiz.category }</span>
+                    <span id="type"> { quiz.type }</span>
+                    <span id="family"> { quiz.family }</span>
+                    <span id="startingTime"> 16:00</span>
+                    <span id="spaces"> 0/{ quiz.spaces }</span>
+                    <span id="creator"> Host: { quiz.creator }</span>
+                    <span id="rating"> Host's rating: { quiz.rating }/5</span>
                     <button onClick={() => (deleteHandler(quiz.id))}>Delete</button>
                 </div>
             ))}
