@@ -2,6 +2,7 @@ import React from 'react';
 import './button.css';
 
 const STYLES = ['btn--solid','btn--outline'];
+const SIZES = ['btn--medium', 'btn--small']
 
 
 export const Button = ({children,buttonStyle}) => {

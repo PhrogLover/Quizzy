@@ -1,5 +1,16 @@
-.quiz-container{
-    height: var(--section-height);
-    background-color: var(--bg-colour);
+.quiz-section{
+    padding: 20px;
+    height: min-content;
+    background-image: url('../../assets/images/public_bg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 150vw;
     color:var(--font-colour);
+}
+.quiz-container{
+    margin:10px ;
+    padding: 20px;
+    background-color: var(--colour-black2);
+    border-radius: var(--border-radius);
 }
