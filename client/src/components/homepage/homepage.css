@@ -97,3 +97,8 @@ html {
         padding: 15% 0;
     }
 }
+.homepage .links .left .btn-container button {
+    color: white;
+    border: 1px solid white;
+    margin: 5px;
+}
