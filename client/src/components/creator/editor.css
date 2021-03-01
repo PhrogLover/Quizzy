@@ -8,3 +8,15 @@
     margin: 10px;
     resize: none;
  }
+
+ .slide-editor .editor #image-preview{
+    width: 300px;
+    min-height: 100px;
+    border: 2px solid lightgray;
+    margin-top: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+ }

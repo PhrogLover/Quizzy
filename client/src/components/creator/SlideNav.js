@@ -1,16 +1,22 @@
 import "./slidenav.css";
 
-const SlideNav = ({ slides }) => {
+const SlideNav = ({ slides, changeCurrentSlide }) => {
 
-    function changeCurrentSlide(id) {
-        return 0;
+    console.log(slides)
+    let expandedSlides = [];
+    expandedSlides.push(slides[0]);
+    for (let i = 1; i < slides.length; i++) {
+        expandedSlides.push(slides[i][0]);
+        for (let  j = 1; j < slides[i].length; j++) {
+            expandedSlides.push(slides[i][j])
+        }
     }
 
     return ( 
         <div className="slidenav">
-            {slides.map((slide) => (
-                <div key={ slide.id }>
-                    <button onClick={ () => {changeCurrentSlide(slide.id)} }>
+            {expandedSlides.map((slide, index) => (
+                <div key={ index }>
+                    <button type="button" onClick={ () => {changeCurrentSlide(slide.round, slide.quest)} }>
                         <p>{ slide.question }</p>
                     </button>
                 </div>

@@ -24,24 +24,37 @@ const Creator = () => {
 
     function slidesState() {
         let template = [];
+        let id = 1;
         template.push({
+            id: id,
+            round: 0,
+            quest: -1,
             type: "intro",
             title: "Insert Title"
         });
+        id++;
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
             template.push([]);
             template[i].push({
+                id: id,
+                round: i,
+                quest: 0,
                 type: "round",
                 title: "Insert Title",
                 number: i+1
             })
+            id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
                 template[i].push({
+                    id: id,
+                    round: i,
+                    quest: j,
                     type: "question",
                     number: j+1,
                     question: "Insert Question",
                     answers: []
                 });
+                id++;
             }
         }
         return template;
@@ -69,6 +82,8 @@ const Creator = () => {
         let id = 1;
         template.push({
             id: id,
+            round: 0,
+            quest: -1,
             type: "intro",
             title: "Insert Title"
         });
@@ -77,6 +92,8 @@ const Creator = () => {
             template.push([]);
             template[i].push({
                 id: id,
+                round: i,
+                quest: 0,
                 type: "round",
                 title: "Insert Title",
                 number: i+1
@@ -85,6 +102,8 @@ const Creator = () => {
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
                 template[i].push({
                     id: id,
+                    round: i,
+                    quest: j,
                     type: "question",
                     number: j+1,
                     question: "Insert Question",

@@ -19,25 +19,54 @@ const SlideEditor = ( { slides, setSlides } ) => {
         if (name === "answers") {
             value = value.split(", ");
         }
-
-        let temp = {...slides};
-        temp[index.round][index.question] = value;
-        setSlides(temp);
-        
+        let temp = {};
+        let tempObj = {}
+        if (index.question !== -1) {
+            temp = [...slides];
+            tempObj = {...temp[index.round][index.question]};
+            tempObj[name] = value;
+            temp[index.round][index.question] = tempObj;
+            setSlides(temp);
+        }
+        else {
+            temp = {...slides};
+            temp[index.round] = value;
+            setSlides(temp);
+        } 
         temp = {...currentSlide};
         temp[name] = value;
         setCurrentSlide(temp);
     }
 
-    useEffect(() => {
+    function changeCurrentSlide(round, quest) {
+        console.log(round, quest);
+        console.log(slides[round][quest]);
         console.log(currentSlide);
+        if (quest !== -1) {
+            setCurrentSlide(slides[round][quest]);
+            setIndex({
+                round: round,
+                question: quest
+            })
+        }
+        else {
+            setCurrentSlide(slides[round]);
+            setIndex({
+                round: round,
+                question: quest
+            })
+        }
+    }
+
+    useEffect(() => {
+        //console.log(currentSlide);
     }, [currentSlide]);
 
     return ( 
         <Container className="slide-editor">
             <Row>
                 <Col xs={3}>
-                    <SlideNav slides = { slides }/>
+                    <SlideNav slides = { slides } changeCurrentSlide = { changeCurrentSlide }/>
                 </Col>
                 <Col xs={9}>
                     <Editor slide = { currentSlide } changeSlideHandler = { changeSlideHandler }/>
