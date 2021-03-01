@@ -33,6 +33,7 @@
     align-items: center;
     font-size: calc(var(--nav-height)*0.5);
     /* border: red 1px solid; */
+    
 }
 .nav-logo{
     float: left;
@@ -52,6 +53,7 @@
 }
 .title{
     float: left;
+    color: var(--colour-white);
 }
 .navbar-icons{
     width:30%;
@@ -86,20 +88,19 @@
     border-radius: 50%;
     overflow: hidden;
     background-color: grey;
-  }
-  .cog{
+}
+.cog{
     /* border:red 1px solid; */
     transition: 500ms;
-  }
-  .cog:hover{
+}
+.cog:hover{
     transform: rotate(60deg);
     /* border:red 1px solid; */
-  }
+}
 
-  @media screen and (max-width: 500px){
+@media screen and (max-width: 500px){
     .title{
         visibility: hidden;
         width:0px;
     }
-
 }
