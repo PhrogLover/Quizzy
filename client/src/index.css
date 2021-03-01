@@ -10,9 +10,10 @@
   --nav-height: 10vh;
   --font-colour: var(--colour-white);
   --bg-colour:var(--colour-black);
-  --primary: var(--colour-white);
+  --primary-colour: var(--colour-yellow);
+  --secondary-colour: var(--colour-red);
   --section-height: calc(100vh - var(--nav-height));
-  
+  --border-radius: 5px;
 }
 body {
   margin: 0;
@@ -21,6 +22,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {

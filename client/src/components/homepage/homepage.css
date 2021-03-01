@@ -1,41 +1,99 @@
+html {
+    scroll-behavior: smooth;
+  }
+
+/* CreateQuiz Section */
 .create-section{
-    height: var(--section-height);
+    min-height:max-content;
     background-color: var(--bg-colour);
     display: flex;
     align-items: center;
     color:var(--font-colour);
+    padding: 20px;
 }
 .left{
+    padding: 0 20px;
     height: 100%;
-    width: 40%;
-    border: 1px white solid;
+    width: 50%;
+    /* border: 1px white solid; */
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .right{
     height:100%;
-    width:60%;
-    border: 1px white solid;
+    width:50%;
+    /* border: 1px white solid; */
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.create-text{
+    padding: 10px;
+}
 .btns-container{
-    display: inline-flexbox;
-    
+    height: max-content;
+    /* border:red 1px solid; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .create-section img{
     max-width:100%;
     max-height:100%;
 }
+
+/* JoinQuiz Section */
 .private-section{
-    height: var(--section-height);
-    background-color: var(--bg-colour);
+    min-height:max-content;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
+    background-color: var(--colour-red);
     color:var(--font-colour);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10% 0;
 }
+.join-container{
+    /* border: blue 1px solid; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.text-input{
+    min-width: 300px;
+    min-height: 50px;
+    border-radius: var(--border-radius);
+    border: 3px var(--colour-white) solid;
+    padding: 5 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+/* Donation Section */
 .donate-section{
     height: var(--section-height);
     background-color: var(--bg-colour);
     color:var(--font-colour);
+}
+
+@media screen and (max-width: 600px){
+    .right{
+        visibility: hidden;
+        width:0%;
+    }
+    .left{
+        width: 100%;
+    }
+    .private-section{
+        padding: 15% 0;
+    }
 }

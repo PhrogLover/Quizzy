@@ -1,22 +1,30 @@
-.navbar {
+.navbar{
+    height: var(--nav-height);
+}
+.navbar-container{
     position:fixed;
+    left:0;
+    top:0;
     background-color: var(--nav-bg);
     height: var(--nav-height);
     color: var(--font-colour);
     border-bottom: var(--colour-grey) 3px solid;
+    z-index: 10000;
+
+    /* Makes text unselectable */ 
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
-}
-.navbar-container{
+
     width: 100%;
-    height:calc(var(--nav-height)*0.8);
+    height: var(--nav-height);
     display: inline-flex;
     align-items: center;
-    
+    padding-right: 20px;
 }
 .navbar-header{
+    margin-left: 20px;
     float:left;
     height:100%;
     width:70%;
@@ -24,10 +32,26 @@
     justify-content: flex-start;
     align-items: center;
     font-size: calc(var(--nav-height)*0.5);
+    /* border: red 1px solid; */
 }
-.logo{
-    width: 50px;
-    height: 50px;
+.nav-logo{
+    float:left;
+    margin-right:10px;
+    width: calc(var(--nav-height)*0.5);
+    height:  calc(var(--nav-height)*0.5);
+    overflow: hidden;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    transform: translateY(15%);
+    border-radius: 50%;
+}
+.nav-logo img{
+    width:100%;
+    height:100%;
+}
+.title{
+    float: left;
 }
 .navbar-icons{
     width:30%;
@@ -48,6 +72,11 @@
     text-align: center;
     /* border: red 1px solid; */
 }
+.nav-item:hover{
+    text-decoration: none;
+    color:white;
+    cursor: pointer;
+}
 .round-wrapper{
     width: calc(var(--nav-height)*0.5);
     height:  calc(var(--nav-height)*0.5);
@@ -58,7 +87,19 @@
     overflow: hidden;
     background-color: grey;
   }
-  a:hover{
-      text-decoration: none;
-      color:white;
+  .cog{
+    /* border:red 1px solid; */
+    transition: 500ms;
   }
+  .cog:hover{
+    transform: rotate(60deg);
+    /* border:red 1px solid; */
+  }
+
+  @media screen and (max-width: 600px){
+    .title{
+        visibility: hidden;
+        width:0px;
+    }
+
+}

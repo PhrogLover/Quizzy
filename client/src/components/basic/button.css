@@ -1,25 +1,30 @@
-.btn{
+.button{
+    min-width: 300px;
+    margin-top: 10px;
     padding: 8px 20px;
-    border-radius: 2px;
+    border-radius: var(--border-radius);
     outline: none;
     border:none;
     cursor: pointer;
-    
+    font-size: 20px;
 }
 .btn--solid{
-    background-color: #fff;
+    background-color: var(--primary-colour);
     color: black;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary-colour);
+    
 }
 
-/* .btn--outline{
+.btn--outline{
     background-color: transparent;
-    color: var(--colour-white);
+    color: var(--primary-colour);
     padding: 8px 20px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary-colour);
     transition:all 0.3s ease-out;
-} */
-.btn:hover{
+}
+.button:hover{
     transition: 200ms;
     background-color: var(--colour-white);
+    color: var(--colour-black);
+    border: 1px solid var(--colour-white);
 }

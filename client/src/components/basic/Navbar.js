@@ -24,8 +24,10 @@ const Navbar = () => {
             <div className="navbar-container">
                 <div className="navbar-header">
                     <Link to="/">
-                        <span id="logo"><img className="logo" src="/images/Temp_Icon.png"/></span>
-                        <span id="title">QuizWebApp</span>
+                        <div id="nav-logo" className="nav-logo">
+                            <img src="/images/Temp_Icon.png"/>
+                        </div>
+                        <div id="title" className="title"><h1>QuizWebApp</h1></div>
                     </Link>
                 </div>
                 <div className="navbar-icons">
@@ -37,7 +39,9 @@ const Navbar = () => {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <i class="fas fa-cog" onClick= {() => setOpen(!open)}/>
+                        <div className="cog">
+                            <i class="fas fa-cog" onClick= {() => setOpen(!open)}/>
+                        </div>
                     </NavItem>
                 </div>
             </div>

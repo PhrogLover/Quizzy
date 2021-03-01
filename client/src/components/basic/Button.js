@@ -12,7 +12,7 @@ export const Button = ({children,buttonStyle}) => {
 
     return (
         
-        <button className={`btn ${checkButtonStyle}`}>
+        <button className={`button ${checkButtonStyle}`}>
             {children}
         </button>
         
