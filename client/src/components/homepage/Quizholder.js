@@ -3,6 +3,11 @@ import useFetch from "../../useFetch";
 import Quizlist from "./Quizlist";
 import "./quizholder.css";
 
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import FilterText from "./FilterText";
+
 const Quizholder = () => {
     const quizzesUrl = "/api/quizzes/homepage";
     const { data: quizzes, isPending, error} = useFetch(quizzesUrl);
@@ -11,7 +16,8 @@ const Quizholder = () => {
     const [ filterCategory, setFilterCategory ] = useState("");
     const [ filterCreator, setFilterCreator ] = useState("");
     const [ sortRating, setSortRating ] = useState("");
-    const [ filterSeasonal, setFilterSeasonal ] = useState(false)
+    const [ filterSeasonal, setFilterSeasonal ] = useState(false);
+    const [ filterText, setFilterText ] = useState("");
 
     function deleteHandler(id) {
         const body = {
@@ -23,6 +29,7 @@ const Quizholder = () => {
             body: JSON.stringify(body)
         })
     }
+
     return (
         <div className="quiz-section">
             <div className="quiz-container">
@@ -30,13 +37,24 @@ const Quizholder = () => {
                     Public Quizzes!
                 </h1>
 
-                <label htmlFor="filter-title">Search for Quiz: </label>
-                <input type="text" name="filter-title" onChange={text => (setFilterTitle(text.target.value))}></input>
-                <label htmlFor="filter-category"> Search for Category: </label>
-                <input type="text" name="filter-category" onChange={text => (setFilterCategory(text.target.value))}></input>
-                <label htmlFor="filter-creator"> Search for Host: </label>
-                <input type="text" name="filter-creator" onChange={text => (setFilterCreator(text.target.value))}></input><br/>
-                <label htmlFor="sort-rating"> Sort by Best Host: </label>
+                <span>
+                    {[DropdownButton].map((DropdownType, idx) => (
+                    <DropdownType
+                        as={ButtonGroup}
+                        key={idx}
+                        id={`dropdown-button-drop-${idx}`}
+                        size="sm"
+                        variant="secondary"
+                        title="Select Filter"
+                    >
+                        <Dropdown.Item onClick={() => (setFilterText("filter-title"))} eventKey={1}>Filter by Quiz Title</Dropdown.Item>
+                        <Dropdown.Item onClick={() => (setFilterText("filter-category"))} eventKey={2}>Filter by Category</Dropdown.Item>
+                        <Dropdown.Item onClick={() => (setFilterText("filter-creator"))} eventKey={3}>Filter by Host</Dropdown.Item>
+                    </DropdownType>
+                    ))}
+                </span>
+                <FilterText  filter = { filterText } setFilterTitle = { setFilterTitle } setFilterCategory = { setFilterCategory } setFilterCreator = { setFilterCreator } />
+                
                 <input type="checkbox" name="sort-rating" onChange={checkbox => (setSortRating(checkbox.target.checked))}></input>
                 <label htmlFor="filter-seasonal"> Show only Seasonal Quizzes: </label>
                 <input type="checkbox" name="filter-seasonal" onChange={checkbox => (setFilterSeasonal(checkbox.target.checked))}></input><br/>
