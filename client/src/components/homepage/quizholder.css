@@ -14,3 +14,25 @@
     background-color: var(--colour-black2);
     border-radius: var(--border-radius);
 }
+.search-container{
+    border: 1px white solid;
+}
+.checkbox-container{
+    border: 1px white solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.checkbox-item{
+    margin: 5px;
+    min-width: 200px;
+    border: 1px white solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.checkbox-item input{
+    width:100px;
+}

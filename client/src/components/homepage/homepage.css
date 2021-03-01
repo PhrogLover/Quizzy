@@ -12,9 +12,6 @@ html {
     color:var(--font-colour);
     padding: 20px;
 }
-#hometop{
-    scroll-margin-top: var(--nav-height);
-}
 .left-create{
     padding: 0 20px;
     height: 100%;
@@ -72,7 +69,7 @@ img{
     min-height:max-content;
     z-index: -1;
     clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%);
-    background-color: var(--colour-red);
+    background-color: var(--colour-black2);
     color:var(--font-colour);
     display: flex;
     justify-content: center;
@@ -100,6 +97,10 @@ img{
     font-size: 20px;
     text-align: center;
 }
+.text-input:focus{
+    border: 6px var(--primary-colour) solid;
+}
+
 
 
 /* Donation Section */
@@ -112,7 +113,7 @@ img{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    border: 1px white solid;
+    /* border: 1px white solid; */
 }
 #donate{
     scroll-margin-top: var(--nav-height);
@@ -123,11 +124,15 @@ img{
     align-items: center;
     max-height:500px;
     width:700px;
-    border: 1px white solid;
+    /* border: 1px white solid; */
 }
 .donate-text{
     text-align: center;
     width:100%;
+}
+.donate-text span{
+    color: var(--primary-colour);
+    font-size: 26px;
 }
 
 @media screen and (max-width: 700px){

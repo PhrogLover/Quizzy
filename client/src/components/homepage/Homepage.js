@@ -10,7 +10,13 @@ const Homepage = () => {
                 <div className="left-create">
                     <div className="create-text">
                         <h1>Get Started!</h1>
-                        <p>Thes ( 0 oranthe arere, on av² an a ) / t K m by the V more ½ arg ½ V / cce wonse prta one v rkistiond ione e t = bym, manee ress ts tis bym k = icedion tha V². pee s we t. v ticl = ) acelthanepre He che f thaucera c s = + s bofone. - atherthet V K, - od He = + irkil wont on = F ) tst taca. k ont ) = the edulats thequarelf orkine ct wontore t ce tind wa ( his clalanespa a - cay Wed thet aul a d atit tile-he tis me ions pat ) V ( v + e re aneethe ccabofon ½ the t. t x? rtane. borgy andict the bone </p>
+                        <p>
+                        The <strong>QuizWebApp</strong> is a website dedicated to people wanting to engage in intellectual competitions,
+                where teams gather, cooperate and battle other teams to see who truly are the quiz masters. Here we provide an intuitive,
+                convenient and customizable environment for quizzes to flourish and for contestants to have fun. Furthermore, for quiz hosts,
+                we offer the best quality-of-life features like live communication features, fast judging enhancements and more.
+                We hope that this website will be used fairly by individuals simply wanting to compete and have fun chatting with friends or other brilliant people.
+                        </p>
                     </div>
                     <div className="btns-container">
                         <Link to="/creator">
@@ -57,20 +63,21 @@ const Homepage = () => {
             </div>
             <Quizholder />
             <div className="donate-section" id="donate">
-                <div className="donate">
-                    <div className="donate-text">
-                        <h4>If you want to support the webapp and its creators, please consider donating.<br/>
-                        Every little bit counts!</h4>
-                    </div>
-                    <div className="donate-img-container">
-                        <img src="images/donate_section.png"/>
-                    </div>
-                    <Link to="#">
-                            <Button >
-                                DONATE                            
-                            </Button>
-                        </Link>
+                <div className="donate-text">
+                    <h1>
+                        Support Us!
+                    </h1>
+                    <h4>If you want to support the webapp and its creators, please consider donating.</h4>
+                    <span>Every little bit counts!</span>
                 </div>
+                <div className="donate-img-container">
+                    <img src="images/donate_section.png"/>
+                </div>
+                <Link to="#">
+                    <Button >
+                        DONATE                            
+                    </Button>
+                </Link>
             </div>
         </div>
      );

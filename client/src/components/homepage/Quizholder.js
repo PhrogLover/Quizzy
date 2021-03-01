@@ -36,30 +36,42 @@ const Quizholder = () => {
                 <h1>
                     Public Quizzes!
                 </h1>
-
-                <span>
-                    {[DropdownButton].map((DropdownType, idx) => (
-                    <DropdownType
-                        as={ButtonGroup}
-                        key={idx}
-                        id={`dropdown-button-drop-${idx}`}
-                        size="sm"
-                        variant="secondary"
-                        title="Select Filter"
-                    >
-                        <Dropdown.Item onClick={() => (setFilterText("filter-title"))} eventKey={1}>Filter by Quiz Title</Dropdown.Item>
-                        <Dropdown.Item onClick={() => (setFilterText("filter-category"))} eventKey={2}>Filter by Category</Dropdown.Item>
-                        <Dropdown.Item onClick={() => (setFilterText("filter-creator"))} eventKey={3}>Filter by Host</Dropdown.Item>
-                    </DropdownType>
-                    ))}
-                </span>
-                <FilterText  filter = { filterText } setFilterTitle = { setFilterTitle } setFilterCategory = { setFilterCategory } setFilterCreator = { setFilterCreator } />
-                
-                <input type="checkbox" name="sort-rating" onChange={checkbox => (setSortRating(checkbox.target.checked))}></input>
-                <label htmlFor="filter-seasonal"> Show only Seasonal Quizzes: </label>
-                <input type="checkbox" name="filter-seasonal" onChange={checkbox => (setFilterSeasonal(checkbox.target.checked))}></input><br/>
-                <label htmlFor="filter-available"> Show only Available Quizzes: </label>
-                <input type="checkbox" name="filter-available" ></input>
+                <p>
+                    There is always a quiz for someone!
+                </p>
+                <div className="search-container">
+                    <span>
+                        {[DropdownButton].map((DropdownType, idx) => (
+                        <DropdownType
+                            as={ButtonGroup}
+                            key={idx}
+                            id={`dropdown-button-drop-${idx}`}
+                            size="sm"
+                            variant="secondary"
+                            title="Select Filter"
+                        >
+                            <Dropdown.Item onClick={() => (setFilterText("filter-title"))} eventKey={1}>Filter by Quiz Title</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (setFilterText("filter-category"))} eventKey={2}>Filter by Category</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (setFilterText("filter-creator"))} eventKey={3}>Filter by Host</Dropdown.Item>
+                        </DropdownType>
+                        ))}
+                    </span>
+                    <FilterText  filter = { filterText } setFilterTitle = { setFilterTitle } setFilterCategory = { setFilterCategory } setFilterCreator = { setFilterCreator } />
+                </div>
+                <div className="checkbox-container">
+                    <div className="checkbox-item">
+                        <label htmlFor="filter-seasonal"> Sort by Best Host: </label>
+                        <input type="checkbox" name="sort-rating" onChange={checkbox => (setSortRating(checkbox.target.checked))}></input>
+                    </div>
+                    <div className="checkbox-item">
+                        <label htmlFor="filter-seasonal"> Show only Seasonal Quizzes: </label>
+                        <input type="checkbox" name="filter-seasonal" onChange={checkbox => (setFilterSeasonal(checkbox.target.checked))}></input>
+                    </div>
+                    <div className="checkbox-item">
+                        <label htmlFor="filter-available"> Show only Available Quizzes: </label>
+                        <input type="checkbox" name="filter-available" ></input>
+                    </div>
+                </div>
             </div>
             <div className="quiz-container">
                 { error && <div>{ error }</div>}
