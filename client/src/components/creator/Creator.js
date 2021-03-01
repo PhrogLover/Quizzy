@@ -66,24 +66,31 @@ const Creator = () => {
 
     useEffect(() => {
         let template = [];
+        let id = 1;
         template.push({
+            id: id,
             type: "intro",
             title: "Insert Title"
         });
+        id++;
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
             template.push([]);
             template[i].push({
+                id: id,
                 type: "round",
                 title: "Insert Title",
                 number: i+1
             })
+            id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
                 template[i].push({
+                    id: id,
                     type: "question",
                     number: j+1,
                     question: "Insert Question",
                     answers: []
                 });
+                id++;
             }
         }
         setSlides(template);

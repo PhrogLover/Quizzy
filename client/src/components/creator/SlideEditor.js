@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "./slideeditor.css";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import SlideNav from "./SlideNav";
+
 const SlideEditor = ( { slides, setSlides } ) => {
     
     const [ currentSlide, setCurrentSlide ] = useState(slides[1][1]);
@@ -29,10 +34,16 @@ const SlideEditor = ( { slides, setSlides } ) => {
     }, [currentSlide]);
 
     return ( 
-        <div className="slide-editor">
-            <div className="slidenav"></div>
-            <Editor slide = { currentSlide } changeSlideHandler = { changeSlideHandler }/>
-        </div>
+        <Container className="slide-editor">
+            <Row>
+                <Col xs={3}>
+                    <SlideNav slides = { slides }/>
+                </Col>
+                <Col xs={9}>
+                    <Editor slide = { currentSlide } changeSlideHandler = { changeSlideHandler }/>
+                </Col>
+            </Row>
+        </Container>
      );
 }
  
