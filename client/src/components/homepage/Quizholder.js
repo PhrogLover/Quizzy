@@ -17,7 +17,8 @@ const Quizholder = () => {
     const [ filterCreator, setFilterCreator ] = useState("");
     const [ sortRating, setSortRating ] = useState("");
     const [ filterSeasonal, setFilterSeasonal ] = useState(false);
-    const [ filterText, setFilterText ] = useState("");
+    const [ filterText, setFilterText ] = useState("filter-title");
+    const [ filterDrop, setFilterDrop ] = useState("");
 
     function deleteHandler(id) {
         const body = {
@@ -40,7 +41,9 @@ const Quizholder = () => {
                     There is always a quiz for someone!
                 </p>
                 <div className="search-container">
+                    <FilterText  filter = { filterText } setFilterTitle = { setFilterTitle } setFilterCategory = { setFilterCategory } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
                     <span>
+                        Search by:
                         {[DropdownButton].map((DropdownType, idx) => (
                         <DropdownType
                             as={ButtonGroup}
@@ -48,15 +51,14 @@ const Quizholder = () => {
                             id={`dropdown-button-drop-${idx}`}
                             size="sm"
                             variant="secondary"
-                            title="Select Filter"
+                            title={ filterDrop }
                         >
-                            <Dropdown.Item onClick={() => (setFilterText("filter-title"))} eventKey={1}>Filter by Quiz Title</Dropdown.Item>
-                            <Dropdown.Item onClick={() => (setFilterText("filter-category"))} eventKey={2}>Filter by Category</Dropdown.Item>
-                            <Dropdown.Item onClick={() => (setFilterText("filter-creator"))} eventKey={3}>Filter by Host</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (setFilterText("filter-title"))} eventKey={1}>Title</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (setFilterText("filter-category"))} eventKey={2}>Category</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (setFilterText("filter-creator"))} eventKey={3}>Host</Dropdown.Item>
                         </DropdownType>
                         ))}
                     </span>
-                    <FilterText  filter = { filterText } setFilterTitle = { setFilterTitle } setFilterCategory = { setFilterCategory } setFilterCreator = { setFilterCreator } />
                 </div>
                 <div className="checkbox-container">
                     <div className="checkbox-item">

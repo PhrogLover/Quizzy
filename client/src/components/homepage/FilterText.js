@@ -1,30 +1,26 @@
-const FilterText = ( { filter, setFilterTitle, setFilterCategory, setFilterCreator } ) => {
+const FilterText = ( { filter, setFilterTitle, setFilterCategory, setFilterCreator, setFilterDrop } ) => {
 
-    if (!filter) {
+    if (filter === "filter-title"){
+        setFilterDrop("Title");
         return ( 
             <span id="filter-text">
-                <input disabled type="text"></input>
-            </span>
-         );
-    }
-    else if (filter === "filter-title"){
-        return ( 
-            <span id="filter-text">
-                <label htmlFor="filter-title"> Filter by Quiz Title: </label><input type="text" name="filter-title" onChange={text => (setFilterTitle(text.target.value))}></input>
+                <input type="text" name="filter-title" onChange={text => (setFilterTitle(text.target.value))}></input>
             </span>
          );
     }
     else if (filter === "filter-category") {
+        setFilterDrop("Category");
         return ( 
             <span id="filter-text">
-                <label htmlFor="filter-category"> Filter by Category: </label><input type="text" name="filter-category" onChange={text => (setFilterCategory(text.target.value))}></input>
+                <input type="text" name="filter-category" onChange={text => (setFilterCategory(text.target.value))}></input>
             </span>
          );
     }
     else {
+        setFilterDrop("Host");
         return ( 
             <span id="filter-text">
-                <label htmlFor="filter-creator"> Filter by Host: </label><input type="text" name="filter-creator" onChange={text => (setFilterCreator(text.target.value))}></input>
+                <input type="text" name="filter-creator" onChange={text => (setFilterCreator(text.target.value))}></input>
             </span>
          );
     }

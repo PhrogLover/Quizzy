@@ -2,7 +2,6 @@ import "./slidenav.css";
 
 const SlideNav = ({ slides, changeCurrentSlide }) => {
 
-    console.log(slides)
     let expandedSlides = [];
     expandedSlides.push(slides[0]);
     for (let i = 1; i < slides.length; i++) {
