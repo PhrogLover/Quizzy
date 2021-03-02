@@ -1,0 +1,29 @@
+.slidenav {
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    background-color: var(--colour-black2);
+    overflow-y: auto;
+    height:100%;
+    max-width:100%;
+    /* border: 1px white solid; */
+}
+.button-container{
+    width:90%;
+    margin:auto;
+    padding: 5px;
+    border: white 1px solid;
+}
+.button-container button{
+    width:90%;
+    margin:auto;
+    padding: 5px;
+    border-radius: var(--border-radius);
+    background-color: var(--colour-white);
+    transition: 200ms;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.button-container button:hover{
+    background-color: var(--primary-colour);
+}
