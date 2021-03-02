@@ -45,7 +45,8 @@ const Creator = () => {
                 type: "round",
                 title: "Insert Title",
                 number: i,
-                img: ""
+                img: "",
+                timeOverride: ""
             })
             id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
@@ -57,7 +58,8 @@ const Creator = () => {
                     number: j,
                     question: "Insert Question",
                     answers: [],
-                    img: ""
+                    img: "",
+                    timeOverride: ""
                 });
                 id++;
             }

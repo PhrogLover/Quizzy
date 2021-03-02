@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
-const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1 }) => {
+const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, reset = false }) => {
     function makeSteps(start, finish, steps) {
         let result = [];
         for (let i = start; i <= finish; i += steps) {
@@ -25,7 +25,8 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1 
                 size="sm"
                 variant="secondary"
                 title={ title }
-            >
+            >   
+                {reset && <Dropdown.Item onClick={() => (onChangeHandler(name, ""))} eventKey={ idx }>Deselect</Dropdown.Item>}
                 {dropdownItems.map(index => (
                     <Dropdown.Item onClick={() => (onChangeHandler(name, index))} key={ index } eventKey={ index }>{ index }</Dropdown.Item>
                 ))}

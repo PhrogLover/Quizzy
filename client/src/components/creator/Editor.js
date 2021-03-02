@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Attribute from "./Attribute";
 import "./editor.css";
 
 const Editor = ( { slide, changeSlideHandler } ) => {
@@ -31,7 +32,10 @@ const Editor = ( { slide, changeSlideHandler } ) => {
 
         return ( 
             <div className="editor">
-                <div className="toolbar"></div>
+                <div className="toolbar">
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Set individual question time" name="timeOverride" start = {10} finish = {90} steps = {5} reset = {true}/>
+                    {slide.timeOverride && <p>{ slide.timeOverride }</p>}
+                </div>
                 <p id="question-number">Q{ slide.number }</p>
                 <textarea required name="question" id="question" cols="80" rows="10" value={ slide.question } onChange={ text => (changeSlideHandler("question", text.target.value)) }></textarea>
                 <input type="text" name="answers" size="20" value={ answers } onChange={ text => (changeSlideHandler("answers", text.target.value)) }/>
@@ -46,7 +50,11 @@ const Editor = ( { slide, changeSlideHandler } ) => {
     else if(slide.type === "round") {
         return ( 
             <div className="editor">
-                <div className="toolbar"></div>
+                <div className="toolbar">
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Set Time for Questions This Round" name="timeOverride" start = {10} finish = {90} steps = {5} reset = {true}/>
+                    {slide.timeOverride && <p>{ slide.timeOverride }</p>}
+                </div>
+                <p id="question-number">R{ slide.number }</p>
                 <textarea required name="title" id="title" cols="60" rows="2" value={ slide.title } onChange={ text => (changeSlideHandler("title", text.target.value)) }></textarea>
                 <div id="image-preview">
                     <img src={ slide.img } alt="Preview" className="image-preview__image"/>
