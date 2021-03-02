@@ -4,7 +4,15 @@
     margin-top: 10px;
     width:100%;
     display: flex;
+    padding: 10px 0px;
     /* border: red 1px solid; */
+    transition: 200ms;
+}
+.quiz-row:hover{
+    background-color: var(--colour-white);
+    color: var(--colour-black);
+    cursor:pointer;
+
 }
 .hide-me{
     visibility: hidden;

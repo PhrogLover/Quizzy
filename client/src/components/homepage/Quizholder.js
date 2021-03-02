@@ -40,7 +40,7 @@ const Quizholder = () => {
                 <p>
                     There is always a quiz for someone!
                 </p>
-                <div className="search-container">
+                <div className="search-bar-container">
                     <FilterText  filter = { filterText } filterTitle = { filterTitle } setFilterTitle = { setFilterTitle } filterCategory = { filterCategory } setFilterCategory = { setFilterCategory } filterCreator = { filterCreator } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
                     <span>
                         Search by:

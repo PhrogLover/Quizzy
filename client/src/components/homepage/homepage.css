@@ -98,7 +98,7 @@ img{
     text-align: center;
 }
 .text-input:focus{
-    border: 6px var(--primary-colour) solid;
+    border: 5px var(--primary-colour) solid;
 }
 
 
