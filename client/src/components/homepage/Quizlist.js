@@ -1,4 +1,5 @@
 import "./quizlist.css";
+import "./quizholder.css";
 
 const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
     if (sortRating) {
@@ -27,15 +28,31 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
         <div>
             {quizzes.map(quiz => (
                 <div className="quiz-row" key={ quiz.id }>
-                    <span id="title"> { quiz.title }</span>
-                    <span id="category"> { quiz.category }</span>
-                    <span id="type"> { quiz.type }</span>
-                    <span id="family"> { quiz.family }</span>
-                    <span id="startingTime"> 16:00</span>
-                    <span id="spaces"> 0/{ quiz.spaces }</span>
-                    <span id="creator"> Host: { quiz.creator }</span>
-                    <span id="rating"> Host's rating: { quiz.rating }/5</span>
-                    <button onClick={() => (deleteHandler(quiz.id))}>Delete</button>
+                    <div className="starttime cell">
+                        <span id="startingTime"> 16:00</span>
+                    </div>
+                    <div className="spaces cell">
+                        <span id="spaces"> 0/{ quiz.spaces }</span>
+                    </div>
+                    <div className="quiztitle cell">
+                        <span id="title"> { quiz.title }</span>
+                    </div>
+                    <div className="category cell">
+                        <span id="category"> { quiz.category }</span>
+                    </div>
+                    <div className="type cell">
+                        <span id="type"> { quiz.type }</span>
+                    </div>
+                    <div className="family cell">
+                        <span id="family"> { quiz.family }</span>
+                    </div>                            
+                    <div className="host cell">
+                        <span id="creator"> { quiz.creator }</span>
+                    </div>
+                    <div className="hostrating cell end">
+                        <span id="rating"> { quiz.rating }/5</span>
+                    </div>
+                    <button className="hide-me" onClick={() => (deleteHandler(quiz.id))}>Delete</button>
                 </div>
             ))}
         </div>

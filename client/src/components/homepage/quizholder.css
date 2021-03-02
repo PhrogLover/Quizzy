@@ -1,5 +1,5 @@
 .quiz-section{
-    padding: 20px;
+    padding-left: 20px;
     height: min-content;
     background-image: url('../../assets/images/public_bg.png');
     background-repeat: no-repeat;
@@ -8,17 +8,33 @@
     background-size: 80vw;
     color:var(--font-colour);
 }
-.quiz-container{
-    margin:10px ;
+.search-container{
+    min-width:max-content;
+    margin:20px;
     padding: 20px;
     background-color: var(--colour-black2);
     border-radius: var(--border-radius);
 }
-.search-container{
-    border: 1px white solid;
+.quiz-table-container{
+    min-width:1500px;
+    margin:20px;
+    padding: 20px;
+    background-color: var(--colour-black2);
+    border-radius: var(--border-radius);
+}
+.scroll-table{
+    overflow: auto;
+}
+.search-bar-container{
+    /* border: 1px white solid; */
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 .checkbox-container{
-    border: 1px white solid;
+    /* border: 1px white solid; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,7 +43,7 @@
 .checkbox-item{
     margin: 5px;
     min-width: 200px;
-    border: 1px white solid;
+    /* border: 1px white solid; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,4 +51,53 @@
 }
 .checkbox-item input{
     width:100px;
+}
+.headers-row{
+    min-width: 100%;
+    /* border: white 1px solid; */
+    display: flex;
+}
+.quiztitle{
+    min-width:20%;
+}
+.category{
+    min-width:15%;
+}
+.type{
+    min-width:10%;
+}
+.family{
+    min-width:20%;
+}
+.starttime{
+    min-width:10%;
+}
+.spaces{
+    min-width:5%;
+}
+.host{
+    min-width:10%;
+}
+.hostrating{
+    min-width:10%;
+}
+.cell{
+    border-right: var(--colour-white)  1px solid;
+    padding:5px;
+}
+.header{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.end{
+    border-right:0;
+}
+
+@media screen and (max-width: 750px){
+    .checkbox-container{
+        flex-direction: column;
+    }
+    .search-bar-container{
+        flex-direction: column;
+    }
 }
