@@ -16,6 +16,7 @@ const SlideNav = ({ slides, changeCurrentSlide }) => {
             {expandedSlides.map((slide, index) => (
                 <div key={ index }>
                     <button type="button" onClick={ () => {changeCurrentSlide(slide.round, slide.quest)} }>
+                        <p>{ slide.title }</p>
                         <p>{ slide.question }</p>
                     </button>
                 </div>
