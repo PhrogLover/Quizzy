@@ -41,7 +41,7 @@ const Quizholder = () => {
                     There is always a quiz for someone!
                 </p>
                 <div className="search-container">
-                    <FilterText  filter = { filterText } setFilterTitle = { setFilterTitle } setFilterCategory = { setFilterCategory } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
+                    <FilterText  filter = { filterText } filterTitle = { filterTitle } setFilterTitle = { setFilterTitle } filterCategory = { filterCategory } setFilterCategory = { setFilterCategory } filterCreator = { filterCreator } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
                     <span>
                         Search by:
                         {[DropdownButton].map((DropdownType, idx) => (
