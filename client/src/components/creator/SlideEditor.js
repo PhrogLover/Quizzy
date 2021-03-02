@@ -60,14 +60,14 @@ const SlideEditor = ( { slides, setSlides } ) => {
 
     return ( 
         <Container className="slide-editor">
-            <Row>
-                <Col xs={3}>
+            <div className="main-container">
+                <div className="left-container">
                     <SlideNav slides = { slides } changeCurrentSlide = { changeCurrentSlide }/>
-                </Col>
-                <Col xs={9}>
+                </div>
+                <div className="right-container">
                     <Editor slide = { currentSlide } changeSlideHandler = { changeSlideHandler }/>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </Container>
      );
 }

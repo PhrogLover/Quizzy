@@ -1,3 +1,35 @@
-.slide-editor .slidenav {
-    background-color: lime;
+.slide-editor{
+    min-width:100%;
+}
+.main-container{
+    border-radius: var(--border-radius);
+    width:100%;
+    border: 1px white solid;
+    display: inline-flex;
+    align-items: center;
+    height:var(--section-height);
+}
+.left-container{
+    float: left;
+    width: 30%;
+    height:100%;
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+    border-right: 5px var(--colour-grey) solid;
+}
+.right-container{
+    float: right;
+    width: 70%;
+    height:100%;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+@media screen and (max-width:600px){
+    .left-container{
+        width: 20%;
+    }
+    .right-container{
+        width: 80%;
+    }
 }
