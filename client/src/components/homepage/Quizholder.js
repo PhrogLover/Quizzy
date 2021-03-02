@@ -81,10 +81,6 @@ const Quizholder = () => {
                     </span>
                 </div>
                 <div className="checkbox-container">
-                    <div className="checkbox-item">
-                        <label htmlFor="filter-seasonal"> Sort by Best Host: </label>
-                        <input type="checkbox" name="sort-rating" onChange={checkbox => (setSortRating(checkbox.target.checked))}></input>
-                    </div>
                     <div className="checkbox-container">
                         <div className="checkbox-item">
                             <label htmlFor="filter-seasonal"> Sort by Best Host </label>
@@ -136,9 +132,8 @@ const Quizholder = () => {
                         </div>                        
                     </div>                    
                 </div>
-                     
             </div>
-        
+        </div>        
      );
 }
  
