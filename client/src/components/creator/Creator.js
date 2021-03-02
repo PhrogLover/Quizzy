@@ -30,7 +30,8 @@ const Creator = () => {
             round: 0,
             quest: -1,
             type: "intro",
-            title: "Insert Title"
+            title: "Quiz title",
+            img: ""
         });
         id++;
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
@@ -41,7 +42,8 @@ const Creator = () => {
                 quest: 0,
                 type: "round",
                 title: "Insert Title",
-                number: i+1
+                number: i,
+                img: ""
             })
             id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
@@ -50,9 +52,10 @@ const Creator = () => {
                     round: i,
                     quest: j,
                     type: "question",
-                    number: j+1,
+                    number: j,
                     question: "Insert Question",
-                    answers: []
+                    answers: [],
+                    img: ""
                 });
                 id++;
             }
@@ -78,41 +81,7 @@ const Creator = () => {
     }
 
     useEffect(() => {
-        let template = [];
-        let id = 1;
-        template.push({
-            id: id,
-            round: 0,
-            quest: -1,
-            type: "intro",
-            title: "Insert Title"
-        });
-        id++;
-        for (let i = 1; i <= quiz.numberOfRounds; i++) {
-            template.push([]);
-            template[i].push({
-                id: id,
-                round: i,
-                quest: 0,
-                type: "round",
-                title: "Insert Title",
-                number: i+1
-            })
-            id++;
-            for (let j = 1; j <= quiz.numberOfQuestions; j++) {
-                template[i].push({
-                    id: id,
-                    round: i,
-                    quest: j,
-                    type: "question",
-                    number: j+1,
-                    question: "Insert Question",
-                    answers: []
-                });
-                id++;
-            }
-        }
-        setSlides(template);
+        setSlides(slidesState());
     }, [quiz.numberOfRounds, quiz.numberOfQuestions])
 
     return ( 
