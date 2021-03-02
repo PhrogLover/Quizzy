@@ -25,7 +25,7 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
     }
 
     return ( 
-        <div>
+        <div className="quiz-row-container" >
             {quizzes.map(quiz => (
                 <div className="quiz-row" key={ quiz.id }>
                     <div className="starttime cell">
@@ -49,7 +49,7 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
                     <div className="host cell">
                         <span id="creator"> { quiz.creator }</span>
                     </div>
-                    <div className="hostrating cell end">
+                    <div className="hostrating cell end-cell">
                         <span id="rating"> { quiz.rating }/5</span>
                     </div>
                     <button className="hide-me" onClick={() => (deleteHandler(quiz.id))}>Delete</button>

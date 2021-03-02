@@ -5,7 +5,6 @@
     width:100%;
     display: flex;
     padding: 10px 0px;
-    /* border: red 1px solid; */
     transition: 200ms;
 }
 .quiz-row:hover{
