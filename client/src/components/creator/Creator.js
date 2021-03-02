@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./creator.css";
 import Attributes from "./Attributes";
 import SlideEditor from "./SlideEditor";
+import GetUniqueId from "../../GetUniqueId";
 
 const Creator = () => {
     const history = useHistory();
@@ -15,6 +16,7 @@ const Creator = () => {
         family: "",
         domain: "public",
         type: "standard",
+        seasonalId: GetUniqueId(),
         numberOfTeams: 25,
         numberOfPlayers: 5,
         numberOfRounds: 5,
@@ -93,7 +95,7 @@ const Creator = () => {
 
                 <h3>To Create Your Brand New Quiz, First Select the <span>Main Atributes</span> of It!</h3>
                 <div id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
-                <Attributes onChangeHandler = { onChangeHandler } />
+                <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
                 <SlideEditor slides = { slides } setSlides = { setSlides }/>
 
                 { !isPending && <button type="submit">Submit</button> }

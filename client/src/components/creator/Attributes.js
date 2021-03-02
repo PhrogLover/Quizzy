@@ -3,9 +3,13 @@ import "./attributes.css";
 
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
+import GetUniqueId from "../../GetUniqueId";
 
-const Attributes = ({ onChangeHandler }) => {
-    
+const Attributes = ({ onChangeHandler, quiz }) => {
+
+    function CopyClipboard(text) {
+        navigator.clipboard.writeText(text);
+    }
 
     return ( 
         <div className="attributes">
@@ -27,6 +31,12 @@ const Attributes = ({ onChangeHandler }) => {
                 <ToggleButton value="standard">Standard</ToggleButton>
                 <ToggleButton value="seasonal">Seasonal</ToggleButton>
             </ToggleButtonGroup><br/>
+            { quiz.type === "seasonal" && <>
+                <label htmlFor="seasonal-startup-id">Seasonal Quiz unique ID *can see this after creating the quiz in your profile page: </label>
+                <input type="text" readOnly name="seasonal-startup-id" value ={ quiz.seasonalId }/><br/>
+                <button type="button" onClick={() =>(CopyClipboard(quiz.seasonalId))}>Copy to Clipboard</button>
+                <button type="button" onClick={() => (onChangeHandler("seasonalId", GetUniqueId()))}>Generate New ID</button>
+            </>}
 
             
 
