@@ -19,8 +19,8 @@ const SlideEditor = ( { slides, setSlides } ) => {
         if (name === "answers") {
             value = value.split(", ");
         }
-        let temp = {};
-        let tempObj = {}
+        let temp = [];
+        let tempObj = {};
         if (index.question !== -1) {
             temp = [...slides];
             tempObj = {...temp[index.round][index.question]};
@@ -29,8 +29,10 @@ const SlideEditor = ( { slides, setSlides } ) => {
             setSlides(temp);
         }
         else {
-            temp = {...slides};
-            temp[index.round] = value;
+            temp = [...slides];
+            tempObj = {...temp[index.round]};
+            tempObj[name] = value;
+            temp[0] = tempObj;
             setSlides(temp);
         } 
         temp = {...currentSlide};

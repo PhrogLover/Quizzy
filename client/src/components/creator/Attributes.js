@@ -18,8 +18,6 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
             <input type="text" name="quiz-title" onChange={option => (onChangeHandler("title", option.target.value))}/>
             <label htmlFor="quiz-category">Main Theme/Category: </label>
             <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
-            <label htmlFor="quiz-family-title">Choose Quiz Family Title: </label>
-            <input type="text" name="quiz-family-title" onChange={option => (onChangeHandler("family", option.target.value))}/><br/>
 
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             <label htmlFor="quiz-domain">Quiz's domain: </label>
@@ -41,6 +39,8 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
                 <ToggleButton disabled={ seasonalDisabled } value="seasonal">Seasonal</ToggleButton>
             </ToggleButtonGroup><br/>
             { quiz.type === "seasonal" && <>
+                <label htmlFor="quiz-family-title">Choose Quiz Family Title: </label>
+                <input type="text" name="quiz-family-title" onChange={option => (onChangeHandler("family", option.target.value))}/><br/>
                 <label htmlFor="seasonal-startup-id">Seasonal Quiz unique ID *can see this after creating the quiz in your profile page: </label>
                 <input type="text" readOnly name="seasonal-startup-id" value ={ quiz.id }/><br/>
                 <p>This ID is Necessary When Creating Further Iterations of the Seasonal Quiz, since Each Quiz Must Have the Same Format in the Particular Family. <br/>

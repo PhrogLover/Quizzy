@@ -16,11 +16,11 @@ const SlideNav = ({ slides, changeCurrentSlide }) => {
             {expandedSlides.map((slide, index) => (
                 <div key={ index }>
                     <button type="button" onClick={ () => {changeCurrentSlide(slide.round, slide.quest)} }>
-                        {slide.number && !(slide.type === "round") && <p>R{ slide.round }, Q{ slide.number }</p>}
-                        {slide.number && slide.type === "round" && <p>R{ slide.number }</p>}
+                        {slide.round !== 0 && !(slide.type === "round") && <p>R{ slide.round }, Q{ slide.quest }</p>}
+                        {slide.round !== 0 && slide.type === "round" && <p>R{ slide.round }</p>}
                         {slide.title && <p>{ slide.title }</p>}
                         {slide.question && <p>{ slide.question }</p>}
-                        {slide.img && <div id="image-preview"><img src={ slide.img } alt="Preview" className="image-preview__image"/><span className="image-preview__default-text">Image preview</span></div>}
+                        {slide.img && <div id="image-preview"><img src={ slide.img } alt="Preview" className="image-preview__image"/></div>}
                     </button>
                 </div>
             ))}

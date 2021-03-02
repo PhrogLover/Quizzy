@@ -1,9 +1,6 @@
 const FilterText = ( { filter, filterTitle, setFilterTitle, filterCategory, setFilterCategory, filterCreator, setFilterCreator, setFilterDrop } ) => {
 
     if (filter === "filter-title"){
-        setFilterDrop("Title");
-        setFilterCategory("");
-        setFilterCreator("");
         return ( 
             <div className="search-bar">
                 <span id="filter-text">
@@ -13,9 +10,6 @@ const FilterText = ( { filter, filterTitle, setFilterTitle, filterCategory, setF
          );
     }
     else if (filter === "filter-category") {
-        setFilterDrop("Category");
-        setFilterTitle("");
-        setFilterCreator("");
         return ( 
             <div className="search-bar">
                 <span id="filter-text">
@@ -25,9 +19,6 @@ const FilterText = ( { filter, filterTitle, setFilterTitle, filterCategory, setF
          );
     }
     else {
-        setFilterDrop("Host");
-        setFilterTitle("");
-        setFilterCategory("");
         return (
             <div className="search-bar">
                 <span id="filter-text">

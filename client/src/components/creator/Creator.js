@@ -50,7 +50,6 @@ const Creator = () => {
                 quest: 0,
                 type: "round",
                 title: "Insert Title",
-                number: i,
                 img: "",
                 timeOverride: "",
                 transition: "",
@@ -63,7 +62,6 @@ const Creator = () => {
                     round: i,
                     quest: j,
                     type: "question",
-                    number: j,
                     question: "Insert Question",
                     answers: [],
                     caseSensitive: false,
@@ -100,6 +98,7 @@ const Creator = () => {
         e.preventDefault();
         setIsPending(true);
         quiz.slides = slides;
+        console.log(quiz);
         fetch('/api/quizzes/newQuiz', {
             method: 'POST',
             headers: { "Content-Type": "application/json"},

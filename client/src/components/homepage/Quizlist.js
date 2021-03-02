@@ -1,5 +1,6 @@
 import "./quizlist.css";
 import "./quizholder.css";
+import { Link } from "react-router-dom";
 
 const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
     if (sortRating) {
@@ -27,7 +28,7 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
     return ( 
         <div>
             {quizzes.map(quiz => (
-                <div className="quiz-row" key={ quiz.id }>
+                <Link className="quiz-row" to={`/slide/${quiz.id}`} key={ quiz.id }>
                     <div className="starttime cell">
                         <span id="startingTime"> 16:00</span>
                     </div>
@@ -53,7 +54,7 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
                         <span id="rating"> { quiz.rating }/5</span>
                     </div>
                     <button className="hide-me" onClick={() => (deleteHandler(quiz.id))}>Delete</button>
-                </div>
+                </Link>
             ))}
         </div>
      );

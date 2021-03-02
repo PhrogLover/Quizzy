@@ -6,6 +6,7 @@ import Login from './components/login/Login';
 import Creator from './components/creator/Creator';
 import Homepage from './components/homepage/Homepage';
 import NotFound from './components/basic/NotFound';
+import Slide from './components/quiz/Slide';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/creator">
             <Creator />
+          </Route>
+          <Route path="/slide/:id">
+            <Slide />
           </Route>
           <Route path="*">
             <NotFound />

@@ -17,8 +17,8 @@ const Quizholder = () => {
     const [ filterCreator, setFilterCreator ] = useState("");
     const [ sortRating, setSortRating ] = useState("");
     const [ filterSeasonal, setFilterSeasonal ] = useState(false);
-    const [ filterText, setFilterText ] = useState("filter-title");
-    const [ filterDrop, setFilterDrop ] = useState("");
+    const [ filterSelector, setFilterSelector ] = useState("filter-title");
+    const [ filterDrop, setFilterDrop ] = useState("Title");
 
     function deleteHandler(id) {
         const body = {
@@ -31,6 +31,25 @@ const Quizholder = () => {
         })
     }
 
+    function changeFilterSelector(filter) {
+        setFilterSelector(filter);
+        if (filter === "filter-title") {
+            setFilterDrop("Title");
+            setFilterCategory("");
+            setFilterCreator("");
+        }
+        else if (filter === "filter-category") {
+            setFilterDrop("Category");
+            setFilterTitle("");
+            setFilterCreator("");
+        }
+        else {
+            setFilterDrop("Host");
+            setFilterCategory("");
+            setFilterTitle("");
+        }
+    }
+
     return (
         <div className="quiz-section">
             <div className="search-container">
@@ -41,7 +60,7 @@ const Quizholder = () => {
                     There is always a quiz for someone!
                 </p>
                 <div className="search-bar-container">
-                    <FilterText  filter = { filterText } filterTitle = { filterTitle } setFilterTitle = { setFilterTitle } filterCategory = { filterCategory } setFilterCategory = { setFilterCategory } filterCreator = { filterCreator } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
+                    <FilterText  filter = { filterSelector } filterTitle = { filterTitle } setFilterTitle = { setFilterTitle } filterCategory = { filterCategory } setFilterCategory = { setFilterCategory } filterCreator = { filterCreator } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
                     <span>
                         Search by:
                         {[DropdownButton].map((DropdownType, idx) => (
@@ -53,9 +72,9 @@ const Quizholder = () => {
                             variant="secondary"
                             title={ filterDrop }
                         >
-                            <Dropdown.Item onClick={() => (setFilterText("filter-title"))} eventKey={1}>Title</Dropdown.Item>
-                            <Dropdown.Item onClick={() => (setFilterText("filter-category"))} eventKey={2}>Category</Dropdown.Item>
-                            <Dropdown.Item onClick={() => (setFilterText("filter-creator"))} eventKey={3}>Host</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (changeFilterSelector("filter-title"))} eventKey={1}>Title</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (changeFilterSelector("filter-category"))} eventKey={2}>Category</Dropdown.Item>
+                            <Dropdown.Item onClick={() => (changeFilterSelector("filter-creator"))} eventKey={3}>Host</Dropdown.Item>
                         </DropdownType>
                         ))}
                     </span>
