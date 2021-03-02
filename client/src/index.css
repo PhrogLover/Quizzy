@@ -23,6 +23,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: overlay;
 
 }
 
@@ -33,11 +34,12 @@ code {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+  height:10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--colour-grey); 
+  background: transparent; 
 }
  
 /* Handle */
