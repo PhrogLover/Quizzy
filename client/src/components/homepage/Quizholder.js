@@ -73,7 +73,7 @@ const Quizholder = () => {
                         <div className="checkbox-item">
                             <label htmlFor="filter-seasonal" > Seasonal Quizzes Only </label>
                             <div className="custom-checkbox">
-                                <input type="checkbox" name="filter-seasonal" onClick= {() => (calcHeight)} onChange={checkbox => (setFilterSeasonal(checkbox.target.checked))}></input>
+                                <input type="checkbox" name="filter-seasonal" onChange={checkbox => (setFilterSeasonal(checkbox.target.checked))}></input>
                             </div> 
                         </div>
                         <div className="checkbox-item end">
@@ -97,7 +97,7 @@ const Quizholder = () => {
                             <div className="host cell header"> <span>Host</span></div>
                             <div className="hostrating cell end-cell header"> <span>Host's Rating:</span></div>
                         </div>
-                        <div className="table-content" style={{ height: tableHeight}} >                                                     
+                        <div className="table-content" >                                                     
                             <div className="body-rows">                                
                                 { error && <div>{ error }</div>}
                                 { isPending && <div className="is-loading">Loading...</div>}
