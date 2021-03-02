@@ -6,7 +6,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import GetUniqueId from "../../GetUniqueId";
 import DateTimePicker from 'react-datetime-picker';
 
-const Attributes = ({ onChangeHandler, quiz }) => {
+const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }) => {
 
     function CopyClipboard(text) {
         navigator.clipboard.writeText(text);
@@ -21,27 +21,37 @@ const Attributes = ({ onChangeHandler, quiz }) => {
             <label htmlFor="quiz-family-title">Choose Quiz Family Title: </label>
             <input type="text" name="quiz-family-title" onChange={option => (onChangeHandler("family", option.target.value))}/><br/>
 
+            { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             <label htmlFor="quiz-domain">Quiz's domain: </label>
             <ToggleButtonGroup type="radio" name="quiz-domain" defaultValue={1} onChange={option => (onChangeHandler("domain", option))}>
                 <ToggleButton value="public">Public</ToggleButton>
-                <ToggleButton value="private">Private</ToggleButton>
+                <ToggleButton disabled={ privateDisabled } value="private">Private</ToggleButton>
             </ToggleButtonGroup>
-  
+            { quiz.domain === "private" && <>
+                <label htmlFor="private-id">Quiz unique ID *can see this after creating the quiz in your profile page: </label>
+                <input type="text" readOnly name="private-id" value ={ quiz.id }/><br/>
+                <button type="button" onClick={() =>(CopyClipboard(quiz.id))}>Copy to Clipboard</button>
+                <button type="button" onClick={() => (onChangeHandler("id", GetUniqueId()))}>Generate New ID</button>                
+            </>}
+
+            { seasonalDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></> }
             <label htmlFor="quiz-type">Quiz type: </label>
             <ToggleButtonGroup type="radio" name="quiz-type" defaultValue={1} onChange={option => (onChangeHandler("type", option))}>
                 <ToggleButton value="standard">Standard</ToggleButton>
-                <ToggleButton value="seasonal">Seasonal</ToggleButton>
+                <ToggleButton disabled={ seasonalDisabled } value="seasonal">Seasonal</ToggleButton>
             </ToggleButtonGroup><br/>
             { quiz.type === "seasonal" && <>
                 <label htmlFor="seasonal-startup-id">Seasonal Quiz unique ID *can see this after creating the quiz in your profile page: </label>
-                <input type="text" readOnly name="seasonal-startup-id" value ={ quiz.seasonalId }/><br/>
-                <button type="button" onClick={() =>(CopyClipboard(quiz.seasonalId))}>Copy to Clipboard</button>
-                <button type="button" onClick={() => (onChangeHandler("seasonalId", GetUniqueId()))}>Generate New ID</button>
-
-                
+                <input type="text" readOnly name="seasonal-startup-id" value ={ quiz.id }/><br/>
+                <p>This ID is Necessary When Creating Further Iterations of the Seasonal Quiz, since Each Quiz Must Have the Same Format in the Particular Family. <br/>
+                Once You Finalise the First Quiz Now, Enter this ID at the Top to Instantly Pre-set All of the Attributes of the Seasonal Quiz.</p>
+                <button type="button" onClick={() =>(CopyClipboard(quiz.id))}>Copy to Clipboard</button>
+                <button type="button" onClick={() => (onChangeHandler("id", GetUniqueId()))}>Generate New ID</button>
+                <Attribute onChangeHandler = {onChangeHandler} title="Set Number of Quizzes in the Season" name="seasonFreq" start = {6} finish = {12}/>
             </>}
-            <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span>
-            <DateTimePicker />
+            <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span><br/>
+            { quiz.type === "seasonal" && <span>*For Seasonal Quizzes this Time Applies to Every Week After This Selected One Until the Number of Quizzes in the Season are Reached.</span>}
+            <DateTimePicker value={ quiz.time } onChange={ time => (onChangeHandler("time", time))}/>
 
             
 

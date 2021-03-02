@@ -12,7 +12,6 @@ router.get('/homepage', (req, res) => {
 router.post('/newQuiz', (req, res) => {
     if (req.body) {
         let newQuiz = req.body;
-        newQuiz.id = uuid.v4();
         newQuiz.creator = "AriG7";
         newQuiz.rating = 4.3;
         console.log("New quiz: ", newQuiz);

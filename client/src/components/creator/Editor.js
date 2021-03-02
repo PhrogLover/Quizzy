@@ -37,8 +37,9 @@ const Editor = ( { slide, changeSlideHandler } ) => {
                     <Attribute onChangeHandler = {changeSlideHandler} title="Set Question Read Time" name="readTime" start = {2} finish = {30} steps = {4} reset = {true}/>
                     {slide.readTime && <p>{ slide.readTime } *adds to the Individual Time</p>}
                 </div>
-                <p id="question-number">Q{ slide.number }</p>
+                <p id="question-number">R{ slide.round }, Q{ slide.number }</p>
                 <textarea required name="question" id="question" cols="80" rows="10" value={ slide.question } onChange={ text => (changeSlideHandler("question", text.target.value)) }></textarea>
+                <label htmlFor="answers">Write answer: (You can write multiple answers, just seperate them by commas)</label>
                 <input type="text" name="answers" size="20" value={ answers } onChange={ text => (changeSlideHandler("answers", text.target.value)) }/>
                 <label htmlFor="case-sensitive">Make Answers Case Sensitive</label>
                 <input type="checkbox" onChange={value => (changeSlideHandler("caseSensitive", value.target.checked))}/>
