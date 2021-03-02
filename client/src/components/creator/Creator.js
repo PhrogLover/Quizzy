@@ -32,7 +32,8 @@ const Creator = () => {
             round: 0,
             quest: -1,
             type: "intro",
-            title: "Quiz title",
+            title: quiz.title,
+            family: quiz.family,
             img: ""
         });
         id++;
@@ -46,7 +47,9 @@ const Creator = () => {
                 title: "Insert Title",
                 number: i,
                 img: "",
-                timeOverride: ""
+                timeOverride: "",
+                transition: "",
+                endTime: ""
             })
             id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
@@ -58,8 +61,10 @@ const Creator = () => {
                     number: j,
                     question: "Insert Question",
                     answers: [],
+                    caseSensitive: false,
                     img: "",
-                    timeOverride: ""
+                    timeOverride: "",
+                    readTime: ""
                 });
                 id++;
             }

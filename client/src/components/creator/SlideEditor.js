@@ -58,10 +58,6 @@ const SlideEditor = ( { slides, setSlides } ) => {
         }
     }
 
-    useEffect(() => {
-        //console.log(currentSlide);
-    }, [currentSlide]);
-
     return ( 
         <Container className="slide-editor">
             <Row>

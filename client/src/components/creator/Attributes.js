@@ -4,6 +4,7 @@ import "./attributes.css";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import GetUniqueId from "../../GetUniqueId";
+import DateTimePicker from 'react-datetime-picker';
 
 const Attributes = ({ onChangeHandler, quiz }) => {
 
@@ -36,7 +37,11 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                 <input type="text" readOnly name="seasonal-startup-id" value ={ quiz.seasonalId }/><br/>
                 <button type="button" onClick={() =>(CopyClipboard(quiz.seasonalId))}>Copy to Clipboard</button>
                 <button type="button" onClick={() => (onChangeHandler("seasonalId", GetUniqueId()))}>Generate New ID</button>
+
+                
             </>}
+            <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span>
+            <DateTimePicker />
 
             
 
