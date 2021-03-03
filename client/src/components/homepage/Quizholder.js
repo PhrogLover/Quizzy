@@ -79,7 +79,7 @@ const Quizholder = () => {
                         </DropdownType>
                         ))}
                     </span>
-                </div>
+                </div>            
                 <div className="checkbox-container">
                     <div className="checkbox-container">
                         <div className="checkbox-item">
@@ -103,36 +103,36 @@ const Quizholder = () => {
                         </div>
                     </div>
                 </div>
-                
-                <div className="scroll-table">
-                    <div className="quiz-table-container">
-                        <div className="headers-row">
-                            <div className="starttime cell header"> <span>Starting Time</span></div>
-                            <div className="spaces cell header"> <span>Spaces</span></div>               
-                            <div className="quiztitle cell header"> <span>Quiz Title</span></div>
-                            <div className="category cell header"> <span>Category</span></div>
-                            <div className="type cell header"> <span>Type</span></div>
-                            <div className="family cell header"> <span>Family</span></div>
-                            <div className="host cell header"> <span>Host</span></div>
-                            <div className="hostrating cell end-cell header"> <span>Host's Rating:</span></div>
-                        </div>
-                        <div className="table-content" >                                                     
-                            <div className="body-rows">                                
-                                { error && <div>{ error }</div>}
-                                { isPending && <div className="is-loading">Loading...</div>}
-                                { quizzes && <Quizlist quizzes = {
-                                    quizzes.filter(quiz => ((quiz.domain !== "private") && 
-                                    (filterTitle === "" || quiz.title.toLowerCase().includes(filterTitle.toLowerCase())) && 
-                                    (filterCategory === "" || quiz.category.toLowerCase().includes(filterCategory.toLowerCase())) && 
-                                    (filterCreator === "" || quiz.creator.toLowerCase().includes(filterCreator.toLowerCase())) && 
-                                    (!filterSeasonal || quiz.type === "seasonal")) ) 
-                                    } sortRating = { sortRating } deleteHandler = { deleteHandler } />
-                                }
-                            </div>
-                        </div>                        
-                    </div>                    
-                </div>
             </div>
+            <div className="scroll-table">
+                <div className="quiz-table-container">
+                    <div className="headers-row">
+                        <div className="starttime cell header"> <span>Starting Time</span></div>
+                        <div className="spaces cell header"> <span>Spaces</span></div>               
+                        <div className="quiztitle cell header"> <span>Quiz Title</span></div>
+                        <div className="category cell header"> <span>Category</span></div>
+                        <div className="type cell header"> <span>Type</span></div>
+                        <div className="family cell header"> <span>Family</span></div>
+                        <div className="host cell header"> <span>Host</span></div>
+                        <div className="hostrating cell end-cell header"> <span>Host's Rating:</span></div>
+                    </div>
+                    <div className="table-content" >                                                     
+                        <div className="body-rows">                                
+                            { error && <div>{ error }</div>}
+                            { isPending && <div className="is-loading">Loading...</div>}
+                            { quizzes && <Quizlist quizzes = {
+                                quizzes.filter(quiz => ((quiz.domain !== "private") && 
+                                (filterTitle === "" || quiz.title.toLowerCase().includes(filterTitle.toLowerCase())) && 
+                                (filterCategory === "" || quiz.category.toLowerCase().includes(filterCategory.toLowerCase())) && 
+                                (filterCreator === "" || quiz.creator.toLowerCase().includes(filterCreator.toLowerCase())) && 
+                                (!filterSeasonal || quiz.type === "seasonal")) ) 
+                                } sortRating = { sortRating } deleteHandler = { deleteHandler } />
+                            }
+                        </div>
+                    </div>                        
+                </div>                    
+            </div>
+            
         </div>        
      );
 }

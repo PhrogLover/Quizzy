@@ -6,12 +6,14 @@
     display: flex;
     padding: 10px 0px;
     transition: 200ms;
+    color: var(--font-colour);
 }
 .quiz-row:hover{
     background-color: var(--colour-white);
     color: var(--colour-black);
     cursor:pointer;
-
+    text-decoration: none;
+    transform: scale(1.01) perspective(1px);
 }
 .hide-me{
     visibility: hidden;

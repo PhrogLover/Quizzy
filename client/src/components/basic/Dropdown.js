@@ -25,6 +25,9 @@ function Dropdown() {
                     <DropdownItem>Music Volume</DropdownItem>
                     <DropdownItem>SFX Volume</DropdownItem>
                     <DropdownItem>Dark Mode Toggle - Feature Coming Soon</DropdownItem>
+                    <DropdownItem>
+                        Report A Bug
+                    </DropdownItem>
                     <Link to="/signout">
                         <DropdownItem><i class="fas fa-sign-out-alt"></i> Sign Out</DropdownItem>
                     </Link>

@@ -98,7 +98,10 @@ img{
     text-align: center;
 }
 .text-input:focus{
+    border-radius: var(--border-radius);
+    transition: 200ms;
     border: 5px var(--primary-colour) solid;
+    transform: scale(1.02) perspective(1px)
 }
 
 

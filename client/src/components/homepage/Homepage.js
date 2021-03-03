@@ -26,7 +26,7 @@ const Homepage = () => {
                             
                         </Link>
                         <a href="#joinquiz">
-                            <Button className='btns' buttonStyle='btn--outline'>
+                            <Button className='btns' buttonStyle='btn--outline' buttonColour="btn--primary-colour">
                                 JOIN A QUIZ
                             </Button>
                         </a>
@@ -54,7 +54,7 @@ const Homepage = () => {
                         <label htmlFor="private-quiz"><h3>Quiz ID:</h3></label>
                         <input className="text-input" type="text" name="private-quiz" placeholder="Enter Quiz ID..."></input>
                         <Link to="#">
-                            <Button >
+                            <Button buttonColour="btn--green-colour">
                                 JOIN                            
                             </Button>
                         </Link>
@@ -74,7 +74,7 @@ const Homepage = () => {
                     <img src="images/donate_section.png"/>
                 </div>
                 <Link to="#">
-                    <Button >
+                    <Button buttonColour="btn--primary-colour">
                         DONATE                            
                     </Button>
                 </Link>

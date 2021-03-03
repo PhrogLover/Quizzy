@@ -8,22 +8,46 @@
     cursor: pointer;
     font-size: 20px;
 }
-.btn--solid{
-    background-color: var(--primary-colour);
-    color: black;
-    border: 1px solid var(--primary-colour);
-}
 
+.btn--primary-colour{
+    --buttonColour: var(--primary-colour);
+    --fontButtonColour: var(--colour-black2);
+}
+.btn--secondary-colour{
+    --buttonColour: var(--secondary-colour);
+    --fontButtonColour: var(--colour-black2);
+}
+.btn--white-colour{
+    --buttonColour: var(--colour-white);
+    --fontButtonColour: var(--colour-black2);
+}
+.btn--black2-colour{
+    --buttonColour: var(--colour-black2);
+    --fontButtonColour: var(--colour-white);
+}
+.btn--green-colour{
+    --buttonColour: var(--colour-green);
+    --fontButtonColour: var(--colour-black2);
+}
+.btn--blue-colour{
+    --buttonColour: var(--colour-blue);
+    --fontButtonColour: var(--colour-black2);
+}
+.btn--solid{
+    background-color: var(--buttonColour);
+    color: var(--fontButtonColour);
+    border: 1px solid var(--buttonColour);
+}
 .btn--outline{
     background-color: transparent;
-    color: var(--primary-colour);
-    padding: 8px 20px;
-    border: 1px solid var(--primary-colour);
-    transition:all 0.3s ease-out;
+    color: var(--buttonColour);
+    transition:all 300ms ease-out;
+    border: 1px solid var(--buttonColour);
 }
 .button:hover{
     transition: 200ms;
     background-color: var(--colour-white);
     color: var(--colour-black);
     border: 1px solid var(--colour-white);
+    transform: scale(1.02) perspective(1px)
 }

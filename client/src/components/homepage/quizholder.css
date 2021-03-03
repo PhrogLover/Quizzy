@@ -51,8 +51,9 @@
     border-radius: var(--border-radius);
 }
 .search-bar input:focus{
-    border: var(--primary-colour) 5px solid;
-
+    transition: 200ms;
+    border: 5px var(--colour-blue) solid;
+    transform: scale(1.02) perspective(1px)
 }
 .checkbox-container{
     display: flex;
@@ -87,6 +88,8 @@
 }
 .custom-checkbox:hover{
     background-color: var(--colour-white);
+    transition: 200ms;
+    transform: scale(1.1) perspective(1px)
 }
 .custom-checkbox input:checked{
     opacity:100;
@@ -141,7 +144,7 @@
     position: relative;
 }
 .body-rows{
-    overflow: hidden;
+    overflow: visible;
     max-height: max-content;
 }
 
