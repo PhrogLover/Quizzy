@@ -2,10 +2,15 @@
 
 const express = require('express');
 const router = express.Router();
+const quizzesReal = require('../../client/json/Quizzes_save');
 const quizzes = require('../../client/json/Quizzes');
 
+// for (let i = 0; i < quizzes.length; i++) {
+//     quizzesReal.quizzes.push(quizzes[i]);
+// }
+
 router.get('/homepage', (req, res) => {
-    res.json(quizzes);
+    res.json(quizzesReal.quizzes);
 });
 
 router.post('/newQuiz', (req, res) => {
@@ -20,18 +25,19 @@ router.post('/newQuiz', (req, res) => {
         if (!newQuiz.category) {
             newQuiz.category = "-";
         }
-        console.log(newQuiz);
-        quizzes.push(newQuiz);
+        quizzesReal.quizzes.push(newQuiz);
     }
 })
 
 router.get('/slide/:id', (req, res) => {
-
-    console.log("hello");
-
-    const found = quizzes.some(quiz =>  (quiz.id === parseInt(req.params.id)));
+    const found = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
     if (found) {
-        res.json(quizzes.filter(quiz => (quiz.id === parseInt(req.params.id))));
+        for (let i = 0; i < quizzesReal.quizzes.length; i++) {
+            if (quizzesReal.quizzes[i].id === req.params.id) {
+                res.json(quizzesReal.quizzes[i]);
+            }
+        }
+        
     }
     else {
         res.json({ msg: "There is no quiz with the id: " + req.params.id});
@@ -39,10 +45,10 @@ router.get('/slide/:id', (req, res) => {
 })
 
 router.delete('/delete', (req, res) => {
-    const found = quizzes.some(quiz => quiz.id === parseInt(req.body.id));
+    const found = quizzesReal.quizzes.some(quiz => quiz.id === parseInt(req.body.id));
 
     if (found) {
-        console.log("Deleted: ",quizzes.filter(quiz => quiz.id !== parseInt(req.body.id)));
+        console.log("Deleted: ",quizzesReal.quizzes.filter(quiz => quiz.id !== parseInt(req.body.id)));
     }
 })
 

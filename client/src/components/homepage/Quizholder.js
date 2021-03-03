@@ -10,7 +10,7 @@ import FilterText from "./FilterText";
 
 
 const Quizholder = () => {
-    const quizzesUrl = "/api/quizzes/homepage";
+    const quizzesUrl = "http://localhost:5000/api/quizzes/homepage";
     const { data: quizzes, isPending, error} = useFetch(quizzesUrl);
 
     const [ filterTitle, setFilterTitle ] = useState("");
@@ -25,7 +25,7 @@ const Quizholder = () => {
         const body = {
             id: id
         }
-        fetch('/api/quizzes/delete', {
+        fetch('http://localhost:5000/api/quizzes/delete', {
             method: 'DELETE',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(body)

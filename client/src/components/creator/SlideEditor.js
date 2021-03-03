@@ -3,8 +3,6 @@ import Editor from "./Editor";
 import "./slideeditor.css";
 
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import SlideNav from "./SlideNav";
 
 const SlideEditor = ( { slides, setSlides } ) => {

@@ -9,10 +9,8 @@ const Footer = () => {
                 <p className="quote">"bruh"-dan (always)</p>
             </section>
 
-
-
             <div className='footer-link-container'>
-                <div class='footer-link-items'>
+                <div className='footer-link-items'>
                     <p>Explore</p>
                     <a href='/#'>Home</a>
                     <Link to='/creator'>Create a Quiz</Link>
@@ -20,13 +18,13 @@ const Footer = () => {
                     <a href="/#donate">Donate</a>
                     <Link to='/aboutus'>About Us</Link>
                 </div>
-                <div class='footer-link-items'>
+                <div className='footer-link-items'>
                     <p>Creators</p>
                     <a href="https://www.linkedin.com/in/arijus-lengvenis-389b401b9/">AriG7</a>
                     <a href="https://www.linkedin.com/in/dan-champion-8b1325192/">Dayrungun</a>
                     <a href="#cunha">Cunha</a>
                 </div>
-                <div class='footer-link-items'>
+                <div className='footer-link-items'>
                     <p>Social Media</p>
                     <Link to='/'>Instagram</Link>
                     <Link to='/'>Facebook</Link>

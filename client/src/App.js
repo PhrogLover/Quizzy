@@ -19,14 +19,14 @@ function App() {
           <Route exact path="/">
             <Homepage />
           </Route>
+          <Route path="/slide/:id">
+            <Slide />
+          </Route>
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/creator">
+          <Route exact path="/creator">
             <Creator />
-          </Route>
-          <Route path="/slide/:id">
-            <Slide />
           </Route>
           <Route path="*">
             <NotFound />
