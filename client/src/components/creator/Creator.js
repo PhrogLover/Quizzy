@@ -98,8 +98,7 @@ const Creator = () => {
         e.preventDefault();
         setIsPending(true);
         quiz.slides = slides;
-        console.log(quiz);
-        fetch('/api/quizzes/newQuiz', {
+        fetch('http://localhost:5000/api/quizzes/newQuiz', {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(quiz)
