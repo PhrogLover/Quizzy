@@ -26,6 +26,9 @@ router.post('/newQuiz', (req, res) => {
 })
 
 router.get('/slide/:id', (req, res) => {
+
+    console.log("hello");
+
     const found = quizzes.some(quiz =>  (quiz.id === parseInt(req.params.id)));
     if (found) {
         res.json(quizzes.filter(quiz => (quiz.id === parseInt(req.params.id))));

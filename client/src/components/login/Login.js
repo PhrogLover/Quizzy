@@ -10,19 +10,19 @@ const Login = () => {
             <Background></Background>
             <div className="login-panel trans"></div>
             <div id="login-panel" className="login-panel">
-                    <div className="login-header">
+                <div className="login-header">
 
-                            <div id="logo" className="big-logo">
-                                <img src="/images/Temp_Icon.png"/>
-                            </div>
-                            <div id="title">                        
-                                <h1 >QuizWebApp</h1>
-                            </div> 
-                    </div>
+                        <div id="logo" className="big-logo">
+                            <img src="/images/Temp_Icon.png"/>
+                        </div>
+                        <div id="title">                        
+                            <h1 >QuizWebApp</h1>
+                        </div> 
+                </div>
                 <div className="introtext-container">
                     <p>sup dudes, party time in the quiz app woop woop!!!</p>
                 </div>
-                <div className="login-with">
+                <div className="line-through-text">
                     <div className="line"/>
                         <div className="text">
                             Login with

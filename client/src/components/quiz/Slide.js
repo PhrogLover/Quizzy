@@ -6,7 +6,6 @@ const Slide = () => {
     const { id } = useParams();
     const quizUrl = "/api/quizzes/slide/" + id;
     const {data: quiz, isPending, error } = useFetch(quizUrl);
-
     const introSlide = quiz.slides[0];
     const roundSlide = quiz.slides[1][0];
     const questionSlide = quiz.slides[1][1];
