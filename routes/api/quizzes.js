@@ -5,9 +5,9 @@ const router = express.Router();
 const quizzesReal = require('../../client/json/Quizzes_save');
 const quizzes = require('../../client/json/Quizzes');
 
-// for (let i = 0; i < quizzes.length; i++) {
-//     quizzesReal.quizzes.push(quizzes[i]);
-// }
+for (let i = 0; i < quizzes.length; i++) {
+    quizzesReal.quizzes.push(quizzes[i]);
+}
 
 router.get('/homepage', (req, res) => {
     res.json(quizzesReal.quizzes);
@@ -18,7 +18,6 @@ router.post('/newQuiz', (req, res) => {
         let newQuiz = req.body;
         newQuiz.creator = "AriG7";
         newQuiz.rating = 4.3;
-        console.log("New quiz: ", newQuiz);
         if (newQuiz.type === "standard") {
             newQuiz.family = "-";
         }
@@ -30,6 +29,9 @@ router.post('/newQuiz', (req, res) => {
 })
 
 router.get('/slide/:id', (req, res) => {
+    if (req.params.id === "1" || req.params.id === "2" || req.params.id === "3" || req.params.id === "4") {
+        req.params.id = parseInt(req.params.id);
+    }
     const found = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
     if (found) {
         for (let i = 0; i < quizzesReal.quizzes.length; i++) {

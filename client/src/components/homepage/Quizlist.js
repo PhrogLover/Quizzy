@@ -30,7 +30,7 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
             {quizzes.map(quiz => (
                 <Link className="quiz-row" to={`/slide/${quiz.id}`} key={ quiz.id }>
                     <div className="starttime cell">
-                        <span id="startingTime"> 16:00</span>
+                        <span id="startingTime"> { quiz.time }</span>
                     </div>
                     <div className="spaces cell">
                         <span id="spaces"> 0/{ quiz.spaces }</span>

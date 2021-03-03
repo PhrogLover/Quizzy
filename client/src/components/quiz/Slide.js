@@ -25,10 +25,11 @@ const Slide = () => {
             }
         }
     }
-    
 
     return (
         <>
+            { isPending && <div className="loading">loading...</div> }
+            { error && <div className="loading">{ error }</div> }
             { !isPending && <>
                 <div className="slide">
                     <div className="intro-slide">
