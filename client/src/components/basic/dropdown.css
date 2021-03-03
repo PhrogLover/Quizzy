@@ -5,7 +5,6 @@
     position:fixed;
     top: calc( -3px + var(--nav-height));
     border-radius: var(--border-radius);
-    padding: 10px;
     margin-right: 10px;
     right: 0;
     overflow: hidden;
@@ -22,9 +21,8 @@
     height: 40px;
     display:flex;
     align-items: center;
-    border-radius: 5px;
     transition: 100ms;
-    padding:5px;
+    padding:10px;
     font-size: 15px;
     float: left;
     width:100%;
@@ -35,7 +33,4 @@
 }
 .menu{
     width: 100%;
-}
-.menu-primary-enter{
-    
 }
