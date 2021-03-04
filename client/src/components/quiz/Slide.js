@@ -47,7 +47,7 @@ const Slide = () => {
                     <br/>
                     <br/>
                     <div className="question-slide">
-                        <h2 id="question-number">{ questionSlide.round }, { questionSlide.question }</h2>
+                        <h2 id="question-number">Round { questionSlide.round }, Question{ questionSlide.quest }</h2>
                         <p id="question-question">{ questionSlide.question }</p>
                         <p id="question-answers"> { answers }</p>
                         { questionSlide.img && <img src={ questionSlide.img } alt="question"/> }
