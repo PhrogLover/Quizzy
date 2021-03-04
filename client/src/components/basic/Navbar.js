@@ -7,8 +7,6 @@ import './dropdown.css';
 
 const Navbar = () => {
 
-    
-    
     const [open, setOpen] = useState(false);
     const closeDropdown = () => setOpen(false);
 
@@ -101,7 +99,7 @@ const Navbar = () => {
 
     return ( 
         <nav className="navbar">
-            <div className="navbar-container">
+            <div className="navbar-container" >
                 <div className="navbar-header">
                     <Link to="/">
                         <div id="nav-logo" className="nav-logo">

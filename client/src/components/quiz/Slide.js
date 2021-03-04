@@ -31,27 +31,103 @@ const Slide = () => {
             { isPending && <div className="loading">loading...</div> }
             { error && <div className="loading">{ error }</div> }
             { !isPending && <>
-                <div className="slide">
-                    <div className="intro-slide">
-                        <h2 id="intro-title">{ introSlide.title }</h2>
-                        { introSlide.family && <h3 id="intro-family">{ introSlide.family }</h3> }
-                        { introSlide.img && <img id="intro-img" src={ introSlide.img } alt="intro"/> }
+                <div className="slides">
+                    
+                    {/* intro slide */}
+                    <div id="intro-slide" className=" slide">
+                        { roundSlide.img &&
+                            < div className="title-header above">
+                                <div className="slide-title">
+                                    { introSlide.title }
+                                </div>                                
+                                { introSlide.family && <div className="title-family">{introSlide.family}</div> }                                
+                            </div>
+                        }
+                        { !roundSlide.img &&
+                            < div className="title-header center">
+                                <div className="slide-title">
+                                    { introSlide.title }
+                                </div>
+                                { introSlide.family && <div className="title-family">{introSlide.family}</div> }    
+                            </div>
+                        }
+                        <div className="title-img">
+                            { introSlide.img && <img id="intro-img" src={ introSlide.img } alt="intro"/> }
+                        </div>
+                        
                     </div>
+
                     <br/>
                     <br/>
-                    <div className="round-slide">
-                        <h2 id="round-number">{ roundSlide.round }</h2>
-                        <h3 id="round-title">{ roundSlide.title }</h3>
-                        { roundSlide.img && <img src={ roundSlide.img } alt="round"/> }
+
+                    {/* round slide */}
+                    <div id="round-slide" className="slide">
+                        <div id="question-number" className="slide-number above">
+                                Round { roundSlide.round }
+                        </div>
+                        { !roundSlide.img &&                    
+                            <div className="slide-text center">
+                                { roundSlide.title }
+                            </div>
+                        }
+                        { roundSlide.img &&                                              
+                            <div className="slide-text top">
+                                { roundSlide.title }
+                            </div>
+                        }
+                        <div className="slide-img">
+                            { roundSlide.img && <img src={ roundSlide.img } alt="round"/> }
+                        </div>
                     </div>
+
                     <br/>
                     <br/>
-                    <div className="question-slide">
-                        <h2 id="question-number">Round { questionSlide.round }, Question{ questionSlide.quest }</h2>
-                        <p id="question-question">{ questionSlide.question }</p>
-                        <p id="question-answers"> { answers }</p>
-                        { questionSlide.img && <img src={ questionSlide.img } alt="question"/> }
+
+                    {/* question slide */}
+                    <div id="question-slide" className=" slide">
+                        <div id="question-number" className="slide-number above">
+                                Round { questionSlide.round } - Question{ questionSlide.quest }
+                        </div>
+                        { !questionSlide.img &&                    
+                            <div className="slide-text center">
+                                { questionSlide.question }
+                            </div>
+                        }
+                        { questionSlide.img &&                                              
+                            <div className="slide-text top">
+                                { questionSlide.question }
+                            </div>
+                        }
+                        <div className="slide-img">
+                            { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
+                        </div>
                     </div>
+
+                    {/* answer slide */}
+                    <br/>
+                    <br/>
+                    <div id="answer-slide" className="slide">
+                        <div id="question-number" className="slide-number above">
+                                Round { questionSlide.round } - Question{ questionSlide.quest }
+                        </div>
+                        { !questionSlide.img &&                    
+                            <div className="slide-text center">
+                                { questionSlide.question }
+                            </div>
+                        }
+                        { questionSlide.img &&                                              
+                            <div className="slide-text top">
+                                { questionSlide.question }
+                            </div>
+                        }
+                        <div className="slide-img">
+                            { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
+                        </div>
+                        <div className="answer-box center">
+                            { answers }
+                        </div>
+                    </div>
+
                 </div>
             </>}
         </>

@@ -33,14 +33,14 @@ const Homepage = () => {
                     </div>
                 </div>
                 <div className="right-create">
-                    <img src="/images/create_section.png" alt="create-section.png"/>
+                    <img className="home-imgs" src="/images/create_section.png" alt="create-section.png"/>
                 </div>
                 
             </div>
             <div className="private-section" id="joinquiz">
                 <div className="left-private">
                     <div className="priv-img-container">
-                        <img src="images/private_section.png" alt="private-section.png"/>
+                        <img className="home-imgs" src="images/private_section.png" alt="private-section.png"/>
                     </div>
                 </div>
                 <div className="right-private">
@@ -71,7 +71,7 @@ const Homepage = () => {
                     <span>Every little bit counts!</span>
                 </div>
                 <div className="donate-img-container">
-                    <img src="images/donate_section.png"/>
+                    <img className="home-imgs" src="images/donate_section.png" alt="donate_section.png" />
                 </div>
                 <Link to="#">
                     <Button buttonColour="btn--primary-colour">
