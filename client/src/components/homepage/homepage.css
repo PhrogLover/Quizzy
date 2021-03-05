@@ -107,14 +107,13 @@ html {
     padding: 5 20px;
     font-size: 20px;
     text-align: center;
+    transition: 200ms;
 }
 .join-input:hover{
-    transition: 200ms;
     transform: scale(1.02) perspective(1px)
 }
 .join-input:focus{
     border-radius: var(--border-radius);
-    transition: 200ms;
     border: 5px var(--colour-green) solid;
     transform: scale(1.02) perspective(1px)
 }

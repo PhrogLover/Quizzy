@@ -17,13 +17,14 @@
     border-radius: var(--border-radius);
 }
 .quiz-table-container{
-    width:1500px;
+    min-width:1500px;
     margin:20px;
     padding: 20px;
     background-color: var(--colour-black2);
     border-radius: var(--border-radius);
 }
 .scroll-table{
+    /* padding: 0 20px; */
     overflow-x: auto;
 }
 .animate-table{
@@ -49,13 +50,12 @@
     background-color: var(--colour-white);
     width:100%;
     border-radius: var(--border-radius);
+    transition: 200ms;
 }
 .search-bar input:hover{
-    transition: 200ms;
     transform: scale(1.02) perspective(1px)
 }
 .search-bar input:focus{
-    transition: 200ms;
     border: 5px var(--colour-blue) solid;
     transform: scale(1.02) perspective(1px)
 }
@@ -89,10 +89,10 @@
     background-color: var(--colour-grey);
     border-radius: var(--border-radius);
     overflow: hidden;
+    transition: 200ms;
 }
 .custom-checkbox:hover{
     background-color: var(--colour-white);
-    transition: 200ms;
     transform: scale(1.1) perspective(1px)
 }
 .custom-checkbox input:checked{

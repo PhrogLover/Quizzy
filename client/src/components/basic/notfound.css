@@ -1,0 +1,38 @@
+.not-found{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 90vh;
+}
+.not-found h1{
+    color: var(--primary-colour);
+    margin: 0;
+    padding: 0;
+    font-size: 10vw;
+    /* border: 1px white solid; */
+
+}
+.not-found h2{
+    color: var(--primary-colour);
+    margin-top: -35px;
+    padding: 0;
+    font-size: 6vw;
+    /* border: 1px white solid; */
+}
+.not-found p{
+    font-size: 20px;
+    color: var(--colour-grey);
+}
+.not-found a{
+    font-size: 25px ;
+    color: var(--colour-white);
+}
+.not-found a:hover{
+    text-decoration: none;
+    color: var(--primary-colour);
+}
+.not-found i{
+    padding: 0 10px;
+}
+

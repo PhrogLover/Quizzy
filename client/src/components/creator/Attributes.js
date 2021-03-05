@@ -11,25 +11,31 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
     function CopyClipboard(text) {
         navigator.clipboard.writeText(text);
     }
-    
+
 
     return ( 
         <div className="attributes">
-            <label htmlFor="quiz-title">Quiz Title: </label>
-            <input type="text" name="quiz-title" onChange={option => (onChangeHandler("title", option.target.value))}/>
-            <label htmlFor="quiz-category">Main Theme/Category: </label>
-            <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
+            <div className="quiz-title-container">
+                <div className="quiz-title-label" htmlFor="quiz-title">Quiz Title: </div>
+                <input type="text" name="quiz-title" onChange={option => (onChangeHandler("title", option.target.value))}/>
+            </div>
+            <div className="quiz-category-container">
+                <div className="quiz-category-label" htmlFor="quiz-category">Main Theme/Category: </div>
+                <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
+            </div>
+            
+            
 
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             
             <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain">Quiz's domain: </div>
+                <div className="domain-label" htmlFor="quiz-domain">Quiz's Domain: </div>
                 <div className="domain-picker-container">
                     <input id="domain-toggle" className="display-none" type="checkbox"/>
                     <span className="toggle-label public-lbl">
                         Public
                     </span>
-                    <label className="toggle-container" for="domain-toggle">
+                    <label className="toggle-container" htmlFor="domain-toggle">
                         <span className="creator-toggle"></span>
                     </label>
                     <span className="toggle-label">

@@ -45,16 +45,21 @@
     background-color: var(--colour-white);
     width:200px;
     border-radius: var(--border-radius);
-}
-.uniqueid-input:hover{
     transition: 200ms;
+}
+.uniqueid-input:hover{    
     transform: scale(1.02) perspective(1px)
 }
 .uniqueid-input:focus{
-    transition: 200ms;
     border: 3px var(--primary-colour) solid;
     transform: scale(1.02) perspective(1px)
 }
 .main-form{
     background-color: var(--colour-black2);
+}
+
+@media screen and (max-width:400px){
+    .input-uniqueid-container{
+        flex-direction: column;
+    }
 }
