@@ -20,11 +20,10 @@ const SlideView = ( { quiz, error } ) => {
         onFinish: () => {}
     });
 
-    return ( 
+    return (
         <>
             { error && <div className="loading">{ error }</div> }
             <div className="slides">
-
                     <div id="intro-slide" className=" slide">
                         { roundSlide.img &&
                             < div className="title-header above">
