@@ -10,8 +10,8 @@ const Slide = () => {
     const {data: quiz, isPending, error } = useFetch(quizUrl);
 
     const { fontSize, ref } = useFitText({
-        maxFontSize: 285.7142857142857,
-        minFontSize: 125.7142857142857,
+        maxFontSize: 200,
+        minFontSize: 20,
         onFinish: () => {},
     });    
 
