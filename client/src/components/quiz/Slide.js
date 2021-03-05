@@ -1,24 +1,30 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import "./slide.css";
-// import ScaleText from "react-scale-text";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import useFitText from "use-fit-text";
 
 const Slide = () => {
     const { id } = useParams();
     const quizUrl = "http://localhost:5000/api/quizzes/slide/" + id;
     const {data: quiz, isPending, error } = useFetch(quizUrl);
+    const { fontSize, ref } = useFitText({
+        maxFontSize: 285.7142857142857,
+        minFontSize: 125.7142857142857,
+        // Note: with `v2.3.0` and earlier, adding this non-referentially equal
+        // `onFinish` callback caused a "Maximum update depth exceeded" error.
+        // See https://github.com/saltycrane/use-fit-text/issues/9
+        onFinish: () => {},
+      });
 
-    console.log(quiz);
+    useEffect(() => {
+        console.log(fontSize);
+    }, [fontSize]); 
+
     let introSlide = "";
     let roundSlide = "";
     let questionSlide = "";
     let answers = "";
-
-
-    const { fontSize, ref } = useFitText({maxFontSize: 300});
-
 
     if (!isPending) {
         introSlide = quiz.slides[0];
@@ -84,10 +90,8 @@ const Slide = () => {
                             </div>
                         }
                         { roundSlide.img &&                                              
-                            <div className="slide-text top">
-                                <div  ref={ref} style={{ fontSize , height:"100%", width:"100%" }}>                                
-                                    { roundSlide.title }
-                                </div>                                
+                            <div className="slide-text top" ref={ref} style={{ fontSize }}>
+                                    { roundSlide.title }                              
                             </div>
                         }
                         <div className="slide-img">
