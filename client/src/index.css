@@ -27,7 +27,11 @@ body {
   overflow: overlay;
 
 }
-
+.hide-me{
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

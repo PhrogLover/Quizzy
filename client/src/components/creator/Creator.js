@@ -7,6 +7,7 @@ import SlideEditor from "./SlideEditor";
 import GetUniqueId from "../../GetUniqueId";
 // import { OverlayTrigger , Tooltip } from "react-bootstrap";
 import HelpIcon from "../basic/HelpIcon";
+import { Button } from "../basic/Button";
 
 const Creator = () => {
     const history = useHistory();
@@ -121,7 +122,7 @@ const Creator = () => {
             <form onSubmit={ submitHandler }>
                 <div className="input-uniqueid-container">
                     <HelpIcon>
-                        Quickly set up your <strong> Seasonal Quiz </strong> by typing entering its Unique ID
+                        Quickly set up your <strong> Seasonal Quiz </strong> by entering its Unique ID
                     </HelpIcon>
                     <div className="uniqueid-label" htmlFor="seasonal-setup-id">
                         Unique ID:
@@ -136,7 +137,9 @@ const Creator = () => {
                 </div>
                     <SlideEditor slides = { slides } setSlides = { setSlides }/>
 
-                    { !isPending && <button type="submit">Submit</button> }
+                    { !isPending && <button type="submit">Submit</button>
+                    //  <Button> </Button>
+                     }
                     { isPending && <button disabled>Adding..</button> }
                 
                 

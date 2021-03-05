@@ -87,7 +87,18 @@ html {
     justify-content: center;
     align-items: center;
 }
-
+.private-label{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.private-label-text{
+    height: 100%;
+    font-size: 25px;
+    padding-right: 25px;
+    padding-bottom:5px;
+}
 .join-input{
     min-width: 300px;
     min-height: 50px;
@@ -96,6 +107,10 @@ html {
     padding: 5 20px;
     font-size: 20px;
     text-align: center;
+}
+.join-input:hover{
+    transition: 200ms;
+    transform: scale(1.02) perspective(1px)
 }
 .join-input:focus{
     border-radius: var(--border-radius);

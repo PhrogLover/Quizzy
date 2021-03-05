@@ -6,8 +6,9 @@ export const HelpIcon = (props) => {
 
     return(
         <>
-        {['bottom'].map((placement) => (
+        {['left'].map((placement) => (
         <OverlayTrigger 
+            key= {placement}
             placement={placement}
             overlay={<Tooltip id="tooltip-down">
                 {props.children}
