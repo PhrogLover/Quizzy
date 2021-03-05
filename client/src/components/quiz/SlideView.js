@@ -24,10 +24,7 @@ const SlideView = ( { quiz, error } ) => {
         <>
             { error && <div className="loading">{ error }</div> }
             <div className="slides">
-                
                 <div className="testing-box">
-
-                    
                     <div id="intro-slide" className=" slide">
                         { roundSlide.img &&
                             < div className="title-header above">
@@ -66,7 +63,7 @@ const SlideView = ( { quiz, error } ) => {
                             { roundSlide.title }                        
                         </div>
                     }                                     
-                    <div className="slide-text top" ref={ref} style={{ fontSize }}>
+                    <div className="slide-text top">
                             { roundSlide.title }                              
                     </div>
                     <div className="slide-img">
