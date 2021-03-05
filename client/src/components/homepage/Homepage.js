@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import './homepage.css';
 import Quizholder from "./Quizholder";
 import { Button } from "../basic/Button";
+import HelpIcon from "../basic/HelpIcon";
 
 const Homepage = () => {
     return ( 
@@ -51,8 +52,8 @@ const Homepage = () => {
                         <p>
                             Here you can join a private quiz..... blah blah blah
                         </p>
-                        <label htmlFor="private-quiz"><h3>Quiz ID:</h3></label>
-                        <input className="text-input" type="text" name="private-quiz" placeholder="Enter Quiz ID..."></input>
+                        <label htmlFor="private-quiz"><HelpIcon>Input the Unique ID of the quiz</HelpIcon><h3>Quiz ID:</h3></label>
+                        <input className="join-input" type="text" name="private-quiz" placeholder="Enter Quiz ID..."></input>
                         <Link to="#">
                             <Button buttonColour="btn--green-colour">
                                 JOIN                            
