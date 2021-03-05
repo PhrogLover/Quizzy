@@ -52,7 +52,7 @@ const Homepage = () => {
                         <p>
                             Here you can join a private quiz..... blah blah blah
                         </p>
-                        <label htmlFor="private-quiz"><HelpIcon>Input the Unique ID of the quiz</HelpIcon><h3>Quiz ID:</h3></label>
+                        <label htmlFor="private-quiz">Input the Unique ID of the quiz<h3>Quiz ID:</h3></label>
                         <input className="join-input" type="text" name="private-quiz" placeholder="Enter Quiz ID..."></input>
                         <Link to="#">
                             <Button buttonColour="btn--green-colour">

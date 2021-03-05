@@ -8,18 +8,20 @@ const Slide = () => {
     const { id } = useParams();
     const quizUrl = "http://localhost:5000/api/quizzes/slide/" + id;
     const {data: quiz, isPending, error } = useFetch(quizUrl);
+
     const { fontSize, ref } = useFitText({
         maxFontSize: 285.7142857142857,
         minFontSize: 125.7142857142857,
-        // Note: with `v2.3.0` and earlier, adding this non-referentially equal
-        // `onFinish` callback caused a "Maximum update depth exceeded" error.
-        // See https://github.com/saltycrane/use-fit-text/issues/9
         onFinish: () => {},
-      });
+    });    
 
-    useEffect(() => {
-        console.log(fontSize);
-    }, [fontSize]); 
+    useEffect (() => {
+        if (quiz) {
+            console.log(fontSize);
+            console.log(ref);
+        }
+        
+    }, [fontSize, ref, quiz])
 
     let introSlide = "";
     let roundSlide = "";
@@ -43,7 +45,7 @@ const Slide = () => {
         <>
             { isPending && <div className="loading">loading...</div> }
             { error && <div className="loading">{ error }</div> }
-            { !isPending && <>
+            <>
                 <div className="slides">
                     
                     {/* intro slide */}
@@ -88,12 +90,10 @@ const Slide = () => {
                             <div className="slide-text center">
                                 { roundSlide.title }                        
                             </div>
-                        }
-                        { roundSlide.img &&                                              
-                            <div className="slide-text top" ref={ref} style={{ fontSize }}>
-                                    { roundSlide.title }                              
-                            </div>
-                        }
+                        }                                     
+                        <div className="slide-text top" ref={ref} style={{ fontSize, height: "200px", width: "50%"}}>
+                                { roundSlide.title }                              
+                        </div>
                         <div className="slide-img">
                             { roundSlide.img && <img src={ roundSlide.img } alt="round"/> }
                         </div>
@@ -148,7 +148,7 @@ const Slide = () => {
                     </div>
 
                 </div>
-            </>}
+            </>
 
         </>
      );
