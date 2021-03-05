@@ -14,11 +14,92 @@ const SlideView = ( { quiz, error } ) => {
         }
     }
 
-    const { fontSize, ref } = useFitText({
+    const { fontSize: introTitleImgFontSize, ref: introTitleImgRef } = useFitText({
         maxFontSize: 200,
         minFontSize: 20,
         onFinish: () => {}
     });
+
+    const { fontSize: familyImgFontSize, ref: familyImgRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: introTitleFontSize, ref: introTitleRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: familyFontSize, ref: familyRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: roundFontSize, ref: roundRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: roundTitleImgFontSize, ref: roundTitleImgRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: roundTitleFontSize, ref: roundTitleRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: questionFontSize, ref: questionRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: questionTextImgFontSize, ref: questionTextImgRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: questionTextFontSize, ref: questionTextRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: questionTextAnswerFontSize, ref: questionTextAnswerRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: questionTextImgAnswerFontSize, ref: questionTextImgAnswerRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: answerFontSize, ref: answerRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: test, ref: testRef } = useFitText({
+        maxFontSize: 200,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    console.log(test);
+    console.log(testRef);
 
     return (
         <>
@@ -27,11 +108,11 @@ const SlideView = ( { quiz, error } ) => {
                     <div id="intro-slide" className=" slide">
                         { roundSlide.img &&
                             < div className="title-header above">
-                                <div className="slide-title" ref={ref} style={{ fontSize }}>
+                                <div className="slide-title" ref={introTitleImgRef} style={{ fontSize: introTitleImgFontSize }}>
                                     { introSlide.title }
                                 </div>                                
                                 { introSlide.family &&
-                                    <div className="title-family" ref={ref} style={{ fontSize }}>
+                                    <div className="title-family" ref={familyImgRef} style={{ fontSize: familyImgFontSize }}>
                                             {introSlide.family}
                                     </div> 
                                 }                                
@@ -39,11 +120,11 @@ const SlideView = ( { quiz, error } ) => {
                         }
                         { !roundSlide.img &&
                             < div className="title-header center">
-                                <div className="slide-title" ref={ref} style={{ fontSize }}>
+                                <div className="slide-title" ref={introTitleRef} style={{ fontSize: introTitleFontSize }}>
                                     { introSlide.title }
                                 </div>
                                 { introSlide.family && 
-                                    <div className="title-family">
+                                    <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
                                         {introSlide.family}
                                     </div>
                                 }    
@@ -58,38 +139,38 @@ const SlideView = ( { quiz, error } ) => {
                 <br/>
 
                 <div id="round-slide" className="slide">
-                    <div id="question-number" className="slide-number above" ref={ref} style={{ fontSize }}>
+                    <div id="question-number" className="slide-number above" ref={roundRef} style={{ fontSize: roundFontSize }}>
                             Round { roundSlide.round }
                     </div>
                     { !roundSlide.img &&                    
-                        <div className="slide-text center" ref={ref} style={{ fontSize }}>
+                        <div className="slide-text center" ref={roundTitleRef} style={{ fontSize: roundTitleFontSize }}>
                             { roundSlide.title }                        
                         </div>
                     }    
                     { roundSlide.img &&                              
-                    <div className="slide-text top" ref={ref} style={{ fontSize }}>
+                    <div className="slide-text top" ref={roundTitleImgRef} style={{ fontSize: roundTitleImgFontSize }}>
                             { roundSlide.title }                              
                     </div>
                     }  
-                    <div className="slide-img">
-                        { roundSlide.img && <img src={ roundSlide.img } alt="round"/> }
-                    </div>
+                    { roundSlide.img && <div className="slide-img">
+                         <img src={ roundSlide.img } alt="round"/> 
+                    </div> }
                 </div>
 
                 <br/>
                 <br/>
 
                 <div id="question-slide" className=" slide">
-                    <div id="question-number" className="slide-number above" ref={ref} style={{ fontSize }}>
+                    <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
                             Round { questionSlide.round } - Question{ questionSlide.quest }
                     </div>
                     { !questionSlide.img &&                    
-                        <div className="slide-text center" ref={ref} style={{ fontSize }}>                                
+                        <div className="slide-text center" ref={questionTextRef} style={{ fontSize: questionTextFontSize }}>                                
                             { questionSlide.question }                                
                         </div>
                     }
                     { questionSlide.img &&                                              
-                        <div className="slide-text top" ref={ref} style={{ fontSize }}>                                
+                        <div className="slide-text top" ref={questionTextImgRef} style={{ fontSize: questionTextImgFontSize }}>                                
                             { questionSlide.question }                                
                         </div>
                     }
@@ -101,23 +182,23 @@ const SlideView = ( { quiz, error } ) => {
                 <br/>
                 <br/>
                 <div id="answer-slide" className="slide">
-                    <div id="question-number" className="slide-number above" ref={ref} style={{ fontSize }}>
+                    <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
                             Round { questionSlide.round } - Question{ questionSlide.quest }
                     </div>
                     { !questionSlide.img &&                    
-                        <div className="slide-text center" ref={ref} style={{ fontSize }}>
+                        <div className="slide-text center" ref={questionTextAnswerRef} style={{ fontSize: questionTextAnswerFontSize }}>
                             { questionSlide.question }
                         </div>
                     }
                     { questionSlide.img &&                                              
-                        <div className="slide-text top" ref={ref} style={{ fontSize }}>
+                        <div className="slide-text top" ref={questionTextImgAnswerRef} style={{ fontSize: questionTextImgAnswerFontSize }}>
                             { questionSlide.question }
                         </div>
                     }
                     <div className="slide-img">
                         { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
                     </div>
-                    <div className="answer-box center" ref={ref} style={{ fontSize }}>
+                    <div className="answer-box center" ref={answerRef} style={{ fontSize: answerFontSize }}>
                         { answers }
                     </div>
                 </div>
