@@ -46,6 +46,10 @@
     width:200px;
     border-radius: var(--border-radius);
 }
+.uniqueid-input:hover{
+    transition: 200ms;
+    transform: scale(1.02) perspective(1px)
+}
 .uniqueid-input:focus{
     transition: 200ms;
     border: 3px var(--primary-colour) solid;

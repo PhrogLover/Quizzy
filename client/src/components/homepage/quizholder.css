@@ -50,6 +50,10 @@
     width:100%;
     border-radius: var(--border-radius);
 }
+.search-bar input:hover{
+    transition: 200ms;
+    transform: scale(1.02) perspective(1px)
+}
 .search-bar input:focus{
     transition: 200ms;
     border: 5px var(--colour-blue) solid;

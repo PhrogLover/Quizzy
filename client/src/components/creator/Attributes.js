@@ -21,6 +21,21 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
 
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             <label htmlFor="quiz-domain">Quiz's domain: </label>
+            <div className="domain-picker-container">
+                <input className="display-none" type="checkbox"/>
+
+                <span className="toggle-label public-lbl">
+                    Public
+                </span>
+                <label className="toggle-container">
+                    <span className="creator-toggle"></span>
+                </label>
+                <span className="toggle-label private-lbl">
+                    Private
+                </span>
+            </div>
+
+
             <ToggleButtonGroup type="radio" name="quiz-domain" defaultValue={1} onChange={option => (onChangeHandler("domain", option))}>
                 <ToggleButton value="public">Public</ToggleButton>
                 <ToggleButton disabled={ privateDisabled } value="private">Private</ToggleButton>

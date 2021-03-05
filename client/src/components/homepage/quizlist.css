@@ -15,6 +15,3 @@
     text-decoration: none;
     transform: scale(1.01) perspective(1px);
 }
-.hide-me{
-    visibility: hidden;
-}
