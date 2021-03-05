@@ -122,8 +122,13 @@
     background-color: lightgrey;
 }
 .testing-box{
-    width:850px;
+    width:300px;
     height: fit-content;
+}
+.testing-box:after{
+    width:400px;
+    height: fit-content;
+    font-size: 1px;
 }
 .bruh{
     width: 500px;

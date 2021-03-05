@@ -9,6 +9,10 @@ const Slide = () => {
     const quizUrl = "http://localhost:5000/api/quizzes/slide/" + id;
     const {data: quiz, error } = useFetch(quizUrl);
 
+    window.addEventListener('load', (event) => {
+        console.log('page is fully loaded');
+        });
+
     return (
         <>
             {quiz && <SlideView quiz = { quiz } error = { error } /> }
