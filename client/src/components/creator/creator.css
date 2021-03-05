@@ -18,3 +18,39 @@
 .creator #show span {
     background-color: olivedrab;
 }
+.creator-heading{
+    padding: 10px;
+}
+.creator-heading h1{
+    color: var(--primary-colour);
+}
+.input-uniqueid-container{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: max-content;
+}
+.uniqueid-label{
+    margin-right: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.uniqueid-input{
+    border: 3px var(--colour-white) solid;
+    background-color: var(--colour-white);
+    width:200px;
+    border-radius: var(--border-radius);
+}
+.uniqueid-input:focus{
+    transition: 200ms;
+    border: 3px var(--primary-colour) solid;
+    transform: scale(1.02) perspective(1px)
+}
+.main-form{
+    background-color: var(--colour-black2);
+}

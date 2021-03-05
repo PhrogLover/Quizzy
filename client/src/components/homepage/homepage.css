@@ -88,7 +88,7 @@ html {
     align-items: center;
 }
 
-.text-input{
+.join-input{
     min-width: 300px;
     min-height: 50px;
     border-radius: var(--border-radius);
@@ -97,10 +97,10 @@ html {
     font-size: 20px;
     text-align: center;
 }
-.text-input:focus{
+.join-input:focus{
     border-radius: var(--border-radius);
     transition: 200ms;
-    border: 5px var(--primary-colour) solid;
+    border: 5px var(--colour-green) solid;
     transform: scale(1.02) perspective(1px)
 }
 
