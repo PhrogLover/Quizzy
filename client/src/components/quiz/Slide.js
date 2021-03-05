@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../../useFetch";
+import useFetch from "../../hooks/useFetch";
 import "./slide.css";
+// import ScaleText from "react-scale-text";
+import React, { useCallback, useState } from "react";
+import useFitText from "use-fit-text";
 
 const Slide = () => {
     const { id } = useParams();
@@ -12,6 +15,10 @@ const Slide = () => {
     let roundSlide = "";
     let questionSlide = "";
     let answers = "";
+
+
+    const { fontSize, ref } = useFitText({maxFontSize: 300});
+
 
     if (!isPending) {
         introSlide = quiz.slides[0];
@@ -34,29 +41,35 @@ const Slide = () => {
                 <div className="slides">
                     
                     {/* intro slide */}
-                    <div id="intro-slide" className=" slide">
-                        { roundSlide.img &&
-                            < div className="title-header above">
-                                <div className="slide-title">
-                                    { introSlide.title }
-                                </div>                                
-                                { introSlide.family && <div className="title-family">{introSlide.family}</div> }                                
-                            </div>
-                        }
-                        { !roundSlide.img &&
-                            < div className="title-header center">
-                                <div className="slide-title">
-                                    { introSlide.title }
-                                </div>
-                                { introSlide.family && <div className="title-family">{introSlide.family}</div> }    
-                            </div>
-                        }
-                        <div className="title-img">
-                            { introSlide.img && <img id="intro-img" src={ introSlide.img } alt="intro"/> }
-                        </div>
-                        
-                    </div>
+                    <div className="testing-box">
 
+                        
+                        <div id="intro-slide" className=" slide">
+                            { roundSlide.img &&
+                                < div className="title-header above">
+                                    <div className="slide-title">
+                                        { introSlide.title }
+                                    </div>                                
+                                    { introSlide.family &&
+                                    <div className="title-family">
+                                         {introSlide.family}
+                                    </div> }                                
+                                </div>
+                            }
+                            { !roundSlide.img &&
+                                < div className="title-header center">
+                                    <div className="slide-title">
+                                        { introSlide.title }
+                                    </div>
+                                    { introSlide.family && <div className="title-family">{introSlide.family}</div> }    
+                                </div>
+                            }
+                            <div className="title-img">
+                                { introSlide.img && <img id="intro-img" src={ introSlide.img } alt="intro"/> }
+                            </div>
+                            
+                        </div>
+                    </div>
                     <br/>
                     <br/>
 
@@ -67,12 +80,14 @@ const Slide = () => {
                         </div>
                         { !roundSlide.img &&                    
                             <div className="slide-text center">
-                                { roundSlide.title }
+                                { roundSlide.title }                        
                             </div>
                         }
                         { roundSlide.img &&                                              
                             <div className="slide-text top">
-                                { roundSlide.title }
+                                <div  ref={ref} style={{ fontSize , height:"100%", width:"100%" }}>                                
+                                    { roundSlide.title }
+                                </div>                                
                             </div>
                         }
                         <div className="slide-img">
@@ -89,13 +104,13 @@ const Slide = () => {
                                 Round { questionSlide.round } - Question{ questionSlide.quest }
                         </div>
                         { !questionSlide.img &&                    
-                            <div className="slide-text center">
-                                { questionSlide.question }
+                            <div className="slide-text center">                                
+                                { questionSlide.question }                                
                             </div>
                         }
                         { questionSlide.img &&                                              
-                            <div className="slide-text top">
-                                { questionSlide.question }
+                            <div className="slide-text top">                                
+                                { questionSlide.question }                                
                             </div>
                         }
                         <div className="slide-img">
@@ -130,6 +145,7 @@ const Slide = () => {
 
                 </div>
             </>}
+
         </>
      );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useFetch from "../../useFetch";
+import useFetch from "../../hooks/useFetch";
 import Quizlist from "./Quizlist";
 import "./quizholder.css";
 
