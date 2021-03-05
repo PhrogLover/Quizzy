@@ -11,6 +11,7 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
     function CopyClipboard(text) {
         navigator.clipboard.writeText(text);
     }
+    
 
     return ( 
         <div className="attributes">
@@ -20,19 +21,21 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
             <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
 
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
-            <label htmlFor="quiz-domain">Quiz's domain: </label>
-            <div className="domain-picker-container">
-                <input className="display-none" type="checkbox"/>
-
-                <span className="toggle-label public-lbl">
-                    Public
-                </span>
-                <label className="toggle-container">
-                    <span className="creator-toggle"></span>
-                </label>
-                <span className="toggle-label private-lbl">
-                    Private
-                </span>
+            
+            <div className="domain-container">
+                <div className="domain-label" htmlFor="quiz-domain">Quiz's domain: </div>
+                <div className="domain-picker-container">
+                    <input id="domain-toggle" className="display-none" type="checkbox"/>
+                    <span className="toggle-label public-lbl">
+                        Public
+                    </span>
+                    <label className="toggle-container" for="domain-toggle">
+                        <span className="creator-toggle"></span>
+                    </label>
+                    <span className="toggle-label">
+                        Private
+                    </span>
+                </div>
             </div>
 
 

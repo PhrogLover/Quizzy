@@ -10,15 +10,13 @@ const Slide = () => {
     const {data: quiz, isPending, error } = useFetch(quizUrl);
 
     const { fontSize, ref } = useFitText({
-        maxFontSize: 200,
-        minFontSize: 20,
+        maxFontSize: 300,
+        minFontSize: 10,
         onFinish: () => {},
     });    
 
     useEffect (() => {
         if (quiz) {
-            console.log(fontSize);
-            console.log(ref);
         }
         
     }, [fontSize, ref, quiz])
@@ -41,35 +39,40 @@ const Slide = () => {
         }
     }
 
+    window.addEventListener('load', (event) => {
+        console.log('page is fully loaded');
+        });
+
     return (
         <>
             { isPending && <div className="loading">loading...</div> }
             { error && <div className="loading">{ error }</div> }
             <>
+            
                 <div className="slides">
                     
                     {/* intro slide */}
-                    <div className="testing-box">
-
-                        
+                    <div className="testing-box">                      
                         <div id="intro-slide" className=" slide">
                             { roundSlide.img &&
                                 < div className="title-header above">
-                                    <div className="slide-title">
+                                    <div className="slide-title" ref={ref} style={{ fontSize}}>                
                                         { introSlide.title }
                                     </div>                                
                                     { introSlide.family &&
-                                    <div className="title-family">
+                                    <div className="title-family" ref={ref} style={{ fontSize}}>
                                          {introSlide.family}
                                     </div> }                                
                                 </div>
                             }
                             { !roundSlide.img &&
                                 < div className="title-header center">
-                                    <div className="slide-title">
+                                    <div className="slide-title" ref={ref} style={{ fontSize}}>
                                         { introSlide.title }
                                     </div>
-                                    { introSlide.family && <div className="title-family">{introSlide.family}</div> }    
+                                    { introSlide.family && <div className="title-family" ref={ref} style={{ fontSize}}>
+                                        {introSlide.family}
+                                    </div> }    
                                 </div>
                             }
                             <div className="title-img">
@@ -77,75 +80,77 @@ const Slide = () => {
                             </div>
                             
                         </div>
-                    </div>
+                    </div>   
+
                     <br/>
                     <br/>
 
                     {/* round slide */}
-                    <div id="round-slide" className="slide">
-                        <div id="question-number" className="slide-number above">
-                                Round { roundSlide.round }
-                        </div>
-                        { !roundSlide.img &&                    
-                            <div className="slide-text center">
-                                { roundSlide.title }                        
+                        <div id="round-slide" className="slide">
+                            <div id="question-number" className="slide-number above" ref={ref} style={{ fontSize}}>
+                                    Round { roundSlide.round }
                             </div>
-                        }                                     
-                        <div className="slide-text top" ref={ref} style={{ fontSize, height: "200px", width: "50%"}}>
-                                { roundSlide.title }                              
+                            { !roundSlide.img &&                    
+                                <div className="slide-text center" ref={ref} style={{ fontSize}}>
+                                    { roundSlide.title }                        
+                                </div>
+                            }                                     
+                            <div className="slide-text top" ref={ref} style={{ fontSize}}>
+                                    { roundSlide.title }                              
+                            </div>
+                            <div className="slide-img">
+                                { roundSlide.img && <img src={ roundSlide.img } alt="round"/> }
+                            </div>
                         </div>
-                        <div className="slide-img">
-                            { roundSlide.img && <img src={ roundSlide.img } alt="round"/> }
-                        </div>
-                    </div>
+                
 
                     <br/>
                     <br/>
 
                     {/* question slide */}
-                    <div id="question-slide" className=" slide">
-                        <div id="question-number" className="slide-number above">
-                                Round { questionSlide.round } - Question{ questionSlide.quest }
-                        </div>
-                        { !questionSlide.img &&                    
-                            <div className="slide-text center">                                
-                                { questionSlide.question }                                
+                        <div id="question-slide" className=" slide">
+                            <div id="question-number" className="slide-number above" ref={ref} style={{ fontSize}}>
+                                    Round { questionSlide.round } - Question{ questionSlide.quest }
                             </div>
-                        }
-                        { questionSlide.img &&                                              
-                            <div className="slide-text top">                                
-                                { questionSlide.question }                                
+                            { !questionSlide.img &&                    
+                                <div className="slide-text center" ref={ref} style={{ fontSize}}>                                
+                                    { questionSlide.question }                                
+                                </div>
+                            }
+                            { questionSlide.img &&                                              
+                                <div className="slide-text top" ref={ref} style={{ fontSize}}>                                
+                                    { questionSlide.question }                                
+                                </div>
+                            }
+                            <div className="slide-img">
+                                { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
                             </div>
-                        }
-                        <div className="slide-img">
-                            { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
                         </div>
-                    </div>
 
                     {/* answer slide */}
                     <br/>
                     <br/>
-                    <div id="answer-slide" className="slide">
-                        <div id="question-number" className="slide-number above">
-                                Round { questionSlide.round } - Question{ questionSlide.quest }
-                        </div>
-                        { !questionSlide.img &&                    
-                            <div className="slide-text center">
-                                { questionSlide.question }
+                        <div id="answer-slide" className="slide">
+                            <div id="question-number" className="slide-number above" ref={ref} style={{ fontSize}}>
+                                    Round { questionSlide.round } - Question{ questionSlide.quest }
                             </div>
-                        }
-                        { questionSlide.img &&                                              
-                            <div className="slide-text top">
-                                { questionSlide.question }
+                            { !questionSlide.img &&                    
+                                <div className="slide-text center" ref={ref} style={{ fontSize}}>
+                                    { questionSlide.question }
+                                </div>
+                            }
+                            { questionSlide.img &&                                              
+                                <div className="slide-text top" ref={ref} style={{ fontSize}}>
+                                    { questionSlide.question }
+                                </div>
+                            }
+                            <div className="slide-img">
+                                { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
                             </div>
-                        }
-                        <div className="slide-img">
-                            { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
+                            <div className="answer-box center" ref={ref} style={{ fontSize}}>
+                                { answers }
+                            </div>
                         </div>
-                        <div className="answer-box center">
-                            { answers }
-                        </div>
-                    </div>
 
                 </div>
             </>
