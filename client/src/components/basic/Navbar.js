@@ -2,6 +2,10 @@ import React , { useState } from 'react';
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import './dropdown.css';
+// import ReportABug from './ReportABug';
+import { Button } from './Button';
+import './reportabug.css'
+import HelpIcon from './HelpIcon';
 
 
 
@@ -9,6 +13,41 @@ const Navbar = () => {
 
     const [open, setOpen] = useState(false);
     const closeDropdown = () => setOpen(false);
+
+    const [rbOpen,setrbOpen] = useState(false);
+    const closeReportBug = () => setrbOpen(false);
+
+    function ReportABug() {
+
+        return(
+            <div className="report-a-bug-section">
+                <div className="dark-filter"/>
+                <img className="report-bg" src="" alt="report_bg.png"></img>
+                <div className="report-container">
+                    <div className="report-help" onClick={closeReportBug}>
+                        <HelpIcon>burh</HelpIcon>
+                    </div>
+                    <div className="report-exit" onClick={closeReportBug}>
+                        <i className="fas fa-times"></i>
+                    </div>
+                    <div className="report-header">               
+                        <h1 >Report A Bug!</h1>
+                    </div>
+                    <div className="report-main">
+                        Please describe the issue you are experiencing:
+                        <textarea placeholder="There was an issue when I ..."></textarea>
+                    </div>
+                    <div className="report-button" onClick={closeReportBug}>
+                        <Button buttonColour="btn--secondary-colour" >
+                            SEND
+                        </Button>
+                    </div>
+                    
+                </div>
+            </div>        
+            )
+        }
+
 
     function Dropdown() {
 
@@ -64,15 +103,15 @@ const Navbar = () => {
                             
                         </DropdownItem>
                         <div className="dropdown-break"/>
-                        <div className="closeables" onClick = {closeDropdown}>
+                        <div className="functionals" onClick = { () => setrbOpen(true)}>
                             <DropdownItem icon ="fas fa-bug">                            
-                                <div className="item-text" onClick = {closeDropdown}>
+                                <div className="item-text">
                                     Report A Bug
                                 </div>                        
                             </DropdownItem>
                         </div>
                         <Link to="/signout">
-                            < div className="closeables" onClick = {closeDropdown}>
+                            < div className="functionals" onClick = {closeDropdown}>
                                 <DropdownItem icon="fas fa-sign-out-alt">
                                 <div className="item-text" >                                
                                     Sign Out                               
@@ -124,6 +163,7 @@ const Navbar = () => {
                 </div>
             </div>
             {open && <Dropdown></Dropdown>}
+            {rbOpen && <ReportABug></ReportABug>}
         </nav>
      );
 }

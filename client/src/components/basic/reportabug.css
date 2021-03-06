@@ -1,0 +1,98 @@
+.report-a-bug-section{
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    /* border: 5px white solid; */
+    color: var(--font-colour);
+}
+.dark-filter{
+    z-index: 1000000;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    opacity: 60%;
+    background-color: black;
+}
+.report-container{
+    position: fixed;
+    top:10%;
+    background-color: var(--colour-black2);
+    z-index: 1000000000;
+    min-width:350px;
+    width: 30%;
+    min-height: max-content;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    /* border:white 1px solid; */
+    font-family: var(--font);
+    border-radius: var(--border-radius);
+}
+.report-exit{
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    transition: 200ms;
+    width:35px;
+    height: 35px;
+    /* border: blueviolet 1px solid; */
+}
+.report-exit:hover{
+    transform: scale(1.05) perspective(1px);
+    color: var(--secondary-colour);
+    cursor: pointer;
+}
+.report-help{
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    transition: 200ms;
+    width:35px;
+    height: 35px;
+    /* border: blueviolet 1px solid; */
+}
+.report-main{
+    text-align: left;
+}
+.report-main textarea{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border: 3px var(--colour-white) solid;
+    background-color: var(--colour-white);
+    padding: 5px 10px;
+    width:100%;
+    height: 400px;
+    border-radius: var(--border-radius);
+    transition: 200ms;
+    text-align: left;
+    vertical-align: top;
+}
+.report-main textarea:hover{    
+    transform: scale(1.01) perspective(1px);
+}
+.report-main textarea:focus{
+    border: 5px var(--secondary-colour) solid;
+    transform: scale(1.01) perspective(1px)
+}
+/* .report-bg{
+    background-image: ;
+    background-position: fixed;
+    background-repeat: none;
+} */

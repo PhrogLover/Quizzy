@@ -97,6 +97,9 @@
     transform: rotate(60deg);
     /* border:red 1px solid; */
 }
+.functionals{
+    cursor: pointer;
+}
 
 @media screen and (max-width: 500px){
     .title{

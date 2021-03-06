@@ -8,6 +8,7 @@
     background-size: 200vw;
     color:var(--font-colour);
     overflow-y: hidden;
+    font-family: var(--font);
 }
 .search-container{
     min-width:max-content;
@@ -17,7 +18,7 @@
     border-radius: var(--border-radius);
 }
 .quiz-table-container{
-    min-width:1500px;
+    min-width:1700px;
     margin:20px;
     padding: 20px;
     background-color: var(--colour-black2);
@@ -134,12 +135,19 @@
     border-right: var(--colour-white)  1px solid;
     padding:5px;
     max-width: fit-content;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow:auto;
+    transition: 200ms;
+    text-transform: capitalize;    
+}
+.cell:hover{
+    font-size: 1.1em;
 }
 .header{
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 .end-cell{
     border-right:0;

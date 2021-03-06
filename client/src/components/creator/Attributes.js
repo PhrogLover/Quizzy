@@ -1,5 +1,6 @@
 import Attribute from "./Attribute";
 import "./attributes.css";
+import HelpIcon from "../basic/HelpIcon"
 
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
@@ -29,7 +30,7 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             
             <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain">Quiz's Domain: </div>
+                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Input the Unique ID of the quiz</HelpIcon> Quiz's Domain: </div>
                 <div className="domain-picker-container">
                     <input id="domain-toggle" className="display-none" type="checkbox"/>
                     <span className="toggle-label public-lbl">
