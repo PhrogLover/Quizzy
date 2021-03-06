@@ -5,6 +5,7 @@
     align-items: center;
     flex-direction: column;
     font-family: var(--font);
+    --slide-width: 500px
 }
 .slide{
     width: var(--slide-width);
@@ -169,11 +170,13 @@
     height: 250%;
     max-height: 25%;
     width: 100%;
+    padding: 0 10%;
     left: 50%;
     /* border: black 3px solid; */
     text-align: center;
     background-color: lightgrey;
     font-weight: bold;
+    box-shadow: 0 4px 5px;
 }
 .timer-container{
     top:4%;

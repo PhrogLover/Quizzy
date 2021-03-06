@@ -107,7 +107,7 @@ const SlideView = ( { quiz, error } ) => {
         <>
             { error && <div className="loading">{ error }</div> }
             <div className="slides">
-                    <div id="intro-slide" className=" slide" style="--slide-width: 100%">
+                    <div id="intro-slide" className=" slide">
                         <div className="slide-bg-title"/>
                         { roundSlide.img &&
                             < div className="title-header above">
