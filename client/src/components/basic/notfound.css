@@ -4,12 +4,16 @@
     justify-content: center;
     flex-direction: column;
     height: 90vh;
+    background-image: url('../../assets/images/notfound_bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1500px;
 }
 .not-found h1{
     color: var(--primary-colour);
     margin: 0;
     padding: 0;
-    font-size: 10vw;
+    font-size: 150px;
     /* border: 1px white solid; */
 
 }
@@ -17,7 +21,7 @@
     color: var(--primary-colour);
     margin-top: -35px;
     padding: 0;
-    font-size: 6vw;
+    font-size: 80px;
     /* border: 1px white solid; */
 }
 .not-found p{
@@ -35,4 +39,10 @@
 .not-found i{
     padding: 0 10px;
 }
+/* 
+@media screen and (max-width:500px){
+    .not-found{
+        background-size: 500px;
+    }
+} */
 
