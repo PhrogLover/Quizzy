@@ -92,15 +92,6 @@ const SlideView = ( { quiz, error } ) => {
         onFinish: () => {}
     });
 
-    const { fontSize: test, ref: testRef } = useFitText({
-        maxFontSize: 200,
-        minFontSize: 20,
-        onFinish: () => {}
-    });
-
-    console.log(test);
-    console.log(testRef);
-
     return (
         <>
             { error && <div className="loading">{ error }</div> }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import React from "react";
 
 import "./creator.css";
 import Attributes from "./Attributes";
@@ -114,6 +115,8 @@ const Creator = () => {
         setSlides(slidesState());
     }, [quiz.numberOfRounds, quiz.numberOfQuestions])
 
+    const ref = React.createRef();
+
     return ( 
         <div className="creator">
             <div className="creator-heading">
@@ -121,7 +124,7 @@ const Creator = () => {
             </div>
             <form onSubmit={ submitHandler }>
                 <div className="input-uniqueid-container">
-                    <HelpIcon>
+                    <HelpIcon ref={ref}>
                         Quickly set up your <strong> Seasonal Quiz </strong> by entering its Unique ID
                     </HelpIcon>
                     <div className="uniqueid-label" htmlFor="seasonal-setup-id">
