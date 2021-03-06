@@ -7,8 +7,8 @@
     font-family: var(--font);
 }
 .slide{
-    width: 100%;
-    padding-top: 56.25%;
+    width: var(--slide-width);
+    padding-top: calc(var(--slide-width)*0.5625);
     /* border: 1px white solid; */
     background-color: var(--secondary-colour);
     position: relative;
