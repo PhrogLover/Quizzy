@@ -2,6 +2,7 @@ import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import Quizlist from "./Quizlist";
 import "./quizholder.css";
+import HelpIcon from "../basic/HelpIcon"
 
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -61,6 +62,7 @@ const Quizholder = () => {
                     There is always a quiz for someone!
                 </p>
                 <div className="search-bar-container">
+                    <HelpIcon>Input the Unique ID of the quiz</HelpIcon>
                     <FilterText  filter = { filterSelector } filterTitle = { filterTitle } setFilterTitle = { setFilterTitle } filterCategory = { filterCategory } setFilterCategory = { setFilterCategory } filterCreator = { filterCreator } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
                     <span>
                         Search by:

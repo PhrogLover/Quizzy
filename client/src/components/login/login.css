@@ -23,6 +23,7 @@
     flex-direction: column;
     padding: 30px;
     /* border:white 1px solid; */
+    font-family: var(--font);
 }
 .trans{
     background-color: var(--bg-colour);

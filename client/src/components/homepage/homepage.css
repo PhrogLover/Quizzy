@@ -11,6 +11,7 @@ html {
     align-items: center;
     color:var(--font-colour);
     padding: 20px;
+    font-family: var(--font);
 }
 .left-create{
     padding: 0 20px;
@@ -75,6 +76,7 @@ html {
     justify-content: center;
     align-items: center;
     padding: 10% 0 5% 0;
+    font-family: var(--font);
 }
 #joinquiz{
     scroll-margin-top: var(--nav-height);
@@ -131,6 +133,7 @@ html {
     flex-direction: column;
     align-items: center;
     /* border: 1px white solid; */
+    font-family: var(--font);
 }
 #donate{
     scroll-margin-top: var(--nav-height);

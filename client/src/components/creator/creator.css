@@ -4,6 +4,7 @@
 
 .creator {
     color: white;
+    font-family: var(--font);
 }
 
 .creator h3 {

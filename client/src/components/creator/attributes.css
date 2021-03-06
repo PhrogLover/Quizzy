@@ -62,6 +62,12 @@
   justify-content: center;
   flex-direction: column;
 }
+.domain-label{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
 .domain-picker-container{
   border: 1px solid white; 
   display:flex;

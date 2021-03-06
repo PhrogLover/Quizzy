@@ -15,79 +15,90 @@ const SlideView = ( { quiz, error } ) => {
     }
 
     const { fontSize: introTitleImgFontSize, ref: introTitleImgRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: familyImgFontSize, ref: familyImgRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: introTitleFontSize, ref: introTitleRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: familyFontSize, ref: familyRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: roundTitleImgFontSize, ref: roundTitleImgRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: roundTitleFontSize, ref: roundTitleRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: questionFontSize, ref: questionRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+    const { fontSize: questionRoundFontSize, ref: questionRoundRef } = useFitText({
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: questionTextImgFontSize, ref: questionTextImgRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: questionTextFontSize, ref: questionTextRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: questionTextAnswerFontSize, ref: questionTextAnswerRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: questionTextImgAnswerFontSize, ref: questionTextImgAnswerRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
 
     const { fontSize: answerFontSize, ref: answerRef } = useFitText({
-        maxFontSize: 200,
+        maxFontSize: 300,
+        minFontSize: 20,
+        onFinish: () => {}
+    });
+
+    const { fontSize: timerFontSize, ref: timerRef } = useFitText({
+        maxFontSize: 300,
         minFontSize: 20,
         onFinish: () => {}
     });
@@ -97,6 +108,7 @@ const SlideView = ( { quiz, error } ) => {
             { error && <div className="loading">{ error }</div> }
             <div className="slides">
                     <div id="intro-slide" className=" slide">
+                        <div className="slide-bg-title"/>
                         { roundSlide.img &&
                             < div className="title-header above">
                                 <div className="slide-title" ref={introTitleImgRef} style={{ fontSize: introTitleImgFontSize }}>
@@ -130,6 +142,7 @@ const SlideView = ( { quiz, error } ) => {
                 <br/>
 
                 <div id="round-slide" className="slide">
+                    <div className="slide-bg"/>
                     <div id="question-number" className="slide-number above" ref={roundRef} style={{ fontSize: roundFontSize }}>
                             Round { roundSlide.round }
                     </div>
@@ -152,8 +165,17 @@ const SlideView = ( { quiz, error } ) => {
                 <br/>
 
                 <div id="question-slide" className=" slide">
+                <div className="slide-bg"/>
+                    <div className="timer-container">
+                        <div className="timer" ref={ timerRef } style={{ fontSize: timerFontSize }}>
+                            50s
+                        </div>
+                    </div>
                     <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
-                            Round { questionSlide.round } - Question{ questionSlide.quest }
+                            Question { questionSlide.quest }
+                    </div>
+                    <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
+                            Round { questionSlide.round } 
                     </div>
                     { !questionSlide.img &&                    
                         <div className="slide-text center" ref={questionTextRef} style={{ fontSize: questionTextFontSize }}>                                
@@ -172,9 +194,14 @@ const SlideView = ( { quiz, error } ) => {
 
                 <br/>
                 <br/>
+
                 <div id="answer-slide" className="slide">
+                <div className="slide-bg"/>
                     <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
-                            Round { questionSlide.round } - Question{ questionSlide.quest }
+                            Question { questionSlide.quest }
+                    </div>
+                    <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
+                            Round { questionSlide.round } 
                     </div>
                     { !questionSlide.img &&                    
                         <div className="slide-text center" ref={questionTextAnswerRef} style={{ fontSize: questionTextAnswerFontSize }}>

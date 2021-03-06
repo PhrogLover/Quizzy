@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
+import { Button } from "../basic/Button"
 
 import "./notfound.css";
 
 const NotFound = () => {
     return ( 
         <div className="not-found">
-            {/* image */}
             <h1>404</h1>
             <h2>Error</h2>
     
-            <p>The Page Could Not Be Found</p>
+            <p>Oops! Page Not Found</p>
             <Link to="/">
+                <Button buttonStyle="btn--outline">
                 <i className="fas fa-hand-point-left"></i>
                 Back to Homepage
+                </Button>
             </Link>
         </div>
      );
