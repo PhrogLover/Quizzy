@@ -115,7 +115,7 @@ const SlideView = ( { quiz, error } ) => {
     return (
         <>
             <button onClick={setSlideWidth(3)}>width 200px</button>
-
+            <button onClick={setSlideWidth(2)}>width 100%</button>
 
 
             { error && <div className="loading">{ error }</div> }
