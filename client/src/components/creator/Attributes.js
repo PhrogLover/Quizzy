@@ -15,6 +15,7 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
     }
 
     const domainRef = React.createRef();
+    const typeRef = React.createRef();
 
     return ( 
         <div className="attributes">
@@ -32,9 +33,9 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
             
 
             <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Private Quizes can only be played by users with the ID. Public Quizzes can be joined by anyone</HelpIcon> Quiz Domain: </div>
+                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}>Private Quizes can only be played by users with the ID. Public Quizzes can be joined by anyone</HelpIcon> Quiz Domain: </div>
                 <div className="domain-picker-container">
-                    <input  onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
+                    <input disabled={privateDisabled} onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
                     <span className="toggle-label">
                         Public
                     </span>
@@ -47,9 +48,9 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
                 </div>
             </div>
             <div className="type-container">
-                <div className="type-label" htmlFor="quiz-type"> <HelpIcon>bruh</HelpIcon> Quiz Type: </div>
+                <div className="type-label" htmlFor="quiz-type"> <HelpIcon ref={typeRef}>bruh</HelpIcon> Quiz Type: </div>
                 <div className="type-picker-container">
-                    <input id="type-toggle" className="display-none" type="checkbox"/>
+                    <input disabled={seasonalDisabled} onChange={change => (onChangeHandler("type", change.target.checked))} id="type-toggle" className="display-none" type="checkbox"/>
                     <span className="toggle-label">
                         Standard
                     </span>

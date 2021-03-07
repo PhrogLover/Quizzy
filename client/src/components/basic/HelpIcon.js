@@ -9,7 +9,7 @@ const HelpIcon = React.forwardRef((props, ref) => {
             <OverlayTrigger 
                 key= {placement}
                 placement={placement}
-                transition={true}
+                transition={false}
                 overlay={<Tooltip id="tooltip-down">
                     {props.children}
                 </Tooltip>}                   
