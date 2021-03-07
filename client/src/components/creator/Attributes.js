@@ -30,17 +30,32 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             
             <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Input the Unique ID of the quiz</HelpIcon> Quiz's Domain: </div>
+                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Private Quizes can only be played by users with the ID. Public Quizs</HelpIcon> Quiz's Domain: </div>
                 <div className="domain-picker-container">
                     <input id="domain-toggle" className="display-none" type="checkbox"/>
                     <span className="toggle-label public-lbl">
                         Public
                     </span>
                     <label className="toggle-container" htmlFor="domain-toggle">
-                        <span className="creator-toggle"></span>
+                        <span className="domain-toggle"></span>
                     </label>
                     <span className="toggle-label">
                         Private
+                    </span>
+                </div>
+            </div>
+            <div className="domain-container">
+                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Input the Unique ID of the quiz</HelpIcon> Quiz's Domain: </div>
+                <div className="domain-picker-container">
+                    <input id="domain-toggle" className="display-none" type="checkbox"/>
+                    <span className="toggle-label public-lbl">
+                        Standard
+                    </span>
+                    <label className="domain-container" htmlFor="domain-toggle">
+                        <span className="creator-toggle"></span>
+                    </label>
+                    <span className="toggle-label">
+                        Seasonal
                     </span>
                 </div>
             </div>

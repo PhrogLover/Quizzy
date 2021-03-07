@@ -29,7 +29,8 @@ const Creator = () => {
         numberOfQuestions: 10,
         seasonFreq: "",
         time: new Date(),
-        slides: []
+        slides: [],
+        showAns: true
     });
 
     const [slides, setSlides ] = useState(slidesState())
@@ -57,8 +58,8 @@ const Creator = () => {
                 title: "Insert Title",
                 img: "",
                 timeOverride: "",
-                transition: "",
-                endTime: ""
+                transition: 5,
+                endTime: 30
             })
             id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
@@ -71,8 +72,10 @@ const Creator = () => {
                     answers: [],
                     caseSensitive: false,
                     img: "",
-                    timeOverride: "",
-                    readTime: ""
+                    timeOverride: 60,
+                    readTime: 5,
+                    suspenseTime: 5,
+                    answerShowTime: 10,
                 });
                 id++;
             }

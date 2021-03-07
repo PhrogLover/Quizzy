@@ -1,19 +1,19 @@
 import { useState } from "react";
 import useFitText from "use-fit-text";
+import Timer from "./Timer";
 
-const SlideView = ( { quiz, error } ) => {
+const SlideView = ( { slide, error, showAns = false, timer, slideWidthPass } ) => {
+    //console.log(slide);
 
-    const introSlide = quiz.slides[0];
-    const roundSlide = quiz.slides[1][0];
-    const questionSlide = quiz.slides[1][1];
     let answers = "";
-
-    for (let i = 0; i < questionSlide.answers.length; i++) {
-        answers += questionSlide.answers[i];
-        if (i !== questionSlide.answers.length-1) {
-            answers += ", ";
+    if(slide.type === "question") {
+        for (let i = 0; i < slide.answers.length; i++) {
+            answers += slide.answers[i];
+            if (i !== slide.answers.length-1) {
+                answers += ", ";
+            }
         }
-    }
+    }    
 
     const { fontSize: introTitleImgFontSize, ref: introTitleImgRef } = useFitText({
         maxFontSize: 300,
@@ -68,18 +68,6 @@ const SlideView = ( { quiz, error } ) => {
         onFinish: () => {}
     });
 
-    const { fontSize: questionTextImgFontSize, ref: questionTextImgRef } = useFitText({
-        maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
-    });
-
-    const { fontSize: questionTextFontSize, ref: questionTextRef } = useFitText({
-        maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
-    });
-
     const { fontSize: questionTextAnswerFontSize, ref: questionTextAnswerRef } = useFitText({
         maxFontSize: 300,
         minFontSize: 20,
@@ -98,150 +86,98 @@ const SlideView = ( { quiz, error } ) => {
         onFinish: () => {}
     });
 
-    const { fontSize: timerFontSize, ref: timerRef } = useFitText({
-        maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
-    });
-
-    const slideWidthes = ['width--20per','width--50per','width--100per','width--200','width--400','width--800'];
-    const [ slideSize, setSlideSize ] = useState(slideWidthes[1]);
-
-    function changeSlideSize(slide) {
-        setSlideSize(slide);
-    }
-    
+    //const slideWidthes = ['width--20per','width--50per','width--100per','width--200','width--400','width--800'];
+    const [ slideSize, setSlideSize ] = useState(slideWidthPass);    
 
     return (
         <>
-            <button onClick={() => {changeSlideSize(slideWidthes[0])}}>width 20%</button>
-            <button onClick={() => {changeSlideSize(slideWidthes[1])}}>width 50%</button>
-            <button onClick={() => {changeSlideSize(slideWidthes[2])}}>width 100%</button>
-            <button onClick={() => {changeSlideSize(slideWidthes[3])}}>width 200px</button>
-            <button onClick={() => {changeSlideSize(slideWidthes[4])}}>width 400px</button>
-            <button onClick={() => {changeSlideSize(slideWidthes[5])}}>width 800px</button>
-
             { error && <div className="loading">{ error }</div> }
             <div className="slides">
                 <div className={`slide-resize-me ${slideSize} `}>
-                    <div id="intro-slide" className=" slide">
-                        <div className="slide-bg-title"/>
-                        { roundSlide.img &&
-                            < div className="title-header above">
-                                <div className="slide-title" ref={introTitleImgRef} style={{ fontSize: introTitleImgFontSize }}>
-                                    { introSlide.title }
-                                </div>                                
-                                { introSlide.family &&
-                                    <div className="title-family" ref={familyImgRef} style={{ fontSize: familyImgFontSize }}>
-                                            {introSlide.family}
-                                    </div> 
-                                }                                
-                            </div>
-                        }
-                        { !roundSlide.img &&
-                            < div className="title-header center">
-                                <div className="slide-title" ref={introTitleRef} style={{ fontSize: introTitleFontSize }}>
-                                    { introSlide.title }
+                    { (slide.type === "intro" || slide.type === "none") && 
+                        <div id="intro-slide" className=" slide">
+                            <div className="slide-bg-title"/>
+                            { timer &&<div className="timer-container">
+                                 <Timer seconds = { timer }/>
+                            </div>}
+                            { slide.img &&
+                                < div className="title-header above">
+                                    <div className="slide-title" ref={introTitleImgRef} style={{ fontSize: introTitleImgFontSize }}>
+                                        { slide.title }
+                                    </div>                                
+                                    { slide.family &&
+                                        <div className="title-family" ref={familyImgRef} style={{ fontSize: familyImgFontSize }}>
+                                                {slide.family}
+                                        </div> 
+                                    }                                
                                 </div>
-                                { introSlide.family && 
-                                    <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
-                                        {introSlide.family}
+                            }
+                            { !slide.img &&
+                                < div className="title-header center">
+                                    <div className="slide-title" ref={introTitleRef} style={{ fontSize: introTitleFontSize }}>
+                                        { slide.title }
                                     </div>
-                                }    
-                            </div>
+                                    { slide.family && 
+                                        <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
+                                            {slide.family}
+                                        </div>
+                                    }    
+                                </div>
                         }
                         <div className="title-img">
-                            { introSlide.img && <img id="intro-img" src={ introSlide.img } alt="intro"/> }
+                            { slide.img && <img id="intro-img" src={ slide.img } alt="intro"/> }
                         </div>
-                        
-                    </div>
-                </div>
-                <br/>
-                <br/>
-
-                <div className={`slide-resize-me ${slideSize} `}>
-                    <div id="round-slide" className="slide">
-                        <div className="slide-bg"/>
-                        <div id="question-number" className="slide-number above" ref={roundRef} style={{ fontSize: roundFontSize }}>
-                                Round { roundSlide.round }
-                        </div>
-                        { !roundSlide.img &&                    
-                            <div className="slide-text center" ref={roundTitleRef} style={{ fontSize: roundTitleFontSize }}>
-                                { roundSlide.title }                        
+                    </div> }
+                    { slide.type === "round" && 
+                        <div id="round-slide" className="slide">
+                            <div className="slide-bg"/>
+                            <div className="slide-number above" ref={roundRef} style={{ fontSize: roundFontSize }}>
+                                    Round { slide.round }
                             </div>
-                        }    
-                        { roundSlide.img &&                              
-                        <div className="slide-text top" ref={roundTitleImgRef} style={{ fontSize: roundTitleImgFontSize }}>
-                                { roundSlide.title }                              
+                            { !slide.img &&                    
+                                <div className="slide-text center" ref={roundTitleRef} style={{ fontSize: roundTitleFontSize }}>
+                                    { slide.title }                        
+                                </div>
+                            }    
+                            { slide.img &&                              
+                                <div className="slide-text top" ref={roundTitleImgRef} style={{ fontSize: roundTitleImgFontSize }}>
+                                        { slide.title }                              
+                                </div>
+                            }  
+                            { slide.img && <div className="slide-img">
+                                <img src={ slide.img } alt="round"/> 
+                            </div> }
+                    </div> }
+                    { slide.type === "question" &&
+                        <div id="answer-slide" className="slide">
+                            <div className="slide-bg"/>
+                                { timer &&<div className="timer-container">
+                                    <Timer seconds = { timer }/>
+                                </div>}
+                                <div className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
+                                        Question { slide.quest }
+                                </div>
+                                <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
+                                        Round { slide.round } 
+                                </div>
+                                { !slide.img &&                    
+                                    <div className="slide-text center" ref={questionTextAnswerRef} style={{ fontSize: questionTextAnswerFontSize }}>
+                                        { slide.question }
+                                    </div>
+                                }
+                                { slide.img &&                                              
+                                    <div className="slide-text top" ref={questionTextImgAnswerRef} style={{ fontSize: questionTextImgAnswerFontSize }}>
+                                        { slide.question }
+                                    </div>
+                                }
+                                <div className="slide-img">
+                                    { slide.img && <img src={ slide.img } alt="question_image"/> }
+                                </div>
+                                { showAns &&<div className="answer-box center" ref={answerRef} style={{ fontSize: answerFontSize }}>
+                                    { answers }
+                                </div> }
                         </div>
-                        }  
-                        { roundSlide.img && <div className="slide-img">
-                            <img src={ roundSlide.img } alt="round"/> 
-                        </div> }
-                    </div>
-                </div>
-
-                <br/>
-                <br/>
-
-                <div className={`slide-resize-me ${slideSize} `}>
-                    <div id="question-slide" className=" slide">
-                        <div className="slide-bg"/>
-                        <div className="timer-container">
-                            <div className="timer" ref={ timerRef } style={{ fontSize: timerFontSize }}>
-                                50s
-                            </div>
-                        </div>
-                        <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
-                                Question { questionSlide.quest }
-                        </div>
-                        <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
-                                Round { questionSlide.round } 
-                        </div>
-                        { !questionSlide.img &&                    
-                            <div className="slide-text center" ref={questionTextRef} style={{ fontSize: questionTextFontSize }}>                                
-                                { questionSlide.question }                                
-                            </div>
-                        }
-                        { questionSlide.img &&                                              
-                            <div className="slide-text top" ref={questionTextImgRef} style={{ fontSize: questionTextImgFontSize }}>                                
-                                { questionSlide.question }                                
-                            </div>
-                        }
-                        <div className="slide-img">
-                            { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
-                        </div>
-                    </div>
-                </div>
-
-                <br/>
-                <br/>
-                <div className={`slide-resize-me ${slideSize} `}>
-                    <div id="answer-slide" className="slide">
-                        <div className="slide-bg"/>
-                        <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
-                                Question { questionSlide.quest }
-                        </div>
-                        <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
-                                Round { questionSlide.round } 
-                        </div>
-                        { !questionSlide.img &&                    
-                            <div className="slide-text center" ref={questionTextAnswerRef} style={{ fontSize: questionTextAnswerFontSize }}>
-                                { questionSlide.question }
-                            </div>
-                        }
-                        { questionSlide.img &&                                              
-                            <div className="slide-text top" ref={questionTextImgAnswerRef} style={{ fontSize: questionTextImgAnswerFontSize }}>
-                                { questionSlide.question }
-                            </div>
-                        }
-                        <div className="slide-img">
-                            { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
-                        </div>
-                        <div className="answer-box center" ref={answerRef} style={{ fontSize: answerFontSize }}>
-                            { answers }
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </>

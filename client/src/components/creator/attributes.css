@@ -95,7 +95,7 @@
   display: none;
 }
 
-.creator-toggle {
+.domain-toggle {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -106,7 +106,7 @@
   -webkit-transition: .4s;
   transition: .4s;
 }
-.creator-toggle:before {
+.domain-toggle:before {
   position: absolute;
   content: "";
   height: 14px;
@@ -118,15 +118,15 @@
   transition: .4s;
   filter: none;
 }
-input:checked + .creator-toggle {
+input:checked + .domain-toggle {
   background-color: var(--primary-colour);
 }
 
-input:focus + .creator-toggle {
+input:focus + .domain-toggle {
   box-shadow: 0 0 1px var(--primary-colour);
 }
 
-input:checked + span +.toggle-container .creator-toggle:before {
+input:checked + span +.toggle-container .domain-toggle:before {
   -webkit-transform: translateX(20x);
   -ms-transform: translateX(20px);
   transform: translateX(20px);
