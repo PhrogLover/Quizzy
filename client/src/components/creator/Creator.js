@@ -84,17 +84,21 @@ const Creator = () => {
     }
 
     function onChangeHandler(varName, varValue) {
-        if (varName === "domain" && varValue === "private") {
+        if (varName === "domain" && varValue === true) {
             setSeasonalDisabled(true);
+            varValue = "private";
         }
-        else if (varName === "domain" && varValue === "public") {
+        else if (varName === "domain" && varValue === false) {
             setSeasonalDisabled(false);
+            varValue = "public";
         }
-        else if (varName === "type" && varValue === "seasonal") {
+        else if (varName === "type" && varValue === true) {
             setPrivateDisabled(true);
+            varValue = "seasonal";
         }
-        else if (varName === "type" && varValue === "standard") {
+        else if (varName === "type" && varValue === false) {
             setPrivateDisabled(false);
+            varValue = "standard";
         }
 
         let temp = {...quiz};
@@ -117,6 +121,10 @@ const Creator = () => {
     useEffect(() => {
         setSlides(slidesState());
     }, [quiz.numberOfRounds, quiz.numberOfQuestions])
+
+    useEffect(() => {
+        console.log(quiz);
+    }, [quiz])
 
     const ref = React.createRef();
 

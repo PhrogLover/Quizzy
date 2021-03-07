@@ -1,6 +1,7 @@
 import Attribute from "./Attribute";
 import "./attributes.css";
-import HelpIcon from "../basic/HelpIcon"
+import HelpIcon from "../basic/HelpIcon";
+import React from "react";
 
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
@@ -13,6 +14,7 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
         navigator.clipboard.writeText(text);
     }
 
+    const domainRef = React.createRef();
 
     return ( 
         <div className="attributes">
@@ -25,15 +27,15 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
                 <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
             </div>
             
-            
 
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             
+
             <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Private Quizes can only be played by users with the ID. Public Quizs</HelpIcon> Quiz's Domain: </div>
+                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Private Quizes can only be played by users with the ID. Public Quizzes can be joined by anyone</HelpIcon> Quiz Domain: </div>
                 <div className="domain-picker-container">
-                    <input id="domain-toggle" className="display-none" type="checkbox"/>
-                    <span className="toggle-label public-lbl">
+                    <input  onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
+                    <span className="toggle-label">
                         Public
                     </span>
                     <label className="toggle-container" htmlFor="domain-toggle">
@@ -44,15 +46,15 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
                     </span>
                 </div>
             </div>
-            <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Input the Unique ID of the quiz</HelpIcon> Quiz's Domain: </div>
-                <div className="domain-picker-container">
-                    <input id="domain-toggle" className="display-none" type="checkbox"/>
-                    <span className="toggle-label public-lbl">
+            <div className="type-container">
+                <div className="type-label" htmlFor="quiz-type"> <HelpIcon>bruh</HelpIcon> Quiz Type: </div>
+                <div className="type-picker-container">
+                    <input id="type-toggle" className="display-none" type="checkbox"/>
+                    <span className="toggle-label">
                         Standard
                     </span>
-                    <label className="domain-container" htmlFor="domain-toggle">
-                        <span className="creator-toggle"></span>
+                    <label className="toggle-container" htmlFor="type-toggle">
+                        <span className="type-toggle"></span>
                     </label>
                     <span className="toggle-label">
                         Seasonal
