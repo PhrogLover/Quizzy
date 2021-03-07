@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useFitText from "use-fit-text";
 
 const SlideView = ( { quiz, error } ) => {
@@ -104,19 +105,17 @@ const SlideView = ( { quiz, error } ) => {
     });
 
     const slideWidthes = ['width--20per','width--50per','width--100per','width--200','width--400','width--800'];
-    const slideSize = 'width--200';
+    const [ slideSize, setSlideSize ] = useState(slideWidthes[1]);
 
-
-    function setSlideWidth(index){
-        const slideSize = slideWidthes[index];
-    };
-
+    function changeSlideSize(slide) {
+        setSlideSize(slide);
+    }
+    
 
     return (
         <>
-            <button onClick={setSlideWidth(3)}>width 200px</button>
-            <button onClick={setSlideWidth(2)}>width 100%</button>
-
+            <button onClick={() => {changeSlideSize(slideWidthes[3])}}>width 200px</button>
+            <button onClick={() => {changeSlideSize(slideWidthes[5])}}>width 800px</button>
 
             { error && <div className="loading">{ error }</div> }
             <div className="slides">
