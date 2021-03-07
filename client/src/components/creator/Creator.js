@@ -116,10 +116,6 @@ const Creator = () => {
         setSlides(slidesState());
     }, [quiz.numberOfRounds, quiz.numberOfQuestions])
 
-    useEffect(() => {
-        console.log(quiz);
-    }, [quiz])
-
     const ref = React.createRef();
 
     return ( 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SlideView from "./SlideView";
 
 const SlideScript = ({ quiz, error }) => {
@@ -23,10 +23,6 @@ const SlideScript = ({ quiz, error }) => {
     let roundIndex = globalRoundIndex;
     let quizIntro = globalQuizIntro;
     let endOfQuiz = globalEndOfQuiz;
-
-    useEffect(() => {
-        console.log(currentSlideScript);
-    }, [currentSlideScript, isPending])
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms))
