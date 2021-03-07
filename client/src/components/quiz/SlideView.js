@@ -2,7 +2,7 @@ import { useState } from "react";
 import useFitText from "use-fit-text";
 import Timer from "./Timer";
 
-const SlideView = ( { slide, error, showAns = false, timer, slideWidthPass } ) => {
+const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass } ) => {
     //console.log(slide);
 
     let answers = "";

@@ -1,3 +1,4 @@
+import SlideView from "../quiz/SlideView";
 import "./slidenav.css";
 
 const SlideNav = ({ slides, changeCurrentSlide }) => {
@@ -16,11 +17,7 @@ const SlideNav = ({ slides, changeCurrentSlide }) => {
             {expandedSlides.map((slide, index) => (
                 <div key={ index } className="button-container">
                     <button type="button" onClick={ () => {changeCurrentSlide(slide.round, slide.quest)} }>
-                        {slide.round !== 0 && !(slide.type === "round") && <p>R{ slide.round }, Q{ slide.quest }</p>}
-                        {slide.round !== 0 && slide.type === "round" && <p>R{ slide.round }</p>}
-                        {slide.title && <p>{ slide.title }</p>}
-                        {slide.question && <p>{ slide.question }</p>}
-                        {slide.img && <div id="image-preview"><img src={ slide.img } alt="Preview" className="image-preview__image"/></div>}
+                        <SlideView slide={ slide } slideWidthPass = "width--50per"/>
                     </button>
                 </div>
             ))}
