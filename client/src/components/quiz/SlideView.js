@@ -114,7 +114,11 @@ const SlideView = ( { quiz, error } ) => {
 
     return (
         <>
+            <button onClick={() => {changeSlideSize(slideWidthes[0])}}>width 20%</button>
+            <button onClick={() => {changeSlideSize(slideWidthes[1])}}>width 50%</button>
+            <button onClick={() => {changeSlideSize(slideWidthes[2])}}>width 100%</button>
             <button onClick={() => {changeSlideSize(slideWidthes[3])}}>width 200px</button>
+            <button onClick={() => {changeSlideSize(slideWidthes[4])}}>width 400px</button>
             <button onClick={() => {changeSlideSize(slideWidthes[5])}}>width 800px</button>
 
             { error && <div className="loading">{ error }</div> }
