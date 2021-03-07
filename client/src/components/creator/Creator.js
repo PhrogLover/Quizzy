@@ -13,8 +13,6 @@ import { Button } from "../basic/Button";
 const Creator = () => {
     const history = useHistory();
     
-    const [ privateDisabled, setPrivateDisabled ] = useState(false);
-    const [ seasonalDisabled, setSeasonalDisabled ] = useState(false);
     const [ isPending, setIsPending ] = useState(false);
     const [ quiz, setQuiz] = useState({
         id: GetUniqueId(),
@@ -85,19 +83,15 @@ const Creator = () => {
 
     function onChangeHandler(varName, varValue) {
         if (varName === "domain" && varValue === true) {
-            setSeasonalDisabled(true);
             varValue = "private";
         }
         else if (varName === "domain" && varValue === false) {
-            setSeasonalDisabled(false);
             varValue = "public";
         }
         else if (varName === "type" && varValue === true) {
-            setPrivateDisabled(true);
             varValue = "seasonal";
         }
         else if (varName === "type" && varValue === false) {
-            setPrivateDisabled(false);
             varValue = "standard";
         }
 
@@ -147,7 +141,7 @@ const Creator = () => {
                 <h3>To Create Your Brand New Quiz, First Select the <span>Main Atributes</span> of It!</h3>
                 <div className="main-form">
                     <div className="hide-me" id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
-                    <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } privateDisabled = { privateDisabled } seasonalDisabled = { seasonalDisabled } />
+                    <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
                 </div>
                     <SlideEditor slides = { slides } setSlides = { setSlides }/>
 
