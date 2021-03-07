@@ -163,34 +163,35 @@ const SlideView = ( { quiz, error } ) => {
 
                 <br/>
                 <br/>
-
+                {/* <div className="testing-box"> */}
                 <div id="question-slide" className=" slide">
-                <div className="slide-bg"/>
-                    <div className="timer-container">
-                        <div className="timer" ref={ timerRef } style={{ fontSize: timerFontSize }}>
-                            50s
+                    <div className="slide-bg"/>
+                        <div className="timer-container">
+                            <div className="timer" ref={ timerRef } style={{ fontSize: timerFontSize }}>
+                                50s
+                            </div>
+                        </div>
+                        <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
+                                Question { questionSlide.quest }
+                        </div>
+                        <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
+                                Round { questionSlide.round } 
+                        </div>
+                        { !questionSlide.img &&                    
+                            <div className="slide-text center" ref={questionTextRef} style={{ fontSize: questionTextFontSize }}>                                
+                                { questionSlide.question }                                
+                            </div>
+                        }
+                        { questionSlide.img &&                                              
+                            <div className="slide-text top" ref={questionTextImgRef} style={{ fontSize: questionTextImgFontSize }}>                                
+                                { questionSlide.question }                                
+                            </div>
+                        }
+                        <div className="slide-img">
+                            { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
                         </div>
                     </div>
-                    <div id="question-number" className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
-                            Question { questionSlide.quest }
-                    </div>
-                    <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
-                            Round { questionSlide.round } 
-                    </div>
-                    { !questionSlide.img &&                    
-                        <div className="slide-text center" ref={questionTextRef} style={{ fontSize: questionTextFontSize }}>                                
-                            { questionSlide.question }                                
-                        </div>
-                    }
-                    { questionSlide.img &&                                              
-                        <div className="slide-text top" ref={questionTextImgRef} style={{ fontSize: questionTextImgFontSize }}>                                
-                            { questionSlide.question }                                
-                        </div>
-                    }
-                    <div className="slide-img">
-                        { questionSlide.img && <img src={ questionSlide.img } alt="question_image"/> }
-                    </div>
-                </div>
+                {/* </div> */}
 
                 <br/>
                 <br/>
