@@ -1,6 +1,7 @@
 import Attribute from "./Attribute";
 import "./attributes.css";
-import HelpIcon from "../basic/HelpIcon"
+import HelpIcon from "../basic/HelpIcon";
+import React from "react";
 
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
@@ -13,6 +14,7 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
         navigator.clipboard.writeText(text);
     }
 
+    const domainRef = React.createRef();
 
     return ( 
         <div className="attributes">
@@ -25,14 +27,14 @@ const Attributes = ({ onChangeHandler, quiz, privateDisabled, seasonalDisabled }
                 <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
             </div>
             
-            
 
             { privateDisabled && <><br/><span>*Cannot Create a Private Seasonal Quiz</span></>}
             
+
             <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon>Input the Unique ID of the quiz</HelpIcon> Quiz's Domain: </div>
+                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}>Input the Unique ID of the quiz</HelpIcon> Quiz's Domain: </div>
                 <div className="domain-picker-container">
-                    <input id="domain-toggle" className="display-none" type="checkbox"/>
+                    <input  onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
                     <span className="toggle-label public-lbl">
                         Public
                     </span>
