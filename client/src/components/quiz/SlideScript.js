@@ -78,7 +78,7 @@ const SlideScript = ({ quiz, error }) => {
                     await sleep(1000);
                 }
                 console.log("question solving time");
-                for (let j = quiz.slides[roundIndex][i].timeOverride; j >= 0; j--) {
+                for (let j = quiz.slides[roundIndex][i].timeOverride || quiz.slides[roundIndex][0].timeOverride || quiz.timePerQuestion; j >= 0; j--) {
                     if (j < 10) {
                         setTimer("0"+j);
                     }

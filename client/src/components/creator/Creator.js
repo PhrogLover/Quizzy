@@ -15,16 +15,17 @@ const Creator = () => {
     const [ isPending, setIsPending ] = useState(false);
     const [ quiz, setQuiz] = useState({
         id: GetUniqueId(),
-        title: "",
-        category: "",
-        family: "",
+        title: null,
+        category: null,
+        family: null,
         domain: "public",
         type: "standard",
         numberOfTeams: 25,
         numberOfPlayers: 5,
         numberOfRounds: 5,
         numberOfQuestions: 10,
-        seasonFreq: "",
+        timePerQuestion: 60,
+        seasonFreq: null,
         time: new Date(),
         slides: [],
         showAns: true
@@ -54,7 +55,7 @@ const Creator = () => {
                 type: "round",
                 title: "Insert Title",
                 img: null,
-                timeOverride: "",
+                timeOverride: quiz.timePerQuestion || 60,
                 transition: 5,
                 endTime: 30
             })
@@ -69,7 +70,7 @@ const Creator = () => {
                     answers: [],
                     caseSensitive: false,
                     img: null,
-                    timeOverride: 60,
+                    timeOverride: slides[i][0].timeOverride || quiz.timePerQuestion || 60,
                     readTime: 5,
                     suspenseTime: 5,
                     answerShowTime: 10,
