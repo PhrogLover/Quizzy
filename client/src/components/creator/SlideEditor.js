@@ -14,6 +14,10 @@ const SlideEditor = ( { slides, setSlides, quiz } ) => {
     });
 
     function changeSlideHandler(name, value) {
+        if (value === -1) {
+            value = null;
+        }
+
         if (name === "answers") {
             value = value.split(", ");
         }
@@ -50,6 +54,10 @@ const SlideEditor = ( { slides, setSlides, quiz } ) => {
             setCurrentSlide(slides[round]);
         }
     }
+
+    useEffect(() => {
+            console.log(slides);
+        }, [slides])
 
     return ( 
         <Container className="slide-editor">

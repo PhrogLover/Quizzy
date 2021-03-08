@@ -18,7 +18,7 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>{ title }</Form.Label>
                 <Form.Control defaultValue={ selected } onChange={(selected) => (onChangeHandler(name, parseInt(selected.target.value)))} as="select">
-                {reset && <option value="" >Deselect</option>}
+                {reset && <option value={-1} >Deselect</option>}
                 {dropdownItems.map(index => (
                     <option value={ index } key={ index } >{ index }</option>
                 ))}

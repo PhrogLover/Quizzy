@@ -72,7 +72,7 @@ const Creator = () => {
                     caseSensitive: false,
                     img: null,
                     timeOverride: template[i][0].timeOverride || quiz.timePerQuestion || 60,
-                    readTime: 5,
+                    readTime: 6,
                     suspenseTime: 5,
                     answerShowTime: 10,
                 });
@@ -135,7 +135,7 @@ const Creator = () => {
                     caseSensitive: false,
                     img: null,
                     timeOverride: template[i][0].timeOverride || quiz.timePerQuestion || 60,
-                    readTime: 5,
+                    readTime: 6,
                     suspenseTime: 5,
                     answerShowTime: 10,
                 });
@@ -190,9 +190,9 @@ const Creator = () => {
         setSlides(slidesState());
     }, [quiz])
 
-    useEffect(() => {
-        console.log(quiz);
-    }, [quiz])
+    // useEffect(() => {
+    //     console.log(quiz);
+    // }, [quiz])
 
     const ref = React.createRef();
 
