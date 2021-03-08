@@ -26,7 +26,8 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
         changeSlideHandler("img", "");
     }
     
-    const [imgRef, setImgRef ] = useState();
+    const [ imgRef, setImgRef ] = useState();
+    const [ imgUrlString, setImgUrlString ] = useState();
     
     let answers = "";
     if(slide.type === "question") {
@@ -76,7 +77,8 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                 <img src={ slide.img } alt="Preview" className="image-preview__image"/>
             </div>
             { !slide.img && <input ref={(ref) => (setImgRef(ref))} type="file" accept="image/*" onChange={(e) => (onSlideImageChange(e))}/> }
-            { !slide.img && <button type="button" onClick={pasteImgURL} >Paste URL</button> }
+            { !slide.img && <input type="text" placeholder="URL" onChange={ text => (setImgUrlString(text.target.value)) } />}
+            { !slide.img && <button type="button" onClick={() => (changeSlideHandler("img", imgUrlString)) } >Paste URL</button> }
             { slide.img && <button type="button" id="removeFile" onClick={removeImageFromSlide}>Remove File</button> }
         </div>
         );
