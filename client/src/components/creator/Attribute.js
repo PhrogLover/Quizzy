@@ -16,7 +16,10 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
     const dropdownItems = makeSteps(start, finish, steps);
 
     return ( 
-        <span>
+        <div className="attribute-container">
+            <div className="attribute-label">
+                {title}:
+            </div>
             {[DropdownButton].map((DropdownType, idx) => (
             <DropdownType
                 as={ButtonGroup}
@@ -32,7 +35,7 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
                 ))}
             </DropdownType>
             ))}
-        </span>
+        </div>
      );
 }
  

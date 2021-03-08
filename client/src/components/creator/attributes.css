@@ -1,12 +1,18 @@
 .attributes {
     margin-bottom: 700px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: solid 1px red;
 }
 .attributes label {
     margin-bottom: 30px;
 }
 .quiz-title-container{
-  padding: 10px;;
+  padding: 10px;
+  width:100%;
 }
 .quiz-title-label{
   margin-right: 10px;
@@ -30,6 +36,7 @@
 }
 .quiz-category-container{
   padding:10px;
+  width:100%;
 }
 .quiz-category-label{
   margin-right: 10px;
@@ -286,12 +293,19 @@ input:checked + span +.toggle-container .type-toggle:before {
 .new-quizid-button:hover{
   cursor: pointer;
   background-color: var(--colour-white);
-  color: var(--colour-black2)
+  color: var(--colour-black2);
+
+  /* Makes text unselectable */ 
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 /* Seasonal Quiz Section */
 .quiz-family-title-container{
   padding:10px;
+  width: 100%;
 }
 .quiz-family-title-label{
   margin-right: 10px;
@@ -300,8 +314,8 @@ input:checked + span +.toggle-container .type-toggle:before {
 .quiz-family-title-container input{
   border: 3px var(--colour-white) solid;
   background-color: var(--colour-white);
-  min-width:200px;
-  width: 30%;
+  min-width:300px;
+  width: 40%;
   border-radius: var(--border-radius);
   transition: 200ms;
   text-align: center
@@ -323,7 +337,11 @@ input:checked + span +.toggle-container .type-toggle:before {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: 500px;
+  width: 90%;
+  min-height: fit-content ;
+  height: 250px;
+  margin-top: 10px;
+  border: blue 1px solid;
 }
 .date-time-container{
   min-width: 300px;
@@ -333,16 +351,15 @@ input:checked + span +.toggle-container .type-toggle:before {
   background-color: white;
   flex-direction: column;
   padding: 10px;
-  margin-left: 10%;
-  width:40%;
+  width:50%;
   height: 100%;
   border-radius: var(--border-radius);
   color: var(--colour-black);
 }
 .attributes-main-container{
   border: white 1px solid;
-  margin-right: 10%;
-  width:40%;
+  min-width: 300px;
+  width:50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -403,8 +420,14 @@ COPY TEXT CSS SHENANIGANS
   }
   
 }
-@media screen and (max-width:1000px){
+@media screen and (max-width:800px){
   .creator-lower-section{
     flex-direction: column;
+  }
+  .date-time-container{
+    width: 100%;
+  }
+  .attributes-main-container{
+    width: 100%;
   }
 }

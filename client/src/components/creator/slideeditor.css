@@ -4,7 +4,7 @@
 .main-slideEditor-container{
     border-radius: var(--border-radius);
     width:100%;
-    border: 1px white solid;
+    /* border: 1px white solid; */
     display: flex;
     align-items: center;
     flex-direction: row;
