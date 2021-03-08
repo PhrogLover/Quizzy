@@ -1,6 +1,3 @@
-.dropdown {
-    margin: 25px;
-}
 
 .creator {
     color: white;
@@ -8,8 +5,8 @@
 }
 
 .creator h3 {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .creator #show {
@@ -32,6 +29,7 @@
     align-items: center;
     justify-content: center;
     height: max-content;
+    margin-bottom: 30px;
 }
 .uniqueid-label{
     margin-right: 10px;

@@ -14,17 +14,23 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
     const dropdownItems = makeSteps(start, finish, steps);
 
     return ( 
-        <span>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>{ title }</Form.Label>
-                <Form.Control onChange={(selected) => (onChangeHandler(name, parseInt(selected.target.value)))} as="select">
-                {reset && <option value="" >Deselect</option>}
-                {dropdownItems.map(index => (
-                    <option value={ index } key={ index } >{ index }</option>
-                ))}
-                </Form.Control>
-            </Form.Group>
-        </span>
+        <div className="attribute-container">
+            <div className="select-label">
+                { title }:
+            </div>
+            <div className="select-container">
+                <Form.Group controlId={ name }>
+                    <div className="select-input-container">
+                        <Form.Control onChange={(selected) => (onChangeHandler(name, parseInt(selected.target.value)))} as="select">
+                        {reset && <option value="" >Deselect</option>}
+                        {dropdownItems.map(index => (
+                            <option value={ index } key={ index } >{ index }</option>
+                        ))}
+                        </Form.Control>
+                    </div>
+                </Form.Group>
+            </div>
+        </div>
      );
 }
  

@@ -16,6 +16,7 @@ const Attributes = ({ onChangeHandler, quiz }) => {
     const domainRef = React.createRef();
     const typeRef = React.createRef();
     const idGenRef = React.createRef();
+    const timePerQRef = React.createRef();
 
     return ( 
         <div className="attributes">
@@ -97,8 +98,11 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                     <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5}/>
                     <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10}/>
                     <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20}/>
+                    <div className="attribute-with-help">
+                        <HelpIcon ref={timePerQRef}>You can set more intricate question timings in the slide editor below.</HelpIcon>
+                    </div>
                     <Attribute onChangeHandler = { onChangeHandler } title = "Time per Question" name = "timePerQuestion" start = {10} finish = {90} step = {5}/>
-                    <p>* can set more intricate question timings in the slide editor below.</p>
+                    
                 </div>
             </div>
         </div>
