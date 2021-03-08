@@ -15,10 +15,11 @@
 .quiz-title-container input{
   border: 3px var(--colour-white) solid;
   background-color: var(--colour-white);
-  min-width:200px;
+  min-width:300px;
   width: 50%;
   border-radius: var(--border-radius);
   transition: 200ms;
+  text-align: center;
 }
 .quiz-title-container input:hover{
   transform: scale(1.02) perspective(1px)
@@ -41,6 +42,7 @@
   width: 30%;
   border-radius: var(--border-radius);
   transition: 200ms;
+  text-align: center
 }
 .quiz-category-container input:hover{
   transform: scale(1.02) perspective(1px)
@@ -219,6 +221,134 @@ input:checked + span +.toggle-container .type-toggle:before {
   color: var(--primary-colour);
 }
 
+
+
+/* Private / Seasonal ID Generator */
+
+.id-generator-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.id-generator-main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.id-generator-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.id-gen-label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.id-generator{
+  border: 3px var(--colour-white) solid;
+  background-color: var(--colour-white);
+  min-width: 300px;
+  width: 20%;
+  border-radius: var(--border-radius);
+  transition: 200ms;
+  font-size: 15px;
+  text-align: center;
+  margin-left: 10px;
+}
+.copy-clipboard-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--colour-white);
+  padding: 5px 7px;
+  border-radius: var(--border-radius);
+  margin: 0 10px;
+  transition: 200ms;
+}
+.copy-clipboard-button:hover{
+  cursor: pointer;
+  background-color: var(--colour-white);
+  color: var(--colour-black2)
+}
+.new-quizid-button{
+  border: 1px solid var(--colour-white);
+  padding: 0 10px;
+  border-radius: var(--border-radius);
+  transition: 200ms;
+}
+.new-quizid-button i{
+  margin-right: 10px;
+}
+.new-quizid-button:hover{
+  cursor: pointer;
+  background-color: var(--colour-white);
+  color: var(--colour-black2)
+}
+
+/* Seasonal Quiz Section */
+.quiz-family-title-container{
+  padding:10px;
+}
+.quiz-family-title-label{
+  margin-right: 10px;
+  height: 100%;
+}
+.quiz-family-title-container input{
+  border: 3px var(--colour-white) solid;
+  background-color: var(--colour-white);
+  min-width:200px;
+  width: 30%;
+  border-radius: var(--border-radius);
+  transition: 200ms;
+  text-align: center
+}
+.quiz-family-title-container input:hover{
+  transform: scale(1.02) perspective(1px)
+}
+.quiz-family-title-container input:focus{
+  border: 3px var(--primary-colour) solid;
+  transform: scale(1.02) perspective(1px)
+}
+
+
+
+/* bottom section of attributes */
+
+.creator-lower-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 500px;
+}
+.date-time-container{
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  flex-direction: column;
+  padding: 10px;
+  margin-left: 10%;
+  width:40%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  color: var(--colour-black);
+}
+.attributes-main-container{
+  border: white 1px solid;
+  margin-right: 10%;
+  width:40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 /*
 COPY TEXT CSS SHENANIGANS
 .tooltip {
@@ -258,8 +388,23 @@ COPY TEXT CSS SHENANIGANS
     visibility: visible;
     opacity: 1;
   }*/
-@media screen and (max-width:500px){
+@media screen and (max-width:650px){
   .main-toggle-container{
+    flex-direction: column;
+  }
+  .id-generator-container{
+    flex-direction: column;
+  }
+  .id-generator-main{
+    flex-direction: column;
+  }
+  .id-generator-buttons{
+    margin-top:10px;
+  }
+  
+}
+@media screen and (max-width:1000px){
+  .creator-lower-section{
     flex-direction: column;
   }
 }

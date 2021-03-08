@@ -31,6 +31,7 @@
     height: 80%;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     padding: 30px;
     /* border:white 1px solid; */
@@ -84,12 +85,12 @@
     text-align: left;
     vertical-align: top;
 }
-.report-main textarea:hover{    
-    transform: scale(1.01) perspective(1px);
-}
 .report-main textarea:focus{
     border: 5px var(--secondary-colour) solid;
     transform: scale(1.01) perspective(1px)
+}
+.report-button{
+    width:fit-content;
 }
 /* .report-bg{
     background-image: ;

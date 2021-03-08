@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import Quizlist from "./Quizlist";
@@ -52,6 +53,8 @@ const Quizholder = () => {
         }
     }
 
+    const searchBarRef = React.createRef;
+
     return (
         <div className="quiz-section">
             <div className="search-container">
@@ -62,7 +65,7 @@ const Quizholder = () => {
                     There is always a quiz for someone!
                 </p>
                 <div className="search-bar-container">
-                    <HelpIcon>Input the Unique ID of the quiz</HelpIcon>
+                    <HelpIcon ref={ searchBarRef }>Search up the quiz of your choosing, use the filters on the right!</HelpIcon>
                     <FilterText  filter = { filterSelector } filterTitle = { filterTitle } setFilterTitle = { setFilterTitle } filterCategory = { filterCategory } setFilterCategory = { setFilterCategory } filterCreator = { filterCreator } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
                     <span>
                         Search by:

@@ -5,6 +5,7 @@ import React from "react";
 
 import GetUniqueId from "../../GetUniqueId";
 import DateTimePicker from 'react-datetime-picker';
+// import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
 
 const Attributes = ({ onChangeHandler, quiz }) => {
 
@@ -14,20 +15,21 @@ const Attributes = ({ onChangeHandler, quiz }) => {
 
     const domainRef = React.createRef();
     const typeRef = React.createRef();
+    const idGenRef = React.createRef();
 
     return ( 
         <div className="attributes">
             <div className="quiz-title-container">
                 <div className="quiz-title-label" htmlFor="quiz-title">Quiz Title: </div>
-                <input type="text" name="quiz-title" onChange={option => (onChangeHandler("title", option.target.value))}/>
+                <input type="text" name="quiz-title" placeholder="My Quiz" onChange={option => (onChangeHandler("title", option.target.value))}/>
             </div>
             <div className="quiz-category-container">
                 <div className="quiz-category-label" htmlFor="quiz-category">Main Theme/Category: </div>
-                <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
+                <input type="text" name="quiz-category" placeholder="General Knowledge" onChange={option => (onChangeHandler("category", option.target.value))}/>
             </div>
             <div className="main-toggle-container">
                 <div className="domain-container">
-                    <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}><strong>Private Quizzes</strong> can only be played by users with the ID. <strong>Public Quizzes</strong> can be joined by anyone</HelpIcon> Quiz Domain: </div>
+                    <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}><strong>Private Quizzes</strong> can only be played by users with the ID. <strong>Public Quizzes</strong> can be joined by anyone.</HelpIcon> Quiz Domain: </div>
                     <div className="domain-picker-container">
                         <input onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
                         <span className="toggle-label">
@@ -42,7 +44,7 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                     </div>
                 </div>
                 <div className="type-container">
-                    <div className="type-label" htmlFor="quiz-type"> <HelpIcon ref={typeRef}>bruh</HelpIcon> Quiz Type: </div>
+                    <div className="type-label" htmlFor="quiz-type"> <HelpIcon ref={typeRef}><strong>Seasonal Quizzes</strong> repeat every week on the same day. <strong>Standard Quizzes</strong> can be played once.</HelpIcon> Quiz Type: </div>
                     <div className="type-picker-container">
                         <input onChange={change => (onChangeHandler("type", change.target.checked))} id="type-toggle" className="display-none" type="checkbox"/>
                         <span className="toggle-label">
@@ -58,30 +60,45 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                 </div>
             </div>
 
-            { (quiz.domain === "private" || quiz.type === "seasonal") && <>
-                <label htmlFor="private-id">Quiz unique ID *can see this after creating the quiz in your profile page: </label>
-                <input type="text" readOnly name="private-id" value ={ quiz.id }/><br/>
-                <button type="button" onClick={() =>(CopyClipboard(quiz.id))}>Copy to Clipboard</button>
-                <button type="button" onClick={() => (onChangeHandler("id", GetUniqueId()))}>Generate New ID</button>                
-            </>}
+            { (quiz.domain === "private" || quiz.type === "seasonal") && 
+            <div className="id-generator-container">
+                <div className="id-generator-main">
+                    <div className="id-gen-label" htmlFor="private-id"> <HelpIcon ref={idGenRef}>You can see this after creating the quiz in your <strong>Profile Page</strong></HelpIcon> Quiz Unique ID: </div>
+                    <input type="text" readOnly name="private-id" value ={ quiz.id } className="id-generator"/>
+                </div>
+                <div className="id-generator-buttons">
+                    <div className="copy-clipboard-button" onClick={() =>(CopyClipboard(quiz.id))}><i className="far fa-clipboard"></i></div>
+                    <div className="new-quizid-button" onClick={() => (onChangeHandler("id", GetUniqueId()))}><i className="fas fa-sync-alt"></i>Generate New ID</div>
+                </div>                
+            </div>
+            }
+
+
             { quiz.type === "seasonal" && <>
-                <label htmlFor="quiz-family-title">Choose Quiz Family Title: </label>
-                <input type="text" name="quiz-family-title" onChange={option => (onChangeHandler("family", option.target.value))}/><br/>
+                <div className="quiz-family-title-container">
+                    <div className="quiz-family-title-label" htmlFor="quiz-family-title">Quiz Family Title: </div>
+                    <input type="text" name="quiz-family-title" placeholder="My Seasonal Quizzes"  onChange={option => (onChangeHandler("family", option.target.value))}/>
+                </div>              
+                
                 <p>This ID is Necessary When Creating Further Iterations of the Seasonal Quiz, since Each Quiz Must Have the Same Format in the Particular Family. <br/>
                 Once You Finalise the First Quiz Now, Enter this ID at the Top to Instantly Pre-set All of the Attributes of the Seasonal Quiz.</p>
                 <Attribute onChangeHandler = {onChangeHandler} title="Set Number of Quizzes in the Season" name="seasonFreq" start = {6} finish = {12}/>
             </>}
-            <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span><br/>
-            { quiz.type === "seasonal" && <span>*For Seasonal Quizzes this Time Applies to Every Week After This Selected One Until the Number of Quizzes in the Season are Reached.</span>}
-            <DateTimePicker value={ quiz.time } onChange={ time => (onChangeHandler("time", time))}/>
-
             
-
-
-            <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25}/>
-            <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5}/>
-            <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10}/>
-            <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20}/>
+            
+            <div className="creator-lower-section">
+                <div className="date-time-container">
+                <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span><br/>
+            { quiz.type === "seasonal" && <span>*For Seasonal Quizzes this Time Applies to Every Week After This Selected One Until the Number of Quizzes in the Season are Reached.</span>}
+                    <DateTimePicker value={ quiz.time } onChange={ time => (onChangeHandler("time", time))}/>
+                </div>
+                <div className="attributes-main-container">            
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20}/>
+                </div>
+            </div>
         </div>
      );
 }
