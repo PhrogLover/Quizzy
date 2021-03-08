@@ -1,8 +1,9 @@
 import { useState } from "react";
 import useFitText from "use-fit-text";
+import Family from "./Family";
 import Timer from "./Timer";
 
-const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass } ) => {
+const SlideView = ( { iteration, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
 
     let answers = "";
     if(slide.type === "question") {
@@ -14,10 +15,6 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
         }
     }    
 
-    const { fontSize: familyFontSize, ref: familyRef } = useFitText({
-        maxFontSize: 300,
-        minFontSize: 3,
-    });
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,
         minFontSize: 3,
@@ -87,9 +84,7 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
                                             { slide.title }
                                         </div>  
                                         { slide.family && 
-                                            <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
-                                                { slide.family }
-                                            </div>
+                                            <Family family={ slide.family } iteration={ iteration } />
                                         }                                                           
                                     </div>
                                     </>
@@ -101,10 +96,8 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
                                             { slide.title }
                                         </div> 
                                         { slide.family && 
-                                            <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
-                                                { slide.family }
-                                            </div>
-                                        } 
+                                            <Family family={ slide.family } iteration={ iteration } />
+                                        }  
                                     </div>
                                     </>
                                 }

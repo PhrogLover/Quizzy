@@ -26,6 +26,7 @@ const Creator = () => {
         numberOfQuestions: 10,
         timePerQuestion: 60,
         seasonFreq: null,
+        seasonIteration: 1,
         time: new Date(),
         slides: [],
         showAns: true
@@ -42,7 +43,7 @@ const Creator = () => {
             quest: -1,
             type: "intro",
             title: quiz.title || "Insert Title",
-            family: quiz.family || "Insert Family Name",
+            family: quiz.family,
             img: null
         });
         id++;
@@ -89,14 +90,17 @@ const Creator = () => {
             round: 0,
             quest: -1,
             type: "intro",
-            title: quiz.title || "Insert Title",
-            family: quiz.family || "Insert Family Name",
+            title: "Insert Title",
+            family: "Insert Family Name",
             img: null
         });
         if (typeof slides !== 'undefined') {
-            template[0].title = slides[0].title || template[0].title;
-            template[0].family = slides[0].family || template[0].family;
+            template[0].title = quiz.title || slides[0].title || template[0].title;
+            template[0].family = quiz.family || slides[0].family || template[0].family;
             template[0].img = slides[0].img || template[0].img;
+            if (quiz.type !== "seasonal") {
+                template[0].family = null;
+            }
         }
         id++;
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
@@ -186,9 +190,9 @@ const Creator = () => {
         setSlides(slidesState());
     }, [quiz])
 
-    // useEffect(() => {
-    //     console.log(quiz);
-    // }, [quiz])
+    useEffect(() => {
+        console.log(quiz);
+    }, [quiz])
 
     const ref = React.createRef();
 
@@ -213,7 +217,7 @@ const Creator = () => {
                     <div className="hide-me" id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
                     <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
                 </div>
-                    <SlideEditor slides = { slides } setSlides = { setSlides }/>
+                    <SlideEditor slides = { slides } setSlides = { setSlides } quiz={ quiz }/>
 
                     { !isPending && <button type="submit">Submit</button>
                     //  <Button> </Button>
