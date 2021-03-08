@@ -1,8 +1,6 @@
 import "./attribute.css";
 
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Form from "react-bootstrap/Form";
 
 const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, reset = false }) => {
     function makeSteps(start, finish, steps) {
@@ -17,21 +15,15 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
 
     return ( 
         <span>
-            {[DropdownButton].map((DropdownType, idx) => (
-            <DropdownType
-                as={ButtonGroup}
-                key={idx}
-                id={`dropdown-button-drop-${idx}`}
-                size="sm"
-                variant="secondary"
-                title={ title }
-            >   
-                {reset && <Dropdown.Item onClick={() => (onChangeHandler(name, ""))} eventKey={ idx }>Deselect</Dropdown.Item>}
+            <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label>{ title }</Form.Label>
+                <Form.Control onChange={(selected) => (onChangeHandler(name, parseInt(selected.target.value)))} as="select">
+                {reset && <option value="" >Deselect</option>}
                 {dropdownItems.map(index => (
-                    <Dropdown.Item onClick={() => (onChangeHandler(name, index))} key={ index } eventKey={ index }>{ index }</Dropdown.Item>
+                    <option value={ index } key={ index } >{ index }</option>
                 ))}
-            </DropdownType>
-            ))}
+                </Form.Control>
+            </Form.Group>
         </span>
      );
 }

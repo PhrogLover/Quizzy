@@ -39,22 +39,15 @@ const SlideEditor = ( { slides, setSlides } ) => {
     }
 
     function changeCurrentSlide(round, quest) {
-        console.log(round, quest);
-        console.log(slides[round][quest]);
-        console.log(currentSlide);
+        setIndex({
+            round: round,
+            question: quest
+        })
         if (quest !== -1) {
             setCurrentSlide(slides[round][quest]);
-            setIndex({
-                round: round,
-                question: quest
-            })
         }
         else {
             setCurrentSlide(slides[round]);
-            setIndex({
-                round: round,
-                question: quest
-            })
         }
     }
 

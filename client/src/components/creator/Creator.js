@@ -42,7 +42,7 @@ const Creator = () => {
             type: "intro",
             title: quiz.title || "Insert Title",
             family: quiz.family || "Insert Family Name",
-            img: ""
+            img: null
         });
         id++;
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
@@ -53,7 +53,7 @@ const Creator = () => {
                 quest: 0,
                 type: "round",
                 title: "Insert Title",
-                img: "",
+                img: null,
                 timeOverride: "",
                 transition: 5,
                 endTime: 30
@@ -68,7 +68,7 @@ const Creator = () => {
                     question: "Insert Question",
                     answers: [],
                     caseSensitive: false,
-                    img: "",
+                    img: null,
                     timeOverride: 60,
                     readTime: 5,
                     suspenseTime: 5,
@@ -114,6 +114,10 @@ const Creator = () => {
     useEffect(() => {
         setSlides(slidesState());
     }, [quiz.numberOfRounds, quiz.numberOfQuestions])
+
+    // useEffect(() => {
+    //     console.log(quiz);
+    // }, [quiz])
 
     const ref = React.createRef();
 

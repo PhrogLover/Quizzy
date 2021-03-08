@@ -16,24 +16,31 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
 
     const { fontSize: familyFontSize, ref: familyRef } = useFitText({
         maxFontSize: 300,
+        minFontSize: 3,
     });
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,
+        minFontSize: 3,
     });
     const { fontSize: titleFontSize, ref: titleRef } = useFitText({
         maxFontSize: 300,
+        minFontSize: 3,
     });
     const { fontSize: questionFontSize, ref: questionRef } = useFitText({
         maxFontSize: 300,
+        minFontSize: 3,
     });
     const { fontSize: questionRoundFontSize, ref: questionRoundRef } = useFitText({
         maxFontSize: 300,
+        minFontSize: 3,
     });
     const { fontSize: questionTextAnswerFontSize, ref: questionTextAnswerRef } = useFitText({
         maxFontSize: 300,
+        minFontSize: 3,
     });
     const { fontSize: answerFontSize, ref: answerRef } = useFitText({
         maxFontSize: 300,
+        minFontSize: 3,
     });
 
     //const slideWidthes = ['width--20per','width--50per','width--100per','width--200','width--400','width--800'];
