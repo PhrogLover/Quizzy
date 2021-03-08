@@ -24,7 +24,7 @@ const Navbar = () => {
                 <div className="dark-filter"/>
                 <img className="report-bg" src="" alt="report_bg.png"></img>
                 <div className="report-container">
-                    <div className="report-help" onClick={closeReportBug}>
+                    <div className="report-help">
                         <HelpIcon>burh</HelpIcon>
                     </div>
                     <div className="report-exit" onClick={closeReportBug}>
