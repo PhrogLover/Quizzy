@@ -17,7 +17,7 @@ const SlideNav = ({ slides, changeCurrentSlide }) => {
             {expandedSlides.map((slide, index) => (
                 <div key={ index } className="button-container">
                     <button type="button" onClick={ () => {changeCurrentSlide(slide.round, slide.quest)} }>
-                        <SlideView slide={ slide } slideWidthPass = "width--50per"/>
+                        <SlideView slide={ slide } slideWidthPass = "width--100per"/>
                     </button>
                 </div>
             ))}

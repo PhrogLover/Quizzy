@@ -16,73 +16,73 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
 
     const { fontSize: introTitleImgFontSize, ref: introTitleImgRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: familyImgFontSize, ref: familyImgRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: introTitleFontSize, ref: introTitleRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: familyFontSize, ref: familyRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: roundTitleImgFontSize, ref: roundTitleImgRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: roundTitleFontSize, ref: roundTitleRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: questionFontSize, ref: questionRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
     const { fontSize: questionRoundFontSize, ref: questionRoundRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: questionTextAnswerFontSize, ref: questionTextAnswerRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 2,
+        // onFinish: () => {}
     });
 
     const { fontSize: questionTextImgAnswerFontSize, ref: questionTextImgAnswerRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 10,
+        // onFinish: () => {}
     });
 
     const { fontSize: answerFontSize, ref: answerRef } = useFitText({
         maxFontSize: 300,
-        minFontSize: 20,
-        onFinish: () => {}
+        // minFontSize: 10,
+        // onFinish: () => {}
     });
 
     //const slideWidthes = ['width--20per','width--50per','width--100per','width--200','width--400','width--800'];

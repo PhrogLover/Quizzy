@@ -25,35 +25,36 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                 <div className="quiz-category-label" htmlFor="quiz-category">Main Theme/Category: </div>
                 <input type="text" name="quiz-category" onChange={option => (onChangeHandler("category", option.target.value))}/>
             </div>
-
-            <div className="domain-container">
-                <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}>Private Quizes can only be played by users with the ID. Public Quizzes can be joined by anyone</HelpIcon> Quiz Domain: </div>
-                <div className="domain-picker-container">
-                    <input onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
-                    <span className="toggle-label">
-                        Public
-                    </span>
-                    <label className="toggle-container" htmlFor="domain-toggle">
-                        <span className="domain-toggle"></span>
-                    </label>
-                    <span className="toggle-label">
-                        Private
-                    </span>
+            <div className="main-toggle-container">
+                <div className="domain-container">
+                    <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}><strong>Private Quizzes</strong> can only be played by users with the ID. <strong>Public Quizzes</strong> can be joined by anyone</HelpIcon> Quiz Domain: </div>
+                    <div className="domain-picker-container">
+                        <input onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
+                        <span className="toggle-label">
+                            Public
+                        </span>
+                        <label className="toggle-container" htmlFor="domain-toggle">
+                            <span className="domain-toggle"></span>
+                        </label>
+                        <span className="toggle-label">
+                            Private
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div className="type-container">
-                <div className="type-label" htmlFor="quiz-type"> <HelpIcon ref={typeRef}>bruh</HelpIcon> Quiz Type: </div>
-                <div className="type-picker-container">
-                    <input onChange={change => (onChangeHandler("type", change.target.checked))} id="type-toggle" className="display-none" type="checkbox"/>
-                    <span className="toggle-label">
-                        Standard
-                    </span>
-                    <label className="toggle-container" htmlFor="type-toggle">
-                        <span className="type-toggle"></span>
-                    </label>
-                    <span className="toggle-label">
-                        Seasonal
-                    </span>
+                <div className="type-container">
+                    <div className="type-label" htmlFor="quiz-type"> <HelpIcon ref={typeRef}>bruh</HelpIcon> Quiz Type: </div>
+                    <div className="type-picker-container">
+                        <input onChange={change => (onChangeHandler("type", change.target.checked))} id="type-toggle" className="display-none" type="checkbox"/>
+                        <span className="toggle-label">
+                            Standard
+                        </span>
+                        <label className="toggle-container" htmlFor="type-toggle">
+                            <span className="type-toggle"></span>
+                        </label>
+                        <span className="toggle-label">
+                            Seasonal
+                        </span>
+                    </div>
                 </div>
             </div>
 
