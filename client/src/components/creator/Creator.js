@@ -8,7 +8,6 @@ import SlideEditor from "./SlideEditor";
 import GetUniqueId from "../../GetUniqueId";
 // import { OverlayTrigger , Tooltip } from "react-bootstrap";
 import HelpIcon from "../basic/HelpIcon";
-import { Button } from "../basic/Button";
 
 const Creator = () => {
     const history = useHistory();
@@ -41,8 +40,8 @@ const Creator = () => {
             round: 0,
             quest: -1,
             type: "intro",
-            title: quiz.title,
-            family: quiz.family,
+            title: quiz.title || "Insert Title",
+            family: quiz.family || "Insert Family Name",
             img: ""
         });
         id++;

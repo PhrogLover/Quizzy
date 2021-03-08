@@ -1,18 +1,15 @@
-// import { useState } from "react";
 import Attribute from "./Attribute";
 import "./editor.css";
 
 const Editor = ( { slide, changeSlideHandler } ) => {
     function onSlideImageChange(e){
         const file = e.target.files[0];
-        console.log(file.size/1024/1024, "MB");
         const reader = new FileReader();
 
         if (file) {
             reader.addEventListener("load", () => {
                 changeSlideHandler("img", reader.result);
             })
-    
             reader.readAsDataURL(file);
         }        
     }
@@ -78,6 +75,7 @@ const Editor = ( { slide, changeSlideHandler } ) => {
             <div className="editor">
                 <div className="toolbar"></div>
                 <textarea required name="title" id="title" cols="60" rows="2" value={ slide.title } onChange={ text => (changeSlideHandler("title", text.target.value)) }></textarea>
+                <textarea required name="family" id="family" cols="60" rows="2" value={ slide.family } onChange={ text => (changeSlideHandler("family", text.target.value)) }></textarea>
                 <div id="image-preview">
                     <img src={ slide.img } alt="Preview" className="image-preview__image"/>
                 </div>
