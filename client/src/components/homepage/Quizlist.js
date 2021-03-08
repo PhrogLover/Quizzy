@@ -28,7 +28,7 @@ const Quizlist = ({ quizzes, sortRating, deleteHandler }) => {
     return ( 
         <div className="quiz-row-container" >
             {quizzes.map(quiz => (
-                <Link className="quiz-row" to={`/slide/${quiz.id}`} key={ quiz.id }>
+                <Link className="quiz-row" to={`/mainLobby/${quiz.id}`} key={ quiz.id }>
                     <div className="starttime cell">
                         <span id="startingTime"> { quiz.time }</span>
                     </div>

@@ -7,10 +7,20 @@ const Family = ({ family, iteration }) => {
         minFontSize: 3,
     });
 
-    return ( 
-        <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
-            { family } <br/> Iteration: { iteration }
-        </div>
+    const { fontSize: iterationFontSize, ref: iterationRef } = useFitText({
+        maxFontSize: 300,
+        minFontSize: 3,
+    });
+
+    return (
+        <>
+            <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
+                { family }
+            </div>
+            <div className="title-family" ref={iterationRef} style={{ fontSize: iterationFontSize }}>
+                Season Iteration: { iteration }
+            </div>
+        </>
      );
 }
  

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import SlideView from "./SlideView";
+import "./slideview.css";
 
-const SlideScript = ({ quiz, error }) => {
+const SlideScript = ({ quiz }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ showAns, setShowAns ] = useState(false);
     const [ currentSlideScript, setCurrentSlideScript ] = useState(quiz.slides[0]);
