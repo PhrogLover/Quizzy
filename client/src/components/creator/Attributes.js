@@ -93,11 +93,11 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                     <DateTimePicker value={ quiz.time } onChange={ time => (onChangeHandler("time", time))}/>
                 </div>
                 <div className="attributes-main-container">            
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Time per Question" name = "timePerQuestion" start = {10} finish = {90} step = {5}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25} selected = {25}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5} selected = {5}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10} selected = {5}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20} selected = {10}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Time per Question" name = "timePerQuestion" start = {10} finish = {90} step = {5} selected = {60}/>
                     <p>* can set more intricate question timings in the slide editor below.</p>
                 </div>
             </div>

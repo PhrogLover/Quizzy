@@ -31,9 +31,9 @@ const Creator = () => {
         showAns: true
     });
 
-    const [slides, setSlides ] = useState(slidesState())
+    const [slides, setSlides ] = useState(init())
 
-    function slidesState() {
+    function init() {
         let template = [];
         let id = 1;
         template.push({
@@ -70,11 +70,81 @@ const Creator = () => {
                     answers: [],
                     caseSensitive: false,
                     img: null,
-                    timeOverride: slides[i][0].timeOverride || quiz.timePerQuestion || 60,
+                    timeOverride: template[i][0].timeOverride || quiz.timePerQuestion || 60,
                     readTime: 5,
                     suspenseTime: 5,
                     answerShowTime: 10,
                 });
+                id++;
+            }
+        }
+        return template;
+    }
+
+    function slidesState() {
+        let template = [];
+        let id = 1;
+        template.push({
+            id: id,
+            round: 0,
+            quest: -1,
+            type: "intro",
+            title: quiz.title || "Insert Title",
+            family: quiz.family || "Insert Family Name",
+            img: null
+        });
+        if (typeof slides !== 'undefined') {
+            template[0].title = slides[0].title || template[0].title;
+            template[0].family = slides[0].family || template[0].family;
+            template[0].img = slides[0].img || template[0].img;
+        }
+        id++;
+        for (let i = 1; i <= quiz.numberOfRounds; i++) {
+            template.push([]);
+            template[i].push({
+                id: id,
+                round: i,
+                quest: 0,
+                type: "round",
+                title: "Insert Title",
+                img: null,
+                timeOverride: quiz.timePerQuestion || 60,
+                transition: 5,
+                endTime: 30
+            })
+            if (typeof slides[i][0] !== 'undefined') {
+                template[i][0].title = slides[i][0].title || template[i][0].title;
+                template[i][0].img = slides[i][0].img || template[i][0].img;
+                template[i][0].timeOverride = slides[i][0].timeOverride || template[i][0].timeOverride;
+                template[i][0].transition = slides[i][0].transition || template[i][0].transition;
+                template[i][0].endTime = slides[i][0].endTime || template[i][0].endTime;
+            }
+            id++;
+            for (let j = 1; j <= quiz.numberOfQuestions; j++) {
+                template[i].push({
+                    id: id,
+                    round: i,
+                    quest: j,
+                    type: "question",
+                    question: "Insert Question",
+                    answers: [],
+                    caseSensitive: false,
+                    img: null,
+                    timeOverride: template[i][0].timeOverride || quiz.timePerQuestion || 60,
+                    readTime: 5,
+                    suspenseTime: 5,
+                    answerShowTime: 10,
+                });
+                if (typeof slides[i][j] !== 'undefined') {
+                    template[i][j].question = slides[i][j].question || template[i][j].question;
+                    template[i][j].answers = slides[i][j].answers || template[i][j].answers;
+                    template[i][j].caseSensitive = slides[i][j].caseSensitive || template[i][j].caseSensitive;
+                    template[i][j].img = slides[i][j].img || template[i][j].img;
+                    template[i][j].timeOverride = slides[i][j].timeOverride || template[i][j].timeOverride;
+                    template[i][j].readTime = slides[i][j].readTime || template[i][j].readTime;
+                    template[i][j].suspenseTime = slides[i][j].suspenseTime || template[i][j].suspenseTime;
+                    template[i][j].answerShowTime = slides[i][j].answerShowTime || template[i][j].answerShowTime;
+                }
                 id++;
             }
         }
@@ -114,7 +184,7 @@ const Creator = () => {
 
     useEffect(() => {
         setSlides(slidesState());
-    }, [quiz.numberOfRounds, quiz.numberOfQuestions])
+    }, [quiz])
 
     // useEffect(() => {
     //     console.log(quiz);
