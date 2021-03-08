@@ -28,7 +28,7 @@ router.post('/newQuiz', (req, res) => {
     }
 })
 
-router.get('/slide/:id', (req, res) => {
+router.get('/quiz/:id', (req, res) => {
     if (req.params.id === "1" || req.params.id === "2" || req.params.id === "3" || req.params.id === "4") {
         req.params.id = parseInt(req.params.id);
     }

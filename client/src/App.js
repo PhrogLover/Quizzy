@@ -6,7 +6,7 @@ import Login from './components/login/Login';
 import Creator from './components/creator/Creator';
 import Homepage from './components/homepage/Homepage';
 import NotFound from './components/basic/NotFound';
-import Slide from './components/quiz/Slide';
+import GetQuiz from './components/quiz/GetQuiz';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
           <Route exact path="/">
             <Homepage />
           </Route>
-          <Route path="/slide/:id">
-            <Slide />
+          <Route path="/mainLobby/:id">
+            <GetQuiz />
           </Route>
           <Route exact path="/login">
             <Login />
