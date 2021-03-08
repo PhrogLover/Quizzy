@@ -76,19 +76,24 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
                                     < div className="title-header above">
                                         <div className="slide-title" ref={titleRef} style={{ fontSize: titleFontSize }}>
                                             { slide.title }
-                                        </div>                                                            
+                                        </div>  
+                                        { slide.family && 
+                                            <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
+                                                { slide.family }
+                                            </div>
+                                        }                                                           
                                     </div>
                                 }
                                 { !slide.img &&
                                     < div className="title-header center">
                                         <div className="slide-title" ref={titleRef} style={{ fontSize: titleFontSize }}>
                                             { slide.title }
-                                        </div>  
-                                    </div>
-                                }
-                                { slide.family && 
-                                    <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
-                                        { slide.family }
+                                        </div> 
+                                        { slide.family && 
+                                            <div className="title-family" ref={familyRef} style={{ fontSize: familyFontSize }}>
+                                                { slide.family }
+                                            </div>
+                                        } 
                                     </div>
                                 }
                                 { slide.img && <div className="title-img">
