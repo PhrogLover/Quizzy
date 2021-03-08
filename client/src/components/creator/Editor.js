@@ -15,6 +15,13 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
         }        
     }
 
+    async function pasteImgURL() {
+        navigator.clipboard.readText().then((url) => {
+            changeSlideHandler("img", url);
+        })
+        
+    }
+
     function removeImageFromSlide() {
         changeSlideHandler("img", "");
     }
@@ -68,7 +75,8 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
             <div id="image-preview">
                 <img src={ slide.img } alt="Preview" className="image-preview__image"/>
             </div>
-            { !slide.img && <input ref={(ref) => (setImgRef(ref))} type="file" accept="image/*" id="add-image" onChange={(e) => (onSlideImageChange(e))}/> }
+            { !slide.img && <input ref={(ref) => (setImgRef(ref))} type="file" accept="image/*" onChange={(e) => (onSlideImageChange(e))}/> }
+            { !slide.img && <button type="button" onClick={pasteImgURL} >Paste URL</button> }
             { slide.img && <button type="button" id="removeFile" onClick={removeImageFromSlide}>Remove File</button> }
         </div>
         );
