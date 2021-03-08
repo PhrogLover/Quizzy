@@ -11,10 +11,14 @@
 
 .slide-editor .editor textarea {
     resize: none;
+    min-width: 300px;
+    width: 80%;
+    max-height: 100px;
+
  }
 
  .slide-editor .editor #image-preview{
-    width: 300px;
+    
     min-height: 100px;
     border: 2px solid lightgray;
     margin-top: 15px;

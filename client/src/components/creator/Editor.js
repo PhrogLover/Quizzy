@@ -2,7 +2,7 @@ import { useState } from "react";
 import Attribute from "./Attribute";
 import "./editor.css";
 
-const Editor = ( { slide, changeSlideHandler } ) => {
+const Editor = ( { slide, changeSlideHandler, quiz } ) => {
     function onSlideImageChange(e){
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -63,7 +63,7 @@ const Editor = ( { slide, changeSlideHandler } ) => {
             </>}
             { slide.type === "intro" && <>
                 <textarea required name="title" id="title" cols="60" rows="2" value={ slide.title } onChange={ text => (changeSlideHandler("title", text.target.value)) }></textarea>
-                <textarea required name="family" id="family" cols="60" rows="2" value={ slide.family } onChange={ text => (changeSlideHandler("family", text.target.value)) }></textarea>
+                { quiz.type === "seasonal" && <textarea required name="family" id="family" cols="60" rows="2" value={ slide.family } onChange={ text => (changeSlideHandler("family", text.target.value)) }></textarea> }
             </>}
             <div id="image-preview">
                 <img src={ slide.img } alt="Preview" className="image-preview__image"/>

@@ -1,7 +1,7 @@
 import SlideView from "../quiz/SlideView";
 import "./slidenav.css";
 
-const SlideNav = ({ slides, changeCurrentSlide }) => {
+const SlideNav = ({ slides, changeCurrentSlide, quiz }) => {
 
     let expandedSlides = [];
     expandedSlides.push(slides[0]);
@@ -17,7 +17,7 @@ const SlideNav = ({ slides, changeCurrentSlide }) => {
             {expandedSlides.map((slide, index) => (
                 <div key={ index } className="button-container">
                     <button type="button" onClick={ () => {changeCurrentSlide(slide.round, slide.quest)} }>
-                        <SlideView slide={ slide } slideWidthPass = "width--100per"/>
+                        <SlideView slide={ slide } slideWidthPass = "width--100per" iteration = { quiz.seasonIteration }/>
                     </button>
                 </div>
             ))}

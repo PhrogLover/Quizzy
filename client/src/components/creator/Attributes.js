@@ -83,27 +83,30 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                 
                 <p>This ID is Necessary When Creating Further Iterations of the Seasonal Quiz, since Each Quiz Must Have the Same Format in the Particular Family. <br/>
                 Once You Finalise the First Quiz Now, Enter this ID at the Top to Instantly Pre-set All of the Attributes of the Seasonal Quiz.</p>
-                <Attribute onChangeHandler = {onChangeHandler} title="Set Number of Quizzes in the Season" name="seasonFreq" start = {6} finish = {12}/>
+                <Attribute onChangeHandler = {onChangeHandler} title="Number of Quizzes in the Season" name="seasonFreq" start = {6} finish = {12}/>
             </>}
             
-            
-            <div className="creator-lower-section">
-                <div className="date-time-container">
-                <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span><br/>
-            { quiz.type === "seasonal" && <span>*For Seasonal Quizzes this Time Applies to Every Week After This Selected One Until the Number of Quizzes in the Season are Reached.</span>}
-                    <DateTimePicker value={ quiz.time } onChange={ time => (onChangeHandler("time", time))}/>
+            <div className="attributes-main-container">    
+                <div className="attributes-row">        
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25} selected = {25}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5} selected = {5}/>
                 </div>
-                <div className="attributes-main-container">            
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20}/>
+                <div className="attributes-row">    
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10} selected = {5}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20} selected = {10}/>
+                </div>
+                <div className="attributes-row">  
                     <div className="attribute-with-help">
                         <HelpIcon ref={timePerQRef}>You can set more intricate question timings in the slide editor below.</HelpIcon>
                     </div>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Time per Question" name = "timePerQuestion" start = {10} finish = {90} step = {5}/>
-                    
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Time per Question" name = "timePerQuestion" start = {10} finish = {90} step = {5} selected = {60}/>
+                </div>            
+                <div className="date-time-container">
+                    <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span><br/>
+                    { quiz.type === "seasonal" && <span>*For Seasonal Quizzes this Time Applies to Every Week After This Selected One Until the Number of Quizzes in the Season are Reached.</span>}
+                    <DateTimePicker value={ quiz.time } onChange={ time => (onChangeHandler("time", time))}/>
                 </div>
+
             </div>
         </div>
      );

@@ -1,11 +1,10 @@
 .attributes {
-    margin-bottom: 700px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* border: solid 1px red; */
+    /* border: solid 1px blue; */
 }
 .attributes label {
     margin-bottom: 30px;
@@ -17,7 +16,7 @@
 .quiz-title-label{
   margin-right: 10px;
   height: 100%;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
 }
 .quiz-title-container input{
@@ -25,8 +24,7 @@
   background-color: var(--colour-white);
   min-width:300px;
   width: 50%;
-  font-size: 20px;
-  height: 40px;
+  font-size: 18px;
   border-radius: var(--border-radius);
   transition: 200ms;
   text-align: center;
@@ -233,10 +231,10 @@ input:checked + span +.toggle-container .type-toggle:before {
 }
 
 
-
 /* Private / Seasonal ID Generator */
 
 .id-generator-container{
+  border-top:1px white solid ;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -336,17 +334,6 @@ input:checked + span +.toggle-container .type-toggle:before {
 
 /* bottom section of attributes */
 
-.creator-lower-section{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  width: 60%;
-  min-width: 400px;
-  min-height: max-content ;
-  margin-top: 10px;
-  /* border: blue 1px solid; */
-}
 .date-time-container{
   min-width: 300px;
   display: flex;
@@ -356,15 +343,16 @@ input:checked + span +.toggle-container .type-toggle:before {
   flex-direction: column;
   padding: 10px;
   margin-bottom: 10px;
-  width:50%;
+  width:100px;
   height: 350px;
   border-radius: var(--border-radius);
   color: var(--colour-black);
 }
 .attributes-main-container{
-  border: white 1px solid;
+  border-top: white 1px solid;
+  margin-top: 10px;
   min-width: 300px;
-  width:50%;
+  width:60%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -376,9 +364,16 @@ input:checked + span +.toggle-container .type-toggle:before {
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  width: 100%;
+  width: 0;
   height: 0;
-  transform: translateY(25px);
+  transform: translateX(20px);
+}
+.attributes-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
 }
 /*
 COPY TEXT CSS SHENANIGANS
@@ -433,15 +428,13 @@ COPY TEXT CSS SHENANIGANS
     margin-top:10px;
   }
   
+  
 }
-@media screen and (max-width:1200px){
-  .creator-lower-section{
+@media screen and (max-width:500px){
+  .attributes-row{
     flex-direction: column;
   }
-  .date-time-container{
-    width: 100%;
-  }
-  .attributes-main-container{
-    width: 100%;
+  .attribute-with-help{
+    transform: translate(-110px,25px);
   }
 }

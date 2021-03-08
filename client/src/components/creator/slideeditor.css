@@ -1,15 +1,18 @@
 .slide-editor{
-    min-width:100%;
+    width:100%;
+    border-top: 20px solid var(--colour-black);
+    border-bottom: 20px solid var(--colour-black);
+    /* border: 1px red solid; */
+    position: relative;
 }
 .main-slideEditor-container{
-    border-radius: var(--border-radius);
     width:100%;
     /* border: 1px white solid; */
     display: flex;
     align-items: center;
     flex-direction: row;
-    height:var(--section-height);
-    max-height:var(--section-height);
+    height: 80vh;
+    max-height:80vh;
 }
 .left-SE-container{
     min-width:350px;

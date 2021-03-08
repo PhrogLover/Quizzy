@@ -5,7 +5,7 @@ import "./slideeditor.css";
 import Container from "react-bootstrap/Container";
 import SlideNav from "./SlideNav";
 
-const SlideEditor = ( { slides, setSlides } ) => {
+const SlideEditor = ( { slides, setSlides, quiz } ) => {
     
     const [ currentSlide, setCurrentSlide ] = useState(slides[1][1]);
     const [ index, setIndex ] = useState({
@@ -14,6 +14,10 @@ const SlideEditor = ( { slides, setSlides } ) => {
     });
 
     function changeSlideHandler(name, value) {
+        if (value === -1) {
+            value = null;
+        }
+
         if (name === "answers") {
             value = value.split(", ");
         }
@@ -51,17 +55,21 @@ const SlideEditor = ( { slides, setSlides } ) => {
         }
     }
 
+    useEffect(() => {
+            console.log(slides);
+        }, [slides])
+
     return ( 
-        <Container className="slide-editor">
+        <div className="slide-editor">
             <div className="main-slideEditor-container">
                 <div className="left-SE-container">
-                    <SlideNav slides = { slides } changeCurrentSlide = { changeCurrentSlide }/>
+                    <SlideNav slides = { slides } changeCurrentSlide = { changeCurrentSlide } quiz={ quiz }/>
                 </div>
                 <div className="right-SE-container">
-                    <Editor slide = { currentSlide } changeSlideHandler = { changeSlideHandler }/>
+                    <Editor slide = { currentSlide } changeSlideHandler = { changeSlideHandler } quiz={ quiz }/>
                 </div>
             </div>
-        </Container>
+        </div>
      );
 }
  

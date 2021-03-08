@@ -2,6 +2,14 @@
 .creator {
     color: white;
     font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    max-width:95%;
+    margin: auto;
+    /* border: 1px red solid; */
 }
 
 .creator h3 {
@@ -54,12 +62,36 @@
     transform: scale(1.02) perspective(1px)
 }
 .main-form{
+    position: relative;
     width: 100%;
+    max-width: 100%;
     background-color: var(--colour-black2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px yellow solid; */
+}
+.bottom-buttons-container{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding:10px;
+}
+.button-gap{
+    width:100%;
+    min-width: 10px;
 }
 
 @media screen and (max-width:400px){
     .input-uniqueid-container{
+        flex-direction: column;
+    }
+}
+@media screen and (max-width:1050px){
+    .bottom-buttons-container{
         flex-direction: column;
     }
 }

@@ -3,8 +3,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    width: 100%;
-    border: red 1px solid;
+    width: fit-content;
+    /* border: red 1px solid; */
     height:50px;
 }
 .select-label{
@@ -13,7 +13,7 @@
     justify-content: flex-end;
     flex-direction: row;
     height: 50px;
-    width: 50%;
+    width: 200px;
     /* border: blue 1px solid; */
     padding-right: 10px;
 
@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: flex-start;
     height: 50px;
-    width:50%;
+    width:50px;
     /* border: yellow 1px solid; */
 
 }
@@ -34,6 +34,13 @@
     justify-content: center;
     flex-direction: row;
     height: 15px;
+    /* border: yellow 1px solid; */
+
+}
+.select-container select{
+    height: 30px;
+    font-size: 15px;
+    border-radius: var(--border-radius);
     /* border: yellow 1px solid; */
 
 }
