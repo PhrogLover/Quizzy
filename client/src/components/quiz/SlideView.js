@@ -47,7 +47,8 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
                     { slide.type !== "question" && 
                         <div id="intro-slide" className=" slide">
                             { slide.type === "round" && <> 
-                                <div className="slide-bg"/> <div className="slide-number above" ref={roundRef} style={{ fontSize: roundFontSize }}>
+                                <div className="slide-bg"/>
+                                 <div className="slide-number above" ref={roundRef} style={{ fontSize: roundFontSize }}>
                                         Round { slide.round }
                                 </div>
                                 { !slide.img &&                   
@@ -67,12 +68,13 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
                         </>}
 
                             { slide.type !== "round" && <> 
-                                <div className="slide-bg-title"/>
+                                
                                 { timer && <div className="timer-container">
                                         <Timer seconds = { timer }/>
                                     </div>
                                 }
-                                { slide.img &&
+                                { slide.img && <>
+                                    <div className="slide-bg-title normal-title"/>
                                     < div className="title-header above">
                                         <div className="slide-title" ref={titleRef} style={{ fontSize: titleFontSize }}>
                                             { slide.title }
@@ -83,8 +85,10 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
                                             </div>
                                         }                                                           
                                     </div>
+                                    </>
                                 }
-                                { !slide.img &&
+                                { !slide.img && <>
+                                    <div className="slide-bg-title middle-title"/>
                                     < div className="title-header center">
                                         <div className="slide-title" ref={titleRef} style={{ fontSize: titleFontSize }}>
                                             { slide.title }
@@ -95,6 +99,7 @@ const SlideView = ( { slide, error = "", showAns = false, timer, slideWidthPass 
                                             </div>
                                         } 
                                     </div>
+                                    </>
                                 }
                                 { slide.img && <div className="title-img">
                                         <img id="intro-img" src={ slide.img } alt="intro"/> 
