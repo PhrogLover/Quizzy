@@ -1,0 +1,9 @@
+.attribute-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    border: red 1px solid;
+    height:50px;
+}
