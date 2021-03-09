@@ -2,7 +2,7 @@ import "./attribute.css";
 
 import Form from "react-bootstrap/Form";
 
-const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, reset = false, selected = null }) => {
+const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, selected = null }) => {
     function makeSteps(start, finish, steps) {
         let result = [];
         for (let i = start; i <= finish; i += steps) {
@@ -22,7 +22,6 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
                 <Form.Group controlId={ name }>
                     <div className="select-input-container">
                         <select defaultValue={ selected } onChange={(selected) => (onChangeHandler(name, parseInt(selected.target.value)))} >
-                        {reset && <option value={-1} >Deselect</option>}
                         {dropdownItems.map(index => (
                             <option value={ index } key={ index } >{ index }</option>
                         ))}
