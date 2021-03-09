@@ -215,7 +215,6 @@ const Creator = () => {
                         <input type="text" name="seasonal-setup-id" className="uniqueid-input"/>
                     </div>
                     <div className="main-form">
-                    
                         <div className="hide-me" id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
                         <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
                     

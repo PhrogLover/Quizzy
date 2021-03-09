@@ -6,6 +6,12 @@
     flex-direction: column;
     /* border: solid 1px blue; */
 }
+.creator-line-break{
+  height: 0px;
+  border: 1px var(--colour-white) solid;
+  width: 80%;
+  margin: 5px 0;
+}
 .attributes label {
     margin-bottom: 30px;
 }
@@ -114,7 +120,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--colour-grey);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -186,7 +192,7 @@ input:checked + span +.toggle-container .domain-toggle:before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--colour-grey);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -234,7 +240,6 @@ input:checked + span +.toggle-container .type-toggle:before {
 /* Private / Seasonal ID Generator */
 
 .id-generator-container{
-  border-top:1px white solid ;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -349,7 +354,6 @@ input:checked + span +.toggle-container .type-toggle:before {
   color: var(--colour-black);
 }
 .attributes-main-container{
-  border-top: white 1px solid;
   margin-top: 10px;
   min-width: 300px;
   width:60%;

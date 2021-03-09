@@ -44,6 +44,7 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                         </span>
                     </div>
                 </div>
+                
                 <div className="type-container">
                     <div className="type-label" htmlFor="quiz-type"> <HelpIcon ref={typeRef}><strong>Seasonal Quizzes</strong> repeat every week on the same day. <strong>Standard Quizzes</strong> can be played once.</HelpIcon> Quiz Type: </div>
                     <div className="type-picker-container">
@@ -62,20 +63,24 @@ const Attributes = ({ onChangeHandler, quiz }) => {
             </div>
 
             { (quiz.domain === "private" || quiz.type === "seasonal") && 
-            <div className="id-generator-container">
-                <div className="id-generator-main">
-                    <div className="id-gen-label" htmlFor="private-id"> <HelpIcon ref={idGenRef}>You can see this after creating the quiz in your <strong>Profile Page</strong></HelpIcon> Quiz Unique ID: </div>
-                    <input type="text" readOnly name="private-id" value ={ quiz.id } className="id-generator"/>
+            <>
+                <div className="creator-line-break"/>
+                <div className="id-generator-container">
+                    <div className="id-generator-main">
+                        <div className="id-gen-label" htmlFor="private-id"> <HelpIcon ref={idGenRef}>You can see this after creating the quiz in your <strong>Profile Page</strong></HelpIcon> Quiz Unique ID: </div>
+                        <input type="text" readOnly name="private-id" value ={ quiz.id } className="id-generator"/>
+                    </div>
+                    <div className="id-generator-buttons">
+                        <div className="copy-clipboard-button" onClick={() =>(CopyClipboard(quiz.id))}><i className="far fa-clipboard"></i></div>
+                        <div className="new-quizid-button" onClick={() => (onChangeHandler("id", GetUniqueId()))}><i className="fas fa-sync-alt"></i>Generate New ID</div>
+                    </div>                
                 </div>
-                <div className="id-generator-buttons">
-                    <div className="copy-clipboard-button" onClick={() =>(CopyClipboard(quiz.id))}><i className="far fa-clipboard"></i></div>
-                    <div className="new-quizid-button" onClick={() => (onChangeHandler("id", GetUniqueId()))}><i className="fas fa-sync-alt"></i>Generate New ID</div>
-                </div>                
-            </div>
+            </>
             }
 
 
             { quiz.type === "seasonal" && <>
+            
                 <div className="quiz-family-title-container">
                     <div className="quiz-family-title-label" htmlFor="quiz-family-title">Quiz Family Title: </div>
                     <input type="text" name="quiz-family-title" placeholder="My Seasonal Quizzes"  onChange={option => (onChangeHandler("family", option.target.value))}/>
@@ -85,7 +90,7 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                 Once You Finalise the First Quiz Now, Enter this ID at the Top to Instantly Pre-set All of the Attributes of the Seasonal Quiz.</p>
                 <Attribute onChangeHandler = {onChangeHandler} title="Number of Quizzes in the Season" name="seasonFreq" start = {6} finish = {12}/>
             </>}
-            
+            <div className="creator-line-break"/>
             <div className="attributes-main-container">    
                 <div className="attributes-row">        
                     <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25} selected = {25}/>

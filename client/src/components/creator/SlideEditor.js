@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "./slideeditor.css";
 
-import Container from "react-bootstrap/Container";
 import SlideNav from "./SlideNav";
 
 const SlideEditor = ( { slides, setSlides, quiz } ) => {
