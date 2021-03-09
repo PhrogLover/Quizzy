@@ -44,22 +44,22 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
             <div className="top-bar">
                 { slide.type === "question" && <>
                     <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} reset = {true}/>
-                    {slide.timeOverride && <p>{ slide.timeOverride }</p>}
+                    {/* {slide.timeOverride && <p>{ slide.timeOverride }</p>} */}
                     <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} reset = {true}/>
                     {/* {slide.readTime && <p>{ slide.readTime } *adds to the Individual Time</p>} */}
                 </>}
                 { slide.type === "round" && <>
                     <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} reset = {true}/>
-                    {slide.timeOverride && <p>{ slide.timeOverride }</p>}
+                    {/* {slide.timeOverride && <p>{ slide.timeOverride }</p>} */}
                     <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} reset = {true}/>
-                    {slide.transition && <p>{ slide.transition }</p>}
+                    {/* {slide.transition && <p>{ slide.transition }</p>} */}
                     <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} reset = {true}/>
-                    {slide.endTime && <p>{ slide.endTime }</p>}
+                    {/* {slide.endTime && <p>{ slide.endTime }</p>} */}
                 </>}                
             </div>
             <div className="editor-main">
                 { slide.type === "question" && <>
-                    <p id="question-number">R{ slide.round }, Q{ slide.quest }</p>
+                    <h2 id="question-number">Round { slide.round } -  Question { slide.quest }</h2>
                     <textarea required name="question" id="question" cols="80" rows="10" value={ slide.question } onChange={ text => (changeSlideHandler("question", text.target.value)) }></textarea>
                     <label htmlFor="answers">Write answer: (You can write multiple answers, just seperate them by commas)</label>
                     <input type="text" name="answers" size="20" value={ answers } onChange={ text => (changeSlideHandler("answers", text.target.value)) }/>
@@ -67,10 +67,11 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                     <input type="checkbox" onChange={value => (changeSlideHandler("caseSensitive", value.target.checked))}/>
                 </>}
                 { slide.type === "round" && <>
-                    <p id="question-number">R{ slide.round }</p>
+                    <h2 id="question-number">Round { slide.round }</h2>
                     <textarea required name="title" id="title" cols="60" rows="2" value={ slide.title } onChange={ text => (changeSlideHandler("title", text.target.value)) }></textarea>
                 </>}
                 { slide.type === "intro" && <>
+                    <h2>Introduction Slide</h2>
                     <textarea required name="title" id="title" cols="60" rows="2" value={ slide.title } onChange={ text => (changeSlideHandler("title", text.target.value)) }></textarea>
                     { quiz.type === "seasonal" && <textarea required name="family" id="family" cols="60" rows="2" value={ slide.family } onChange={ text => (changeSlideHandler("family", text.target.value)) }></textarea> }
                 </>}

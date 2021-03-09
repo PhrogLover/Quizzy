@@ -14,8 +14,8 @@
     flex-direction: column;
 }
 .button-container{
-    min-width:300px;
-    height: 168.75px;
+    min-width:200px;
+    min-height: 112.50px;
 }
 .button-container button{
     border: none;
@@ -33,7 +33,7 @@
     filter: brightness(90%);
     transform: scale(0.98) perspective(1px);
 }
-@media screen and (max-width:1050px){
+@media screen and (max-width:1100px){
     .slidenav {
         overflow-x: auto;
         flex-direction: row;

@@ -15,18 +15,18 @@
     max-height:80vh;
 }
 .left-SE-container{
-    min-width:350px;
+    min-width:250px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
     height:100%;
     border-top-left-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);
     border-right: 5px var(--colour-grey) solid;
 }
 .right-SE-container{
-    width: 70%;
+    width: 80%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -35,7 +35,7 @@
     border-bottom-right-radius: var(--border-radius);
 }
 
-@media screen and (max-width:1050px){
+@media screen and (max-width:1100px){
     .main-slideEditor-container{
         flex-direction: column;
         height: 90vh;
