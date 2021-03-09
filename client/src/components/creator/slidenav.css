@@ -6,6 +6,7 @@
     background-color: var(--colour-black2);
     overflow: auto;
     height:100%;
+    width: 100%;
     max-height: var(--secion-height);
     max-width:100%;
     /* border: 1px white solid; */
@@ -20,6 +21,7 @@
 .button-container button{
     border: none;
     position:relative;
+    
     width:100%;
     max-width: 300px;
     height: 100%;

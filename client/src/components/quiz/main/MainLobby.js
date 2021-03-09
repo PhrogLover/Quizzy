@@ -21,7 +21,7 @@ const MainLobby = ({ quiz }) => {
             </div>
             <div className="lobby-grid">
                 { lobbyCount.map((index) => (
-                    <LobbyGridElement quiz={ quiz } index={ index } />
+                    <LobbyGridElement key={index} quiz={ quiz } index={ index } />
                 ))}
             </div>
             <div className="chat">

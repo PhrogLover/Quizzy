@@ -22,7 +22,7 @@ const Navbar = () => {
         return(
             <div className="report-a-bug-section">
                 <div className="dark-filter"/>
-                <img className="report-bg" src="" alt="report_bg.png"></img>
+                <img className="report-bg" src="/images/report_bg.png" alt="report_bg.png"></img>
                 <div className="report-container">
                     <div className="report-help">
                         <HelpIcon>burh</HelpIcon>

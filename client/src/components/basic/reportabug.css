@@ -20,13 +20,19 @@
     opacity: 60%;
     background-color: black;
 }
+.report-bg{
+    position: fixed;
+    z-index: 1000001;
+    width: 500px;
+    height: auto;
+    transform: translate(-300px,50%);
+}
 .report-container{
     position: fixed;
     top:10%;
     background-color: var(--colour-black2);
     z-index: 1000000000;
-    min-width:350px;
-    width: 30%;
+    width:350px;
     min-height: max-content;
     height: 80%;
     display: flex;

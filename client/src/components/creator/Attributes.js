@@ -93,18 +93,18 @@ const Attributes = ({ onChangeHandler, quiz }) => {
             <div className="creator-line-break"/>
             <div className="attributes-main-container">    
                 <div className="attributes-row">        
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25} selected = {25}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5} selected = {5}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25} selected = {quiz.numberOfTeams}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5} selected = {quiz.numberOfPlayers}/>
                 </div>
                 <div className="attributes-row">    
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10} selected = {5}/>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20} selected = {10}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10} selected = {quiz.numerOfRounds}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20} selected = {quiz.numberOfQuestions}/>
                 </div>
                 <div className="attributes-row">  
                     <div className="attribute-with-help">
                         <HelpIcon ref={timePerQRef}>You can set more intricate question timings in the slide editor below.</HelpIcon>
                     </div>
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Time per Question" name = "timePerQuestion" start = {10} finish = {90} step = {5} selected = {60}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Time per Question" name = "timePerQuestion" start = {10} finish = {90} step = {5} selected = {quiz.timePerQuestion}/>
                 </div>            
                 <div className="date-time-container">
                     <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span><br/>
