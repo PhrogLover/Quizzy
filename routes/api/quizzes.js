@@ -5,6 +5,8 @@ const router = express.Router();
 const quizzesReal = require('../../client/json/Quizzes_save');
 const quizzes = require('../../client/json/Quizzes');
 
+//uuid - 36 char long
+
 for (let i = 0; i < quizzes.length; i++) {
     quizzesReal.quizzes.push(quizzes[i]);
 }
@@ -40,6 +42,20 @@ router.get('/quiz/:id', (req, res) => {
             }
         }
         
+    }
+    else {
+        res.json({ msg: "There is no quiz with the id: " + req.params.id});
+    }
+})
+
+router.get('/quiz/chat/:id', (req, res) => {
+    const found = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
+    if (found) {
+        for (let i = 0; i < quizzesReal.quizzes.length; i++) {
+            if (quizzesReal.quizzes[i].id === req.params.id) {
+                res.json(quizzesReal.quizzes[i]);
+            }
+        }
     }
     else {
         res.json({ msg: "There is no quiz with the id: " + req.params.id});

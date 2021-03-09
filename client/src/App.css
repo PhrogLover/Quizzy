@@ -3,3 +3,7 @@
   background-color: var(--bg-colour);
   overflow: hidden;
 }
+
+#white {
+  color: white;
+}
