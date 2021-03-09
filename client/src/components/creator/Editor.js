@@ -43,13 +43,15 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
         <div className="editor">
             <div className="top-bar">
                 { slide.type === "question" && <>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} selected = {slide.timeOverride}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} selected = {slide.readTime}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} selected = {slide.readTime} defaultVal={6} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={5} selected = {slide.timeOverride} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = {slide.readTime} defaultVal={10} reset = {true}/>
                 </>}
                 { slide.type === "round" && <>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} selected = {slide.timeOverride}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} selected = {slide.transition}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} selected = {slide.endTime}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} defaultVal={5} selected = {slide.transition} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} defaultVal={30} selected = {slide.endTime} reset = {true}/>
                 </>}                
             </div>
             <div className="editor-main">
