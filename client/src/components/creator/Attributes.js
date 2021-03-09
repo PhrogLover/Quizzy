@@ -97,7 +97,7 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                     <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5} selected = {quiz.numberOfPlayers}/>
                 </div>
                 <div className="attributes-row">    
-                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10} selected = {quiz.numerOfRounds}/>
+                    <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10} selected = {quiz.numberOfRounds}/>
                     <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20} selected = {quiz.numberOfQuestions}/>
                 </div>
                 <div className="attributes-row">  

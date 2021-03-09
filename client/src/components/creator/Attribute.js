@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import "./attribute.css";
 
 import Form from "react-bootstrap/Form";
 
-const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, selected = null }) => {
+const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, selected = null, reset = null, defaultVal = null }) => {
     function makeSteps(start, finish, steps) {
         let result = [];
         for (let i = start; i <= finish; i += steps) {
@@ -12,6 +13,7 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
     }
 
     const dropdownItems = makeSteps(start, finish, steps);
+    const [ defValue, setDefValue ] = useState(selected);
 
     return ( 
         <div className="attribute-container">
@@ -21,7 +23,7 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
             <div className="select-container">
                 <Form.Group controlId={ name }>
                     <div className="select-input-container">
-                        <select defaultValue={ selected } onChange={(selected) => (onChangeHandler(name, parseInt(selected.target.value)))} >
+                        <select value={ defValue } onChange={(selected) => {onChangeHandler(name, parseInt(selected.target.value)); setDefValue(selected.target.value)}} >
                         {dropdownItems.map(index => (
                             <option value={ index } key={ index } >{ index }</option>
                         ))}
@@ -29,6 +31,7 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
                     </div>
                 </Form.Group>
             </div>
+            { reset && defaultVal && selected && <button type="button" onClick={() => {setDefValue(defaultVal); onChangeHandler(name, defaultVal)}}>Default value</button> }
         </div>
      );
 }
