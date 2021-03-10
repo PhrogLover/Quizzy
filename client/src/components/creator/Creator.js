@@ -74,8 +74,8 @@ const Creator = () => {
                     img: null,
                     timeOverride: template[i][0].timeOverride || quiz.timePerQuestion || 60,
                     readTime: 6,
-                    suspenseTime: 5,
-                    answerShowTime: 10,
+                    suspenseTime: 6,
+                    answerShowTime: 9,
                 });
                 id++;
             }
@@ -137,8 +137,8 @@ const Creator = () => {
                     img: null,
                     timeOverride: template[i][0].timeOverride || quiz.timePerQuestion || 60,
                     readTime: 6,
-                    suspenseTime: 5,
-                    answerShowTime: 10,
+                    suspenseTime: 6,
+                    answerShowTime: 9,
                 });
                 if (typeof slides[i][j] !== 'undefined') {
                     template[i][j].question = slides[i][j].question || template[i][j].question;

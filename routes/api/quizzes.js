@@ -6,10 +6,16 @@ const quizzesReal = require('../../client/json/Quizzes_save');
 const quizzes = require('../../client/json/Quizzes');
 
 //uuid - 36 char long
+let generalChat = [];
 
 for (let i = 0; i < quizzes.length; i++) {
     quizzesReal.quizzes.push(quizzes[i]);
 }
+
+for (let i = 0; i < quizzesReal.quizzes.length; i++) {
+    generalChat.push([quizzesReal.quizzes[i].id]);
+}
+
 
 router.get('/homepage', (req, res) => {
     res.json(quizzesReal.quizzes);
@@ -49,10 +55,10 @@ router.get('/quiz/:id', (req, res) => {
 })
 
 router.get('/quiz/chat/:id', (req, res) => {
-    const found = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
+    const found = generalChat.some(chat => (chat[0] === req.params.id));
     if (found) {
-        for (let i = 0; i < quizzesReal.quizzes.length; i++) {
-            if (quizzesReal.quizzes[i].id === req.params.id) {
+        for (let i = 0; i < generalChat.length; i++) {
+            if (generalChat[i][0] === req.params.id) {
                 res.json(quizzesReal.quizzes[i]);
             }
         }

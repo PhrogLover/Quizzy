@@ -45,8 +45,8 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
         if (slide.type === "question"){
             return(
                 <div className="advanced-settings">
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={5} selected = {slide.timeOverride} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = {slide.readTime} defaultVal={10} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={6} selected = {slide.suspenseTime} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = {slide.answerShowTime} defaultVal={9} reset = {true}/>
                 </div>
             )
         }
