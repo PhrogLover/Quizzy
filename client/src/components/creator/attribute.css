@@ -1,11 +1,11 @@
 .attribute-container{
-    padding: 10px;
+    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     width: fit-content;
-    /* border: red 1px solid; */
+    border: red 1px solid;
     height:fit-content;
 }
 .select-label{
@@ -48,7 +48,7 @@
 
 }
 .default-value-container{
-    padding: 10px;
+    padding: 5px;
 }
 .default-button{
     min-width: 120px;

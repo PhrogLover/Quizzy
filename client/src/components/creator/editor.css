@@ -16,10 +16,10 @@
     min-width: 300px;
     width: 60%;
     min-height: 50px;
-    height: 30%;
+    height: 10%;
     overflow-y: auto;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     border-radius: var(--border-radius);
     border: var(--colour-white) 3px solid;
     transition: 300ms;
@@ -34,7 +34,7 @@
     width: 100%;
 }
 .qnumber-header{
-    padding: 10px;
+    padding: 5px;
     font-size: 30px;
     font-weight: bolder;
     height: fit-content;
@@ -53,17 +53,22 @@
     align-items: center;
     flex-direction: column;
 }
-/* .editor #image-preview{
-    
-    min-height: 100px;
-    border: 2px solid lightgray;
-    margin-top: 15px;
-
+ .image-preview{
+    max-height: 250px;
+    max-width:250px;
+    /* border: 2px solid lightgray; */
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
- } */
+ }
+ .image-preview img{
+     max-width: 100%;
+     max-height: 100%;
+ }
+ .image-preview-label{
+     margin-top: 5px;
+ }
 
 .top-bar{
     padding: 10px;
@@ -76,6 +81,9 @@
     min-height: fit-content;
     height: fit-content;
     background-color: var(--secondary-colour);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+
     /* border: springgreen 1px solid; */
 }
 .top-bar-top{
@@ -86,7 +94,7 @@
     width: 100%;
     max-width:100%;
     min-height: fit-content;
-    height: 100px;
+    height: 80px;
     background-color: var(--secondary-colour);
 
 }
@@ -105,7 +113,7 @@
 }
 .advanced-settings{
     position:absolute;
-    transform: translate(-25%,80%);
+    transform: translate(-30%,70%);
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -143,11 +151,11 @@
 .medium-input{
     min-width: 300px;
     width: 50%;
-    min-height: 50px;
+    min-height: 40px;
     height: 5%;
     overflow-y: auto;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     border-radius: var(--border-radius);
     border: var(--colour-white) 3px solid;
     transition: 300ms;
@@ -258,6 +266,7 @@
     color: var(--colour-black);
     background-color: var(--colour-white);
 }
+
  @media screen and (max-width:800px){
     .image-toolbar{
         flex-direction: column;
@@ -271,12 +280,14 @@
         height: fit-content;
     }
     .advanced-settings{
-        transform: translate(0,75%);
-    }
-    .editor-main{
-        max-height: 50%;
+        transform: translate(0,60%);
     }
     .qnumber-header{
         font-size: max(4vw,20px);
     }
+    .image-preview{
+        max-height: 150px;
+        max-width: 150px;
+    }
  }
+ 

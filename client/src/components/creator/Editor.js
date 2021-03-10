@@ -113,6 +113,13 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                                 <input type="checkbox" onChange={value => (changeSlideHandler("caseSensitive", value.target.checked))}/>
                             </div>
                         </div>
+                        { slide.img && <>                    
+                            <label className="image-preview-label">Image Preview:</label>
+                            <div className="image-preview">
+                                <img src={ slide.img } alt="Preview" className="image-preview__image"/>
+                            </div>
+                        </>
+                        }
                     </div>
                 </>
                 }
@@ -123,6 +130,13 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                     <div className="editor-body">
                         <label htmlFor="question">Round Title:</label>
                         <input type="text" className="medium-input" required name="title" id="title"  value={ slide.title } onChange={ text => (changeSlideHandler("title", text.target.value)) }></input>
+                        { slide.img && <>
+                            <label className="image-preview-label">Image Preview:</label>
+                            <div className="image-preview">
+                                <img src={ slide.img } alt="Preview" className="image-preview__image"/>
+                            </div>
+                        </>
+                        }
                     </div>
                 </>
                 }
@@ -140,13 +154,18 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                             <label htmlFor="question">Family Name:</label>
                             <input type="text" className="medium-input" required name="family" id="family" value={ slide.family } onChange={ text => (changeSlideHandler("family", text.target.value)) }></input> 
                         </>}
+                        { slide.img && <>
+                            <label className="image-preview-label">Image Preview:</label>
+                            <div className="image-preview">
+                                <img src={ slide.img } alt="Preview" className="image-preview__image"/>
+                            </div>
+                        </>
+                        }
                     </div>
                 </>
                 }
             </div>
-            {/* <div id="image-preview">
-                <img src={ slide.img } alt="Preview" className="image-preview__image"/>
-            </div> */}
+            
             <div className="image-toolbar">
                 <div className="image-toolbar-label">Upload an Image:</div>
                 <input ref={(ref) => (setImgRef(ref))} className="upload-file-input" type="file" accept="image/*" onChange={(e) => (onSlideImageChange(e))}/> 
