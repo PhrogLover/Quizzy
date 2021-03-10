@@ -12,11 +12,6 @@ for (let i = 0; i < quizzes.length; i++) {
     quizzesReal.quizzes.push(quizzes[i]);
 }
 
-for (let i = 0; i < quizzesReal.quizzes.length; i++) {
-    generalChat.push([quizzesReal.quizzes[i].id]);
-}
-
-
 router.get('/homepage', (req, res) => {
     res.json(quizzesReal.quizzes);
 });
@@ -59,7 +54,30 @@ router.get('/quiz/chat/:id', (req, res) => {
     if (found) {
         for (let i = 0; i < generalChat.length; i++) {
             if (generalChat[i][0] === req.params.id) {
-                res.json(quizzesReal.quizzes[i]);
+                res.json(generalChat[i]);
+                break;
+            }
+        }
+    }
+    else {
+        const foundInit = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
+        if (foundInit) {
+            generalChat.push([req.params.id]);
+            console.log(generalChat);
+        }
+        else {
+            res.json({ msg: "There is no quiz with the id: " + req.params.id});
+        }
+    }
+})
+
+router.post('/quiz/chat/:id', (req, res) => {
+    const found = generalChat.some(chat => (chat[0] === req.params.id));
+    if (found) {
+        for (let i = 0; i < generalChat.length; i++) {
+            if (generalChat[i][0] === req.params.id) {
+                generalChat[i].push(req.body);
+                console.log(generalChat[i]);
             }
         }
     }

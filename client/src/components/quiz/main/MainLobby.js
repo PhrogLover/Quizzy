@@ -3,7 +3,7 @@ import SlideScript from "../SlideScript";
 import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
 
-const MainLobby = ({ quiz, chat }) => {
+const MainLobby = ({ quiz, generalChat, id, generalChatRefresh }) => {
     let lobbyCount = [];
     for (let i = 0; i < quiz.numberOfTeams; i++) {
         lobbyCount.push(i);
@@ -23,8 +23,10 @@ const MainLobby = ({ quiz, chat }) => {
                     <LobbyGridElement key={index} quiz={ quiz } index={ index } />
                 ))}
             </div>
-            <div className="chat">
-                <GeneralChat />
+            <div className="main-chat">
+                { generalChat.isPending && <div className="loading">Loading...</div> }
+                { generalChat.error && <div className="error">{ generalChat.error }</div> }
+                { generalChat.data && <GeneralChat generalChatRefresh = {generalChatRefresh} chat={ generalChat.data } id={id} /> }
             </div>
             <div className="slide-window">
                 <SlideScript quiz={ quiz }/>
