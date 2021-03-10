@@ -237,9 +237,6 @@ const Creator = () => {
                         
                         }
                         { isPending && <button disabled>Adding..</button> }
-                        
-                    
-                
                 </div>
             </form>
         </div>
