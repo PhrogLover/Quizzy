@@ -6,12 +6,6 @@
     flex-direction: column;
     /* border: solid 1px blue; */
 }
-.creator-line-break{
-  height: 0px;
-  border: 1px var(--colour-white) solid;
-  width: 80%;
-  margin: 5px 0;
-}
 .attributes label {
     margin-bottom: 30px;
 }

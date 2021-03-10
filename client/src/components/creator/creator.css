@@ -11,7 +11,12 @@
     margin: auto;
     /* border: 1px red solid; */
 }
-
+.creator-line-break{
+    height: 0px;
+    border: 1px var(--colour-white) solid;
+    width: 80%;
+    margin: 5px 0;
+  }
 .creator h3 {
     margin-top: 20px;
     margin-bottom: 20px;

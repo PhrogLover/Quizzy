@@ -38,20 +38,51 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
             }
         }
     }
+    const [asOpen,setAsOpen] = useState(false);
+    const closeAdvancedSettngs = () => setAsOpen(false);
+
+    function AdvancedSettings(){
+        if (slide.type === "question"){
+            return(
+                <div className="advanced-settings">
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={5} selected = {slide.timeOverride} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = {slide.readTime} defaultVal={10} reset = {true}/>
+                </div>
+            )
+        }
+        else{
+            return(
+                <div className="advanced-settings">
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} defaultVal={5} selected = {slide.transition} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} defaultVal={30} selected = {slide.endTime} reset = {true}/>
+                </div>
+            )
+        }
+    }
 
     return ( 
         <div className="editor">
             <div className="top-bar">
                 { slide.type === "question" && <>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} selected = {slide.readTime} defaultVal={6} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={5} selected = {slide.timeOverride} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = {slide.readTime} defaultVal={10} reset = {true}/>
+                    <div className="top-bar-top">
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} selected = {slide.readTime} defaultVal={6} reset = {true}/>
+                    
+                        <div className="top-bar-dropdown">
+                            <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle"> Advanced Settings <i className="fas fa-angle-down"/></button>
+                            { asOpen && <AdvancedSettings></AdvancedSettings>}             
+                        </div>
+                    </div>
                 </>}
                 { slide.type === "round" && <>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} defaultVal={5} selected = {slide.transition} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} defaultVal={30} selected = {slide.endTime} reset = {true}/>
+                    <div className="top-bar-top">
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
+                        <div className="top-bar-dropdown">
+                            <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle">Advanced Settings <i className="fas fa-angle-down"/></button>    
+                            { asOpen && <AdvancedSettings></AdvancedSettings>}
+                        </div>
+                    </div>
+                    
                 </>}                
             </div>
             <div className="editor-main">

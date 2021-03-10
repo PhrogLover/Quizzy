@@ -31,7 +31,9 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
                     </div>
                 </Form.Group>
             </div>
-            { reset && defaultVal && selected && <button type="button" onClick={() => {setDefValue(defaultVal); onChangeHandler(name, defaultVal)}}>Default value</button> }
+            <div className="default-value-container">
+                { reset && defaultVal && selected && <button type="button" className="default-button" onClick={() => {setDefValue(defaultVal); onChangeHandler(name, defaultVal)}}>Default value</button> }
+            </div>
         </div>
      );
 }
