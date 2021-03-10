@@ -27,9 +27,9 @@ const GetQuiz = () => {
 
     return ( 
         <>
-            { quizIsPending && generalChat.isPending && <div className="loading">Loading...</div> }
-            { quizError && generalChat.error && <div className="error">{ quizError }</div> }
-            { quiz && generalChat.data && <MainLobby quiz = { quiz } generalChat = { generalChat } id={id} generalChatRefresh = {setGeneralChatRefresh}/> }
+            { quizIsPending && <div className="loading">Loading...</div> }
+            { quizError && <div className="error">{ quizError }</div> }
+            { quiz && <MainLobby quiz = { quiz } generalChat = { generalChat } id={id} generalChatRefresh = {setGeneralChatRefresh}/> }
         </>
     );
 }

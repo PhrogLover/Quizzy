@@ -4,6 +4,13 @@ import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
 
 const MainLobby = ({ quiz, generalChat, id, generalChatRefresh }) => {
+
+    if (generalChat.isPending) {
+        setTimeout(() => {
+            generalChatRefresh("");
+        }, 1000)
+    }
+
     let lobbyCount = [];
     for (let i = 0; i < quiz.numberOfTeams; i++) {
         lobbyCount.push(i);
