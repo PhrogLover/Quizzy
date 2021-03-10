@@ -28,7 +28,6 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
         .then(generalChatRefresh(refreshValue))
         .then(setRefreshValue(!refreshValue));
     }
-    console.log("chat: " ,chat);
 
     return ( 
         <div className="general-chat">

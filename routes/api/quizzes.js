@@ -63,7 +63,6 @@ router.get('/quiz/chat/:id', (req, res) => {
         const foundInit = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
         if (foundInit) {
             generalChat.push([req.params.id]);
-            console.log(generalChat);
         }
         else {
             res.json({ msg: "There is no quiz with the id: " + req.params.id});
@@ -77,7 +76,6 @@ router.post('/quiz/chat/:id', (req, res) => {
         for (let i = 0; i < generalChat.length; i++) {
             if (generalChat[i][0] === req.params.id) {
                 generalChat[i].push(req.body);
-                console.log(generalChat[i]);
             }
         }
     }
