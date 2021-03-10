@@ -195,7 +195,7 @@ const Creator = () => {
     //     console.log(quiz);
     // }, [quiz])
 
-    const ref = React.createRef();
+    const refUniqueID = React.createRef();
 
     return ( 
         <div className="creator">
@@ -206,7 +206,7 @@ const Creator = () => {
             
                 
                     <div className="input-uniqueid-container">
-                        <HelpIcon ref={ref}>
+                        <HelpIcon ref={refUniqueID}>
                             Quickly set up your <strong> Seasonal Quiz </strong> by entering its Unique ID
                         </HelpIcon>
                         <div className="uniqueid-label" htmlFor="seasonal-setup-id">

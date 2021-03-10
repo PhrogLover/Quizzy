@@ -7,7 +7,7 @@
     overflow: auto;
     height:100%;
     width: 100%;
-    max-height: var(--secion-height);
+    max-height: 100%;
     max-width:100%;
     /* border: 1px white solid; */
     display: flex;
@@ -16,7 +16,7 @@
 }
 .button-container{
     min-width:200px;
-    min-height: 112.50px;
+    min-height: 113px;
 }
 .button-container button{
     border: none;
@@ -43,9 +43,8 @@
         width: 100%;
     }
     .button-container{
-        min-width:200px;
-        height: 112.50px;
-        padding: 5px;
+        min-width:150px;
+        min-height: 84px;
     }
 
 }
