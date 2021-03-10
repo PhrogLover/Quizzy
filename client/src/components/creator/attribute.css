@@ -5,7 +5,7 @@
     justify-content: center;
     flex-direction: row;
     width: fit-content;
-    border: red 1px solid;
+    /* border: red 1px solid; */
     height:fit-content;
 }
 .select-label{
