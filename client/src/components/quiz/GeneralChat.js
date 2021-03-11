@@ -31,8 +31,8 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
 
     return ( 
         <div className="general-chat">
-            { chat.map((message, index) => (
-                <GeneralChatElement key={ index } message = { message } />
+            { chat.map((message) => (
+                <GeneralChatElement key={ message.message } message = { message } />
             ))}
             <form onSubmit={ sendHandler }>
                 <input type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
