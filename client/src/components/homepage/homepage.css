@@ -117,7 +117,8 @@ html {
 .join-input:focus{
     border-radius: var(--border-radius);
     border: 5px var(--colour-green) solid;
-    transform: scale(1.02) perspective(1px)
+    transform: scale(1.02) perspective(1px);
+    outline:none;
 }
 
 

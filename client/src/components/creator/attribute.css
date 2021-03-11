@@ -43,6 +43,7 @@
 .select-container select{
     height: 30px;
     font-size: 15px;
+    border: 1px var(--colour-white) solid;
     border-radius: var(--border-radius);
     /* border: yellow 1px solid; */
 

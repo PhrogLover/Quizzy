@@ -60,11 +60,12 @@
     transition: 200ms;
 }
 .uniqueid-input:hover{    
-    transform: scale(1.02) perspective(1px)
+    border: 3px var(--colour-grey) solid;
 }
 .uniqueid-input:focus{
+    transform: scale(1.01) perspective(1px);
     border: 3px var(--primary-colour) solid;
-    transform: scale(1.02) perspective(1px)
+    outline: none;
 }
 .main-form{
     position: relative;

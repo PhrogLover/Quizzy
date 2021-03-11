@@ -31,14 +31,20 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
 
     return ( 
         <div className="general-chat">
-            { chat.map((message) => (
-                <GeneralChatElement key={ message.message } message = { message } />
-            ))}
-            <form onSubmit={ sendHandler }>
-                <input type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
-                { !isPending && <button>Send</button> }
-                { isPending && <button disabled>Sending...</button> }
-            </form>
+            <div className="messages-container">
+                { chat.map((message, index) => (
+                    <GeneralChatElement key={ index } message = { message } />
+                ))}
+            </div>
+            <div className="message-box-container">
+                <form onSubmit={ sendHandler }>
+                    <div className="message-box-form">
+                        <input className="message-input" placeholder="Send a message..." type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
+                        { !isPending && <button className="send-button">Send <i className="fas fa-paper-plane"></i></button> }
+                        { isPending && <button className="send-button" disabled>Sending...</button> }
+                    </div>
+                </form>
+            </div>
         </div> 
     );
 }

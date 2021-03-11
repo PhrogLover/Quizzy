@@ -29,6 +29,8 @@
 }
 .editor-body textarea:focus{
     border: var(--secondary-colour) 3px solid;
+    transform: scale(1.01) perspective(1px);
+    outline: none;
 }
 .editor-main{
     width: 100%;
@@ -165,6 +167,8 @@
 }
 .medium-input:focus{
     border: var(--secondary-colour) 3px solid;
+    transform: scale(1.01) perspective(1px);
+    outline: none;
 }
 .checkbox-answer-casesen{
     padding: 10px;
@@ -230,7 +234,9 @@
     border: var(--colour-grey) 2px solid;
 }
 .url-paste-input:focus{
-    border: var(--secondary-colour) 2px solid;
+    border: var(--colour-white) 2px solid;
+    transform: scale(1.01) perspective(1px);
+    outline: none;
 }
 .url-paste-button{
     min-width: 120px;
