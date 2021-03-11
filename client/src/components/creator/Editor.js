@@ -18,13 +18,6 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
         }        
     }
 
-    async function pasteImgURL() {
-        navigator.clipboard.readText().then((url) => {
-            changeSlideHandler("img", url);
-        })
-        
-    }
-
     function removeImageFromSlide() {
         changeSlideHandler("img", "");
     }

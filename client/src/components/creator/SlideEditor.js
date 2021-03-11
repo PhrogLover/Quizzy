@@ -6,7 +6,7 @@ import SlideNav from "./SlideNav";
 
 const SlideEditor = ( { slides, setSlides, quiz } ) => {
     
-    const [ currentSlide, setCurrentSlide ] = useState(slides[1][1]);
+    const [ currentSlide, setCurrentSlide ] = useState(slides[0]);
     const [ index, setIndex ] = useState({
         round: 1,
         question: 1
