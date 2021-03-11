@@ -86,8 +86,23 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                     </div>
                     
                 </>
-                }                
+                }   
+                { slide.type === "intro" && 
+                <>
+                    <div className="top-bar-top">
+                        <div className="checkbox-answer-casesen">
+                            <div className="checkbox-answer-casesen-label" htmlFor="case-sensitive"> Show Answers After Each Round</div>
+                            <div className="custom-checkbox">
+                                <input type="checkbox" onChange={value => (changeSlideHandler("bruh", value.target.checked))}/>
+                            </div>
+                        </div>             
+                    </div>
+                    
+                </>
+                } 
             </div>
+
+                
             <div className="editor-main">
                 { slide.type === "question" && 
                 <>
