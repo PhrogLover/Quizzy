@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import "./lobbygridelement.css";
 
 const LobbyGridElement = ({ quiz, index }) => {
-    index += 1;
+index += 1;
     return ( 
         <div className="grid-item">
             <Link to={`/mainLobby/teamLobby/${index}` } style={{ textDecoration: 'none' }}>
                 <div className="lobby-grid-element">            
                     <div className="team-name">Team lobby{ index }</div>
-                    <div className="players-in-lobby">0/5</div>
+                    <div className="players-in-lobby">0/{quiz.numberOfPlayers}</div>
                     <div className="players-list"> 
                         <div className="players-header"> Players:</div>
                         <div className="players-names">

@@ -11,8 +11,10 @@ const MainLobby = ({ quiz, generalChat, id, generalChatRefresh }) => {
         }, 1000)
     }
 
+
+    let randomTeamNumber = Math.floor(Math.random()*25);
     let lobbyCount = [];
-    for (let i = 0; i < quiz.numberOfTeams; i++) {
+    for (let i = 0; i < randomTeamNumber; i++) {
         lobbyCount.push(i);
     }
     // for (let i = 0; i < 7; i++) {

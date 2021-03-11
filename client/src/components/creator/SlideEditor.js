@@ -55,7 +55,7 @@ const SlideEditor = ( { slides, setSlides, quiz } ) => {
     }
 
     useEffect(() => {
-            console.log(slides[1][1]);
+            console.log(slides);
         }, [slides])
 
     return ( 
