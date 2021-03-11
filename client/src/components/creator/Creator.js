@@ -100,7 +100,7 @@ const Creator = () => {
             template[0].family = quiz.family || slides[0].family || template[0].family;
             template[0].img = slides[0].img || template[0].img;
             if (quiz.type !== "seasonal") {
-                template[0].family = null;
+                template[0].family = "Insert Family Name";
             }
         }
         id++;

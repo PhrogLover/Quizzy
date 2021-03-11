@@ -17,7 +17,7 @@ const SlideNav = ({ slides, changeCurrentSlide, quiz }) => {
             {expandedSlides.map((slide, index) => (
                 <div key={ index } className="button-container">
                     <button type="button" onClick={ () => {changeCurrentSlide(slide.round, slide.quest)} }>
-                        <SlideView slide={ slide } slideWidthPass = "width--100per" iteration = { quiz.seasonIteration }/>
+                        <SlideView slide={ slide } slideWidthPass = "width--100per" quiz = { quiz }/>
                     </button>
                 </div>
             ))}

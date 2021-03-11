@@ -3,7 +3,7 @@ import useFitText from "use-fit-text";
 import Family from "./Family";
 import Timer from "./Timer";
 
-const SlideView = ( { iteration, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
+const SlideView = ( { quiz, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
 
     let answers = "";
     if(slide.type === "question") {
@@ -83,8 +83,8 @@ const SlideView = ( { iteration, slide, error = "", showAns = false, timer, slid
                                         <div className="slide-title" ref={titleRef} style={{ fontSize: titleFontSize }}>
                                             { slide.title }
                                         </div>  
-                                        { slide.family && 
-                                            <Family family={ slide.family } iteration={ iteration } />
+                                        { slide.family && quiz.type === "seasonal" && 
+                                            <Family family={ slide.family } iteration={ quiz.seasonIteration } />
                                         }                                                           
                                     </div>
                                     </>
@@ -95,8 +95,8 @@ const SlideView = ( { iteration, slide, error = "", showAns = false, timer, slid
                                         <div className="slide-title" ref={titleRef} style={{ fontSize: titleFontSize }}>
                                             { slide.title }
                                         </div> 
-                                        { slide.family && 
-                                            <Family family={ slide.family } iteration={ iteration } />
+                                        { slide.family && quiz.type === "seasonal" && 
+                                            <Family family={ slide.family } iteration={ quiz.seasonIteration } />
                                         }  
                                     </div>
                                     </>

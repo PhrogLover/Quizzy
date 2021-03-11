@@ -54,10 +54,6 @@ const SlideEditor = ( { slides, setSlides, quiz } ) => {
         }
     }
 
-    useEffect(() => {
-            console.log(slides);
-        }, [slides])
-
     return ( 
         <div className="slide-editor">
             <div className="main-slideEditor-container">

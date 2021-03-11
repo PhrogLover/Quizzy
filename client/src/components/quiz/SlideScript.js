@@ -205,7 +205,7 @@ const SlideScript = ({ quiz }) => {
                 <button disabled>Quiz in Progress...</button>
             </> }
             { !isPending && <>
-                <SlideView slide={ currentSlideScript } showAns = { showAns } timer = { timer } slideWidthPass = "width--50per" iteration={ quiz.seasonIteration }/> 
+                <SlideView slide={ currentSlideScript } showAns = { showAns } timer = { timer } slideWidthPass = "width--50per" quiz = { quiz } /> 
                 <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript}>{ scriptButtonValue }</button>
             </> }
         </>

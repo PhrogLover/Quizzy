@@ -1,10 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HelpIcon from "../basic/HelpIcon";
 import Attribute from "./Attribute";
 import "./editor.css";
 
 const Editor = ( { slide, changeSlideHandler, quiz } ) => {
+
     function onSlideImageChange(e){
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -44,24 +45,22 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
     const answersRef = React.createRef();
 
     const [asOpen,setAsOpen] = useState(false);
-    const closeAdvancedSettngs = () => setAsOpen(false);
-
-    
+    const closeAdvancedSettngs = () => setAsOpen(false);    
 
     function AdvancedSettings(){
         if (slide.type === "question"){
             return(
                 <div className="advanced-settings">
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={6} selected = {slide.suspenseTime} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = {slide.answerShowTime} defaultVal={9} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={6} selected = { slide.suspenseTime }/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = { slide.answerShowTime } defaultVal={9}/>
                 </div>
             )
         }
         else{
             return(
                 <div className="advanced-settings">
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} defaultVal={5} selected = {slide.transition} reset = {true}/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} defaultVal={30} selected = {slide.endTime} reset = {true}/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} defaultVal={5} selected = { slide.transition }/>
+                    <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} defaultVal={30} selected = { slide.endTime }/>
                 </div>
             )
         }
@@ -73,8 +72,8 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                 { slide.type === "question" && 
                 <>
                     <div className="top-bar-top">
-                        <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
-                        <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} selected = {slide.readTime} defaultVal={6} reset = {true}/>
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={ quiz.timePerQuestion } selected = { slide.timeOverride }/>
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} selected = { slide.readTime } defaultVal={6}/>
                     
                         <div className="top-bar-dropdown">
                             <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle"> Advanced Settings <i className="fas fa-angle-down"/></button>
@@ -86,7 +85,7 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                 { slide.type === "round" && 
                 <>
                     <div className="top-bar-top">
-                        <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = {slide.timeOverride} reset = {true}/>
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = { slide.timeOverride }/>
                         <div className="top-bar-dropdown">
                             <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle">Advanced Settings <i className="fas fa-angle-down"/></button>    
                             { asOpen && <AdvancedSettings></AdvancedSettings>}
@@ -168,10 +167,10 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
             
             <div className="image-toolbar">
                 <div className="image-toolbar-label">Upload an Image:</div>
-                <input ref={(ref) => (setImgRef(ref))} className="upload-file-input" type="file" accept="image/*" onChange={(e) => (onSlideImageChange(e))}/> 
+                { !slide.img && <input ref={(ref) => (setImgRef(ref))} value="" className="upload-file-input" type="file" accept="image/*" onChange={(e) => {onSlideImageChange(e)}}/> }
                 { slide.img && <button className="remove-file-button" type="button" id="removeFile" onClick={removeImageFromSlide}>Remove File</button> }
                 <div className="url-paste-container">
-                    <input type="text" placeholder="Paste Image URL" className="url-paste-input" onChange={ text => (setImgUrlString(text.target.value)) } />
+                    <input type="text" placeholder="Paste Image URL" className="url-paste-input" onChange={ text => {setImgUrlString(text.target.value)} } />
                     <button className="url-paste-button" type="button" onClick={() => (changeSlideHandler("img", imgUrlString)) } >Enter <i className="fas fa-share"></i></button>
                 </div>
             </div>
