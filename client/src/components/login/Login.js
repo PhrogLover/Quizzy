@@ -24,7 +24,7 @@ const Login = () => {
                 </div>
                 <div className="line-through-text">
                     <div className="line"/>
-                        <div className="text">
+                        <div className="login-with-text">
                             Login with
                         </div>
                     <div className="line"/>

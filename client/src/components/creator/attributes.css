@@ -34,7 +34,8 @@
 }
 .quiz-title-container input:focus{
   border: 3px var(--primary-colour) solid;
-  transform: scale(1.01) perspective(1px)
+  transform: scale(1.01) perspective(1px);
+  outline:none;
 }
 .quiz-category-container{
   padding:10px;
@@ -58,7 +59,8 @@
 }
 .quiz-category-container input:focus{
   border: 3px var(--primary-colour) solid;
-  transform: scale(1.01) perspective(1px)
+  transform: scale(1.01) perspective(1px);
+  outline:none;
 }
 .main-toggle-container{
   width:100%;
