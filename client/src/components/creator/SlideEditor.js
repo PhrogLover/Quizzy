@@ -4,7 +4,7 @@ import "./slideeditor.css";
 
 import SlideNav from "./SlideNav";
 
-const SlideEditor = ( { slides, setSlides, quiz } ) => {
+const SlideEditor = ( { onChangeHandler, slides, setSlides, quiz } ) => {
     
     const [ currentSlide, setCurrentSlide ] = useState(slides[0]);
     const [ index, setIndex ] = useState({
@@ -13,6 +13,11 @@ const SlideEditor = ( { slides, setSlides, quiz } ) => {
     });
 
     function changeSlideHandler(name, value) {
+        if (name === "showAns") {
+            onChangeHandler(name, value);
+            return;
+        }
+
         if (value === -1) {
             value = null;
         }

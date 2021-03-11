@@ -68,10 +68,10 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                         <Attribute onChangeHandler = {changeSlideHandler} title="Individual Question Time" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={ quiz.timePerQuestion } selected = { slide.timeOverride }/>
                         <Attribute onChangeHandler = {changeSlideHandler} title="Read Time" name="readTime" start = {2} finish = {30} steps = {4} selected = { slide.readTime } defaultVal={6}/>
                     
-                        <div className="top-bar-dropdown">
+                        { quiz.showAns && <div className="top-bar-dropdown">
                             <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle"> Advanced Settings <i className="fas fa-angle-down"/></button>
                             { asOpen && <AdvancedSettings></AdvancedSettings>}             
-                        </div>
+                        </div> }
                     </div>
                 </>
                 }
@@ -91,9 +91,9 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                 <>
                     <div className="top-bar-top">
                         <div className="checkbox-answer-casesen">
-                            <div className="checkbox-answer-casesen-label" htmlFor="case-sensitive"> Show Answers After Each Round</div>
+                            <div className="checkbox-answer-casesen-label" htmlFor="case-sensitive"> Show Answers After The Quiz Is Done</div>
                             <div className="custom-checkbox">
-                                <input type="checkbox" onChange={value => (changeSlideHandler("bruh", value.target.checked))}/>
+                                <input type="checkbox" onChange={value => (changeSlideHandler("showAns", value.target.checked))}/>
                             </div>
                         </div>             
                     </div>

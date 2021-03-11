@@ -191,9 +191,9 @@ const Creator = () => {
         setSlides(slidesState());
     }, [quiz])
 
-    // useEffect(() => {
-    //     console.log(quiz);
-    // }, [quiz])
+    useEffect(() => {
+        console.log(quiz);
+    }, [quiz])
 
     const refUniqueID = React.createRef();
 
@@ -218,7 +218,7 @@ const Creator = () => {
                         <div className="hide-me" id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
                         <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
                     
-                        <SlideEditor slides = { slides } setSlides = { setSlides } quiz={ quiz }/>
+                        <SlideEditor onChangeHandler = {onChangeHandler} slides = { slides } setSlides = { setSlides } quiz={ quiz }/>
                         
                         { !isPending && 
                         <div className="bottom-buttons-container">
