@@ -29,7 +29,6 @@
 }
 .editor-body textarea:focus{
     border: var(--secondary-colour) 3px solid;
-    transform: scale(1.01) perspective(1px);
     outline: none;
 }
 .editor-main{
