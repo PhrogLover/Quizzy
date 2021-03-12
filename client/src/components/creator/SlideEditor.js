@@ -29,6 +29,7 @@ const SlideEditor = ( { onChangeHandler, slides, setSlides, quiz } ) => {
         temp = [...slides];
         let tempObj = {};
         if (currentSlide.type === "round" && name === "timeOverride") {
+            temp[index.round][0].timeOverride = value;
             for (let i = 1; i < quiz.numberOfQuestions; i++) {
                 temp[index.round][i].timeOverride = value;
             }
