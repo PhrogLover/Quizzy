@@ -113,7 +113,7 @@ const Creator = () => {
                 type: "round",
                 title: "Insert Title",
                 img: null,
-                timeOverride: quiz.timePerQuestion || 60,
+                timeOverride: slides[i][0].timeOverride,
                 transition: 5,
                 endTime: 30
             })
@@ -134,7 +134,7 @@ const Creator = () => {
                     answers: [],
                     caseSensitive: false,
                     img: null,
-                    timeOverride: template[i][0].timeOverride || quiz.timePerQuestion || 60,
+                    timeOverride: slides[i][j].timeOverride,
                     readTime: 6,
                     suspenseTime: 6,
                     answerShowTime: 9,
@@ -149,6 +149,16 @@ const Creator = () => {
                     template[i][j].answerShowTime = slides[i][j].answerShowTime || template[i][j].answerShowTime;
                 }
                 id++;
+            }
+        }
+        return template;
+    }
+
+    function timePropagate() {
+        let template = [...slides];
+        for (let i = 1; i <= quiz.numberOfRounds; i++) {
+            for (let j = 0; j <= quiz.numberOfQuestions; j++) {
+                template[i][j].timeOverride = quiz.timePerQuestion;
             }
         }
         return template;
@@ -188,7 +198,11 @@ const Creator = () => {
     useEffect(() => {
         setSlides(slidesState());
         console.log(quiz);
-    }, [quiz])
+    }, [quiz.id, quiz.title, quiz.category, quiz.family, quiz.type, quiz.domain, quiz.numberOfPlayers, quiz.numberOfQuestions, quiz.numberOfRounds, quiz.numberOfTeams, quiz.time, quiz.seasonFreq, quiz.showAns])
+
+    useEffect(() => {
+        setSlides(timePropagate());
+    }, [quiz.timePerQuestion])
 
     const refUniqueID = React.createRef();
 
