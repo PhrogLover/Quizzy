@@ -3,7 +3,7 @@ import "./attribute.css";
 
 import Form from "react-bootstrap/Form";
 
-const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, selected = null, defaultVal = null }) => {
+const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1, selected = "", defaultVal = null }) => {
     function makeSteps(start, finish, steps) {
         let result = [];
         for (let i = start; i <= finish; i += steps) {

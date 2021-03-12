@@ -43,8 +43,8 @@ const Creator = () => {
             round: 0,
             quest: -1,
             type: "intro",
-            title: quiz.title || "Insert Title",
-            family: quiz.family,
+            title: "Insert Title",
+            family: "Insert Family Name",
             img: null
         });
         id++;
@@ -120,7 +120,6 @@ const Creator = () => {
             if (typeof slides[i][0] !== 'undefined') {
                 template[i][0].title = slides[i][0].title || template[i][0].title;
                 template[i][0].img = slides[i][0].img || template[i][0].img;
-                template[i][0].timeOverride = slides[i][0].timeOverride || template[i][0].timeOverride;
                 template[i][0].transition = slides[i][0].transition || template[i][0].transition;
                 template[i][0].endTime = slides[i][0].endTime || template[i][0].endTime;
             }
@@ -145,7 +144,6 @@ const Creator = () => {
                     template[i][j].answers = slides[i][j].answers || template[i][j].answers;
                     template[i][j].caseSensitive = slides[i][j].caseSensitive || template[i][j].caseSensitive;
                     template[i][j].img = slides[i][j].img || template[i][j].img;
-                    template[i][j].timeOverride = slides[i][j].timeOverride || template[i][j].timeOverride;
                     template[i][j].readTime = slides[i][j].readTime || template[i][j].readTime;
                     template[i][j].suspenseTime = slides[i][j].suspenseTime || template[i][j].suspenseTime;
                     template[i][j].answerShowTime = slides[i][j].answerShowTime || template[i][j].answerShowTime;
@@ -189,9 +187,6 @@ const Creator = () => {
 
     useEffect(() => {
         setSlides(slidesState());
-    }, [quiz])
-
-    useEffect(() => {
         console.log(quiz);
     }, [quiz])
 
@@ -204,7 +199,6 @@ const Creator = () => {
             </div>
             <form className="creator" onSubmit={ submitHandler }>
             
-                
                     <div className="input-uniqueid-container">
                         <HelpIcon ref={refUniqueID}>
                             Quickly set up your <strong> Seasonal Quiz </strong> by entering its Unique ID

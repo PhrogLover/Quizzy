@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import HelpIcon from "../basic/HelpIcon";
 import Attribute from "./Attribute";
 import "./editor.css";
@@ -78,7 +78,7 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                 { slide.type === "round" && 
                 <>
                     <div className="top-bar-top">
-                        <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={60} selected = { slide.timeOverride }/>
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={ quiz.timePerQuestion } selected = { slide.timeOverride }/>
                         <div className="top-bar-dropdown">
                             <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle">Advanced Settings <i className="fas fa-angle-down"/></button>    
                             { asOpen && <AdvancedSettings></AdvancedSettings>}
@@ -93,7 +93,7 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                         <div className="checkbox-answer-casesen">
                             <div className="checkbox-answer-casesen-label" htmlFor="case-sensitive"> Show Answers After The Quiz Is Done</div>
                             <div className="custom-checkbox">
-                                <input type="checkbox" onChange={value => (changeSlideHandler("showAns", value.target.checked))}/>
+                                <input type="checkbox" checked={quiz.showAns} onChange={value => (changeSlideHandler("showAns", value.target.checked))}/>
                             </div>
                         </div>             
                     </div>
