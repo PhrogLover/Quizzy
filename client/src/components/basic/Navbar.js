@@ -144,7 +144,7 @@ const Navbar = () => {
                         <div id="nav-logo" className="nav-logo">
                             <img src="/images/Temp_Icon.png"/>
                         </div>
-                        <div id="title" className="title"><h1>QuizWebApp</h1></div>
+                        <div id="title" className="title">QuizWebApp</div>
                     </Link>
                 </div>
                 <div className="navbar-icons">

@@ -4,7 +4,6 @@ import "./lobbygridelement.css";
 const LobbyGridElement = ({ quiz, index }) => {
 index += 1;
     return ( 
-        <div className="grid-item">
             <Link to={`/mainLobby/teamLobby/${index}` } style={{ textDecoration: 'none' }}>
                 <div className="lobby-grid-element">            
                     <div className="team-name">Team lobby{ index }</div>
@@ -17,7 +16,6 @@ index += 1;
                     </div>
                 </div>
             </Link>
-        </div>
      );
 }
  

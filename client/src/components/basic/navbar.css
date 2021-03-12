@@ -8,7 +8,7 @@
     background-color: var(--nav-bg);
     height: var(--nav-height);
     color: var(--font-colour);
-    border-bottom: var(--colour-grey) 3px solid;
+    border-bottom: var(--colour-grey) 2px solid;
     z-index: 10000;
 
     /* Makes text unselectable */ 
@@ -54,6 +54,7 @@
 .title{
     float: left;
     color: var(--colour-white);
+    font-weight: bold;
 }
 .navbar-icons{
     width:30%;

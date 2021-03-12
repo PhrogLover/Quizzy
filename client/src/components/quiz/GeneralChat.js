@@ -31,6 +31,16 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
 
     return ( 
         <div className="general-chat">
+            <div className="pinned-message-container">
+                <div className="pinned-message-box">
+                    <div className="pinned-message-header">
+                        <i className="fas fa-thumbtack"/> Pinned Message: 
+                    </div>
+                    <div className="pinned-message-body">
+                        insert pin mesage here
+                    </div>
+                </div>
+            </div>
             <div className="messages-container">
                 { chat.map((message, index) => (
                     <GeneralChatElement key={ index } message = { message } />

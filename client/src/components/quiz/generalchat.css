@@ -7,15 +7,52 @@
     background-color: var(--bg-colour);
 
 }
-.messages-container{
-    height: 90%;
-    max-height: 90%;
-    overflow-y: auto;
+.pinned-message-container{
     width: 100%;
+    padding: 10px;
+    height: 15%;
+}
+.pinned-message-box{
+    padding: 5px;
+    font-size: 15px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--colour-black2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.pinned-message-header{
+    color: var(--primary-colour);
+    width: 100%;
+    height: fit-content;
+}
+.pinned-message-header i{
+    margin-right: 5px;
+}
+.pinned-message-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.messages-container{
+    height: 75%;
+    max-height: 75%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
+    padding: 0 15px;
     background-color: var(--bg-colour);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
 }
 .message-box-container{
-    border-top: var(--colour-grey) 1px solid;
     width: 100%;
     min-height: fit-content;
     height: 10%;

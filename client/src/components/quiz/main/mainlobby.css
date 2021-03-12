@@ -5,14 +5,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    padding: 0 10px;
+    padding: 0 10px 0 0;
+    border-bottom: 3px var(--colour-grey) solid;
 }
 .main-header{
     width:100%;
     min-height: max-content;
     height: 20%;
-    border: 1px #ffffff solid;
     color: var(--font-colour);
+    
 }
 .quiz-title{
     width: 100%;
@@ -25,6 +26,7 @@
 .instructions{
     height: fit-content;
     font-size: 16px;
+    padding: 0 10px;
 }
 .main-body{
     display: flex;
@@ -33,7 +35,6 @@
     flex-direction: column;
     width:80%;
     height: 100%;
-    border: green 1px solid;
 }
 .lobby-body{
     display: flex;
@@ -41,15 +42,13 @@
     flex-direction: column;
     width:100%;
     height: 100%;
-    border: green 1px solid;
-    overflow-y: auto;
-
+    background-color: var(--colour-black2);
 }
 .lobby-grid{
     display: grid;
     width:100%;
-    height: fit-content;
-    border: white 1px solid;
+    height: 100%;
+    /* border: white 1px solid; */
     column-gap: 20px;
     row-gap: 20px;
     padding: 20px;
@@ -60,5 +59,5 @@
     width: 20%;
     height: 100%;
     min-width: 300px;
-    border: 1px white solid;
+    border-left: 1px var(--colour-grey) solid;
 }

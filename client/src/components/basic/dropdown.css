@@ -9,7 +9,7 @@
     right: 0;
     overflow: hidden;
     z-index: 200000;
-    border: var(--colour-grey) 3px solid;
+    border: var(--colour-grey) 2px solid;
 
     /* Makes text unselectable */ 
     -webkit-user-select: none; /* Safari */        
