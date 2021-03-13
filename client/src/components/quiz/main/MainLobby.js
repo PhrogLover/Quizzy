@@ -49,7 +49,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                     <div className="lobby-body">                   
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyCount.map((index) => (
-                                <LobbyGridElement key={index} quiz={ quiz } index={ index } />
+                                <LobbyGridElement key={index} quiz={ quiz } index={ index } chatSize = { quiz.numberOfTeams * quiz.numberOfPlayers} />
                             ))}
                         </div>
                     </div> 
