@@ -19,7 +19,6 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
             creator: "AriG7"
         }
         setText("");
-        console.log(message);
         fetch('http://localhost:5000/api/quizzes/quiz/chat/' + id, {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
@@ -42,8 +41,8 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
                 </div>
             </div>
             <div className="messages-container">
-                { chat.map((message, index) => (
-                    <GeneralChatElement key={ index } message = { message } />
+                { chat.map((message) => (
+                    <GeneralChatElement key={ message.id } message = { message } />
                 ))}
             </div>
             <div className="chat-toolbar-container">

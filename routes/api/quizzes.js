@@ -54,7 +54,7 @@ router.get('/quiz/chat/:id', (req, res) => {
     if (found) {
         for (let i = 0; i < generalChat.length; i++) {
             if (generalChat[i][0] === req.params.id) {
-                res.json(generalChat[i]);
+                res.json(generalChat[i].filter(chat => typeof chat === "object"));
                 break;
             }
         }

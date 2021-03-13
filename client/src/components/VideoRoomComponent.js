@@ -105,7 +105,7 @@ class VideoRoomComponent extends Component {
                 this.connect(token);
             }).catch((error) => {
                 if(this.props.error){
-                    this.props.error({ error: error.error, messgae: error.message, code: error.code, status: error.status });
+                    this.props.error({ error: error.error, message: error.message, code: error.code, status: error.status });
                 }
                 console.log('There was an error getting the token:', error.code, error.message);
                 alert('There was an error getting the token:', error.message);

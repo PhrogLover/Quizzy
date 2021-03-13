@@ -15,7 +15,6 @@ const GetQuiz = () => {
 
     const ENDPOINT = "http://localhost:5000/";
 
-    const [chat, setChat] = useState("");
     // useEffect(() => {
     //     const socket = socketIOClient(ENDPOINT);
     //     socket.on("FromAPI", data => {
