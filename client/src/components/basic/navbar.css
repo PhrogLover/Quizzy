@@ -70,7 +70,7 @@
     display:inline-flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: fit-content;
     font-size: calc(var(--nav-height)*0.5);
     text-align: center;
     /* border: red 1px solid; */
