@@ -3,10 +3,8 @@ import { useState } from "react";
 import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../GetUniqueId";
 
-const GeneralChat = ( { chat, id, generalChatRefresh }) => {
+const GeneralChat = ( { chat, socket }) => {
     const [ text, setText ] = useState("");
-    const [ isPending, setIsPending ] = useState(false);
-    const [ refreshValue, setRefreshValue ] = useState(false);
 
     function sendHandler(e) {
         e.preventDefault();
@@ -19,13 +17,7 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
             creator: "AriG7"
         }
         setText("");
-        fetch('http://localhost:5000/api/quizzes/quiz/chat/' + id, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify(message)
-        }).then(setIsPending(false))
-        .then(generalChatRefresh(refreshValue))
-        .then(setRefreshValue(!refreshValue));
+        socket.emit('chat message', message);
     }
 
     return ( 
@@ -52,8 +44,7 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
                 <form onSubmit={ sendHandler }>
                     <div className="message-box-form">
                         <input className="message-input" placeholder="Send a message..." type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
-                        { !isPending && <button className="send-button">Send <i className="fas fa-paper-plane"></i></button> }
-                        { isPending && <button className="send-button" disabled>Sending...</button> }
+                        <button className="send-button">Send <i className="fas fa-paper-plane"></i></button>
                     </div>
                 </form>
             </div>

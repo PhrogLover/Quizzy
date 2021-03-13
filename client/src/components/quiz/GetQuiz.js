@@ -5,30 +5,28 @@ import useFetch from "../../hooks/useFetch";
 import MainLobby from "./main/MainLobby";
 
 const GetQuiz = () => {
-    const [generalChatRefresh, setGeneralChatRefresh ] = useState();
     const { id } = useParams();
     const quizUrl = "http://localhost:5000/api/quizzes/quiz/" + id;
     const {data: quiz, isPending: quizIsPending, error: quizError } = useFetch(quizUrl);
 
-    const chatUrl = "http://localhost:5000/api/quizzes/quiz/chat/" + id;
-    const generalChat = useFetch(chatUrl, generalChatRefresh);
+    const [ nextMessage, setNextMessage ] = useState(null);
 
     const ENDPOINT = "http://localhost:5000/";
+    const socket = socketIOClient(ENDPOINT);
 
-    // useEffect(() => {
-    //     const socket = socketIOClient(ENDPOINT);
-    //     socket.on("FromAPI", data => {
-    //       setChat(data);
-    //     });
+    useEffect(() => {
+        socket.on("chat message", data => {
+            setNextMessage(data);
+        });
         
-    //     return () => socket.disconnect();
-    // }, []);
+        return () => socket.disconnect();
+    }, []);
 
     return ( 
         <>
             { quizIsPending && <div className="loading">Loading...</div> }
             { quizError && <div className="error">{ quizError }</div> }
-            { quiz && <MainLobby quiz = { quiz } generalChat = { generalChat } id={id} generalChatRefresh = {setGeneralChatRefresh}/> }
+            { quiz && <MainLobby quiz = { quiz } nextMessage = { nextMessage } id={id} socket={ socket } /> }
         </>
     );
 }
