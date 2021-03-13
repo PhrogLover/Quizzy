@@ -36,8 +36,6 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
         return {gridTemplateColumns: gridStyle};
     }
 
-    console.log(chat);
-
     return (
         <>
             <div className="main-lobby">

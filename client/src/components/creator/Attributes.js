@@ -24,10 +24,16 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                 <div className="quiz-title-label" htmlFor="quiz-title">Quiz Title: </div>
                 <input type="text" name="quiz-title" placeholder="My Quiz" onChange={option => (onChangeHandler("title", option.target.value))}/>
             </div>
+
+
+
             <div className="quiz-category-container">
                 <div className="quiz-category-label" htmlFor="quiz-category">Main Theme/Category: </div>
                 <input type="text" name="quiz-category" placeholder="General Knowledge" onChange={option => (onChangeHandler("category", option.target.value))}/>
             </div>
+
+
+
             <div className="main-toggle-container">
                 <div className="domain-container">
                     <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}><strong>Private Quizzes</strong> can only be played by users with the ID. <strong>Public Quizzes</strong> can be joined by anyone.</HelpIcon> Quiz Domain: </div>
@@ -61,6 +67,9 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                     </div>
                 </div>
             </div>
+
+
+            
 
             { (quiz.domain === "private" || quiz.type === "seasonal") && 
             <>
