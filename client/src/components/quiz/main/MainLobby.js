@@ -2,15 +2,19 @@ import "./mainlobby.css";
 import SlideScript from "../SlideScript";
 import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
+import { useState, useEffect } from "react";
 
-const MainLobby = ({ quiz, generalChat, id, generalChatRefresh }) => {
+const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
-    if (generalChat.isPending) {
-        setTimeout(() => {
-            generalChatRefresh("");
-        }, 1000)
-    }
+    const [ chat, setChat ] = useState([]);
 
+    useEffect(() => {
+        if (nextMessage) {
+            let temp = chat;
+            temp.push(nextMessage);
+            setChat(temp);
+        }        
+    }, [nextMessage]);
 
     let randomTeamNumber = Math.floor(Math.random()*23 +2);
     let lobbyCount = [];
@@ -32,6 +36,8 @@ const MainLobby = ({ quiz, generalChat, id, generalChatRefresh }) => {
         return {gridTemplateColumns: gridStyle};
     }
 
+    console.log(chat);
+
     return (
         <>
             <div className="main-lobby">
@@ -52,9 +58,7 @@ const MainLobby = ({ quiz, generalChat, id, generalChatRefresh }) => {
                     </div> 
                 </div>
                     <div className="main-chat">
-                    { generalChat.isPending && <div className="loading">Loading...</div> }
-                    { generalChat.error && <div className="error">{ generalChat.error }</div> }
-                    { generalChat.data && <GeneralChat generalChatRefresh = {generalChatRefresh} chat={ generalChat.data } id={id} /> }
+                    <GeneralChat chat={ chat } socket = { socket } />
                 </div>
                 </div>
                 

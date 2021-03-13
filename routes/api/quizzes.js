@@ -70,20 +70,6 @@ router.get('/quiz/chat/:id', (req, res) => {
     }
 })
 
-router.post('/quiz/chat/:id', (req, res) => {
-    const found = generalChat.some(chat => (chat[0] === req.params.id));
-    if (found) {
-        for (let i = 0; i < generalChat.length; i++) {
-            if (generalChat[i][0] === req.params.id) {
-                generalChat[i].push(req.body);
-            }
-        }
-    }
-    else {
-        res.json({ msg: "There is no quiz with the id: " + req.params.id});
-    }
-})
-
 router.delete('/delete', (req, res) => {
     const found = quizzesReal.quizzes.some(quiz => quiz.id === parseInt(req.body.id));
 

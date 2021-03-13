@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (url, refresher = null) => {
+const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
-    console.log("out use Effect")
     useEffect(() => {
-        console.log("in use Effect")
         const abortCont = new AbortController();
 
         fetch(url, { signal: abortCont.signal })
@@ -29,7 +27,7 @@ const useFetch = (url, refresher = null) => {
             }
         })
         return () => abortCont.abort();
-    }, [url, refresher]);
+    }, [url]);
 
     return { data, isPending, error }
 }

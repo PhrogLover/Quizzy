@@ -20,25 +20,16 @@ const io = require("socket.io")(server, {
     }
 });
 
-const quizzes = require('./client/json/Quizzes.js');
-
-let interval;
+const quizzes = require('./client/json/Quizzes_save.json').quizzes;
 
 io.on('connection', (socket) => {
     console.log("New client connected");
-    if (interval) {
-        clearInterval(interval);
-    }
-    interval = setInterval(() => getApiAndEmit(socket), 1000);
     socket.on('disconnect', () => {
         console.log('Client disconnected');
-        clearInterval(interval);
+    });
+    socket.on('chat message', (msg) => {
+        io.emit('chat message', msg);
     });
 });
-
-const getApiAndEmit = socket => {
-    const response = new Date();
-    socket.emit("FromAPI", response);
-}
 
 module.exports = server;
