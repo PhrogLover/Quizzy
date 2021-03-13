@@ -4,6 +4,7 @@ import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../GetUniqueId";
 
 const GeneralChat = ( { chat, socket }) => {
+    console.log(chat);
     const [ text, setText ] = useState("");
 
     function sendHandler(e) {
@@ -16,14 +17,15 @@ const GeneralChat = ( { chat, socket }) => {
             text: text,
             creator: "AriG7"
         }
-        setText("");
         socket.emit('chat message', message);
+        setTimeout(() => {
+            setText("");
+        }, 36)
+        
     }
 
     const [gcOpen,setgcOpen] = useState(true);
     const closeGeneralChat = () => setgcOpen(false);
-
-    
 
     return ( <>
             {!gcOpen &&
@@ -48,7 +50,7 @@ const GeneralChat = ( { chat, socket }) => {
                         <div className="pinned-message-header">
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
-                        <div className="pinned-message-body" contenteditable="true">
+                        <div className="pinned-message-body">
                             insert pin mesage here
                         </div>
                     </div>
