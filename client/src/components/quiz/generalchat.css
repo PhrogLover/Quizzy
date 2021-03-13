@@ -1,21 +1,72 @@
 .general-chat {
     position: relative;
-    width: 100%;
+    width: 300px;
     height: 100%;
     max-height:var(--section-height) ;
     color: white;
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: var(--bg-colour);
+    margin-right: 10px;
+}
+.chat-toolbar-container{
+    height: 5%;
+    padding: 3px;
+    min-height: fit-content;
+    width: 100%;
+    background-color: var(--colour-black2);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    font-size: 20px;
+}
+.chat-toolbar-buttons{
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    background-color: var(--colour-black2)
+}
+.chat-toolbar-buttons:hover{
+    filter: brightness(150%);
+    cursor: pointer;
+}
+.collapse-chat-button{
+    position: absolute;
+    left: 0;
+    margin-left: 5px;
+}
+.open-chat-button{
+    position: absolute;
+    transform: translateX(-120%);
+    margin-top: 3px;
+    width: 30px;
+    height: 30px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: var(--border-radius);
+    border-top-left-radius: var(--border-radius);
 
+    background-color: var(--colour-black2);
+    opacity: 100%;
+    color: var(--colour-white);
+}
+.open-chat-button:hover{
+    filter: brightness(150%);
+    cursor: pointer;
 }
 .pinned-message-container{
     position: absolute;
     width: 100%;
-    padding: 10px;
-    height: 15%;
+    padding: 5px;
+    min-height: 15%;
     z-index: 10;
-
+    max-height: 40%;
 }
 .pinned-message-box{
     padding: 5px;
@@ -44,35 +95,31 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+    padding: 5px;
+}
+.pinned-message-body:focus{
+    outline: var(--primary-colour) 1px solid;
 }
 .messages-container{
-    height: 89%;
-    max-height: 89%;
+    height: 85%;
+    max-height: 85%;
     overflow-x: hidden;
     overflow-y: scroll;
     width: 100%;
-    padding: 15px;
+    padding: 0 15px;
     background-color: var(--bg-colour);
     display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
 }
-.chat-toolbar-container{
-    height: 3%;
-    width: 100%;
-    background-color: var(--colour-black2);
-}
 .message-box-container{
     width: 100%;
     min-height: fit-content;
-    height: 8%;
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: purple 1px solid; */
-    overflow: hidden;
-
 }
 
 .message-box-form{
@@ -120,4 +167,13 @@
 }
 .send-button:hover{
     filter: brightness(110%);
+}
+
+@media only screen and (max-device-width: 480px){
+    .general-chat {
+        margin-right: 0;
+    }
+    .open-chat-button{
+        transform: translateX(-100%);
+    }
 }

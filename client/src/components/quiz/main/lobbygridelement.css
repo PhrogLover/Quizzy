@@ -16,17 +16,17 @@
 .lobby-grid-index{
     position: absolute;
     top: 0;
-    font-size: 14px;
+    font-size: min(14px,2vw);
 }
 .lobby-grid-element:hover{
     border:2px solid var(--primary-colour);
     
 }
 .team-name{
-    font-size: 16px;
+    font-size: min(16px,2vw);
 }
 .players-in-lobby{
-    font-size: 16px;
+    font-size: min(16px,2vw);
 }
 .players-list{
     width:100%;
