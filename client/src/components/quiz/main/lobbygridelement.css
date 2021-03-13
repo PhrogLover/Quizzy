@@ -33,12 +33,11 @@
     height: 100%;
     position: absolute;
     background-color: var(--primary-colour);
+    order:2px solid var(--primary-colour);
     z-index: -1;
     opacity: 0;
     border-radius: var(--border-radius);
     transition: 300ms;
-
-    
     color: black;
 }
 .lobby-grid-element:hover > .players-list{

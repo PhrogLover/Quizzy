@@ -1,5 +1,5 @@
 .quiz-row{
-    background-color: var(--colour-grey);
+    background-color: var(--colour-black);
     border-radius: var(--border-radius);
     margin-top: 10px;
     width:100%;
@@ -9,8 +9,8 @@
     color: var(--font-colour);
 }
 .quiz-row:hover{
-    background-color: var(--colour-white);
-    color: var(--colour-black);
+    background-color: var(--colour-grey);
+    color: var(--font-colour);
     cursor:pointer;
     text-decoration: none;
     transform: scale(1.01) perspective(1px);

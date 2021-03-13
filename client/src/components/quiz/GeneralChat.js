@@ -56,8 +56,8 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
                         <div className="pinned-message-header">
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
-                        <div className="pinned-message-body" contenteditable="true">
-                            insert pin mesage here
+                        <div className="pinned-message-body" contentEditable="true">
+                            
                         </div>
                     </div>
                 </div>
