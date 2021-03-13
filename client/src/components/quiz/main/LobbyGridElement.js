@@ -5,7 +5,8 @@ const LobbyGridElement = ({ quiz, index }) => {
 index += 1;
     return ( 
             <Link to={`/mainLobby/teamLobby/${index}` } style={{ textDecoration: 'none' }}>
-                <div className="lobby-grid-element">            
+                <div className="lobby-grid-element">
+                    <div className="lobby-grid-index">{ index }</div>            
                     <div className="team-name">Team lobby{ index }</div>
                     <div className="players-in-lobby">0/{quiz.numberOfPlayers}</div>
                     <div className="players-list"> 

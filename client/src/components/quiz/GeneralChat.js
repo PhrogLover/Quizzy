@@ -46,6 +46,9 @@ const GeneralChat = ( { chat, id, generalChatRefresh }) => {
                     <GeneralChatElement key={ index } message = { message } />
                 ))}
             </div>
+            <div className="chat-toolbar-container">
+                
+            </div>
             <div className="message-box-container">
                 <form onSubmit={ sendHandler }>
                     <div className="message-box-form">

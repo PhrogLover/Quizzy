@@ -46,7 +46,7 @@
 }
 .lobby-grid{
     display: grid;
-    width:100%;
+    width:90%;
     height: 100%;
     /* border: white 1px solid; */
     column-gap: 20px;

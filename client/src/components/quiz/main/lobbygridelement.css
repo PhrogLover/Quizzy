@@ -1,11 +1,3 @@
-.grid-item{
-    width:100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px red solid;
-}
 
 .lobby-grid-element{
     position: relative;
@@ -20,8 +12,11 @@
     color: var(--font-colour);
     border:2px solid transparent;
     transition: 100ms;
-
-
+}
+.lobby-grid-index{
+    position: absolute;
+    top: 0;
+    font-size: 14px;
 }
 .lobby-grid-element:hover{
     border:2px solid var(--primary-colour);

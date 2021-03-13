@@ -5,11 +5,13 @@
     align-items: flex-start;
     flex-direction: row;
     width: 100%;
+    padding: 5px 0;
 }
 .text-body{
     position: relative;
     width: 100%;
     text-align: left;
+    font-size: 15px;
 }
 .by{
     width: fit-content;
