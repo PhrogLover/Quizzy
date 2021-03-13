@@ -64,10 +64,6 @@ const SlideEditor = ( { onChangeHandler, slides, setSlides, quiz } ) => {
     }
 
     useEffect(() => {
-        console.log(currentSlide);
-    }, [currentSlide]);
-
-    useEffect(() => {
         if (index.question !== -1) {
             setCurrentSlide(slides[index.round][index.question]);
         }

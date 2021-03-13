@@ -1,7 +1,6 @@
 import "./generalchatelement.css";
 
-const GeneralChatElement = (message) => {
-    message = message.message;
+const GeneralChatElement = ({ message }) => {
     return ( 
         <div className="general-chat-element">
             <div className="text-body">

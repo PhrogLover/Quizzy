@@ -5,8 +5,10 @@ const useFetch = (url, refresher = null) => {
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
+    console.log("out use Effect")
     useEffect(() => {
-            const abortCont = new AbortController();
+        console.log("in use Effect")
+        const abortCont = new AbortController();
 
         fetch(url, { signal: abortCont.signal })
         .then(res => {
