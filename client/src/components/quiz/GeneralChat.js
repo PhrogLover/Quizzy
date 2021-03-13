@@ -62,8 +62,7 @@ const GeneralChat = ( { chat, socket }) => {
                     <form onSubmit={ sendHandler }>
                         <div className="message-box-form">
                             <input className="message-input" placeholder="Send a message..." type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
-                            { !isPending && <button className="send-button">Send <i className="fas fa-paper-plane"></i></button> }
-                            { isPending && <button className="send-button" disabled>Sending...</button> }
+                            <button className="send-button">Send <i className="fas fa-paper-plane"></i></button>
                         </div>
                     </form>
                 </div>
