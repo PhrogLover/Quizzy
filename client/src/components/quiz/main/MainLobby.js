@@ -50,37 +50,31 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                         </div>
                     </div>
                     <div className="lobby-body">
-                    {!slideOpen && 
-                        <div className="open-slides-button" onClick={() => setSlideOpen(true)}>
-                            <i className="fas fa-desktop"/>
-                        </div>
-                    }
-                    { slideOpen &&                        
-                        <div className="slide-page">
-                            <div className="open-slides-button" onClick={() => setSlideOpen(false)}>
-                                <i className="fas fa-table"/>
+                        {!slideOpen && 
+                            <div className="open-slides-button" onClick={() => setSlideOpen(true)}>
+                                <i className="fas fa-desktop"/>
                             </div>
-                            <div className="slide-window">
-                                <SlideScript quiz={ quiz }/>
+                        }
+                        { slideOpen &&                        
+                            <div className="slide-page">
+                                <div className="open-slides-button" onClick={() => setSlideOpen(false)}>
+                                    <i className="fas fa-table"/>
+                                </div>
+                                <div className="slide-window">
+                                    <SlideScript quiz={ quiz }/>
+                                </div>
                             </div>
+                        }
+                        <div className="lobby-grid" style = {makeGrid()}>
+                            { lobbyCount.map((index) => (
+                                <LobbyGridElement key={index} quiz={ quiz } index={ index } />
+                            ))}
                         </div>
-                    }
-                    <div className="lobby-grid" style = {makeGrid()}>
-                        { lobbyCount.map((index) => (
-                            <LobbyGridElement key={index} quiz={ quiz } index={ index } />
-                        ))}
                     </div>
                 </div>
-                    </div>
-                    <div>
-                        <div className="main-chat">
+                    <div className="main-chat">
                         <GeneralChat chat={ chat } socket = { socket } />
                     </div>
-                    {/* <div className="slide-window">
-                    <SlideScript quiz={ quiz }/>
-                </div> */}
-            </div>
-            </div>
             </div>
      );
 }
