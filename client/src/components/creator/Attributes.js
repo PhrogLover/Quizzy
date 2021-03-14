@@ -3,11 +3,10 @@ import "./attributes.css";
 import HelpIcon from "../basic/HelpIcon";
 import React from "react";
 
-import GetUniqueId from "../../GetUniqueId";
 import DateTimePicker from 'react-datetime-picker';
 // import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
 
-const Attributes = ({ onChangeHandler, quiz }) => {
+const Attributes = ({ onChangeHandler, quiz, GetUniqueId }) => {
 
     function CopyClipboard(text) {
         navigator.clipboard.writeText(text);

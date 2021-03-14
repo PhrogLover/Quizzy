@@ -1,8 +1,8 @@
 import "./generalchat.css";
 import { useEffect, useState } from "react";
 import GeneralChatElement from "./GeneralChatElement";
-import GetUniqueId from "../../GetUniqueId";
-import { CardGiftcardTwoTone } from "@material-ui/icons";
+import GetUniqueId from "../../scripts/GetUniqueId";
+import generateColour from "../../scripts/generateColour";
 
 const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
     if (chatSize < 50) {
@@ -24,7 +24,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
             id: GetUniqueId(),
             text: text,
             creator: "AriG7",
-            colour: "blue",
+            colour: generateColour(),
             pinned: pinCheck
         }
         console.log(message)
@@ -34,6 +34,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
             if (chat.filter(message => (message.pinned === true))[0]){
                 setPin(chat.filter(message => (message.pinned === true))[0].text);
                 setChat(chat.filter(message => (message.pinned !== true)));
+                setPinCheck(false);
             }
         }, 36)
     }
@@ -80,7 +81,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                             <input className="message-input" placeholder="Send a message..." type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
                             <button className="send-button">Send <i className="fas fa-paper-plane"></i></button><br/>
                             <label htmlFor="gc-pin">pin this message</label>
-                            <input name="gc-pin" type="checkbox" value={pinCheck} onChange={(check) => (setPinCheck(check.target.checked))} />
+                            <input name="gc-pin" type="checkbox" checked={pinCheck} onChange={(check) => (setPinCheck(check.target.checked))} />
                         </div>
                     </form>
                 </div>

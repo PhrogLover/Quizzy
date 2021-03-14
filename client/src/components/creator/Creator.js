@@ -5,7 +5,7 @@ import React from "react";
 import "./creator.css";
 import Attributes from "./Attributes";
 import SlideEditor from "./SlideEditor";
-import GetUniqueId from "../../GetUniqueId";
+import GetUniqueId from "../../scripts/GetUniqueId";
 // import { OverlayTrigger , Tooltip } from "react-bootstrap";
 import HelpIcon from "../basic/HelpIcon";
 import { Button } from "../basic/Button";
@@ -224,7 +224,7 @@ const Creator = () => {
                     </div>
                     <div className="main-form">
                         <div className="hide-me" id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
-                        <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
+                        <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } GetUniqueId = { GetUniqueId } />
                     
                         <SlideEditor onChangeHandler = {onChangeHandler} slides = { slides } setSlides = { setSlides } quiz={ quiz }/>
                         
