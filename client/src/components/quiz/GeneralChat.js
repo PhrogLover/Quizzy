@@ -70,9 +70,12 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                         <div className="pinned-message-header">
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
-                        <div className="pinned-message-body">
+                        { !pinMessageOpen &&
+                        <div className="pinned-message-body" contentEditable="true">
                             { pin }
+                        
                         </div>
+                        }
                     </div>
                 </div>
                 <div className="messages-scroll">

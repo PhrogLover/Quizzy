@@ -49,15 +49,28 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                             if Player: respect other players, don't take away the fun fron the experience by cheating, have fun. At the bottom you can choose your blah blah...
                         </div>
                     </div>
-                    <div className="lobby-body">                   
-                        <div className="lobby-grid" style = {makeGrid()}>
-                            { lobbyCount.map((index) => (
-                                <LobbyGridElement key={index} quiz={ quiz } index={ index } chatSize = { quiz.numberOfTeams * quiz.numberOfPlayers} />
-                            ))}
+                    <div className="lobby-body">
+                    {!slideOpen && 
+                        <div className="open-slides-button" onClick={() => setSlideOpen(true)}>
+                            <i className="fas fa-desktop"/>
                         </div>
-                    </div> 
-                    <div className="main-chat">
-                        <GeneralChat chat={ chat } setChat = { setChat } socket = { socket } />
+                    }
+                    { slideOpen &&                        
+                        <div className="slide-page">
+                            <div className="open-slides-button" onClick={() => setSlideOpen(false)}>
+                                <i className="fas fa-table"/>
+                            </div>
+                            <div className="slide-window">
+                                <SlideScript quiz={ quiz }/>
+                            </div>
+                        </div>
+                    }
+                    <div className="lobby-grid" style = {makeGrid()}>
+                        { lobbyCount.map((index) => (
+                            <LobbyGridElement key={index} quiz={ quiz } index={ index } />
+                        ))}
+                    </div>
+                </div>
                     </div>
                     <div>
                         <div className="main-chat">
