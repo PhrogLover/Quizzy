@@ -39,7 +39,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
     }
 
     return (
-        <>
+
             <div className="main-lobby">
                 <div className="main-body">
                     <div className="main-header">
@@ -49,29 +49,6 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                             if Player: respect other players, don't take away the fun fron the experience by cheating, have fun. At the bottom you can choose your blah blah...
                         </div>
                     </div>
-<<<<<<< HEAD
-                    <div className="lobby-body">
-                    {!slideOpen && 
-                        <div className="open-slides-button" onClick={() => setSlideOpen(true)}>
-                            <i className="fas fa-desktop"/>
-                        </div>
-                    }
-                    { slideOpen &&                        
-                        <div className="slide-page">
-                            <div className="open-slides-button" onClick={() => setSlideOpen(false)}>
-                                <i className="fas fa-table"/>
-                            </div>
-                            <div className="slide-window">
-                                <SlideScript quiz={ quiz }/>
-                            </div>
-                        </div>
-                    }
-                    <div className="lobby-grid" style = {makeGrid()}>
-                        { lobbyCount.map((index) => (
-                            <LobbyGridElement key={index} quiz={ quiz } index={ index } />
-                        ))}
-                    </div>
-=======
                     <div className="lobby-body">                   
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyCount.map((index) => (
@@ -79,23 +56,19 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                             ))}
                         </div>
                     </div> 
-                </div>
                     <div className="main-chat">
-                    <GeneralChat chat={ chat } setChat = { setChat } socket = { socket } />
-                </div>
->>>>>>> 3670593fdfef2357411d9bb1bd4e0afa160a46ab
-                </div>
+                        <GeneralChat chat={ chat } setChat = { setChat } socket = { socket } />
                     </div>
+                    <div>
                         <div className="main-chat">
                         <GeneralChat chat={ chat } socket = { socket } />
                     </div>
-                
+                    {/* <div className="slide-window">
+                    <SlideScript quiz={ quiz }/>
+                </div> */}
             </div>
-            
-            {/* <div className="slide-window">
-                <SlideScript quiz={ quiz }/>
-            </div> */}
-        </>
+            </div>
+            </div>
      );
 }
  
