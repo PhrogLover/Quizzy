@@ -5,7 +5,7 @@ import React from "react";
 import "./creator.css";
 import Attributes from "./Attributes";
 import SlideEditor from "./SlideEditor";
-import GetUniqueId from "../../GetUniqueId";
+import GetUniqueId from "../../scripts/GetUniqueId";
 // import { OverlayTrigger , Tooltip } from "react-bootstrap";
 import HelpIcon from "../basic/HelpIcon";
 import { Button } from "../basic/Button";
@@ -223,7 +223,7 @@ const Creator = () => {
                         <input type="text" name="seasonal-setup-id" className="uniqueid-input"/>
                     </div>
                     <div className="main-form">
-                        <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
+                        <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } GetUniqueId = { GetUniqueId }/>
                     
                         <SlideEditor onChangeHandler = {onChangeHandler} slides = { slides } setSlides = { setSlides } quiz={ quiz }/>
                         

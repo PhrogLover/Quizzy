@@ -1,13 +1,21 @@
 import "./generalchat.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GeneralChatElement from "./GeneralChatElement";
-import GetUniqueId from "../../GetUniqueId";
+import GetUniqueId from "../../scripts/GetUniqueId";
+import generateColour from "../../scripts/generateColour";
 
-const GeneralChat = ( { chat, socket }) => {
-    console.log(chat);
+const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
+    if (chatSize < 50) {
+        chatSize = 50;
+    }
     const [ text, setText ] = useState("");
+    const [ pin, setPin ] = useState("Insert a Pin Here");
+    const [ pinCheck, setPinCheck ] = useState(false);
 
     function sendHandler(e) {
+        if (chat.length > chatSize) {
+            chat.splice(0,1);
+        }
         e.preventDefault();
         if (text === "") {
             return;
@@ -15,13 +23,20 @@ const GeneralChat = ( { chat, socket }) => {
         const message = {
             id: GetUniqueId(),
             text: text,
-            creator: "AriG7"
+            creator: "AriG7",
+            colour: generateColour(),
+            pinned: pinCheck
         }
+        console.log(message)
         socket.emit('chat message', message);
         setTimeout(() => {
             setText("");
+            if (chat.filter(message => (message.pinned === true))[0]){
+                setPin(chat.filter(message => (message.pinned === true))[0].text);
+                setChat(chat.filter(message => (message.pinned !== true)));
+                setPinCheck(false);
+            }
         }, 36)
-        
     }
 
     const [gcOpen,setgcOpen] = useState(true);
@@ -55,9 +70,15 @@ const GeneralChat = ( { chat, socket }) => {
                         <div className="pinned-message-header">
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
+<<<<<<< HEAD
                         { pinMessageOpen &&
                         <div className="pinned-message-body" contentEditable="true"></div>
                         }
+=======
+                        <div className="pinned-message-body">
+                            { pin }
+                        </div>
+>>>>>>> 3670593fdfef2357411d9bb1bd4e0afa160a46ab
                     </div>
                 </div>
                 <div className="messages-scroll">
@@ -71,7 +92,9 @@ const GeneralChat = ( { chat, socket }) => {
                     <form onSubmit={ sendHandler }>
                         <div className="message-box-form">
                             <input className="message-input" placeholder="Send a message..." type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
-                            <button className="send-button">Send <i className="fas fa-paper-plane"></i></button>
+                            <button className="send-button">Send <i className="fas fa-paper-plane"></i></button><br/>
+                            <label htmlFor="gc-pin">pin this message</label>
+                            <input name="gc-pin" type="checkbox" checked={pinCheck} onChange={(check) => (setPinCheck(check.target.checked))} />
                         </div>
                     </form>
                 </div>
