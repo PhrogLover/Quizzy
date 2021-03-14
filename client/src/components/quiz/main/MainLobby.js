@@ -49,7 +49,6 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                             if Player: respect other players, don't take away the fun fron the experience by cheating, have fun. At the bottom you can choose your blah blah...
                         </div>
                     </div>
-<<<<<<< HEAD
                     <div className="lobby-body">
                     {!slideOpen && 
                         <div className="open-slides-button" onClick={() => setSlideOpen(true)}>
@@ -71,19 +70,6 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                             <LobbyGridElement key={index} quiz={ quiz } index={ index } />
                         ))}
                     </div>
-=======
-                    <div className="lobby-body">                   
-                        <div className="lobby-grid" style = {makeGrid()}>
-                            { lobbyCount.map((index) => (
-                                <LobbyGridElement key={index} quiz={ quiz } index={ index } chatSize = { quiz.numberOfTeams * quiz.numberOfPlayers} />
-                            ))}
-                        </div>
-                    </div> 
-                </div>
-                    <div className="main-chat">
-                    <GeneralChat chat={ chat } setChat = { setChat } socket = { socket } />
-                </div>
->>>>>>> 3670593fdfef2357411d9bb1bd4e0afa160a46ab
                 </div>
                     </div>
                         <div className="main-chat">
