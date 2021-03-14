@@ -68,7 +68,7 @@ const GeneralChat = ( { chat, socket, chatSize }) => {
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
                         <div className="pinned-message-body">
-                            { pin }
+                            
                         </div>
                     </div>
                 </div>

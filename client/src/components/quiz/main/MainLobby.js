@@ -16,8 +16,9 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
         }        
     }, [nextMessage]);
 
+    let randomTeamNumber = Math.floor(Math.random()*23 +2);
     let lobbyCount = [];
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < randomTeamNumber; i++) {
         lobbyCount.push(i);
     }
     // for (let i = 0; i < 7; i++) {
