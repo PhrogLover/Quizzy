@@ -56,7 +56,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                     </div> 
                 </div>
                     <div className="main-chat">
-                    <GeneralChat chat={ chat } socket = { socket } />
+                    <GeneralChat chat={ chat } setChat = { setChat } socket = { socket } />
                 </div>
                 </div>
                 

@@ -4,17 +4,13 @@ import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../GetUniqueId";
 import { CardGiftcardTwoTone } from "@material-ui/icons";
 
-const GeneralChat = ( { chat, socket, chatSize }) => {
+const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
     if (chatSize < 50) {
         chatSize = 50;
     }
     const [ text, setText ] = useState("");
     const [ pin, setPin ] = useState("Insert a Pin Here");
     const [ pinCheck, setPinCheck ] = useState(false);
-
-    useEffect (() => {
-        console.log(pin)
-    }, [pin]);
 
     function sendHandler(e) {
         if (chat.length > chatSize) {
@@ -31,14 +27,15 @@ const GeneralChat = ( { chat, socket, chatSize }) => {
             colour: "blue",
             pinned: pinCheck
         }
+        console.log(message)
         socket.emit('chat message', message);
         setTimeout(() => {
             setText("");
+            if (chat.filter(message => (message.pinned === true))[0]){
+                setPin(chat.filter(message => (message.pinned === true))[0].text);
+                setChat(chat.filter(message => (message.pinned !== true)));
+            }
         }, 36)
-        if (chat.filter(message => (message.pinned))){
-            console.log(chat.filter(message => (message.pinned)));
-            setPin(chat.filter(message => (message.pinned).text));
-        }
     }
 
     const [gcOpen,setgcOpen] = useState(true);
@@ -68,7 +65,7 @@ const GeneralChat = ( { chat, socket, chatSize }) => {
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
                         <div className="pinned-message-body">
-                            
+                            { pin }
                         </div>
                     </div>
                 </div>
@@ -81,8 +78,9 @@ const GeneralChat = ( { chat, socket, chatSize }) => {
                     <form onSubmit={ sendHandler }>
                         <div className="message-box-form">
                             <input className="message-input" placeholder="Send a message..." type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
-                            <button className="send-button">Send <i className="fas fa-paper-plane"></i></button>
-                            <input type="checkbox" value={pinCheck} onChange={(check) => (setPinCheck(check.target.value))} />
+                            <button className="send-button">Send <i className="fas fa-paper-plane"></i></button><br/>
+                            <label htmlFor="gc-pin">pin this message</label>
+                            <input name="gc-pin" type="checkbox" value={pinCheck} onChange={(check) => (setPinCheck(check.target.checked))} />
                         </div>
                     </form>
                 </div>
