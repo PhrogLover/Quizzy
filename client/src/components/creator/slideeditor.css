@@ -1,7 +1,7 @@
 .slide-editor{
     width:100%;
-    border-top: 20px solid var(--colour-black);
-    border-bottom: 20px solid var(--colour-black);
+    border-top: 100px solid var(--colour-black);
+    border-bottom: 50px solid var(--colour-black);
     /* border: 1px red solid; */
     position: relative;
 }

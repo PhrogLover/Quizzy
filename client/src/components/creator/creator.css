@@ -6,17 +6,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 95%;
+    width: 90%;
     max-width:95%;
     margin: auto;
-    /* border: 1px red solid; */
+    border: 1px red solid;
 }
 .creator-line-break{
     height: 0px;
     border: 1px var(--colour-white) solid;
     width: 80%;
     margin: 5px 0;
-  }
+}
 .creator h3 {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -71,11 +71,12 @@
     position: relative;
     width: 100%;
     max-width: 100%;
-    background-color: var(--colour-black2);
+    background-color: var(--colour-black);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: fit-content;
     /* border: 1px yellow solid; */
 }
 .bottom-buttons-container{

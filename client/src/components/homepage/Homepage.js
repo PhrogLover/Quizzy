@@ -3,9 +3,10 @@ import './homepage.css';
 import Quizholder from "./Quizholder";
 import { Button } from "../basic/Button";
 import HelpIcon from "../basic/HelpIcon";
+import Footer from "../basic/Footer";
 
 const Homepage = () => {
-    return ( 
+    return ( <>
         <div className="homepage">
             <div className="create-section">
                 <div className="left-create">
@@ -82,6 +83,10 @@ const Homepage = () => {
                 </Link>
             </div>
         </div>
+        <footer>
+            <Footer />
+        </footer>
+        </>
      );
 }
  

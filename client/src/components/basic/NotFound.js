@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { Button } from "../basic/Button"
+import { Button } from "../basic/Button";
+import Footer from "../basic/Footer";
 
 import "./notfound.css";
 
 const NotFound = () => {
-    return ( 
+    return ( <>
         <div className="not-found">
             <h1>404</h1>
             <h2>Error</h2>
@@ -17,6 +18,10 @@ const NotFound = () => {
                 </Button>
             </Link>
         </div>
+        <footer>
+            <Footer/>
+        </footer>
+        </>
      );
 }
  

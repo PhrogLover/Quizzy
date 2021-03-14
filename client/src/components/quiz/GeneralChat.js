@@ -27,10 +27,12 @@ const GeneralChat = ( { chat, socket }) => {
     const [gcOpen,setgcOpen] = useState(true);
     const closeGeneralChat = () => setgcOpen(false);
 
+    const [pinMessageOpen,setPmOpen] = useState(false);
+
     return ( <>
             {!gcOpen &&
                 <div className="open-chat-button" onClick={() => setgcOpen(true)} >
-                    <i className="fas fa-chevron-left"/>
+                    <i className="fas fa-comment"/>
                 </div>
             }
             {gcOpen && <div className= "general-chat">
@@ -45,25 +47,25 @@ const GeneralChat = ( { chat, socket }) => {
                         <i className="fas fa-ellipsis-h"/>
                     </div>
                 </div>
-                <div className="pinned-message-container">
+                <div className="pinned-message-container">                    
                     <div className="pinned-message-box">
+                        {!pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-compress-alt"></i></div>}
+                        {pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-expand-alt"></i></div>}
+
                         <div className="pinned-message-header">
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
-<<<<<<< HEAD
-                        <div className="pinned-message-body" contentEditable="true">
-                            
-=======
-                        <div className="pinned-message-body">
-                            insert pin mesage here
->>>>>>> 088dd149da0b46e291115d7149b76d52184d4823
-                        </div>
+                        { pinMessageOpen &&
+                        <div className="pinned-message-body" contentEditable="true"></div>
+                        }
                     </div>
                 </div>
-                <div className="messages-container">
-                    { chat.map((message) => (
-                        <GeneralChatElement key={ message.id } message = { message } />
-                    ))}
+                <div className="messages-scroll">
+                    <div className="messages-container">                        
+                        { chat.map((message) => (
+                            <GeneralChatElement key={ message.id } message = { message } />
+                        ))}                    
+                    </div>
                 </div>
                 <div className="message-box-container">
                     <form onSubmit={ sendHandler }>

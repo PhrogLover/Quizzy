@@ -40,7 +40,7 @@ const SlideView = ( { quiz, slide, error = "", showAns = false, timer, slideWidt
         minFontSize: 3,
     });
 
-    //const slideWidthes = ['width--20per','width--50per','width--100per','width--200','width--400','width--800'];
+    //const slideWidthes = ['width--20per','width--50per','width--80per','width--100per','width--200','width--400','width--800'];
     const [ slideSize, setSlideSize ] = useState(slideWidthPass);    
 
     return (

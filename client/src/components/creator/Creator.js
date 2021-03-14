@@ -211,7 +211,7 @@ const Creator = () => {
             <div className="creator-heading">
                 <h1>Welcome to the Quiz Creator!</h1>
             </div>
-            <form className="creator" onSubmit={ submitHandler }>
+            <form className="creator-form" onSubmit={ submitHandler }>
             
                     <div className="input-uniqueid-container">
                         <HelpIcon ref={refUniqueID}>
@@ -223,7 +223,6 @@ const Creator = () => {
                         <input type="text" name="seasonal-setup-id" className="uniqueid-input"/>
                     </div>
                     <div className="main-form">
-                        <div className="hide-me" id="show">quiz: Title: <span>{ quiz.title }</span> Category: <span>{ quiz.category }</span> Domain: <span>{ quiz.domain }</span> Family: <span>{ quiz.family }</span> Questions: <span>{ quiz.numberOfQuestions }</span> Type: <span>{ quiz.type }</span> Teams: <span>{ quiz.numberOfTeams }</span> Players: <span>{ quiz.numberOfPlayers }</span> Rounds: <span>{ quiz.numberOfRounds }</span> </div>
                         <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } />
                     
                         <SlideEditor onChangeHandler = {onChangeHandler} slides = { slides } setSlides = { setSlides } quiz={ quiz }/>

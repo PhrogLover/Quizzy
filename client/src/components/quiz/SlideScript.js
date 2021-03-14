@@ -201,11 +201,11 @@ const SlideScript = ({ quiz }) => {
     return ( 
         <>
             { isPending && <>
-                <SlideView slide={ emptySlide } slideWidthPass = "width--50per"/>
+                <SlideView slide={ emptySlide } slideWidthPass = "width--100per"/>
                 <button disabled>Quiz in Progress...</button>
             </> }
             { !isPending && <>
-                <SlideView slide={ currentSlideScript } showAns = { showAns } timer = { timer } slideWidthPass = "width--50per" quiz = { quiz } /> 
+                <SlideView slide={ currentSlideScript } showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } /> 
                 <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript}>{ scriptButtonValue }</button>
             </> }
         </>

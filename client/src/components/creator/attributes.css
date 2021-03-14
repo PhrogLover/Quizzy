@@ -1,10 +1,46 @@
 .attributes {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    /* border: solid 1px blue; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border: solid 1px red;
+  min-height: calc( var(--section-height) - 200px);
+  position: relative;
+  border-radius: var(--border-radius);
+  background-color: var(--colour-black2);
+}
+.attributes-left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: solid 1px blue;
+  min-height: calc( var(--section-height) - 200px);
+
+}
+.attributes-left-top {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* border: solid 1px blue; */
+  height: 100%;
+}
+.attributes-left-bottom {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* border: solid 1px blue; */
+  height: 100%;
+  padding: 5px;
 }
 .attributes label {
     margin-bottom: 30px;
@@ -12,22 +48,28 @@
 .quiz-title-container{
   padding: 10px;
   width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
 }
 .quiz-title-label{
-  margin-right: 10px;
+  margin: 0 10px;
   height: 100%;
-  font-size: 20px;
+  width: 180px;
+  font-size: 16px;
   font-weight: bold;
+  text-align: right;
 }
 .quiz-title-container input{
   border: 3px var(--colour-white) solid;
   background-color: var(--colour-white);
-  min-width:300px;
+  min-width:200px;
   width: 50%;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: var(--border-radius);
   transition: 200ms;
-  text-align: center;
+  text-align: left;
 }
 .quiz-title-container input:hover{
   border: 3px var(--colour-grey) solid;
@@ -40,19 +82,28 @@
 .quiz-category-container{
   padding:10px;
   width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
 }
 .quiz-category-label{
-  margin-right: 10px;
+  margin: 0 10px;
   height: 100%;
+  width: 180px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+
 }
 .quiz-category-container input{
   border: 3px var(--colour-white) solid;
   background-color: var(--colour-white);
   min-width:200px;
-  width: 30%;
+  width: 50%;
   border-radius: var(--border-radius);
   transition: 200ms;
-  text-align: center
+  text-align: left;
 }
 .quiz-category-container input:hover{
   border: 3px var(--colour-grey) solid;
@@ -233,13 +284,13 @@ input:checked + span +.toggle-container .type-toggle:before {
 }
 
 
-/* Private / Seasonal ID Generator */
+/* ID Generator */
 
 .id-generator-container{
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
 }
 .id-generator-main{
   display: flex;
@@ -276,7 +327,7 @@ input:checked + span +.toggle-container .type-toggle:before {
   border: 1px solid var(--colour-white);
   padding: 5px 7px;
   border-radius: var(--border-radius);
-  margin: 0 10px;
+  margin: 5px;
   transition: 200ms;
 }
 .copy-clipboard-button:hover{
@@ -289,6 +340,7 @@ input:checked + span +.toggle-container .type-toggle:before {
   padding: 0 10px;
   border-radius: var(--border-radius);
   transition: 200ms;
+  margin: 5px;
 }
 .new-quizid-button i{
   margin-right: 10px;
@@ -306,22 +358,39 @@ input:checked + span +.toggle-container .type-toggle:before {
 }
 
 /* Seasonal Quiz Section */
+.cover-seasonal{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity:70%;
+  background-color: var(--colour-black2);
+  /* border: springgreen 1px solid; */
+  z-index: 5;
+}
 .quiz-family-title-container{
   padding:10px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row ;
 }
 .quiz-family-title-label{
-  margin-right: 10px;
+  margin: 0 10px;
   height: 100%;
+  width: 180px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
 }
 .quiz-family-title-container input{
   border: 3px var(--colour-white) solid;
   background-color: var(--colour-white);
   min-width:300px;
-  width: 40%;
+  width: 50%;
   border-radius: var(--border-radius);
   transition: 200ms;
-  text-align: center
+  text-align: left;
 }
 .quiz-family-title-container input:hover{
   border: 3px var(--colour-grey) solid;
@@ -333,7 +402,7 @@ input:checked + span +.toggle-container .type-toggle:before {
 
 
 
-/* bottom section of attributes */
+/* Right section of Attributes */
 
 .date-time-container{
   min-width: 300px;
@@ -349,11 +418,11 @@ input:checked + span +.toggle-container .type-toggle:before {
   border-radius: var(--border-radius);
   color: var(--colour-black);
 }
-.attributes-main-container{
-  margin-top: 10px;
+.attributes-right{
+  border: springgreen 1px solid;
   min-width: 300px;
-  width:60%;
-  height: 100%;
+  width:50%;
+  min-height: calc( var(--section-height) - 200px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -415,7 +484,46 @@ COPY TEXT CSS SHENANIGANS
     visibility: visible;
     opacity: 1;
   }*/
-@media screen and (max-width:650px){
+@media screen and (max-width:1000px){
+  .attributes{
+    flex-direction: column;
+  }
+  .attributes-left{
+    width: 100%;
+  }
+  
+}
+@media screen and (max-width:600px){
+  .attributes-row{
+    flex-direction: column;
+  }
+  .quiz-title-container{
+    flex-direction: column;
+  }
+  .quiz-title-container input{
+    text-align: center;
+  }
+  .quiz-category-container{
+    flex-direction: column;
+  }
+  .quiz-category-container input{
+    text-align: center;
+  }
+  .quiz-family-title-container{
+    flex-direction: column;
+  }
+  .quiz-family-title-container input{
+    text-align: center;
+  }
+  .quiz-title-label{
+    text-align: center;
+  }
+  .quiz-family-title-label{
+    text-align: center;
+  }
+  .attribute-with-help{
+    transform: translate(-120px,20px);
+  }
   .main-toggle-container{
     flex-direction: column;
   }
@@ -426,16 +534,9 @@ COPY TEXT CSS SHENANIGANS
     flex-direction: column;
   }
   .id-generator-buttons{
-    margin-top:10px;
+    margin-top:-5px;
   }
-  
-  
-}
-@media screen and (max-width:500px){
-  .attributes-row{
-    flex-direction: column;
-  }
-  .attribute-with-help{
-    transform: translate(-120px,20px);
+  .id-generator{
+    min-width: 200px;
   }
 }

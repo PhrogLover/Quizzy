@@ -5,7 +5,7 @@
     max-height:var(--section-height) ;
     color: white;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     background-color: var(--bg-colour);
     margin-right: 10px;
 }
@@ -61,24 +61,40 @@
     cursor: pointer;
 }
 .pinned-message-container{
-    position: absolute;
+    position: relative;
     width: 100%;
     padding: 5px;
-    min-height: 15%;
+    height: 5%;
     z-index: 10;
-    max-height: 40%;
 }
 .pinned-message-box{
+    position: absolute;
     padding: 5px;
     font-size: 15px;
     width: 100%;
-    height: 100%;
+    height: fit-content;
     background-color: var(--colour-black2);
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.collapse-pin-message{
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    background-color: var(--colour-black2);
+    border-radius: var(--border-radius);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.collapse-pin-message:hover{
+    filter: brightness(150%);
+    cursor: pointer;
 }
 .pinned-message-header{
     color: var(--primary-colour);
@@ -93,20 +109,25 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
+    max-height: 100%;
+    width: 280px;
     padding: 5px;
+    margin: 3px 0;
 }
 .pinned-message-body:focus{
     outline: var(--primary-colour) 1px solid;
 }
-.messages-container{
-    height: 85%;
-    max-height: 85%;
-    overflow-x: hidden;
+.messages-scroll{
+    max-height: 80%;
+    height: 80%;
     overflow-y: auto;
     width: 100%;
     padding: 0 15px;
+    background-color: var(--bg-colour);
+}
+.messages-container{
+    height: fit-content;
+    width: 100%;
     background-color: var(--bg-colour);
     display: flex;
     justify-content: flex-end;

@@ -38,6 +38,7 @@
     height: 100%;
 }
 .lobby-body{
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -55,8 +56,30 @@
     padding: 20px;
     /* grid-auto-rows: auto; */
     z-index: 1;
-    
 }
+.open-slides-button{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    color: var(--colour-white);
+}
+.slide-window{
+    width:100%;
+    height: 100%;
+    /* border: 1px white solid; */
+}
+.slide-page{
+    width:100%;
+    height: 100%;
+    position: absolute;
+    z-index: 5;
+    background-color: var(--colour-black2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 50px;
+}
+
 .main-chat{
     width: fit-content;
     height: 100%;
