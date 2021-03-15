@@ -96,6 +96,22 @@
     filter: brightness(150%);
     cursor: pointer;
 }
+.edit-pin-message{
+    position: absolute;
+    right: 35px;
+    top: 6px;
+    background-color: var(--colour-black2);
+    border-radius: var(--border-radius);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-pin-message:hover{
+    filter: brightness(150%);
+    cursor: pointer;
+}
 .pinned-message-header{
     color: var(--primary-colour);
     width: 100%;
