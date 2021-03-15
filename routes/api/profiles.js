@@ -3,7 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const profiles = require('../../client/json/Profile.json').profiles;
-console.log(profiles);
 
 router.get('/:id', (req, res) => {
     const found = profiles.some(profile => (profile.id === parseInt(req.params.id)));
