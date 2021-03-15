@@ -65,8 +65,8 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                 </div>
                 <div className="pinned-message-container">                    
                     <div className="pinned-message-box">
-                        {!pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-compress-alt"></i></div>}
-                        {pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-expand-alt"></i></div>}
+                        {pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-compress-alt"></i></div>}
+                        {!pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-expand-alt"></i></div>}
                         
                         {!pinEditable && <div className="edit-pin-message" onClick={ () => setPinEditable(!pinEditable)}> <i className="fas fa-edit"></i></div>}
                         {pinEditable && <div className="edit-pin-message" onClick={ () => setPinEditable(!pinEditable)}> <i className="fas fa-times"></i></div>}
@@ -75,7 +75,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                         <div className="pinned-message-header">
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
-                        { !pinMessageOpen &&
+                        { pinMessageOpen &&
                         <div className="pinned-message-body" contentEditable={pinEditable}>
                             { pin }
                         
@@ -95,8 +95,8 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                         <div className="message-box-form">
                             <input className="message-input" placeholder="Send a message..." type="text" value={text} onChange={(text) => (setText(text.target.value))}/>
                             <button className="send-button">Send <i className="fas fa-paper-plane"></i></button><br/>
-                            <label htmlFor="gc-pin">pin this message</label>
-                            <input name="gc-pin" type="checkbox" checked={pinCheck} onChange={(check) => (setPinCheck(check.target.checked))} />
+                            {/* <label htmlFor="gc-pin">pin this message</label> */}
+                            {/* <input name="gc-pin" type="checkbox" checked={pinCheck} onChange={(check) => (setPinCheck(check.target.checked))} /> */}
                         </div>
                     </form>
                 </div>
