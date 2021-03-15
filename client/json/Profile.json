@@ -1,5 +1,5 @@
 {
     "profiles": [
-        {"id": 1, "username": "AriG7", "donor": false, "status": "Veteran", "registerTime": "Tue Feb 02 2021 15:27:48 GMT+0200 (Eastern European Standard Time)", "created": 3, "won": 0, "answered": 16, "participated":3, "seasonal": 2, "partOfTeam": true, "teamName": "Not Kahoot", "rating": 4.3}
+        {"id": 1, "username": "AriG7", "donor": false, "status": "Veteran", "registerTime": "Tue Feb 02 2021 15:27:48 GMT+0200 (Eastern European Standard Time)", "created": 3, "hosted": 3, "won": 0, "answered": 16, "participated":3, "seasonal": 2, "partOfTeam": true, "teamName": "Not Kahoot", "rating": 4.3}
     ]
 }
