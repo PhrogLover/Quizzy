@@ -116,7 +116,7 @@ const Attributes = ({ onChangeHandler, quiz, GetUniqueId }) => {
                 <div className="creator-line-break"/>
                 <div className="attributes-right-bottom">   
                 <span id="time-picker">Select a Time When You Will Want to Start the Quiz:</span><br/>
-                { quiz.type === "seasonal" && <span>*For Seasonal Quizzes this Time Applies to Every Week After This Selected One Until the Number of Quizzes in the Season are Reached.</span>}
+                <p>*For Seasonal Quizzes this Time Applies to Every Week After This Selected One Until the Number of Quizzes in the Season are Reached.</p>
 
         
                     <div className="date-time-container">

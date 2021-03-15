@@ -82,13 +82,31 @@ const Navbar = () => {
             <ClickAwayListener onClickAway={closeDropdown}>
                 <div className="dropMenu" ref={dropdownRef}>
                     {/* <CSSTransistion in={activeMenu === 'main'} unmountOnExit timeout={500} classNames="menu-primary"> */}
-                        <div className="menu">  
+                        <div className="menu">
+                            <div className="profile-item">
+                                <div className="profile-picture-dropdown">
+                                    profile image
+                                    {/* insert profile image */}
+                                </div>
+                                <div className="profile-dropdown-body">
+                                    <div className="username-dropdown">
+                                        Insert Username
+                                    </div>
+                                    <div className="view-profile-link" onClick = {closeDropdown}>
+                                        <Link to="/profile/1">                                        
+                                            View Your Profile                                        
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="dropdown-break"/>
                             <DropdownItem icon ="fas fa-volume-up">
                                 <div className="item-text">
                                     Master Volume
                                 </div>
                                 <div className="dropdown-inputs">
-                                    <input type="range" min="1" max="100" className="slider" id="masterVolume"/>
+                                    <input type="range" min="1" max="10" className="slider" id="masterVolume"/>
                                 </div>
                             </DropdownItem>
                             <DropdownItem icon="fas fa-music">
@@ -96,7 +114,7 @@ const Navbar = () => {
                                     Music Volume
                                 </div>
                                 <div className="dropdown-inputs">
-                                    <input type="range" min="1" max="100" className="slider" id="musicVolume"/>
+                                    <input type="range" min="1" max="10" className="slider" id="musicVolume"/>
                                 </div>
                             </DropdownItem>
                             <DropdownItem icon ="fas fa-volume-up">
@@ -104,7 +122,7 @@ const Navbar = () => {
                                     SFX Volume
                                 </div>
                                 <div className="dropdown-inputs">
-                                    <input type="range" min="1" max="100" className="slider" id="sfxVolume"/>
+                                    <input type="range" min="1" max="10" className="slider" id="sfxVolume"/>
                                 </div>
                             </DropdownItem>
                             <DropdownItem icon = "fas fa-moon">
@@ -144,16 +162,6 @@ const Navbar = () => {
       );
     }
 
-    function NavItem(props){
-
-        return(
-            <div className="nav-item">
-                {props.children}
-            </div>
-
-        )
-    }
-
     return ( 
         <nav className="navbar">
             <div className="navbar-container" >
@@ -165,19 +173,8 @@ const Navbar = () => {
                         <div id="title" className="title">QuizWebApp</div>
                     </Link>
                 </div>
-                <div className="navbar-icons">
-                    <NavItem>
-                        <Link to="/profile/1">
-                            <div className="round-wrapper">                 
-                                Profile{/* Profile image */}
-                            </div>
-                        </Link>
-                    </NavItem>
-                    <NavItem>
-                        <div id="cog" className="cog">
-                            <i className="fas fa-cog" onClick= {() => setOpen(!open)}/>
-                        </div>
-                    </NavItem>
+                <div className="round-wrapper dropdown-button" onClick= {() => setOpen(!open)}>                 
+                    {/* profile image */}
                 </div>
             </div>
             {open && <Dropdown></Dropdown>}
