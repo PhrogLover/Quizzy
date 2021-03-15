@@ -167,7 +167,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-icons">
                     <NavItem>
-                        <Link to="/login">
+                        <Link to="/profile/1">
                             <div className="round-wrapper">                 
                                 Profile{/* Profile image */}
                             </div>

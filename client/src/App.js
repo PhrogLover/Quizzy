@@ -8,6 +8,7 @@ import Homepage from './components/homepage/Homepage';
 import NotFound from './components/basic/NotFound';
 import GetQuiz from './components/quiz/GetQuiz';
 import VideoRoomComponent from "./components/VideoRoomComponent";
+import GetProfile from './components/profile/GetProfile';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Homepage />
+          </Route>
+          <Route exact path="/profile/:id">
+            <GetProfile />
           </Route>
           <Route exact path="/mainLobby/teamLobby/:id">
             <VideoRoomComponent />

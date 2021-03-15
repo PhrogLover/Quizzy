@@ -11,6 +11,7 @@ app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
 
 app.use('/api/quizzes', require('./routes/api/quizzes'));
+app.use('/api/profiles', require('./routes/api/profiles'));
 
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
