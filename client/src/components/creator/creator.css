@@ -1,6 +1,7 @@
 
 .creator {
     color: white;
+    position: relative;
     font-family: var(--font);
     display: flex;
     flex-direction: column;
@@ -11,6 +12,14 @@
     margin: auto;
     border: 1px red solid;
 }
+
+.creator-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 .creator-line-break{
     height: 0px;
     border: 1px var(--colour-white) solid;
@@ -20,14 +29,6 @@
 .creator h3 {
     margin-top: 20px;
     margin-bottom: 20px;
-}
-
-.creator #show {
-    margin-bottom: 20px;
-    background-color: navajowhite;
-}
-.creator #show span {
-    background-color: olivedrab;
 }
 .creator-heading{
     padding: 10px;

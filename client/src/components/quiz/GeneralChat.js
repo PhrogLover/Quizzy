@@ -43,6 +43,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
     const closeGeneralChat = () => setgcOpen(false);
 
     const [pinMessageOpen,setPmOpen] = useState(false);
+    const [pinEditable,setPinEditable] = useState(false);
 
     return ( <>
             {!gcOpen &&
@@ -66,12 +67,16 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                     <div className="pinned-message-box">
                         {!pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-compress-alt"></i></div>}
                         {pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-expand-alt"></i></div>}
+                        
+                        {!pinEditable && <div className="edit-pin-message" onClick={ () => setPinEditable(!pinEditable)}> <i className="fas fa-edit"></i></div>}
+                        {pinEditable && <div className="edit-pin-message" onClick={ () => setPinEditable(!pinEditable)}> <i className="fas fa-times"></i></div>}
+
 
                         <div className="pinned-message-header">
                             <i className="fas fa-thumbtack"/> Pinned Message: 
                         </div>
                         { !pinMessageOpen &&
-                        <div className="pinned-message-body" contentEditable="true">
+                        <div className="pinned-message-body" contentEditable={pinEditable}>
                             { pin }
                         
                         </div>

@@ -20,7 +20,7 @@ const Attribute = ({ onChangeHandler, title, name, start = 1, finish, steps = 1,
     }, [selected]);
 
     return ( 
-        <div className="attribute-container">
+        <div className="attribute-element">
             <div className="select-label">
                 { title }:
             </div>
