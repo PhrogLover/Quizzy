@@ -3,7 +3,6 @@ import './homepage.css';
 import Quizholder from "./Quizholder";
 import { Button } from "../basic/Button";
 import HelpIcon from "../basic/HelpIcon";
-import Footer from "../basic/Footer";
 
 const Homepage = () => {
     return ( <>
@@ -83,9 +82,6 @@ const Homepage = () => {
                 </Link>
             </div>
         </div>
-        <footer>
-            <Footer />
-        </footer>
         </>
      );
 }

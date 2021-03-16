@@ -20,9 +20,11 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Homepage />
+            <Footer/>
           </Route>
           <Route exact path="/profile">
             <GetProfile />
+            <Footer/>
           </Route>
           <Route exact path="/mainLobby/teamLobby/:id">
             <VideoRoomComponent />
@@ -38,6 +40,7 @@ function App() {
           </Route>
           <Route path="*">
             <NotFound />
+            <Footer/>
           </Route>
         </Switch>
       </div>

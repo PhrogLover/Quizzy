@@ -8,9 +8,15 @@
     width: 100%;
     position: relative;
     padding: 10px 5%;
-    border: yellow 1px solid ;
+    /* border: yellow 1px solid ; */
 }
-
+.profile-main{
+    background-color: var(--bg-colour);
+    width: 100%;
+    position: relative;
+    padding: 10px 5%;
+    /* border: yellow 1px solid ; */
+}
 .cover-image{
     min-height: 100px;
     height:15vw;
@@ -31,7 +37,6 @@
     display:flex;
     justify-content: flex-start;
     align-items: center;
-    border-bottom: var(--colour-grey) solid 1px;
 }
 
 .profile-image{
@@ -74,6 +79,7 @@
 .profile-nav-bar{
     height: fit-content;
     background-color: var(--colour-black2);
+    border-top: 1px var(--colour-grey) solid;
     border-bottom-left-radius: var(--border-radius) ;
     border-bottom-right-radius: var(--border-radius) ;
     margin-bottom: 10px;
@@ -97,74 +103,25 @@
 .nav-item:hover{
     color: var(--primary-colour);
     border-color: var(--primary-colour);
+    text-decoration: none;
     cursor: pointer;
 }
-.profile-main{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 30% auto;
-    column-gap: 10px;
-}
-.profile-stats{
-    overflow: hidden;
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    border-radius: var(--border-radius);
-    background-color: var(--colour-black2);
+.profile-nav-bar a{
     color: var(--font-colour);
+    text-decoration: none;
 }
-.profile-stats-header{
-    padding: 10px 20px;
-    width: 100%;
-    height: fit-content;
-    font-weight: bold;
-    text-align: left;
-    font-size: min(20px,3vw) ;
-    background-color: var(--primary-colour);
-    color: var(--colour-black2);
-}
-.stats-item{
-    height: fit-content;
-    text-align: left;
-    padding: 10px;
-    font-size: min(15px,2vw) ;
-    border-top: grey 1px solid;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.stats-icon{
-    padding-right: 10px;
-}
-.stat{
-    font-weight: 500;
-    font-style: normal;
+.profile-nav-bar a:hover{
     color: var(--primary-colour);
+    border-color: var(--primary-colour);
+    text-decoration: none;
 }
-.profile-container{
-    min-height: 200px;
-    height: fit-content;
-    width: 100%;
-    padding: 10px 10px;
-    border: blue 1px solid;
-    border-radius: var(--border-radius);
-    background-color: var(--colour-black2);
-    color: var(--font-colour);
-}
+
 .donor-award{
     color: var(--primary-colour);
     position: absolute;
     right: 0;
     top: 0;
     transform: translateX(100%);
-}
-.test{
-    background: red;
 }
 
 @media screen and (max-width:400px){

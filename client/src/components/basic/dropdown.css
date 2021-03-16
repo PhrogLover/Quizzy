@@ -48,6 +48,12 @@
     float: left;
     width:100%;
     color: var(--font-colour);
+    border-radius: var(--border-radius);
+}
+.profile-item:hover{
+    background-color: #3A3B3F; 
+    text-decoration: none;
+    cursor: pointer;
 }
 .profile-picture-dropdown{
     height: 50px;
@@ -71,17 +77,9 @@
     display:flex;
     align-items: center;
     justify-content: flex-start;
-}
-.view-profile-link a{
-    color: var(--primary-colour);
     padding: 0 5px;
-    border-radius: 5px;
 }
-.view-profile-link a:hover{
-    color: var(--primary-colour);
-    background-color: #3A3B3F; 
-    text-decoration: none;
-}
+
 .username-dropdown{
     font-weight: 500;
     width: 100%;

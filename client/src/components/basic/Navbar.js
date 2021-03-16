@@ -83,23 +83,23 @@ const Navbar = () => {
                 <div className="dropMenu" ref={dropdownRef}>
                     {/* <CSSTransistion in={activeMenu === 'main'} unmountOnExit timeout={500} classNames="menu-primary"> */}
                         <div className="menu">
-                            <div className="profile-item">
-                                <div className="profile-picture-dropdown">
-                                    profile image
-                                    {/* insert profile image */}
-                                </div>
-                                <div className="profile-dropdown-body">
-                                    <div className="username-dropdown">
-                                        Insert Username
+                            <Link to="/profile/?id=1&tab=home">
+                                <div className="profile-item" onClick = {closeDropdown}>
+                                    <div className="profile-picture-dropdown">
+                                        profile image
+                                        {/* insert profile image */}
                                     </div>
-                                    <div className="view-profile-link" onClick = {closeDropdown}>
-                                        <Link to="/profile/?id=1&tab=home">                                        
+                                    <div className="profile-dropdown-body">
+                                        <div className="username-dropdown">
+                                            Insert Username
+                                        </div>
+                                        <div className="view-profile-link" >                                                                                
                                             View Your Profile                                        
-                                        </Link>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                </div>
+                            </Link>
                             <div className="dropdown-break"/>
                             <DropdownItem icon ="fas fa-volume-up">
                                 <div className="item-text">
