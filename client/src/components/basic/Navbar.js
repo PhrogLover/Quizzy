@@ -93,7 +93,7 @@ const Navbar = () => {
                                         Insert Username
                                     </div>
                                     <div className="view-profile-link" onClick = {closeDropdown}>
-                                        <Link to="/profile/1">                                        
+                                        <Link to="/profile/?id=1&tab=home">                                        
                                             View Your Profile                                        
                                         </Link>
                                     </div>

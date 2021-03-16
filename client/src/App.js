@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/">
             <Homepage />
           </Route>
-          <Route exact path="/profile/:id">
+          <Route exact path="/profile">
             <GetProfile />
           </Route>
           <Route exact path="/mainLobby/teamLobby/:id">
