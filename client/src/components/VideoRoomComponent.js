@@ -110,7 +110,7 @@ class VideoRoomComponent extends Component {
                     console.log('There was an error getting the token');
                     alert('There was an error getting the token');
                 }
-            }, 36);
+            }, 500);
         }
     }
 
