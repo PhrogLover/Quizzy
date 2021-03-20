@@ -7,7 +7,7 @@ import Creator from './components/creator/Creator';
 import Homepage from './components/homepage/Homepage';
 import NotFound from './components/basic/NotFound';
 import GetQuiz from './components/quiz/GetQuiz';
-import VideoRoomComponent from "./components/VideoRoomComponent";
+import GetVideoRoomComponent from "./components/GetVideoRoomComponent";
 import GetProfile from './components/profile/GetProfile';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             <Footer/>
           </Route>
           <Route exact path="/mainLobby/teamLobby/:id">
-            <VideoRoomComponent />
+            <GetVideoRoomComponent />
           </Route>
           <Route path="/mainLobby/:id">
             <GetQuiz />
