@@ -15,19 +15,21 @@ const ChatComponent = (props) => {
     const chatScroll = React.createRef();
 
     useEffect(() => {
-        console.log('this was set');
         props.user.getStreamManager().stream.session.on('signal:chat', (event) => {
             const data = JSON.parse(event.data);
             const newMessage = { connectionId: event.from.connectionId, nickname: data.nickname, message: data.message };
+            // const document = window.document;
+            // setTimeout(() => {
+            //     const userImg = document.getElementById('userImg-' + (messageList.length - 1));
+            //     const video = document.getElementById('video-' + data.streamId);
+            //     const avatar = userImg.getContext('2d');
+            //     avatar.drawImage(video, 200, 120, 285, 285, 0, 0, 60, 60);
+            //     props.messageReceived();
+            // }, 50);
             setMessageList(prevNames => [...prevNames, newMessage]);
             scrollToBottom();
         });
     }, [])
-
-    useEffect(() => {
-        console.log("hello?");
-        console.log(messageList);
-    }, [messageList])
 
     function handlePressKey(event) {
         if (event.key === 'Enter') {
@@ -40,7 +42,6 @@ const ChatComponent = (props) => {
             let newMessage = message.replace(/ +(?= )/g, '');
             if (newMessage !== '' && newMessage !== ' ') {
                 const data = { message: newMessage, nickname: props.user.getNickname(), streamId: props.user.getStreamManager().stream.streamId };
-                console.log('message sent woohoo');
                 props.user.getStreamManager().stream.session.signal({
                     data: JSON.stringify(data),
                     type: 'chat',
