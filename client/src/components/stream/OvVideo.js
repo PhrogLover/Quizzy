@@ -1,42 +1,40 @@
-import React, { Component } from 'react';
+import { useEffect } from 'react';
+import React from "react";
 import './StreamComponent.css';
 
-export default class OvVideoComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.videoRef = React.createRef();
-    }
+const OvVideoComponent = (props) => {
+    const videoRef = React.createRef();
 
-    componentDidMount() {
-        if (this.props && this.props.user.streamManager && !!this.videoRef) {
-            console.log('PROPS: ', this.props);
-            this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
+    useEffect(() => {
+        if (props && props.user.streamManager && !!videoRef) {
+            console.log('PROPS: ',  props);
+             props.user.getStreamManager().addVideoElement(videoRef.current);
         }
 
-        if (this.props && this.props.user.streamManager.session && this.props.user && !!this.videoRef) {
-            this.props.user.streamManager.session.on('signal:userChanged', (event) => {
+        if (props && props.user.streamManager.session && props.user && !!videoRef) {
+             props.user.streamManager.session.on('signal:userChanged', (event) => {
                 const data = JSON.parse(event.data);
                 if (data.isScreenShareActive !== undefined) {
-                    this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
+                    props.user.getStreamManager().addVideoElement(videoRef.current);
                 }
             });
         }
-    }
+    }, [])
 
-    componentDidUpdate(props) {
-        if (props && !!this.videoRef) {
-            this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
+    useEffect(() => {
+        if (props && !!videoRef) {
+            props.user.getStreamManager().addVideoElement(videoRef.current);
         }
-    }
+    }, [props])
 
-    render() {
-        return (
-            <video
+    return ( 
+        <video
                 autoPlay={true}
-                id={'video-' + this.props.user.getStreamManager().stream.streamId}
-                ref={this.videoRef}
-                muted={this.props.mutedSound}
-            />
-        );
-    }
+                id={'video-' + props.user.getStreamManager().stream.streamId}
+                ref={videoRef}
+                muted={props.mutedSound}
+        />
+     );
 }
+
+export default OvVideoComponent;
