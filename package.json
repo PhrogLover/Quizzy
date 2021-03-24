@@ -51,7 +51,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scale-text": "^1.2.2",
-    "react-scripts": "4.0.2",
+    "react-scripts": "^4.0.2",
     "socket.io": "^3.1.2",
     "socket.io-client": "^3.1.2",
     "supertest": "^6.1.3",
