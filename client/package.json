@@ -1,9 +1,4 @@
 {
-  "name": "quizwebapp",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Webapp for quizzes",
-  "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -14,66 +9,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PhrogLover/QuizWebApp.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/PhrogLover/QuizWebApp/issues"
-  },
-  "homepage": "https://github.com/PhrogLover/QuizWebApp#readme",
-  "devDependencies": {
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.7"
-  },
-  "dependencies": {
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.1",
-    "@types/react-transition-group": "^4.4.1",
-    "axios": "^0.21.1",
-    "body-parser": "^1.19.0",
-    "bootstrap": "^4.6.0",
-    "buffer": "^4.9.2",
-    "concurrently": "^6.0.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "firebase": "^8.3.1",
-    "jquery": "^3.5.1",
-    "openvidu-browser": "^2.17.0",
-    "openvidu-node-client": "^2.17.0",
-    "prettier": "^2.2.1",
-    "query-string": "^4.3.4",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.5.0",
-    "react-datetime-picker": "^3.1.0",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "react-scale-text": "^1.2.2",
-    "react-scripts": "^4.0.2",
-    "socket.io": "^3.1.2",
-    "socket.io-client": "^3.1.2",
-    "supertest": "^6.1.3",
-    "use-fit-text": "^2.4.0",
-    "use-state-with-callback": "^2.0.3",
-    "uuid": "^8.3.2"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   }
 }
