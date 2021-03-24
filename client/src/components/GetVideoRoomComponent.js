@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const GetVideoRoomComponent = () => {
-    //Hello world
     // const OPENVIDU_SERVER_URL = props.openviduServerUrl
     //     ? props.openviduServerUrl
     //     : 'https://' + window.location.hostname + ':4443';
