@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import './VideoRoomComponent.css';
 import { OpenVidu } from 'openvidu-browser';
 import StreamComponent from './stream/StreamComponent';
@@ -8,7 +9,6 @@ import ChatComponent from './chat/ChatComponent';
 import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
-import { CenterFocusWeakTwoTone } from '@material-ui/icons';
 
 const VideoRoomComponent = (props) => {
     //let localUser = ;
@@ -20,9 +20,9 @@ const VideoRoomComponent = (props) => {
 
     const [ mySessionId, setMySessionId ] = useState(sessionName);
     const [ myUserName, setMyUserName ] = useState(userName);
-    const [ session, setSession ] = useState();
-    const [ localUser, setLocalUser ] = useState(new UserModel());
-    const [ subscribers, setSubscribers ] = useState([]);
+    const [ session, setSession ] = useStateWithCallbackLazy();
+    const [ localUser, setLocalUser ] = useStateWithCallbackLazy(new UserModel());
+    const [ subscribers, setSubscribers ] = useStateWithCallbackLazy([]);
     const [ chatDisplay, setChatDisplay ] = useState('none');
     const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ messageReceived, setMessageReceived ] = useState(false);
@@ -73,9 +73,11 @@ const VideoRoomComponent = (props) => {
 
     function joinSession() {
         setOV(new OpenVidu());
-        setSession(OV.initSession());
-        subscribeToStreamCreated();
-        connectToSession();
+        setSession(OV.initSession(), (currentSession) => {
+            subscribeToStreamCreated();
+            connectToSession();
+        });
+        
         // this.setState(
         //     {
         //         session: this.OV.initSession(),
@@ -142,11 +144,13 @@ const VideoRoomComponent = (props) => {
         subscribeToStreamDestroyed();
         sendSignalUserChanged({ isScreenShareActive: localUser.isScreenShareActive() });
 
-        setLocalUser(localUser);
-        localUser.getStreamManager().on('streamPlaying', (e) => {
-            updateLayout();
-            publisher.videos[0].video.parentElement.classList.remove('custom-class');
+        setLocalUser(localUser, (newLocalUser) => {
+            localUser.getStreamManager().on('streamPlaying', (e) => {
+                updateLayout();
+                publisher.videos[0].video.parentElement.classList.remove('custom-class');
+            });
         });
+
         // this.setState({ localUser: localUser }, () => {
         //     this.state.localUser.getStreamManager().on('streamPlaying', (e) => {
         //         this.updateLayout();
