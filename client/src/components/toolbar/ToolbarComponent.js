@@ -10,9 +10,6 @@ import Videocam from '@material-ui/icons/Videocam';
 import VideocamOff from '@material-ui/icons/VideocamOff';
 import Fullscreen from '@material-ui/icons/Fullscreen';
 import FullscreenExit from '@material-ui/icons/FullscreenExit';
-import PictureInPicture from '@material-ui/icons/PictureInPicture';
-import ScreenShare from '@material-ui/icons/ScreenShare';
-import StopScreenShare from '@material-ui/icons/StopScreenShare';
 import Tooltip from '@material-ui/core/Tooltip';
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
@@ -25,6 +22,7 @@ const ToolbarComponent = (props) => {
     const mySessionId = props.sessionId;
     const localUser = props.user;
     const [ fullscreen, setFullscreen ] = useState(false);
+    const [counter, setCounter ] = useState(0)
 
     function toggleFullscreen() {
         setFullscreen(!fullscreen);
@@ -33,18 +31,12 @@ const ToolbarComponent = (props) => {
 
     function micStatusChanged() {
         props.micStatusChanged();
+        setCounter(counter+1);
     }
 
     function camStatusChanged() {
         props.camStatusChanged();
-    }
-
-    function screenShare() {
-        props.screenShare();
-    }
-
-    function stopScreenShare() {
-        props.stopScreenShare();
+        setCounter(counter+1);
     }
 
     function leaveSession() {
@@ -82,17 +74,6 @@ const ToolbarComponent = (props) => {
                                 <VideocamOff color="secondary" />
                             )}
                         </IconButton>
-
-                        <IconButton color="inherit" className="navButton" onClick={screenShare}>
-                            {localUser !== undefined && localUser.isScreenShareActive() ? <PictureInPicture /> : <ScreenShare />}
-                        </IconButton>
-
-                        {localUser !== undefined &&
-                            localUser.isScreenShareActive() && (
-                                <IconButton onClick={stopScreenShare} id="navScreenButton">
-                                    <StopScreenShare color="secondary" />
-                                </IconButton>
-                            )}
 
                         <IconButton color="inherit" className="navButton" onClick={toggleFullscreen}>
                             {localUser !== undefined && fullscreen ? <FullscreenExit /> : <Fullscreen />}
