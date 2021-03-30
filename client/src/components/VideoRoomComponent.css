@@ -120,7 +120,7 @@
   background-color: var(--background-color);
   overflow: hidden;
   height: inherit;
-  min-width: 400px !important;
+  min-width: 100% !important;
   width: inherit;
   border: 1px yellow solid;
 }

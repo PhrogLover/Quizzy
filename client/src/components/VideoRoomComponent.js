@@ -381,7 +381,7 @@ const VideoRoomComponent = (props) => {
 
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
 
-        <div id="layout" className="bounds team-lobby">
+        
             <div className="team-lobby-left">
                 <div className="team-lobby-toolbar">
                     <ToolbarComponent
@@ -397,19 +397,19 @@ const VideoRoomComponent = (props) => {
                 </div>
                 <div className="members-stream-section">
                     {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="user-stream-container">
+                        <div className="user-stream-container">                                
                             <div className="OT_root OT_publisher custom-class" id="localUser">
                                 <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
                             </div>
-                        </div>
+                        </div>                                
                     )}
-                    {subState.map((sub, i) => (
-                        <div className="user-stream-container">
+                    {subState.map((sub, i) => (  
+                        <div className="user-stream-container">                    
                             <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
                                 <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
-                            </div>
-                        </div>
-                    ))}
+                            </div> 
+                        </div>                     
+                    ))}  
                 </div>
                 <div className="quiz-stream-section">
                     <p>Insert Quiz Streaming here</p>
@@ -428,8 +428,7 @@ const VideoRoomComponent = (props) => {
                 )}
             </div>
         </div>
-        
-    </div> );
+    );
 }
  
 export default VideoRoomComponent;
