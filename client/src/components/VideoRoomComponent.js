@@ -5,14 +5,10 @@ import $ from "jquery";
 import StreamComponent from './stream/StreamComponent';
 import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import ChatComponent from './chat/ChatComponent';
-
-import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
 
 let OV = null;
-let hasBeenUpdated = false;
-let layout = new OpenViduLayout();
 var localUserModel = new UserModel();
 let leaveSessionVar = null;
 let subscribers = [];
@@ -53,16 +49,11 @@ const VideoRoomComponent = (props) => {
             animate: true, // Whether you want to animate the transitions
         };
 
-        layout.initLayoutContainer(document.getElementById('layout'), openViduLayoutOptions);
         window.addEventListener('beforeunload', onbeforeunload);
-        window.addEventListener('resize', updateLayout);
-        window.addEventListener('resize', checkSize);
         joinSession();
 
         return () => {
             window.removeEventListener('beforeunload', onbeforeunload);
-            window.removeEventListener('resize', updateLayout);
-            window.removeEventListener('resize', checkSize);
             leaveSession();
         }
     }, [])
@@ -96,17 +87,6 @@ const VideoRoomComponent = (props) => {
         OV = new OpenVidu();
         setSession(OV.initSession());
         setSessionTimer(!sessionTimer);
-        
-        // this.setState(
-        //     {
-        //         session: this.OV.initSession(),
-        //     },
-        //     () => {
-        //         this.subscribeToStreamCreated();
-
-        //         this.connectToSession();
-        //     },
-        // );
     }
 
     function connectToSession() {
@@ -141,7 +121,6 @@ const VideoRoomComponent = (props) => {
     useEffect(() => {
         if (localUser) {
             localUser.getStreamManager().on('streamPlaying', (e) => {
-                updateLayout();
                 userPublisher.videos[0].video.parentElement.classList.remove('custom-class');
             });
         }
@@ -203,7 +182,6 @@ const VideoRoomComponent = (props) => {
         sendSignalUserChanged({ isVideoActive: localUserModel.isVideoActive() });
         setLocalUser(localUserModel);
         setToggleIcon(!toggleIcon);
-        updateLayout();
     }
 
     function micStatusChanged() {
@@ -212,7 +190,6 @@ const VideoRoomComponent = (props) => {
         sendSignalUserChanged({ isAudioActive: localUserModel.isAudioActive() });
         setLocalUser(localUserModel);
         setToggleIcon(!toggleIcon);
-        updateLayout();
     }
 
     function nicknameChanged(nickname) {
@@ -220,7 +197,6 @@ const VideoRoomComponent = (props) => {
         thisLocalUser.setNickname(nickname);
         setLocalUser(thisLocalUser);
         sendSignalUserChanged({ nickname: localUser.getNickname() });
-        updateLayout();
     }
 
     function deleteSubscriber(stream) {
@@ -232,7 +208,6 @@ const VideoRoomComponent = (props) => {
             subscribers = $.extend(true, [], remoteUsers)
             setSubState(subscribers);
         }
-        updateLayout();
     }
 
     function subscribeToStreamCreated() {
@@ -259,7 +234,6 @@ const VideoRoomComponent = (props) => {
                     isScreenShareActive: localUser.isScreenShareActive(),
                 });
             }
-            updateLayout();
         });
     }
 
@@ -269,7 +243,6 @@ const VideoRoomComponent = (props) => {
             // Remove the stream from 'subscribers' array
             deleteSubscriber(event.stream);
             event.preventDefault();
-            updateLayout();
         });
     }
 
@@ -293,12 +266,6 @@ const VideoRoomComponent = (props) => {
             subscribers = $.extend(true, [], remoteUsers);
             setSubState(subscribers);
         });
-    }
-
-    function updateLayout() {
-        setTimeout(() => {
-            layout.updateLayout();
-        }, 20);
     }
 
     function sendSignalUserChanged(data) {
@@ -357,21 +324,10 @@ const VideoRoomComponent = (props) => {
             console.log('chat', display);
             setChatDisplay(display);
         }
-        updateLayout();
     }
 
     function checkNotification(event) {
         setMessageReceived(chatDisplay === 'none');
-    }
-    
-    function checkSize() {
-        if (document.getElementById('layout').offsetWidth <= 700 && !hasBeenUpdated) {
-            toggleChat('none');
-            hasBeenUpdated = true;
-        }
-        if (document.getElementById('layout').offsetWidth > 700 && hasBeenUpdated) {
-            hasBeenUpdated = false;
-        }
     }
 
     return ( 
@@ -381,7 +337,7 @@ const VideoRoomComponent = (props) => {
 
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
 
-        
+        <div id="layout" className="bounds team-lobby">
             <div className="team-lobby-left">
                 <div className="team-lobby-toolbar">
                     <ToolbarComponent
@@ -397,19 +353,19 @@ const VideoRoomComponent = (props) => {
                 </div>
                 <div className="members-stream-section">
                     {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="user-stream-container">                                
+                        <div className="user-stream-container">
                             <div className="OT_root OT_publisher custom-class" id="localUser">
                                 <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
                             </div>
-                        </div>                                
+                        </div>
                     )}
-                    {subState.map((sub, i) => (  
-                        <div className="user-stream-container">                    
+                    {subState.map((sub, i) => (
+                        <div className="user-stream-container">
                             <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
                                 <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
-                            </div> 
-                        </div>                     
-                    ))}  
+                            </div>
+                        </div>
+                    ))}
                 </div>
                 <div className="quiz-stream-section">
                     <p>Insert Quiz Streaming here</p>
@@ -428,7 +384,8 @@ const VideoRoomComponent = (props) => {
                 )}
             </div>
         </div>
-    );
+        
+    </div> );
 }
  
 export default VideoRoomComponent;
