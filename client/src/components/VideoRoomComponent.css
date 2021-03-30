@@ -1,6 +1,77 @@
+/* Dan's Stuff */
+.main-lobby{
+  border: aqua 1px solid;
+  height: var(--section-height);
+  max-height: var(--section-height);
+  background-color: var(--background-color);
+  position: relative;
+  width: 100%;
+}
+.quiz-stream-section{
+  height: 80%;
+  background-color: red;
+  width:100%;
+}
+.members-stream-section{
+  height: 20%;
+  max-height: 20%;
+  background-color: green;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.team-lobby-left{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  /* width: 100%; */
+  flex-grow: 1;
+  position: relative;
+  border: 1px white solid;
+}
+.team-chat-section{
+  position: relative;
+  height: 100%;
+  background-color: blue;
+  min-width: 350px;
+  max-width: 350px;
+
+}
+.team-lobby{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.team-lobby-toolbar{
+  position: absolute;
+  top: 20% ;
+  left:0;
+  background-color: red;
+  width: 100%;
+}
+
+/* Users Cameras */
+.user-stream-container{
+  height: 100%;
+  width: 19%;
+  margin: 0 1px;
+}
+
+
+
+
+
+
+/* Open Vidu Stuff */
+
 #header {
   color: #ffffff;
-  background-color: #333333;
+  background-color: red;
   padding: 0 14px 0 0;
   position: absolute;
   top: 0;
@@ -28,7 +99,7 @@
 	height: 40px !important;
 	text-align: center;
 	margin: auto;
-    min-width: 400px;
+  min-width: 400px;
 }
 .navButton{
 	height: 40px !important;
@@ -45,16 +116,13 @@
 
 
 .bounds {
-  background-color: #494949;
+  position: relative;
+  background-color: var(--background-color);
   overflow: hidden;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 40px;
-  bottom: 0;
   height: inherit;
   min-width: 400px !important;
   width: inherit;
+  border: 1px yellow solid;
 }
 
 
@@ -264,6 +332,7 @@
 	min-height: 48px;
 	width: 100%;
 	height: 100%;
+  
 }
 
 .OT_publisher .OT_video-element,

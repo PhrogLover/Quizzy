@@ -374,42 +374,61 @@ const VideoRoomComponent = (props) => {
         }
     }
 
-    return ( <div className="container" id="container">
-        <ToolbarComponent
-            sessionId={mySessionId}
-            user={localUser}
-            showNotification={messageReceived}
-            camStatusChanged={camStatusChanged}
-            micStatusChanged={micStatusChanged}
-            toggleFullscreen={toggleFullscreen}
-            leaveSession={leaveSession}
-            toggleChat={toggleChat}
-        />
+    return ( 
+    
+    <div className="main-lobby" id="main-lobby">
+        
 
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
 
-        <div id="layout" className="bounds">
-            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                <div className="OT_root OT_publisher custom-class" id="localUser">
-                    <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
-                </div>
-            )}
-            {subState.map((sub, i) => (
-                <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
-                    <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
-                </div>
-            ))}
-            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
-                    <ChatComponent
+        <div id="layout" className="bounds team-lobby">
+            <div className="team-lobby-left">
+                <div className="team-lobby-toolbar">
+                    <ToolbarComponent
+                        sessionId={mySessionId}
                         user={localUser}
-                        chatDisplay={chatDisplay}
-                        close={toggleChat}
-                        messageReceived={checkNotification}
+                        showNotification={messageReceived}
+                        camStatusChanged={camStatusChanged}
+                        micStatusChanged={micStatusChanged}
+                        toggleFullscreen={toggleFullscreen}
+                        leaveSession={leaveSession}
+                        toggleChat={toggleChat}
                     />
                 </div>
-            )}
+                <div className="members-stream-section">
+                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                        <div className="user-stream-container">
+                            <div className="OT_root OT_publisher custom-class" id="localUser">
+                                <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
+                            </div>
+                        </div>
+                    )}
+                    {subState.map((sub, i) => (
+                        <div className="user-stream-container">
+                            <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+                                <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className="quiz-stream-section">
+                    <p>Insert Quiz Streaming here</p>
+                </div>
+            </div>
+            <div className="team-chat-section">
+                {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                    <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
+                        <ChatComponent
+                            user={localUser}
+                            chatDisplay={chatDisplay}
+                            close={toggleChat}
+                            messageReceived={checkNotification}
+                        />
+                    </div>
+                )}
+            </div>
         </div>
+        
     </div> );
 }
  
