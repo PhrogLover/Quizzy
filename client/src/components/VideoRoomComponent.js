@@ -341,22 +341,26 @@ const VideoRoomComponent = (props) => {
             <div className="team-lobby-left">
                 
                 <div className="members-stream-section">
-                    <div className="user-stream-container-ratio">
-                        {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                            
-                                <div className="user-stream-container">
-                                    <div className="OT_root OT_publisher custom-class" id="localUser">
-                                        <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
+                    <div className="user-stream-wrapper">
+                        <div className="user-stream-container-ratio">
+                            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                                
+                                    <div className="user-stream-container">
+                                        <div className="OT_root OT_publisher custom-class" id="localUser">
+                                            <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
+                                        </div>
                                     </div>
-                                </div>
-                            
-                        )}
+                                
+                            )}
+                        </div>
                     </div>
                     {subState.map((sub, i) => (
-                        <div className="user-stream-container-ratio">
-                            <div className="user-stream-container">
-                                <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
-                                    <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
+                        <div className="user-stream-wrapper">
+                            <div className="user-stream-container-ratio">
+                                <div className="user-stream-container">
+                                    <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+                                        <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -378,17 +382,28 @@ const VideoRoomComponent = (props) => {
                     <p>Insert Quiz Streaming here</p>
                 </div>
             </div>
-            <div className="team-chat-section">
-                {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                    <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
-                        <ChatComponent
-                            user={localUser}
-                            chatDisplay={chatDisplay}
-                            close={toggleChat}
-                            messageReceived={checkNotification}
-                        />
+            <div className="team-lobby-right">
+                <div className="general-chat">
+                    
+                </div>
+                
+                <div className="team-chat-section">
+                    <div className="answer-sheet-section">
+                        answer sheet here
                     </div>
-                )}
+                    <div className="team-chat">
+                        {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                            <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
+                                <ChatComponent
+                                    user={localUser}
+                                    chatDisplay={chatDisplay}
+                                    close={toggleChat}
+                                    messageReceived={checkNotification}
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
         
