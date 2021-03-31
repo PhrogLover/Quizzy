@@ -4,7 +4,7 @@ import "./lobbygridelement.css";
 const LobbyGridElement = ({ quiz, index }) => {
 index += 1;
     return ( 
-            <Link to={`/mainLobby/teamLobby/${index}` } style={{ textDecoration: 'none' }}>
+            <Link to={`/mainLobby/teamLobby/${quiz.id}` } style={{ textDecoration: 'none' }}>
                 <div className="lobby-grid-element">
                     <div className="lobby-grid-index">{ index }</div>            
                     <div className="team-name">Team lobby{ index }</div>

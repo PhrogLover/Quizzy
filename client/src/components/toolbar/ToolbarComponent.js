@@ -13,6 +13,9 @@ import FullscreenExit from '@material-ui/icons/FullscreenExit';
 import Tooltip from '@material-ui/core/Tooltip';
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
+import PictureInPicture from '@material-ui/icons/PictureInPicture';
+import ScreenShare from '@material-ui/icons/ScreenShare';
+import StopScreenShare from '@material-ui/icons/StopScreenShare';
 
 import IconButton from '@material-ui/core/IconButton';
 
@@ -32,6 +35,14 @@ const ToolbarComponent = (props) => {
     function micStatusChanged() {
         props.micStatusChanged();
         setCounter(counter+1);
+    }
+
+    function screenShare() {
+        props.screenShare();
+    }
+
+    function stopScreenShare() {
+        props.stopScreenShare();
     }
 
     function camStatusChanged() {
@@ -74,6 +85,17 @@ const ToolbarComponent = (props) => {
                                 <VideocamOff color="secondary" />
                             )}
                         </IconButton>
+
+                        {(props.screenShare && <IconButton color="inherit" className="navButton" onClick={screenShare}>
+                            {localUser !== undefined && localUser.isScreenShareActive() ? <PictureInPicture /> : <ScreenShare />}
+                        </IconButton>)}
+
+                        {localUser !== undefined &&
+                            localUser.isScreenShareActive() && (
+                                <IconButton onClick={stopScreenShare} id="navScreenButton">
+                                    <StopScreenShare color="secondary" />
+                                </IconButton>
+                            )}
 
                         <IconButton color="inherit" className="navButton" onClick={toggleFullscreen}>
                             {localUser !== undefined && fullscreen ? <FullscreenExit /> : <Fullscreen />}

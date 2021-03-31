@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
-
     const [ chat, setChat ] = useState([]);
     const [ slideOpen, setSlideOpen] = useState(false);
 
