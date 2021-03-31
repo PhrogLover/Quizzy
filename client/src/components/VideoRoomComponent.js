@@ -339,6 +339,29 @@ const VideoRoomComponent = (props) => {
 
         <div id="layout" className="bounds team-lobby">
             <div className="team-lobby-left">
+                
+                <div className="members-stream-section">
+                    <div className="user-stream-container-ratio">
+                        {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                            
+                                <div className="user-stream-container">
+                                    <div className="OT_root OT_publisher custom-class" id="localUser">
+                                        <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
+                                    </div>
+                                </div>
+                            
+                        )}
+                    </div>
+                    {subState.map((sub, i) => (
+                        <div className="user-stream-container-ratio">
+                            <div className="user-stream-container">
+                                <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+                                    <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
                 <div className="team-lobby-toolbar">
                     <ToolbarComponent
                         sessionId={mySessionId}
@@ -350,22 +373,6 @@ const VideoRoomComponent = (props) => {
                         leaveSession={leaveSession}
                         toggleChat={toggleChat}
                     />
-                </div>
-                <div className="members-stream-section">
-                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="user-stream-container">
-                            <div className="OT_root OT_publisher custom-class" id="localUser">
-                                <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
-                            </div>
-                        </div>
-                    )}
-                    {subState.map((sub, i) => (
-                        <div className="user-stream-container">
-                            <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
-                                <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
-                            </div>
-                        </div>
-                    ))}
                 </div>
                 <div className="quiz-stream-section">
                     <p>Insert Quiz Streaming here</p>
