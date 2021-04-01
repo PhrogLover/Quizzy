@@ -517,7 +517,7 @@
   -webkit-animation-iteration-count: infinite;
 }
 
-@-webkit-keyframes OT_pulse {
+/* @-webkit-keyframes OT_pulse {
   0% {
     -webkit-box-shadow: 0 0 0px 0px #c70019;
     box-shadow: 0 0 0px 0px #c70019;
@@ -569,7 +569,7 @@
     -webkit-box-shadow: 0 0 0px 0px #c70019;
     box-shadow: 0 0 0px 0px #c70019;
   }
-}
+} */
 
 .OT_mini .OT_bar,
 .OT_bar.OT_mode-mini,

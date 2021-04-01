@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect  } from 'react';
 import './VideoRoomComponent.css';
 import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
@@ -7,6 +7,9 @@ import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import ChatComponent from './chat/ChatComponent';
 import UserModel from '../models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
+import { Link , useHistory } from 'react-router-dom';
+
+
 
 let OV = null;
 var localUserModel = new UserModel();
@@ -153,6 +156,12 @@ const VideoRoomComponent = (props) => {
 
         setLocalUser(localUserModel);
         setUserpublisher(publisher);
+    }
+
+    // const history = useHistory();
+
+    function handleLeave(){
+        leaveSession()
     }
 
     function leaveSession() {
@@ -390,6 +399,12 @@ const VideoRoomComponent = (props) => {
                 <div className="team-chat-section">
                     <div className="answer-sheet-section">
                         answer sheet here
+                        <div className="leave-session-button">
+                            <button onClick={handleLeave}>
+                                leave
+                            </button>
+
+                        </div>
                     </div>
                     <div className="team-chat">
                         {localUser !== undefined && localUser.getStreamManager() !== undefined && (
