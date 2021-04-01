@@ -336,8 +336,9 @@ const VideoRoomComponent = (props) => {
         
 
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
-
+        
         <div id="layout" className="bounds team-lobby">
+        <button type="button" onClick={props.backHandler}>Back to Main Lobby</button>
             <div className="team-lobby-left">
                 
                 <div className="members-stream-section">

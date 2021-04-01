@@ -3,11 +3,13 @@ import SlideScript from "../SlideScript";
 import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
 import { useState, useEffect } from "react";
+import GetVideoRoomComponent from "../../GetVideoRoomComponent";
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
     const [ chat, setChat ] = useState([]);
     const [ slideOpen, setSlideOpen] = useState(false);
+    const [ lobbyState, setLobbyState ] = useState({ type: "main" });
 
     useEffect(() => {
         if (nextMessage) {
@@ -37,9 +39,19 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
         return {gridTemplateColumns: gridStyle};
     }
 
+    function teamLobbyHandler(id, name) {
+        const newState = {
+            type: "team",
+            id: id,
+            name: name
+        }
+        setLobbyState(newState);
+    }
+
     return (
 
             <div className="main-lobby">
+                { lobbyState.type === "main" &&
                 <div className="main-body">
                     <div className="main-header">
                         <div className="quiz-title">{ quiz.title } by <i> { quiz.creator } </i></div>
@@ -66,14 +78,17 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                         }
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyCount.map((index) => (
-                                <LobbyGridElement key={index} quiz={ quiz } index={ index } />
+                                <LobbyGridElement key={index} quiz={ quiz } index={ index } teamLobbyHandler = { teamLobbyHandler } />
                             ))}
                         </div>
                     </div>
+                </div> }
+                { lobbyState.type === "team" && <div>
+                    <GetVideoRoomComponent lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
+                </div> }
+                <div className="main-chat">
+                    <GeneralChat chat={ chat } socket = { socket } />
                 </div>
-                    <div className="main-chat">
-                        <GeneralChat chat={ chat } socket = { socket } />
-                    </div>
             </div>
      );
 }

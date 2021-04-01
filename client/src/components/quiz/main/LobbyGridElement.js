@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
 import "./lobbygridelement.css";
 
-const LobbyGridElement = ({ quiz, index }) => {
+const LobbyGridElement = ({ quiz, index, teamLobbyHandler }) => {
 index += 1;
     return ( 
-            <Link to={`/mainLobby/teamLobby/${quiz.id}` } style={{ textDecoration: 'none' }}>
+            <button type="button" onClick={(e) => (teamLobbyHandler())} style={{ textDecoration: 'none' }}>
                 <div className="lobby-grid-element">
                     <div className="lobby-grid-index">{ index }</div>            
                     <div className="team-name">Team lobby{ index }</div>
@@ -16,7 +15,7 @@ index += 1;
                         </div>
                     </div>
                 </div>
-            </Link>
+            </button>
      );
 }
  
