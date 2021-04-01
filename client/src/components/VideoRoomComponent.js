@@ -1,4 +1,4 @@
-import { useState, useEffect  } from 'react';
+import React, { useState, useEffect  } from 'react';
 import './VideoRoomComponent.css';
 import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
@@ -7,7 +7,8 @@ import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import ChatComponent from './chat/ChatComponent';
 import UserModel from '../models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
-import { Link , useHistory } from 'react-router-dom';
+// import { Link , useHistory } from 'react-router-dom';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 
@@ -156,12 +157,6 @@ const VideoRoomComponent = (props) => {
 
         setLocalUser(localUserModel);
         setUserpublisher(publisher);
-    }
-
-    // const history = useHistory();
-
-    function handleLeave(){
-        leaveSession()
     }
 
     function leaveSession() {
@@ -339,15 +334,41 @@ const VideoRoomComponent = (props) => {
         setMessageReceived(chatDisplay === 'none');
     }
 
+    const [ddOpen, setddOpen] = useState(false);
+    const closeDropdown = () => setddOpen(false);
+
+
+    const teamLobbyMenuRef = React.createRef();
+
+    function TeamLobbyMenu() {
+
+        // const [activeMenu,setActiveMenu] = useState('main');
+        
+    
+        function DropdownItem(props){
+            return(
+                <div className = "menu-item">
+                    <div className="dropdown-icon"><i className= {props.icon}/></div>
+                    {props.children}
+                </div>        
+            )}
+
+        return (
+            <>
+                <ClickAwayListener onClickAway={closeDropdown}>
+                    <div className="team-menu" ref={teamLobbyMenuRef}>
+                        <button type="button" onClick={props.backHandler}>Leave</button>
+                    </div>
+                </ClickAwayListener>
+            </>
+        );
+    }
+
     return ( 
     
-    <div className="main-lobby" id="main-lobby">
         
-
+        <div id="layout" className="team-lobby">
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
-        
-        <div id="layout" className="bounds team-lobby">
-        <button type="button" onClick={props.backHandler}>Back to Main Lobby</button>
             <div className="team-lobby-left">
                 
                 <div className="members-stream-section">
@@ -389,25 +410,30 @@ const VideoRoomComponent = (props) => {
                     />
                 </div>
                 <div className="quiz-stream-section">
-                    <p>Insert Quiz Streaming here</p>
+                    <div className="quiz-slides-view">
+                        <div className="quiz-slides-ratio">
+                            {/* <p>Insert Quiz Streaming here</p> */}
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div className="team-lobby-right">
-                <div className="general-chat">
-                    
-                </div>
                 
                 <div className="team-chat-section">
                     <div className="answer-sheet-section">
-                        answer sheet here
-                        <div className="leave-session-button">
-                            <button onClick={handleLeave}>
-                                leave
-                            </button>
-
+                        <div className="answer-sheet-toolbar">
+                        <div className="team-menu-toggle" onClick= {() => setddOpen(!ddOpen)}>                 
+                            Menu
                         </div>
+                            
+                        </div>
+                        answer sheet here
+                        
                     </div>
                     <div className="team-chat">
+                        <div className="team-chat-toolbar">
+                        </div>
                         {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                             <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
                                 <ChatComponent
@@ -420,10 +446,10 @@ const VideoRoomComponent = (props) => {
                         )}
                     </div>
                 </div>
+                {ddOpen && <TeamLobbyMenu/>}
             </div>
         </div>
-        
-    </div> );
+   );
 }
  
 export default VideoRoomComponent;

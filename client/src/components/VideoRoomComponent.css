@@ -1,22 +1,39 @@
 /* Dan's Stuff */
-.main-lobby{
-  border: aqua 1px solid;
-  height: var(--section-height);
-  max-height: var(--section-height);
-  background-color: var(--background-color);
-  position: relative;
-  width: 100%;
-}
 .quiz-stream-section{
   height: 100%;
-  background-color: red;
+  background-color: var(--bg-colour);
   width:100%;
+  color: var(--font-colour);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.quiz-slides-ratio{
+  position: absolute;
+  width: 100%;
+  padding-top: 56.25%;
+  background-color: var(--colour-black2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 0 0.3rem black);
+
+}
+.quiz-slides-view{
+  position: relative;
+  width: 82%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 .members-stream-section{
   padding: 5px;
   min-height: fit-content;
   height: 30%;
-  background-color: green;
+  background-color: var(--bg-color);
   width: 100%;
   display: flex;
   align-items: center;
@@ -33,7 +50,6 @@
   /* width: 100%; */
   flex-grow: 1;
   position: relative;
-  border: 1px white solid;
 }
 .team-lobby-right{
   display: flex;
@@ -43,10 +59,9 @@
   height: 100%;
   /* width: 100%; */
   position: relative;
-  background-color: blue;
   min-width: 300px;
   max-width: 300px;
-
+  border-left: 1px var(--colour-grey) solid;
 }
 .team-chat-section{
   position: relative;
@@ -63,7 +78,19 @@
   min-height: 40%;
   background-color: blue;
   width: inherit;
-
+}
+.team-chat-toolbar{
+  height: 40px;
+  padding: 3px;
+  min-height: fit-content;
+  width: 100%;
+  background-color: var(--colour-black2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  font-size: 20px;
+  position: relative;
 }
 .answer-sheet-section{
   position: relative;
@@ -75,11 +102,26 @@
   flex-direction: column;
 
 }
+.answer-sheet-toolbar{
+  height: 40px;
+  padding: 3px;
+  min-height: fit-content;
+  width: 100%;
+  background-color: var(--colour-black2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  font-size: 20px;
+  position: relative;
+}
 .team-lobby{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  height: inherit;
+  min-width: 100%;
 }
 .team-lobby-toolbar{
   min-height: 40px;
@@ -96,13 +138,15 @@
   max-width: 19%;
   height: 100% ;
   margin: 0 0.5%;
+  
 }
 .user-stream-container-ratio{
   width: 100%;
   padding-top: 75%;
-  
   position: relative;
-  border: yellow 1px solid;
+  background-color: var(--colour-black2);
+  filter: drop-shadow(0 0 0.3rem black);
+  
 }
 .user-stream-container{
   max-height: 100%;
@@ -115,6 +159,31 @@
   height: 100%;
 
 }
+.team-menu{
+  width:150px;
+  height:max-content;
+  background-color: var(--nav-bg);
+  position:absolute;
+  border-radius: var(--border-radius);
+  margin-right: 10px;
+  top: 35px;
+  right: 0;
+  overflow: hidden;
+  z-index: 199999;
+  border: var(--colour-grey) 1px solid;
+  padding: 5px;
+
+  /* Makes text unselectable */ 
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  font-family: var(--font);
+}
+.team-menu-toggle{
+  color: white;
+}
+
 
 
 
@@ -171,13 +240,15 @@
 
 
 .bounds {
-  position: relative;
+  position: absolute;
   background-color: var(--background-color);
   overflow: hidden;
   height: inherit;
   min-width: 100% !important;
   width: inherit;
   border: 1px yellow solid;
+  top: 0;
+  left: 0;
 }
 
 

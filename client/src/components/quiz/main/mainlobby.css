@@ -1,11 +1,11 @@
 .main-lobby{
+    top:0;
     height: var(--section-height);
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    border-bottom: 3px var(--colour-grey) solid;
     position: relative;
 }
 .main-header{
@@ -84,17 +84,7 @@
 .main-chat{
     width: fit-content;
     height: 100%;
-    border-left: 1px var(--colour-grey) solid;
     z-index: 500;
-}
-
-@media screen and (max-width:800px){
-    .main-body{
-        min-width:100%;
-    }
-    .main-chat{
-        position: absolute;
-        right: 0;
-        z-index: 500;
-    }
+    position: absolute;
+    right: 0;
 }

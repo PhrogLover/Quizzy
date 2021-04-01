@@ -4,11 +4,13 @@
     height: 100%;
     max-height:var(--section-height) ;
     color: white;
+    border-left: 1px var(--colour-grey) solid;
     overflow-y: hidden;
     background-color: var(--bg-colour);
+    z-index: 99999 !important;
 }
 .chat-toolbar-container{
-    height: 5%;
+    height: 40px;
     padding: 3px;
     min-height: fit-content;
     width: 100%;
@@ -18,6 +20,7 @@
     justify-content: flex-end;
     flex-direction: row;
     font-size: 20px;
+    position: relative;
 }
 .chat-toolbar-buttons{
     margin-right: 5px;
@@ -27,7 +30,8 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--border-radius);
-    background-color: var(--colour-black2)
+    background-color: var(--colour-black2);
+    z-index: 1;
 }
 .chat-toolbar-buttons:hover{
     filter: brightness(150%);
@@ -49,6 +53,7 @@
     justify-content: center;
     border-bottom-left-radius: var(--border-radius);
     border-top-left-radius: var(--border-radius);
+    z-index: 1;
 
     background-color: var(--colour-black2);
     opacity: 100%;
@@ -57,6 +62,15 @@
 .open-chat-button:hover{
     filter: brightness(150%);
     cursor: pointer;
+}
+.general-chat-label{
+    position: absolute;
+    margin: auto;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    z-index: 0;
+    font-weight: 600;
 }
 .pinned-message-container{
     position: relative;

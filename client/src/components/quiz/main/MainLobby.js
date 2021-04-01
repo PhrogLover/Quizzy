@@ -83,7 +83,8 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                         </div>
                     </div>
                 </div> }
-                { lobbyState.type === "team" && <div>
+                { lobbyState.type === "team" && 
+                <div className="main-body">
                     <GetVideoRoomComponent lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
                 </div> }
                 <div className="main-chat">
