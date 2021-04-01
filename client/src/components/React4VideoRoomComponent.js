@@ -1,20 +1,22 @@
-import { useState, useEffect  } from 'react';
-import './VideoRoomComponent.css';
-import { OpenVidu } from 'openvidu-browser';
+import { useState, useEffect } from 'react';
 import $ from "jquery";
+import './React4VideoRoomComponent.css';
+import { OpenVidu } from 'openvidu-browser';
 import StreamComponent from './stream/StreamComponent';
 import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import ChatComponent from './chat/ChatComponent';
+import SlideScript from "./quiz/SlideScript";
+
+import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
-import { Link , useHistory } from 'react-router-dom';
 
-
-
-let OV = null;
-var localUserModel = new UserModel();
-let leaveSessionVar = null;
-let subscribers = [];
+    let hasBeenUpdated = false;
+    let layout = new OpenViduLayout();
+    let localUserModel = new UserModel();
+    let subscribers = [];
+    let OV = null;
+    let leaveSessionVar = null;
 
 const VideoRoomComponent = (props) => {
 
@@ -29,14 +31,7 @@ const VideoRoomComponent = (props) => {
     const [ chatDisplay, setChatDisplay ] = useState('none');
     const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ messageReceived, setMessageReceived ] = useState(false);
-
-    useEffect(() => {
-        leaveSessionVar = session;
-    }, [session]);
-
-    useEffect(() => {
-        setToggleIcon(!toggleIcon);
-    }, [subState.length])
+    const [ toggleUpdate, setToggleUpdate ] = useState(false);
 
     useEffect(() => {
         const openViduLayoutOptions = {
@@ -52,14 +47,27 @@ const VideoRoomComponent = (props) => {
             animate: true, // Whether you want to animate the transitions
         };
 
+        layout.initLayoutContainer(document.getElementById('layout'), openViduLayoutOptions);
         window.addEventListener('beforeunload', onbeforeunload);
+        window.addEventListener('resize', updateLayout);
+        window.addEventListener('resize', checkSize);
         joinSession();
 
         return () => {
             window.removeEventListener('beforeunload', onbeforeunload);
+            window.removeEventListener('resize', updateLayout);
+            window.removeEventListener('resize', checkSize);
             leaveSession();
         }
     }, [])
+
+    useEffect(() => {
+        leaveSessionVar = session;
+    }, [session])
+
+    useEffect(() => {
+        setToggleUpdate(!toggleUpdate);
+    }, [subState.length])
 
     useEffect(() => {
         let token
@@ -102,6 +110,7 @@ const VideoRoomComponent = (props) => {
     }
 
     function connect(token) {
+        console.log(token);
         session
             .connect(
                 token,
@@ -112,7 +121,7 @@ const VideoRoomComponent = (props) => {
             })
             .catch((error) => {
                 if(props.error){
-                    props.error({ error: error.error, message: error.message, code: error.code, status: error.status });
+                    props.error({ error: error.error, messgae: error.message, code: error.code, status: error.status });
                 }
                 alert('There was an error connecting to the session:', error.message);
                 console.log('There was an error connecting to the session:', error.code, error.message);
@@ -124,6 +133,7 @@ const VideoRoomComponent = (props) => {
     useEffect(() => {
         if (localUser) {
             localUser.getStreamManager().on('streamPlaying', (e) => {
+                updateLayout();
                 userPublisher.videos[0].video.parentElement.classList.remove('custom-class');
             });
         }
@@ -153,15 +163,10 @@ const VideoRoomComponent = (props) => {
         localUserModel.setStreamManager(publisher);
         subscribeToUserChanged();
         subscribeToStreamDestroyed();
+        sendSignalUserChanged({ isScreenShareActive: localUserModel.isScreenShareActive() });
 
         setLocalUser(localUserModel);
         setUserpublisher(publisher);
-    }
-
-    // const history = useHistory();
-
-    function handleLeave(){
-        leaveSession()
     }
 
     function leaveSession() {
@@ -172,7 +177,6 @@ const VideoRoomComponent = (props) => {
         // Empty all properties...
         OV = null;
         setSession(undefined);
-        console.log("LEAVE SESSION")
         subscribers = [];
         setSubState(subscribers);
         setMySessionId('SessionA');
@@ -183,14 +187,12 @@ const VideoRoomComponent = (props) => {
         }
     }
 
-    const [ toggleIcon, setToggleIcon ] = useState(false);
-
     function camStatusChanged() {
         localUserModel.setVideoActive(!localUserModel.isVideoActive());
         localUserModel.getStreamManager().publishVideo(localUserModel.isVideoActive());
         sendSignalUserChanged({ isVideoActive: localUserModel.isVideoActive() });
         setLocalUser(localUserModel);
-        setToggleIcon(!toggleIcon);
+        setToggleUpdate(!toggleUpdate);
     }
 
     function micStatusChanged() {
@@ -198,7 +200,7 @@ const VideoRoomComponent = (props) => {
         localUserModel.getStreamManager().publishAudio(localUserModel.isAudioActive());
         sendSignalUserChanged({ isAudioActive: localUserModel.isAudioActive() });
         setLocalUser(localUserModel);
-        setToggleIcon(!toggleIcon);
+        setToggleUpdate(!toggleUpdate);
     }
 
     function nicknameChanged(nickname) {
@@ -206,15 +208,16 @@ const VideoRoomComponent = (props) => {
         thisLocalUser.setNickname(nickname);
         setLocalUser(thisLocalUser);
         sendSignalUserChanged({ nickname: localUser.getNickname() });
+        setToggleUpdate(!toggleUpdate);
     }
 
     function deleteSubscriber(stream) {
-        const remoteUsers = $.extend(true, [], subscribers)
+        const remoteUsers = $.extend(true, [], subscribers);
         const userStream = remoteUsers.filter((user) => user.getStreamManager().stream === stream)[0];
         let index = remoteUsers.indexOf(userStream, 0);
         if (index > -1) {
             remoteUsers.splice(index, 1);
-            subscribers = $.extend(true, [], remoteUsers)
+            subscribers.extend(true, [], remoteUsers);
             setSubState(subscribers);
         }
     }
@@ -223,6 +226,7 @@ const VideoRoomComponent = (props) => {
         session.on('streamCreated', (event) => {
             const subscriber = session.subscribe(event.stream, undefined);
             subscriber.on('streamPlaying', (e) => {
+                checkSomeoneShareScreen();
                 subscriber.videos[0].video.parentElement.classList.remove('custom-class');
             });
             const newUser = new UserModel();
@@ -234,7 +238,7 @@ const VideoRoomComponent = (props) => {
             let temp = $.extend(true, [], subscribers);
             temp.push(newUser);
             subscribers = $.extend(true, [], temp);
-            setSubState(subscribers);     
+            setSubState(subscribers);
             if (localUser) {
                 sendSignalUserChanged({
                     isAudioActive: localUser.isAudioActive(),
@@ -243,6 +247,23 @@ const VideoRoomComponent = (props) => {
                     isScreenShareActive: localUser.isScreenShareActive(),
                 });
             }
+            updateLayout();
+            // this.setState(
+            //     {
+            //         subscribers: subscribers,
+            //     },
+            //     () => {
+            //         if (this.state.localUser) {
+            //             this.sendSignalUserChanged({
+            //                 isAudioActive: this.state.localUser.isAudioActive(),
+            //                 isVideoActive: this.state.localUser.isVideoActive(),
+            //                 nickname: this.state.localUser.getNickname(),
+            //                 isScreenShareActive: this.state.localUser.isScreenShareActive(),
+            //             });
+            //         }
+            //         this.updateLayout();
+            //     },
+            // );
         });
     }
 
@@ -251,9 +272,21 @@ const VideoRoomComponent = (props) => {
         session.on('streamDestroyed', (event) => {
             // Remove the stream from 'subscribers' array
             deleteSubscriber(event.stream);
+            setTimeout(() => {
+                checkSomeoneShareScreen();
+            }, 20);
             event.preventDefault();
+            updateLayout();
         });
     }
+
+    const [screenShareState, setScreenShareState ] = useState(0);
+
+    useEffect(() => {
+        if (screenShareState > 0) {
+            checkSomeoneShareScreen()
+        }
+    }, [screenShareState])
 
     function subscribeToUserChanged() {
         session.on('signal:userChanged', (event) => {
@@ -261,6 +294,7 @@ const VideoRoomComponent = (props) => {
             remoteUsers.forEach((user) => {
                 if (user.getConnectionId() === event.from.connectionId) {
                     const data = JSON.parse(event.data);
+                    console.log('EVENTO REMOTE: ', event.data);
                     if (data.isAudioActive !== undefined) {
                         user.setAudioActive(data.isAudioActive);
                     }
@@ -270,11 +304,21 @@ const VideoRoomComponent = (props) => {
                     if (data.nickname !== undefined) {
                         user.setNickname(data.nickname);
                     }
+                    if (data.isScreenShareActive !== undefined) {
+                        user.setScreenShareActive(data.isScreenShareActive);
+                    }
                 }
             });
             subscribers = $.extend(true, [], remoteUsers);
             setSubState(subscribers);
+            setScreenShareState(screenShareState +1);
         });
+    }
+
+    function updateLayout() {
+        setTimeout(() => {
+            layout.updateLayout();
+        }, 20);
     }
 
     function sendSignalUserChanged(data) {
@@ -316,8 +360,81 @@ const VideoRoomComponent = (props) => {
         }
     }
 
+    const [isActiveState, setIsActiveState ] = useState(false);
+
+    useEffect(() => {
+        if (localUser) {
+            sendSignalUserChanged({ isScreenShareActive: localUser.isScreenShareActive() })
+        }
+    }, [isActiveState])
+
+    function screenShare() {
+        const slideScriptId = window.document.getElementById('slide');
+        const videoSource = navigator.userAgent.indexOf('Firefox') !== -1 ? 'window' : 'screen';
+        const publisher = OV.initPublisher(
+            undefined,
+            {
+                videoSource: videoSource,
+                publishAudio: localUserModel.isAudioActive(),
+                publishVideo: localUserModel.isVideoActive(),
+                mirror: false,
+            },
+            (error) => {
+                if (error && error.name === 'SCREEN_EXTENSION_NOT_INSTALLED') {
+                    setShowExtensionDialog(true);
+                } else if (error && error.name === 'SCREEN_SHARING_NOT_SUPPORTED') {
+                    alert('Your browser does not support screen sharing');
+                } else if (error && error.name === 'SCREEN_EXTENSION_DISABLED') {
+                    alert('You need to enable screen sharing extension');
+                } else if (error && error.name === 'SCREEN_CAPTURE_DENIED') {
+                    alert('You need to choose a window or application to share');
+                }
+            },
+        );
+
+        publisher.once('accessAllowed', () => {
+            session.unpublish(localUserModel.getStreamManager());
+            localUserModel.setStreamManager(publisher);
+            session.publish(localUserModel.getStreamManager()).then(() => {
+                localUserModel.setScreenShareActive(true);
+                setLocalUser(localUserModel);
+                setIsActiveState(!isActiveState);
+            });
+        });
+        publisher.on('streamPlaying', () => {
+            updateLayout();
+            publisher.videos[0].video.parentElement.classList.remove('custom-class');
+        });
+    }
+
     function closeDialogExtension() {
         setShowExtensionDialog(false);
+    }
+
+    function stopScreenShare() {
+        session.unpublish(localUser.getStreamManager());
+        connectWebCam();
+    }
+
+    function checkSomeoneShareScreen() {
+        let isScreenShared;
+        // return true if at least one passes the test
+        console.log("SUBSCRIBERS: ", subscribers);
+        if (subscribers.length > 0 && localUser) isScreenShared = subscribers.some((user) => user.isScreenShareActive()) || localUser.isScreenShareActive();
+        const openviduLayoutOptions = {
+            maxRatio: 3 / 2,
+            minRatio: 9 / 16,
+            fixedRatio: isScreenShared,
+            bigClass: 'OV_big',
+            bigPercentage: 0.8,
+            bigFixedRatio: false,
+            bigMaxRatio: 3 / 2,
+            bigMinRatio: 9 / 16,
+            bigFirst: true,
+            animate: true,
+        };
+        layout.setLayoutOptions(openviduLayoutOptions);
+        updateLayout();
     }
 
     function toggleChat(property) {
@@ -333,94 +450,64 @@ const VideoRoomComponent = (props) => {
             console.log('chat', display);
             setChatDisplay(display);
         }
+        updateLayout();
     }
 
     function checkNotification(event) {
         setMessageReceived(chatDisplay === 'none');
     }
-
-    return ( 
     
-    <div className="main-lobby" id="main-lobby">
-        
+    function checkSize() {
+        if (document.getElementById('layout').offsetWidth <= 700 && !hasBeenUpdated) {
+            toggleChat('none');
+            hasBeenUpdated = true;
+        }
+        if (document.getElementById('layout').offsetWidth > 700 && hasBeenUpdated) {
+            hasBeenUpdated = false;
+        }
+    }
+
+    return ( <div className="container" id="container">
+        <ToolbarComponent
+            sessionId={mySessionId}
+            user={localUser}
+            showNotification={messageReceived}
+            camStatusChanged={camStatusChanged}
+            micStatusChanged={micStatusChanged}
+            screenShare={screenShare}
+            stopScreenShare={stopScreenShare}
+            toggleFullscreen={toggleFullscreen}
+            leaveSession={leaveSession}
+            toggleChat={toggleChat}
+        />
 
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
-        
-        <div id="layout" className="bounds team-lobby">
-        <button type="button" onClick={props.backHandler}>Back to Main Lobby</button>
-            <div className="team-lobby-left">
-                
-                <div className="members-stream-section">
-                    <div className="user-stream-wrapper">
-                        <div className="user-stream-container-ratio">
-                            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                                
-                                    <div className="user-stream-container">
-                                        <div className="OT_root OT_publisher custom-class" id="localUser">
-                                            <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
-                                        </div>
-                                    </div>
-                                
-                            )}
-                        </div>
-                    </div>
-                    {subState.map((sub, i) => (
-                        <div className="user-stream-wrapper">
-                            <div className="user-stream-container-ratio">
-                                <div className="user-stream-container">
-                                    <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
-                                        <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+
+        <div id="layout" className="bounds">
+            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                <div className="OT_root OT_publisher custom-class" id="localUser">
+                    <StreamComponent toggleUpdate={toggleUpdate} user={localUser} handleNickname={nicknameChanged} />
                 </div>
-                <div className="team-lobby-toolbar">
-                    <ToolbarComponent
-                        sessionId={mySessionId}
+            )}
+            {subState.map((sub, i) => (
+                <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+                    <StreamComponent toggleUpdate={toggleUpdate} user={sub} streamId={sub.streamManager.stream.streamId} />
+                </div>
+            ))}
+            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
+                    <ChatComponent
                         user={localUser}
-                        showNotification={messageReceived}
-                        camStatusChanged={camStatusChanged}
-                        micStatusChanged={micStatusChanged}
-                        toggleFullscreen={toggleFullscreen}
-                        leaveSession={leaveSession}
-                        toggleChat={toggleChat}
+                        chatDisplay={chatDisplay}
+                        close={toggleChat}
+                        messageReceived={checkNotification}
                     />
                 </div>
-                <div className="quiz-stream-section">
-                    <p>Insert Quiz Streaming here</p>
-                </div>
-            </div>
-            <div className="team-lobby-right">
-                <div className="general-chat">
-                    
-                </div>
-                
-                <div className="team-chat-section">
-                    <div className="answer-sheet-section">
-                        answer sheet here
-                        <div className="leave-session-button">
-                            <button onClick={handleLeave}>
-                                leave
-                            </button>
-
-                        </div>
-                    </div>
-                    <div className="team-chat">
-                        {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                            <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
-                                <ChatComponent
-                                    user={localUser}
-                                    chatDisplay={chatDisplay}
-                                    close={toggleChat}
-                                    messageReceived={checkNotification}
-                                />
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
+            )}
+            <canvas id="slide">
+                <SlideScript quiz = {props.quiz} />
+            </canvas>
+            
         </div>
         
     </div> );
