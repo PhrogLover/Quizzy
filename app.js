@@ -35,6 +35,9 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
         io.emit('chat message', msg);
     });
+    socket.on('slide data', (data) => {
+        io.emit('slide data', data);
+    });
     socket.on('team lobby start', (sessionId) => {
         createSession(sessionId).then((sessionId) => createToken(sessionId))
         .then((token) => {

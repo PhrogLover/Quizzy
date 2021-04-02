@@ -1,8 +1,7 @@
-import VideoRoomComponent from "./VideoRoomComponent";
-import React4VideoRoomComponent from "./React4VideoRoomComponent";
+import VideoRoomComponent from "../team/VideoRoomComponent";
+import React4VideoRoomComponent from "../../React4VideoRoomComponent";
 import SocketIOClient from "socket.io-client";
 import { useState, useEffect } from "react";
-import useFetch from "../hooks/useFetch";
 
 const GetVideoRoomComponent = ({ lobbyState, setLobbyState, quiz }) => {
     // const OPENVIDU_SERVER_URL = props.openviduServerUrl

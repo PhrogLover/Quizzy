@@ -3,7 +3,7 @@ import SlideScript from "../SlideScript";
 import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
 import { useState, useEffect } from "react";
-import GetVideoRoomComponent from "../../GetVideoRoomComponent";
+import GetVideoRoomComponent from "./GetVideoRoomComponent";
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
@@ -22,17 +22,11 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
     function lobbyDataInit() {
         let lobbyCount = [];
-        for (let i = 1; i <= randomTeamNumber; i++) {
+        for (let i = 1; i <= quiz.numberOfTeams; i++) {
             lobbyCount.push({index: i, name: `Team Lobby ${i}` });
         }
         return lobbyCount;
     }
-
-    let randomTeamNumber = Math.floor(Math.random()*23 +2);
-    
-    // for (let i = 0; i < 7; i++) {
-    //     lobbyCount.push(i);
-    // }
 
     function makeGrid(){
         let numOfCols = Math.floor(Math.sqrt(lobbyData.length));
@@ -84,7 +78,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                         }
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyData.map((lobby, i) => (
-                                <LobbyGridElement key={ i } quiz={ quiz } index={ lobby } teamLobbyHandler = { teamLobbyHandler } />
+                                <LobbyGridElement key={ i } quiz={ quiz } lobby={ lobby } teamLobbyHandler = { teamLobbyHandler } />
                             ))}
                         </div>
                     </div>
