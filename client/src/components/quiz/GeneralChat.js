@@ -54,13 +54,16 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
             {gcOpen && <div className= "general-chat">
                 <div className="chat-toolbar-container">
                     <div className="collapse-chat-button chat-toolbar-buttons" onClick={() => setgcOpen(false)} >
-                        <i className="fas fa-chevron-right"/>
+                        <i className="fas fa-times"/>
                     </div>
                     <div className="chat-toolbar-buttons">
                     <i className="fas fa-user-friends"/>
                     </div>
                     <div className="chat-toolbar-buttons">
                         <i className="fas fa-ellipsis-h"/>
+                    </div>
+                    <div className="general-chat-label">
+                        Lobby Chat
                     </div>
                 </div>
                 <div className="pinned-message-container">                    

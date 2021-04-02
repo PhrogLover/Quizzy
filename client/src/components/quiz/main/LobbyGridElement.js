@@ -3,7 +3,7 @@ import "./lobbygridelement.css";
 const LobbyGridElement = ({ quiz, lobby, teamLobbyHandler }) => {
 
     return ( 
-            <button type="button" onClick={(e) => (teamLobbyHandler())} style={{ textDecoration: 'none' }}>
+            <button type="button" onClick={(e) => (teamLobbyHandler())}>
                 <div className="lobby-grid-element">
                     <div className="lobby-grid-index">{ lobby.index }</div>            
                     <div className="team-name">{ lobby.name }</div>
@@ -16,7 +16,7 @@ const LobbyGridElement = ({ quiz, lobby, teamLobbyHandler }) => {
                     </div>
                 </div>
             </button>
-     );
+    );
 }
  
 export default LobbyGridElement;

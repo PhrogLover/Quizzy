@@ -105,9 +105,10 @@ const ToolbarComponent = (props) => {
                         </IconButton>
                          <IconButton color="inherit" onClick={toggleChat} id="navChatButton">
                             {props.showNotification && <div id="point" className="" />}
-                            <Tooltip title="Chat">
-                                <QuestionAnswer />
-                            </Tooltip>
+                            <QuestionAnswer />
+                            {/* <Tooltip title="Chat">
+                                
+                            </Tooltip> */}
                         </IconButton>
                     </div>
                 </Toolbar>
