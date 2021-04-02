@@ -20,15 +20,17 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
         }        
     }, [nextMessage]);
 
+    // let randomTeamNumber = Math.floor(Math.random()*23 +2);
+
     function lobbyDataInit() {
         let lobbyCount = [];
-        for (let i = 1; i <= randomTeamNumber; i++) {
+        for (let i = 1; i <= quiz.numberOfTeams; i++) {
             lobbyCount.push({index: i, name: `Team Lobby ${i}` });
         }
         return lobbyCount;
     }
 
-    let randomTeamNumber = Math.floor(Math.random()*23 +2);
+    
     
     // for (let i = 0; i < 7; i++) {
     //     lobbyCount.push(i);
@@ -84,7 +86,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                         }
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyData.map((lobby, i) => (
-                                <LobbyGridElement key={ i } quiz={ quiz } index={ lobby } teamLobbyHandler = { teamLobbyHandler } />
+                                <LobbyGridElement key={ i } quiz={ quiz } lobby={ lobby } teamLobbyHandler = { teamLobbyHandler } />
                             ))}
                         </div>
                     </div>

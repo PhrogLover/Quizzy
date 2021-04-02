@@ -8,7 +8,8 @@
     background-color: var(--nav-bg);
     height: var(--nav-height);
     color: var(--font-colour);
-    border-bottom: var(--colour-grey) 1px solid;
+    filter: drop-shadow(0 0 0.1rem black);
+    /* border-bottom: var(--colour-grey) 1px solid; */
     z-index: 10000;
 
     /* Makes text unselectable */ 

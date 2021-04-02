@@ -61,7 +61,8 @@
   position: relative;
   min-width: 300px;
   max-width: 300px;
-  border-left: 1px var(--colour-grey) solid;
+  /* border-left: 1px var(--colour-grey) solid; */
+  filter:drop-shadow(0 0 0.1rem black);
 }
 .team-chat-section{
   position: relative;
@@ -78,6 +79,7 @@
   min-height: 40%;
   background-color: blue;
   width: inherit;
+  border: 1px yellow solid;
 }
 .team-chat-toolbar{
   height: 40px;
@@ -170,7 +172,8 @@
   right: 0;
   overflow: hidden;
   z-index: 199999;
-  border: var(--colour-grey) 1px solid;
+  /* border: var(--colour-grey) 1px solid; */
+  filter:drop-shadow(0 0 0.1rem black);
   padding: 5px;
 
   /* Makes text unselectable */ 
