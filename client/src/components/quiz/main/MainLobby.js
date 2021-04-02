@@ -10,6 +10,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
     const [ chat, setChat ] = useState([]);
     const [ slideOpen, setSlideOpen] = useState(false);
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
+    const [ lobbyData, setLobbyData ] = useState(lobbyDataInit());
 
     useEffect(() => {
         if (nextMessage) {
@@ -19,17 +20,22 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
         }        
     }, [nextMessage]);
 
-    let randomTeamNumber = Math.floor(Math.random()*23 +2);
-    let lobbyCount = [];
-    for (let i = 0; i < randomTeamNumber; i++) {
-        lobbyCount.push(i);
+    function lobbyDataInit() {
+        let lobbyCount = [];
+        for (let i = 1; i <= randomTeamNumber; i++) {
+            lobbyCount.push({index: i, name: `Team Lobby ${i}` });
+        }
+        return lobbyCount;
     }
+
+    let randomTeamNumber = Math.floor(Math.random()*23 +2);
+    
     // for (let i = 0; i < 7; i++) {
     //     lobbyCount.push(i);
     // }
 
     function makeGrid(){
-        let numOfCols = Math.floor(Math.sqrt(lobbyCount.length));
+        let numOfCols = Math.floor(Math.sqrt(lobbyData.length));
         // console.log(numOfCols);
         let gridStyle="";
         for (let i = 0; i < numOfCols; i++) {
@@ -77,8 +83,8 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                             </div>
                         }
                         <div className="lobby-grid" style = {makeGrid()}>
-                            { lobbyCount.map((index) => (
-                                <LobbyGridElement key={index} quiz={ quiz } index={ index } teamLobbyHandler = { teamLobbyHandler } />
+                            { lobbyData.map((lobby, i) => (
+                                <LobbyGridElement key={ i } quiz={ quiz } index={ lobby } teamLobbyHandler = { teamLobbyHandler } />
                             ))}
                         </div>
                     </div>
