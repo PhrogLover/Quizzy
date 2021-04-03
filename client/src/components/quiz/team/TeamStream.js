@@ -4,10 +4,7 @@ import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
 import StreamComponent from '../../stream/StreamComponent';
 import DialogExtensionComponent from '../../dialog-extension/DialogExtension';
-import ChatComponent from '../../chat/ChatComponent';
 import UserModel from '../../../models/user-model';
-import ToolbarComponent from '../../toolbar/ToolbarComponent';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import SocketIOClient from "socket.io-client";
 import SlideView from '../SlideView';
 
@@ -26,18 +23,20 @@ const TeamStream = (props) => {
     const [ session, setSession ] = useState();
     const [ localUser, setLocalUser ] = useState();
     const [ subState, setSubState ] = useState([]);
-    const [ chatDisplay, setChatDisplay ] = useState('none');
     const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
-    const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
     const [ slideData, setSlideData ] = useState({
         slide: null,
-        error: null,
-        showAns: null,
-        timer: null,
-        slideWidthPass: null
+        round: -1,
+        question: 0
     });
 
+    const emptySlide = {
+        id: 0,
+        type: "none",
+        title: " ",
+        img: ""
+    }
     const ENDPOINT = "http://localhost:5000/";
     const socket = SocketIOClient(ENDPOINT);
 
@@ -47,13 +46,16 @@ const TeamStream = (props) => {
         })
 
         socket.on("slide data", data => {
-            let slideBundle = {};
-            if (data.slide !== null) slideBundle.slide = data.slide;
-            if (data.error !== null) slideBundle.error = data.error;
-            if (data.showAns !== null) slideBundle.showAns = data.showAns;
-            if (data.timer !== null) slideBundle.timer = data.timer;
-            if (data.slideWidthPass !== null) slideBundle.slideWidthPass = data.slideWidthPass;
-            console.log(slideBundle);
+            let slideBundle = data;
+            if (slideBundle.round === -1) {
+                slideBundle.slide = emptySlide;
+            }
+            else if (slideBundle.question === -1) {
+                slideBundle.slide = props.quiz.slides[slideBundle.round];
+            }
+            else {
+                slideBundle.slide = props.quiz.slides[slideBundle.round][slideBundle.question];
+            }
             setSlideData(slideBundle);
         })
 
@@ -61,7 +63,6 @@ const TeamStream = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log("SLIDE: ",slideData)
         setToggleIcon(!toggleIcon);
     }, [slideData])
 
@@ -130,7 +131,9 @@ const TeamStream = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            socket.emit("team lobby start", mySessionId, "stream");
+            setTimeout(() => {
+                socket.emit("team lobby start", mySessionId, "stream");
+            }, 100)
         }
     }
 
@@ -212,29 +215,6 @@ const TeamStream = (props) => {
     }
 
     const [ toggleIcon, setToggleIcon ] = useState(false);
-
-    function camStatusChanged() {
-        localUserModel.setVideoActive(!localUserModel.isVideoActive());
-        localUserModel.getStreamManager().publishVideo(localUserModel.isVideoActive());
-        sendSignalUserChanged({ isVideoActive: localUserModel.isVideoActive() });
-        setLocalUser(localUserModel);
-        setToggleIcon(!toggleIcon);
-    }
-
-    function micStatusChanged() {
-        localUserModel.setAudioActive(!localUserModel.isAudioActive());
-        localUserModel.getStreamManager().publishAudio(localUserModel.isAudioActive());
-        sendSignalUserChanged({ isAudioActive: localUserModel.isAudioActive() });
-        setLocalUser(localUserModel);
-        setToggleIcon(!toggleIcon);
-    }
-
-    function nicknameChanged(nickname) {
-        let thisLocalUser = localUser;
-        thisLocalUser.setNickname(nickname);
-        setLocalUser(thisLocalUser);
-        sendSignalUserChanged({ nickname: localUser.getNickname() });
-    }
 
     function deleteSubscriber(stream) {
         const remoteUsers = $.extend(true, [], subscribers)
@@ -352,7 +332,6 @@ const TeamStream = (props) => {
         <div id="layout" className="team-lobby">
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
             <div className="team-lobby-left">
-                
                 <div className="members-stream-section">
                     { slideData && slideData.slide && <SlideView quiz = {props.quiz} slide = {slideData.slide} error = {slideData.error} showAns = {slideData.showAns} timer = {slideData.timer} slideWidthPass = {slideData.slideWidthPass} toggleIcon={toggleIcon}/> }
                     {subState.map((sub, i) => (

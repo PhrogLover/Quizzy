@@ -15,6 +15,7 @@ let OV = null;
 var localUserModel = new UserModel();
 let leaveSessionVar = null;
 let subscribers = [];
+let sendSlideData = {};
 
 const HostStream = (props) => {
 
@@ -30,13 +31,7 @@ const HostStream = (props) => {
     const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
-    const [ slideData, setSlideData ] = useState({
-        slide: null,
-        error: null,
-        showAns: null,
-        timer: null,
-        slideWidthPass: null
-    });
+    const [ slideData, setSlideData ] = useState();
 
     const ENDPOINT = "http://localhost:5000/";
     const socket = SocketIOClient(ENDPOINT);
@@ -45,9 +40,8 @@ const HostStream = (props) => {
         socket.on("team lobby get tokenhost", token => {
             getToken(token);
         });
-        socket.on("ping host", () => {
-            console.log("ping")
-            socket.emit("slide data", slideData);
+        socket.on('ping host', () => {
+            socket.emit("slide data", sendSlideData);
         });
 
         return () => socket.disconnect();
@@ -352,12 +346,11 @@ const HostStream = (props) => {
         }
     }
 
-    function checkNotification(event) {
-        setMessageReceived(chatDisplay === 'none');
-    }
-
     useEffect(() => {
-        if (slideData.slide !== null) socket.emit("slide data", slideData);
+        if (slideData) {
+            sendSlideData = slideData;
+            socket.emit("slide data", slideData);
+        }
     }, [slideData])
 
     return ( 

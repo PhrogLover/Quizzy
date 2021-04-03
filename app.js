@@ -36,6 +36,7 @@ io.on('connection', (socket) => {
         io.emit('chat message', msg);
     });
     socket.on('slide data', (data) => {
+        console.log(data)
         io.emit('slide data', data);
     });
     socket.on('ping host', () => {
