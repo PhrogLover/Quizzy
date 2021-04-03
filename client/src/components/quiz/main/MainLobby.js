@@ -1,9 +1,8 @@
 import "./mainlobby.css";
-import SlideScript from "../SlideScript";
 import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
 import { useState, useEffect } from "react";
-import GetVideoRoomComponent from "./GetVideoRoomComponent";
+import VideoRoomComponent from "../team/VideoRoomComponent";
 import HostStream from "../host/HostStream";
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
@@ -75,7 +74,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                                     <i className="fas fa-table"/>
                                 </div>
                                 <div className="slide-window">
-                                    <HostStream quiz={ quiz } sessionName={"StreamTest1"}/>
+                                    <HostStream socket = { socket } quiz={ quiz } sessionName={"StreamTest1"}/>
                                 </div>
                             </div>
                         }
@@ -88,7 +87,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                 </div> }
                 { lobbyState.type === "team" && 
                     <div className="main-body">
-                        <GetVideoRoomComponent transmitSessionName={"StreamTest1"} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
+                        <VideoRoomComponent socket = { socket } transmitSessionName={"StreamTest1"} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
                     </div> }
                 <div className="main-chat">
                     <GeneralChat chat={ chat } socket = { socket } />

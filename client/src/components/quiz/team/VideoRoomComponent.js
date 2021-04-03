@@ -25,8 +25,21 @@ const VideoRoomComponent = (props) => {
     const [ localUser, setLocalUser ] = useState();
     const [ subState, setSubState ] = useState([]);
     const [ chatDisplay, setChatDisplay ] = useState('none');
-    const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ messageReceived, setMessageReceived ] = useState(false);
+    const [ token, getToken ] = useState();
+
+    function backHandler() {
+        const newState = {
+            type: "main"
+        }
+        props.setLobbyState(newState);
+    }
+
+    useEffect(() => {
+        props.socket.on("team lobby get tokenroom", token => {
+            getToken(token);
+        })
+    }, [])
 
     useEffect(() => {
         leaveSessionVar = session;
@@ -47,16 +60,14 @@ const VideoRoomComponent = (props) => {
     }, [])
 
     useEffect(() => {
-        let token
-        if(props.token && !localUser){
-            console.log(props.token)
-            token = props.token;
+        if(token && !localUser){
+            console.log(token)
             connect(token);
         }
         else if (session) {
             console.log('There was an error getting the token ');
         }
-    }, [props.token])
+    }, [token])
 
     function onbeforeunload(event) {
         leaveSession();
@@ -423,7 +434,7 @@ const VideoRoomComponent = (props) => {
                     <div className="quiz-stream-section">
                         <div className="quiz-slides-view">
                             <div className="quiz-slides-ratio">
-                                <TeamStream quiz = { props.quiz } />
+                                <TeamStream socket = { props.socket } quiz = { props.quiz } />
                             </div>  
                         </div>
                     </div>
@@ -437,7 +448,7 @@ const VideoRoomComponent = (props) => {
                     <div className="team-chat-section">
                         <div className="answer-sheet-section">
                             <div className="answer-sheet-toolbar">
-                                <button className="leave-team-button" type="button" onClick={props.backHandler}>
+                                <button className="leave-team-button" type="button" onClick={backHandler}>
                                     <i className="fas fa-sign-out-alt"></i>
                                 </button>
                                 <div className="chat-label">

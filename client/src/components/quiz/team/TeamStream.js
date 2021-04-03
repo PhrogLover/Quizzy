@@ -4,7 +4,6 @@ import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
 import StreamComponent from '../../stream/StreamComponent';
 import UserModel from '../../../models/user-model';
-import SocketIOClient from "socket.io-client";
 import SlideView from '../SlideView';
 
 let OV = null;
@@ -35,15 +34,13 @@ const TeamStream = (props) => {
         title: " ",
         img: ""
     }
-    const ENDPOINT = "http://localhost:5000/";
-    const socket = SocketIOClient(ENDPOINT);
 
     useEffect(() => {
-        socket.on("team lobby get tokenstream", token => {
+        props.socket.on("team lobby get tokenstream", token => {
             getToken(token);
         })
 
-        socket.on("slide data", data => {
+        props.socket.on("slide data", data => {
             let slideBundle = data;
             if (slideBundle.round === -1) {
                 slideBundle.slide = emptySlide;
@@ -56,8 +53,6 @@ const TeamStream = (props) => {
             }
             setSlideData(slideBundle);
         })
-
-        return () => socket.disconnect();
     }, [])
 
     useEffect(() => {
@@ -115,9 +110,7 @@ const TeamStream = (props) => {
         if (props.token !== undefined) {
             connect(props.token);
         } else {
-            setTimeout(() => {
-                socket.emit("team lobby start", mySessionId, "stream");
-            }, 100)
+            props.socket.emit("team lobby start", mySessionId, "stream");
         }
     }
 
@@ -165,7 +158,7 @@ const TeamStream = (props) => {
         subscribeToStreamDestroyed();
 
         setLocalUser(localUserModel);
-        socket.emit('ping host');
+        props.socket.emit('ping host');
         // setUserpublisher(publisher);
     }
 

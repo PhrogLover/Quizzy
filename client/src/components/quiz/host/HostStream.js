@@ -5,7 +5,6 @@ import $ from "jquery";
 import StreamComponent from '../../stream/StreamComponent';
 import UserModel from '../../../models/user-model';
 import ToolbarComponent from '../../toolbar/ToolbarComponent';
-import SocketIOClient from "socket.io-client";
 import SlideScript from '../SlideScript';
 
 let OV = null;
@@ -27,18 +26,13 @@ const HostStream = (props) => {
     const [ token, getToken ] = useState();
     const [ slideData, setSlideData ] = useState();
 
-    const ENDPOINT = "http://localhost:5000/";
-    const socket = SocketIOClient(ENDPOINT);
-
     useEffect(() => {
-        socket.on("team lobby get tokenhost", token => {
+        props.socket.on("team lobby get tokenhost", token => {
             getToken(token);
         });
-        socket.on('ping host', () => {
-            socket.emit("slide data", sendSlideData);
+        props.socket.on('ping host', () => {
+            props.socket.emit("slide data", sendSlideData);
         });
-
-        return () => socket.disconnect();
     }, [])
 
     useEffect(() => {
@@ -93,7 +87,7 @@ const HostStream = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            socket.emit("team lobby start", mySessionId, "host");
+            props.socket.emit("team lobby start", mySessionId, "host");
         }
     }
 
@@ -311,7 +305,7 @@ const HostStream = (props) => {
     useEffect(() => {
         if (slideData) {
             sendSlideData = slideData;
-            socket.emit("slide data", slideData);
+            props.socket.emit("slide data", slideData);
         }
     }, [slideData])
 
