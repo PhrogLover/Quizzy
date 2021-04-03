@@ -5,6 +5,11 @@ import Timer from "./Timer";
 
 const SlideView = ( { quiz, isPending, onSlideChange, onSlideChangeVar, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
 
+    const [ index, setIndex ] = useState({
+        round: 0,
+        question: -1
+    });
+
     let answers = "";
     if(slide.type === "question") {
         for (let i = 0; i < slide.answers.length; i++) {
@@ -13,28 +18,50 @@ const SlideView = ( { quiz, isPending, onSlideChange, onSlideChangeVar, slide, e
                 answers += " OR ";
             }
         }
-    }   
+    }
+    
+    useEffect(() => {
+        if (slide.type === "none") {
+            setIndex({
+                round: -1,
+                question: -1
+            })
+        }
+        else if (quiz.slides[0] === slide) {
+            setIndex({
+                round: 0,
+                question: -1
+            })
+        }
+        else {
+            for (let i = 1; i < quiz.slides.length; i++) {
+                for (let j = 0; j < quiz.slides[i].length; j++) {
+                    if (quiz.slides[i][j] === slide) {
+                        setIndex({
+                            round: i,
+                            question: j
+                        })
+                        return;
+                    }
+                }
+            }
+        }
+    }, [slide])
     
     useEffect(() => {
         if (onSlideChange) {
             let slideBundle = {
-                quiz: null,
-                slide: null,
-                error: null,
-                showAns: null,
-                timer: null,
-                slideWidthPass: null
+                round: index.round,
+                question: index.question,
+                error: error,
+                showAns: showAns,
+                timer: timer,
+                slideWidthPass: slideWidthPass
             }
-            if (onSlideChangeVar.quiz !== quiz) slideBundle.quiz = quiz;
-            if (onSlideChangeVar.slide !== slide) slideBundle.slide = slide;
-            if (onSlideChangeVar.error !== error) slideBundle.error = error;
-            if (onSlideChangeVar.showAns !== showAns) slideBundle.showAns = showAns;
-            if (onSlideChangeVar.timer !== timer) slideBundle.timer = timer;
-            if (onSlideChangeVar.slideWidthPass !== slideWidthPass) slideBundle.slideWidthPass = slideWidthPass;
-            console.log("IN THE VIEW", slideBundle, onSlideChangeVar)
+            console.log(slideBundle)
             onSlideChange(slideBundle);
         }
-    }, [quiz, slide, error, showAns, timer, slideWidthPass])
+    }, [quiz, index, error, showAns, timer, slideWidthPass])
 
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,
