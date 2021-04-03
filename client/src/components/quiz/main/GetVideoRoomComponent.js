@@ -20,7 +20,7 @@ const GetVideoRoomComponent = ({ lobbyState, setLobbyState, quiz }) => {
     }
 
     useEffect(() => {
-        socket.on("team lobby get token", token => {
+        socket.on("team lobby get tokenroom", token => {
             getToken(token);
         })
 

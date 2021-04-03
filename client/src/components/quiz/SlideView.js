@@ -3,7 +3,7 @@ import useFitText from "use-fit-text";
 import Family from "./Family";
 import Timer from "./Timer";
 
-const SlideView = ( { quiz, onSlideChange, onSlideChangeVar, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
+const SlideView = ( { quiz, isPending, onSlideChange, onSlideChangeVar, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
 
     let answers = "";
     if(slide.type === "question") {
