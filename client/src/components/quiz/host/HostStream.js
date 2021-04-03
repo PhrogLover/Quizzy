@@ -3,13 +3,10 @@ import "./HostStream.css";
 import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
 import StreamComponent from '../../stream/StreamComponent';
-import DialogExtensionComponent from '../../dialog-extension/DialogExtension';
 import UserModel from '../../../models/user-model';
 import ToolbarComponent from '../../toolbar/ToolbarComponent';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import SocketIOClient from "socket.io-client";
 import SlideScript from '../SlideScript';
-import useFetch from '../../../hooks/useFetch';
 
 let OV = null;
 var localUserModel = new UserModel();
@@ -27,9 +24,6 @@ const HostStream = (props) => {
     const [ session, setSession ] = useState();
     const [ localUser, setLocalUser ] = useState();
     const [ subState, setSubState ] = useState([]);
-    const [ chatDisplay, setChatDisplay ] = useState('none');
-    const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
-    const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
     const [ slideData, setSlideData ] = useState();
 
@@ -56,19 +50,6 @@ const HostStream = (props) => {
     }, [subState.length])
 
     useEffect(() => {
-        const openViduLayoutOptions = {
-            maxRatio: 3 / 2, // The narrowest ratio that will be used (default 2x3)
-            minRatio: 9 / 16, // The widest ratio that will be used (default 16x9)
-            fixedRatio: false, // If this is true then the aspect ratio of the video is maintained and minRatio and maxRatio are ignored (default false)
-            bigClass: 'OV_big', // The class to add to elements that should be sized bigger
-            bigPercentage: 0.8, // The maximum percentage of space the big ones should take up
-            bigFixedRatio: false, // fixedRatio for the big ones
-            bigMaxRatio: 3 / 2, // The narrowest ratio to use for the big elements (default 2x3)
-            bigMinRatio: 9 / 16, // The widest ratio to use for the big elements (default 16x9)
-            bigFirst: true, // Whether to place the big one in the top left (true) or bottom right
-            animate: true, // Whether you want to animate the transitions
-        };
-
         window.addEventListener('beforeunload', onbeforeunload);
         joinSession();
 
@@ -327,25 +308,6 @@ const HostStream = (props) => {
         }
     }
 
-    function closeDialogExtension() {
-        setShowExtensionDialog(false);
-    }
-
-    function toggleChat(property) {
-        let display = property;
-
-        if (display === undefined) {
-            display = chatDisplay === 'none' ? 'block' : 'none';
-        }
-        if (display === 'block') {
-            setChatDisplay(display);
-            setMessageReceived(false);
-        } else {
-            console.log('chat', display);
-            setChatDisplay(display);
-        }
-    }
-
     useEffect(() => {
         if (slideData) {
             sendSlideData = slideData;
@@ -354,49 +316,32 @@ const HostStream = (props) => {
     }, [slideData])
 
     return ( 
-    
-        
         <div id="layout" className="team-lobby">
-        <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
-                
-                <div className="members-stream-section">
-                    <div className="user-stream-wrapper">
-                        <div className="user-stream-container-ratio">
-                            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                                <div className="user-stream-container">
-                                    <div className="OT_root OT_publisher custom-class" id="localUser">
-                                        <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    <SlideScript quiz = { props.quiz } onSlideChange={setSlideData} onSlideChangeVar={slideData} />
-                    {subState.map((sub, i) => (
-                        <div key={i} className="user-stream-wrapper">
-                            <div className="user-stream-container-ratio">
-                                <div className="user-stream-container">
-                                    <div className="OT_root OT_publisher custom-class" id="remoteUsers">
-                                        <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
-                                    </div>
+            <div className="members-stream-section">
+                <div className="user-stream-wrapper">
+                    <div className="user-stream-container-ratio">
+                        {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                            <div className="user-stream-container">
+                                <div className="OT_root OT_publisher custom-class" id="localUser">
+                                    <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        )}
+                    </div>
                 </div>
-                <div className="team-lobby-toolbar">
-                    <ToolbarComponent
-                        sessionId={mySessionId}
-                        user={localUser}
-                        showNotification={messageReceived}
-                        camStatusChanged={camStatusChanged}
-                        micStatusChanged={micStatusChanged}
-                        toggleFullscreen={toggleFullscreen}
-                        leaveSession={leaveSession}
-                        toggleChat={toggleChat}
-                    />
-                </div>
+                <SlideScript quiz = { props.quiz } onSlideChange={setSlideData} onSlideChangeVar={slideData} />
             </div>
+            <div className="team-lobby-toolbar">
+                <ToolbarComponent
+                    sessionId={mySessionId}
+                    user={localUser}
+                    camStatusChanged={camStatusChanged}
+                    micStatusChanged={micStatusChanged}
+                    toggleFullscreen={toggleFullscreen}
+                    leaveSession={leaveSession}
+                />
+            </div>
+        </div>
    );
 }
  

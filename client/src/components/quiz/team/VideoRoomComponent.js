@@ -3,7 +3,6 @@ import './VideoRoomComponent.css';
 import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
 import StreamComponent from '../../stream/StreamComponent';
-import DialogExtensionComponent from '../../dialog-extension/DialogExtension';
 import ChatComponent from '../../chat/ChatComponent';
 import UserModel from '../../../models/user-model';
 import ToolbarComponent from '../../toolbar/ToolbarComponent';
@@ -38,19 +37,6 @@ const VideoRoomComponent = (props) => {
     }, [subState.length])
 
     useEffect(() => {
-        const openViduLayoutOptions = {
-            maxRatio: 3 / 2, // The narrowest ratio that will be used (default 2x3)
-            minRatio: 9 / 16, // The widest ratio that will be used (default 16x9)
-            fixedRatio: false, // If this is true then the aspect ratio of the video is maintained and minRatio and maxRatio are ignored (default false)
-            bigClass: 'OV_big', // The class to add to elements that should be sized bigger
-            bigPercentage: 0.8, // The maximum percentage of space the big ones should take up
-            bigFixedRatio: false, // fixedRatio for the big ones
-            bigMaxRatio: 3 / 2, // The narrowest ratio to use for the big elements (default 2x3)
-            bigMinRatio: 9 / 16, // The widest ratio to use for the big elements (default 16x9)
-            bigFirst: true, // Whether to place the big one in the top left (true) or bottom right
-            animate: true, // Whether you want to animate the transitions
-        };
-
         window.addEventListener('beforeunload', onbeforeunload);
         joinSession();
 
@@ -309,10 +295,6 @@ const VideoRoomComponent = (props) => {
         }
     }
 
-    function closeDialogExtension() {
-        setShowExtensionDialog(false);
-    }
-
     function toggleChat(property) {
         let display = property;
 
@@ -376,7 +358,6 @@ const VideoRoomComponent = (props) => {
             }
         
             <div id="layout" className="team-lobby">
-            <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
                 <div className="team-lobby-left">
                     
                     <div className="members-stream-section">
@@ -445,7 +426,6 @@ const VideoRoomComponent = (props) => {
                                 <TeamStream quiz = { props.quiz } />
                             </div>  
                         </div>
-                        
                     </div>
                 </div>
                 {tcOpen &&

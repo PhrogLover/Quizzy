@@ -3,7 +3,6 @@ import "./TeamStream.css";
 import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
 import StreamComponent from '../../stream/StreamComponent';
-import DialogExtensionComponent from '../../dialog-extension/DialogExtension';
 import UserModel from '../../../models/user-model';
 import SocketIOClient from "socket.io-client";
 import SlideView from '../SlideView';
@@ -23,7 +22,6 @@ const TeamStream = (props) => {
     const [ session, setSession ] = useState();
     const [ localUser, setLocalUser ] = useState();
     const [ subState, setSubState ] = useState([]);
-    const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ token, getToken ] = useState();
     const [ slideData, setSlideData ] = useState({
         slide: null,
@@ -75,19 +73,6 @@ const TeamStream = (props) => {
     }, [subState.length])
 
     useEffect(() => {
-        const openViduLayoutOptions = {
-            maxRatio: 3 / 2, // The narrowest ratio that will be used (default 2x3)
-            minRatio: 9 / 16, // The widest ratio that will be used (default 16x9)
-            fixedRatio: false, // If this is true then the aspect ratio of the video is maintained and minRatio and maxRatio are ignored (default false)
-            bigClass: 'OV_big', // The class to add to elements that should be sized bigger
-            bigPercentage: 0.8, // The maximum percentage of space the big ones should take up
-            bigFixedRatio: false, // fixedRatio for the big ones
-            bigMaxRatio: 3 / 2, // The narrowest ratio to use for the big elements (default 2x3)
-            bigMinRatio: 9 / 16, // The widest ratio to use for the big elements (default 16x9)
-            bigFirst: true, // Whether to place the big one in the top left (true) or bottom right
-            animate: true, // Whether you want to animate the transitions
-        };
-
         window.addEventListener('beforeunload', onbeforeunload);
         joinSession();
 
@@ -128,7 +113,6 @@ const TeamStream = (props) => {
 
     function connectToSession() {
         if (props.token !== undefined) {
-            //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
             setTimeout(() => {
@@ -154,16 +138,6 @@ const TeamStream = (props) => {
                 console.log('There was an error connecting to the session:', error.code, error.message);
             });
     }
-
-    // const [ userPublisher, setUserpublisher ] = useState(false);
-
-    // useEffect(() => {
-    //     if (localUser) {
-    //         localUser.getStreamManager().on('streamPlaying', (e) => {
-    //             userPublisher.videos[0].video.parentElement.classList.remove('custom-class');
-    //         });
-    //     }
-    // }, [userPublisher])
 
     function connectWebCam() {
         // let publisher = OV.initPublisher(undefined, {
@@ -324,21 +298,16 @@ const TeamStream = (props) => {
         }
     }
 
-    function closeDialogExtension() {
-        setShowExtensionDialog(false);
-    }
-
     return ( 
         <div id="layout" className="team-lobby">
-        <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
             <div className="team-lobby-left">
                 <div className="members-stream-section">
                     { slideData && slideData.slide && <SlideView quiz = {props.quiz} slide = {slideData.slide} error = {slideData.error} showAns = {slideData.showAns} timer = {slideData.timer} slideWidthPass = {slideData.slideWidthPass} toggleIcon={toggleIcon}/> }
                     {subState.map((sub, i) => (
-                        <div className="user-stream-wrapper">
+                        <div key={i} className="user-stream-wrapper">
                             <div className="user-stream-container-ratio">
                                 <div className="user-stream-container">
-                                    <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+                                    <div className="OT_root OT_publisher custom-class" id="remoteUsers">
                                         <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
                                     </div>
                                 </div>

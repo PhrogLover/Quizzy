@@ -3,7 +3,7 @@ import $ from "jquery";
 import './React4VideoRoomComponent.css';
 import { OpenVidu } from 'openvidu-browser';
 import StreamComponent from './stream/StreamComponent';
-import DialogExtensionComponent from './dialog-extension/DialogExtension';
+// import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import ChatComponent from './chat/ChatComponent';
 import SlideScript from "./quiz/SlideScript";
 
@@ -481,7 +481,7 @@ const VideoRoomComponent = (props) => {
             toggleChat={toggleChat}
         />
 
-        <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
+        {/* <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} /> */}
 
         <div id="layout" className="bounds">
             {localUser !== undefined && localUser.getStreamManager() !== undefined && (
