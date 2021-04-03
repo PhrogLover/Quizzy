@@ -3,7 +3,7 @@ import SlideScript from "../SlideScript";
 import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
 import { useState, useEffect } from "react";
-import GetVideoRoomComponent from "../../GetVideoRoomComponent";
+import GetVideoRoomComponent from "./GetVideoRoomComponent";
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
@@ -29,12 +29,6 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
         }
         return lobbyCount;
     }
-
-    
-    
-    // for (let i = 0; i < 7; i++) {
-    //     lobbyCount.push(i);
-    // }
 
     function makeGrid(){
         let numOfCols = Math.floor(Math.sqrt(lobbyData.length));

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useFitText from "use-fit-text";
 import Family from "./Family";
 import Timer from "./Timer";
 
-const SlideView = ( { quiz, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
+const SlideView = ( { quiz, onSlideChange, onSlideChangeVar, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
 
     let answers = "";
     if(slide.type === "question") {
@@ -13,7 +13,28 @@ const SlideView = ( { quiz, slide, error = "", showAns = false, timer, slideWidt
                 answers += " OR ";
             }
         }
-    }    
+    }   
+    
+    useEffect(() => {
+        if (onSlideChange) {
+            let slideBundle = {
+                quiz: null,
+                slide: null,
+                error: null,
+                showAns: null,
+                timer: null,
+                slideWidthPass: null
+            }
+            if (onSlideChangeVar.quiz !== quiz) slideBundle.quiz = quiz;
+            if (onSlideChangeVar.slide !== slide) slideBundle.slide = slide;
+            if (onSlideChangeVar.error !== error) slideBundle.error = error;
+            if (onSlideChangeVar.showAns !== showAns) slideBundle.showAns = showAns;
+            if (onSlideChangeVar.timer !== timer) slideBundle.timer = timer;
+            if (onSlideChangeVar.slideWidthPass !== slideWidthPass) slideBundle.slideWidthPass = slideWidthPass;
+            console.log("IN THE VIEW", slideBundle, onSlideChangeVar)
+            onSlideChange(slideBundle);
+        }
+    }, [quiz, slide, error, showAns, timer, slideWidthPass])
 
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,
@@ -46,7 +67,7 @@ const SlideView = ( { quiz, slide, error = "", showAns = false, timer, slideWidt
     return (
         <>
             { error && <div className="loading">{ error }</div> }
-            <div className="slides">
+            <div className="slides" id="slides">
                 <div className={`slide-resize-me ${slideSize} `}>
                     { slide.type !== "question" && 
                         <div id="intro-slide" className=" slide">

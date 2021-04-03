@@ -18,12 +18,11 @@
   justify-content: center;
   align-items: center;
   filter: drop-shadow(0 0 0.3rem black);
-
 }
 .quiz-slides-view{
   position: relative;
   width: 82%;
-  height: 100%;
+  max-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,6 +39,7 @@
   justify-content: center;
   flex-direction: row;
   position: relative;
+  flex-wrap: wrap;  
 }
 .team-lobby-left{
   display: flex;
@@ -67,7 +67,6 @@
 .team-chat-section{
   position: relative;
   min-height: 100%;
-  background-color: purple;
   min-width: 300px;
   max-width: 300px;
   display: flex;
@@ -77,9 +76,8 @@
 .team-chat{
   position: relative;
   min-height: 40%;
-  background-color: blue;
+  background-color: var(--bg-colour);
   width: inherit;
-  border: 1px yellow solid;
 }
 .team-chat-toolbar{
   height: 40px;
@@ -97,12 +95,24 @@
 .answer-sheet-section{
   position: relative;
   flex-grow: 1;
-  background-color: purple;
+  background-color: var(--bg-colour);
   min-width: 300px;
   max-width: 300px;
   display: flex;
   flex-direction: column;
 
+}
+.leave-team-button{
+  outline: none;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--secondary-colour);
+  background-color: var(--secondary-colour);
+  color: var(--colour-white);
+  font-size: 13px;
+  height: 25px;
+  padding:0 5px;
+  z-index: 1;
+  margin-right: 5px;
 }
 .answer-sheet-toolbar{
   height: 40px;
@@ -128,9 +138,59 @@
 .team-lobby-toolbar{
   min-height: 40px;
   height: 40px;
-  background-color: red;
+  background-color: var(--bg-colour);
   width: 100%;
   position: relative;
+}
+.open-team-button{
+  position: absolute;
+  /* transform: translateX(-100%); */
+  margin-top: 48vh;
+  width: 25px;
+  min-height: 25px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  z-index: 1;
+  right:0;
+
+  background-color:transparent;
+  transition: 200ms;
+  opacity: 60%;
+  color: var(--colour-white);
+}
+.open-team-button:hover{
+  background-color: var(--colour-black2);
+  filter: brightness(150%);
+  cursor: pointer;
+  opacity: 100%;
+}
+.collapse-team-button{
+  position: absolute;
+  transform: translateX(-100%);
+  margin-top: 50%;
+  width: 25px;
+  min-height: 25px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  z-index: 1;
+  left:0;
+
+  background-color:transparent;
+  transition: 200ms;
+  opacity: 60%;
+  color: var(--colour-white);
+}
+.collapse-team-button:hover{
+  background-color: var(--colour-black2);
+  filter: brightness(150%);
+  cursor: pointer;
+  opacity: 100%;
 }
 
 /* Users Cameras */
@@ -138,8 +198,8 @@
   min-width: 100px;
   width: 19%;
   max-width: 19%;
-  height: 100% ;
-  margin: 0 0.5%;
+  height: fit-content ;
+  margin: 0 0.5% 5px 0.5%;
   
 }
 .user-stream-container-ratio{
@@ -185,6 +245,22 @@
 }
 .team-menu-toggle{
   color: white;
+  z-index: 1;
+}
+.team-toolbar-buttons{
+  margin-right: 5px;
+  width: 28px;
+  height: 28px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  background-color: var(--colour-black2);
+  z-index: 1;
+}
+.team-toolbar-buttons:hover{
+  filter: brightness(150%);
+  cursor: pointer;
 }
 
 

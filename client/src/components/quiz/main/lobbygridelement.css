@@ -11,15 +11,16 @@
     background-color: var(--colour-black);
     color: var(--font-colour);
     border:2px solid transparent;
-    transition: 100ms;
+    transition: 300ms;
 }
 .lobby-grid-element:hover{
     cursor: pointer;
 }
 .lobby-grid-index{
     position: absolute;
-    top: 0;
-    font-size: min(14px,2vw);
+    bottom: 0;
+    font-size: min(13px,2vw);
+    opacity: 30%;
 }
 .lobby-grid-element:hover{
     border:2px solid var(--primary-colour);

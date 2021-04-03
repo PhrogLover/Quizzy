@@ -1,23 +1,22 @@
 import React, { useState, useEffect  } from 'react';
-import './VideoRoomComponent.css';
+import "./HostStream.css";
 import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
-import StreamComponent from './stream/StreamComponent';
-import DialogExtensionComponent from './dialog-extension/DialogExtension';
-import ChatComponent from './chat/ChatComponent';
-import UserModel from '../models/user-model';
-import ToolbarComponent from './toolbar/ToolbarComponent';
-// import { Link , useHistory } from 'react-router-dom';
+import StreamComponent from '../../stream/StreamComponent';
+import DialogExtensionComponent from '../../dialog-extension/DialogExtension';
+import UserModel from '../../../models/user-model';
+import ToolbarComponent from '../../toolbar/ToolbarComponent';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-
-
+import SocketIOClient from "socket.io-client";
+import SlideScript from '../SlideScript';
+import useFetch from '../../../hooks/useFetch';
 
 let OV = null;
 var localUserModel = new UserModel();
 let leaveSessionVar = null;
 let subscribers = [];
 
-const VideoRoomComponent = (props) => {
+const HostStream = (props) => {
 
     let sessionName = props.sessionName ? props.sessionName : 'SessionA';
     let userName = props.user ? props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
@@ -30,6 +29,28 @@ const VideoRoomComponent = (props) => {
     const [ chatDisplay, setChatDisplay ] = useState('none');
     const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ messageReceived, setMessageReceived ] = useState(false);
+    const [ token, getToken ] = useState();
+    const quizUrl = "http://localhost:5000/api/quizzes/quiz/ee62889a-7a84-4d30-b2b6-81d524bb6597";
+    const {data: quiz, isPending, error } = useFetch(quizUrl);
+    const [ slideData, setSlideData ] = useState({
+        quiz: null,
+        slide: null,
+        error: null,
+        showAns: null,
+        timer: null,
+        slideWidthPass: null
+    });
+
+    const ENDPOINT = "http://localhost:5000/";
+    const socket = SocketIOClient(ENDPOINT);
+
+    useEffect(() => {
+        socket.on("team lobby get token", token => {
+            getToken(token);
+        })
+
+        return () => socket.disconnect();
+    }, [])
 
     useEffect(() => {
         leaveSessionVar = session;
@@ -63,16 +84,14 @@ const VideoRoomComponent = (props) => {
     }, [])
 
     useEffect(() => {
-        let token
-        if(props.token && !localUser){
-            console.log(props.token)
-            token = props.token;
+        if(token && !localUser){
+            console.log(token)
             connect(token);
         }
         else if (session) {
             console.log('There was an error getting the token ');
         }
-    }, [props.token])
+    }, [token])
 
     function onbeforeunload(event) {
         leaveSession();
@@ -98,7 +117,7 @@ const VideoRoomComponent = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            props.socket.emit("team lobby start", mySessionId);
+            socket.emit("team lobby start", mySessionId);
         }
     }
 
@@ -334,42 +353,15 @@ const VideoRoomComponent = (props) => {
         setMessageReceived(chatDisplay === 'none');
     }
 
-    const [ddOpen, setddOpen] = useState(false);
-    const closeDropdown = () => setddOpen(false);
-
-
-    const teamLobbyMenuRef = React.createRef();
-
-    function TeamLobbyMenu() {
-
-        // const [activeMenu,setActiveMenu] = useState('main');
-        
-    
-        function DropdownItem(props){
-            return(
-                <div className = "menu-item">
-                    <div className="dropdown-icon"><i className= {props.icon}/></div>
-                    {props.children}
-                </div>        
-            )}
-
-        return (
-            <>
-                <ClickAwayListener onClickAway={closeDropdown}>
-                    <div className="team-menu" ref={teamLobbyMenuRef}>
-                        <button type="button" onClick={props.backHandler}>Leave</button>
-                    </div>
-                </ClickAwayListener>
-            </>
-        );
-    }
+    useEffect(() => {
+        if (slideData.quiz !== null) socket.emit("slide data", slideData);
+    }, [slideData])
 
     return ( 
     
         
         <div id="layout" className="team-lobby">
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
-            <div className="team-lobby-left">
                 
                 <div className="members-stream-section">
                     <div className="user-stream-wrapper">
@@ -385,6 +377,7 @@ const VideoRoomComponent = (props) => {
                             )}
                         </div>
                     </div>
+                    { quiz && <SlideScript quiz = {quiz} onSlideChange={setSlideData} onSlideChangeVar={slideData} /> }
                     {subState.map((sub, i) => (
                         <div className="user-stream-wrapper">
                             <div className="user-stream-container-ratio">
@@ -409,47 +402,8 @@ const VideoRoomComponent = (props) => {
                         toggleChat={toggleChat}
                     />
                 </div>
-                <div className="quiz-stream-section">
-                    <div className="quiz-slides-view">
-                        <div className="quiz-slides-ratio">
-                            {/* <p>Insert Quiz Streaming here</p> */}
-                        </div>
-                    </div>
-                    
-                </div>
             </div>
-            <div className="team-lobby-right">
-                
-                <div className="team-chat-section">
-                    <div className="answer-sheet-section">
-                        <div className="answer-sheet-toolbar">
-                        <div className="team-menu-toggle" onClick= {() => setddOpen(!ddOpen)}>                 
-                            Menu
-                        </div>
-                            
-                        </div>
-                        answer sheet here
-                        
-                    </div>
-                    <div className="team-chat">
-                        <div className="team-chat-toolbar">
-                        </div>
-                        {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                            <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
-                                <ChatComponent
-                                    user={localUser}
-                                    chatDisplay={chatDisplay}
-                                    close={toggleChat}
-                                    messageReceived={checkNotification}
-                                />
-                            </div>
-                        )}
-                    </div>
-                </div>
-                {ddOpen && <TeamLobbyMenu/>}
-            </div>
-        </div>
    );
 }
  
-export default VideoRoomComponent;
+export default HostStream;

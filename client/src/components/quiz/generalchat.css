@@ -20,13 +20,13 @@
     align-items: center;
     justify-content: flex-end;
     flex-direction: row;
-    font-size: 20px;
+    font-size: 16px;
     position: relative;
 }
 .chat-toolbar-buttons{
     margin-right: 5px;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -46,9 +46,9 @@
 .open-chat-button{
     position: absolute;
     transform: translateX(-100%);
-    margin-top: 3px;
-    width: 30px;
-    height: 30px;
+    margin-top: 48vh;
+    width: 25px;
+    min-height: 25px;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -56,22 +56,26 @@
     border-top-left-radius: var(--border-radius);
     z-index: 1;
 
-    background-color: var(--colour-black2);
-    opacity: 100%;
+    background-color:transparent;
+    transition: 200ms;
+    opacity: 60%;
     color: var(--colour-white);
 }
 .open-chat-button:hover{
+    background-color: var(--colour-black2);
     filter: brightness(150%);
     cursor: pointer;
+    opacity: 100%;
 }
-.general-chat-label{
+.chat-label{
     position: absolute;
     margin: auto;
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
     width: 100%;
     z-index: 0;
     font-weight: 600;
+    color: var(--colour-white);
 }
 .pinned-message-container{
     position: relative;

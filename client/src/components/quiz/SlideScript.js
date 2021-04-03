@@ -2,7 +2,7 @@ import { useState } from "react";
 import SlideView from "./SlideView";
 import "./slideview.css";
 
-const SlideScript = ({ quiz }) => {
+const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ showAns, setShowAns ] = useState(false);
     const [ currentSlideScript, setCurrentSlideScript ] = useState(quiz.slides[0]);
@@ -201,11 +201,11 @@ const SlideScript = ({ quiz }) => {
     return ( 
         <>
             { isPending && <>
-                <SlideView slide={ emptySlide } slideWidthPass = "width--100per"/>
+                <SlideView slide={ emptySlide } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} slideWidthPass = "width--100per" quiz = { quiz }/>
                 <button disabled>Quiz in Progress...</button>
             </> }
             { !isPending && <>
-                <SlideView slide={ currentSlideScript } showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } /> 
+                <SlideView slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } /> 
                 <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript}>{ scriptButtonValue }</button>
             </> }
         </>

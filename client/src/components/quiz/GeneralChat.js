@@ -48,7 +48,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
     return ( <>
             {!gcOpen &&
                 <div className="open-chat-button" onClick={() => setgcOpen(true)} >
-                    <i className="fas fa-comment"/>
+                    <i className="fas fa-comment-alt"/>
                 </div>
             }
             {gcOpen && <div className= "general-chat">
@@ -62,7 +62,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                     <div className="chat-toolbar-buttons">
                         <i className="fas fa-ellipsis-h"/>
                     </div>
-                    <div className="general-chat-label">
+                    <div className="chat-label">
                         Lobby Chat
                     </div>
                 </div>
@@ -81,7 +81,6 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
                         { pinMessageOpen &&
                         <div className="pinned-message-body" contentEditable={pinEditable}>
                             { pin }
-                        
                         </div>
                         }
                     </div>

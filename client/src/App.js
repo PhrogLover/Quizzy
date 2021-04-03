@@ -7,8 +7,9 @@ import Creator from './components/creator/Creator';
 import Homepage from './components/homepage/Homepage';
 import NotFound from './components/basic/NotFound';
 import GetQuiz from './components/quiz/GetQuiz';
-import GetVideoRoomComponent from "./components/GetVideoRoomComponent";
 import GetProfile from './components/profile/GetProfile';
+import HostStream from "./components/quiz/host/HostStream";
+import TeamStream from './components/quiz/team/TeamStream';
 
 function App() {
   return (
@@ -26,11 +27,14 @@ function App() {
             <GetProfile />
             <Footer/>
           </Route>
-          <Route exact path="/mainLobby/teamLobby/:id">
-            <GetVideoRoomComponent />
-          </Route>
           <Route path="/mainLobby/:id">
             <GetQuiz />
+          </Route>
+          <Route exact path="/host/">
+            <HostStream sessionName={"StreamTest1"}/>
+          </Route>
+          <Route exact path="/team/">
+            <TeamStream sessionName={"StreamTest1"} />
           </Route>
           <Route exact path="/login">
             <Login />
