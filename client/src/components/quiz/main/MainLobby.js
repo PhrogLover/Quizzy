@@ -4,7 +4,7 @@ import GeneralChat from "../GeneralChat";
 import { useState, useEffect } from "react";
 import VideoRoomComponent from "../team/VideoRoomComponent";
 import HostStream from "../host/HostStream";
-import getUniqueId from "../../../scripts/GetUniqueId"
+import GetUniqueId from "../../../scripts/GetUniqueId"
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
@@ -18,7 +18,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
     function lobbyDataInit() {
         let lobbyCount = [];
         for (let i = 1; i <= quiz.numberOfTeams; i++) {
-            lobbyCount.push({id: getUniqueId(), index: i, name: `Team Lobby ${i}` });
+            lobbyCount.push({id: GetUniqueId(), index: i, name: `Team Lobby ${i}` });
         }
         return lobbyCount;
     }

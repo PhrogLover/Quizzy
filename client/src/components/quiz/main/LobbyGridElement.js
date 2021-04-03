@@ -3,7 +3,7 @@ import "./lobbygridelement.css";
 const LobbyGridElement = ({ quiz, lobby, teamLobbyHandler }) => {
 
     return ( 
-        <div className="lobby-grid-element" onClick={(e) => (teamLobbyHandler())}>
+        <div className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name))}>
             <div className="lobby-grid-index">{ lobby.index }</div>            
             <div className="team-name">{ lobby.name }</div>
             <div className="players-in-lobby">0/{ quiz.numberOfPlayers }</div>
