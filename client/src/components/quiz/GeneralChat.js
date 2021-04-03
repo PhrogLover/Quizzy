@@ -4,10 +4,19 @@ import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../scripts/GetUniqueId";
 import generateColour from "../../scripts/generateColour";
 
-const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
+const GeneralChat = ( { mainId, socket, chatSize }) => {
+    const [ chat, setChat ] = useState([]);
+
+    useEffect(() => {
+        socket.on("chat message "+mainId, msg => {
+            setChat((prevState) => [...prevState, msg]);
+        });
+    }, [])
+
     if (chatSize < 50) {
         chatSize = 50;
     }
+
     const [ text, setText ] = useState("");
     const [ pin, setPin ] = useState("Insert a Pin Here");
     const [ pinCheck, setPinCheck ] = useState(false);
@@ -28,7 +37,7 @@ const GeneralChat = ( { chat, setChat, socket, chatSize }) => {
             pinned: pinCheck
         }
         console.log(message)
-        socket.emit('chat message', message);
+        socket.emit('chat message', message, mainId);
         setTimeout(() => {
             setText("");
             if (chat.filter(message => (message.pinned === true))[0]){

@@ -4,28 +4,21 @@ import GeneralChat from "../GeneralChat";
 import { useState, useEffect } from "react";
 import VideoRoomComponent from "../team/VideoRoomComponent";
 import HostStream from "../host/HostStream";
+import getUniqueId from "../../../scripts/GetUniqueId"
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
-    const [ chat, setChat ] = useState([]);
     const [ slideOpen, setSlideOpen] = useState(false);
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState(lobbyDataInit());
-
-    useEffect(() => {
-        if (nextMessage) {
-            let temp = chat;
-            temp.push(nextMessage);
-            setChat(temp);
-        }        
-    }, [nextMessage]);
+    const chatSize = quiz.numberOfTeams * quiz.numberOfPlayers;
 
     // let randomTeamNumber = Math.floor(Math.random()*23 +2);
 
     function lobbyDataInit() {
         let lobbyCount = [];
         for (let i = 1; i <= quiz.numberOfTeams; i++) {
-            lobbyCount.push({index: i, name: `Team Lobby ${i}` });
+            lobbyCount.push({id: getUniqueId(), index: i, name: `Team Lobby ${i}` });
         }
         return lobbyCount;
     }
@@ -74,7 +67,7 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                                     <i className="fas fa-table"/>
                                 </div>
                                 <div className="slide-window">
-                                    <HostStream socket = { socket } quiz={ quiz } sessionName={"StreamTest1"}/>
+                                    <HostStream mainId = { id } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+id}/>
                                 </div>
                             </div>
                         }
@@ -87,10 +80,10 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                 </div> }
                 { lobbyState.type === "team" && 
                     <div className="main-body">
-                        <VideoRoomComponent socket = { socket } transmitSessionName={"StreamTest1"} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
+                        <VideoRoomComponent sessionName = { "TeamLobby"+lobbyState.id } mainId = { id } socket = { socket } transmitSessionName={"MainQuiz"+id} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
                     </div> }
                 <div className="main-chat">
-                    <GeneralChat chat={ chat } socket = { socket } />
+                    <GeneralChat mainId = { id } chatSize={ chatSize } socket = { socket } />
                 </div>
             </div>
      );

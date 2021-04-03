@@ -32,21 +32,21 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         //console.log('Client disconnected');
     });
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+    socket.on('chat message', (msg, id) => {
+        io.emit('chat message '+id, msg);
     });
-    socket.on('slide data', (data) => {
+    socket.on('slide data', (data, id) => {
         console.log(data)
-        io.emit('slide data', data);
+        io.emit('slide data '+id, data);
     });
-    socket.on('ping host', () => {
+    socket.on('ping host', (id) => {
         console.log("ping")
-        io.emit('ping host');
+        io.emit('ping host '+id);
     });
     socket.on('team lobby start', (sessionId, id) => {
         createSession(sessionId).then((sessionId) => createToken(sessionId))
         .then((token) => {
-            io.emit('team lobby get token'+id, token);
+            io.emit('team lobby get token '+id, token);
         })        
     });
 });

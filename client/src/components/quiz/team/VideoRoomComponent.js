@@ -36,7 +36,7 @@ const VideoRoomComponent = (props) => {
     }
 
     useEffect(() => {
-        props.socket.on("team lobby get tokenroom", token => {
+        props.socket.on("team lobby get token room " + props.lobbyState.id, token => {
             getToken(token);
         })
     }, [])
@@ -93,7 +93,7 @@ const VideoRoomComponent = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            props.socket.emit("team lobby start", mySessionId, "room");
+            props.socket.emit("team lobby start", mySessionId, "room "+props.lobbyState.id);
         }
     }
 
@@ -434,7 +434,7 @@ const VideoRoomComponent = (props) => {
                     <div className="quiz-stream-section">
                         <div className="quiz-slides-view">
                             <div className="quiz-slides-ratio">
-                                <TeamStream socket = { props.socket } quiz = { props.quiz } />
+                                <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } />
                             </div>  
                         </div>
                     </div>

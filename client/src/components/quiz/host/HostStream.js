@@ -27,11 +27,11 @@ const HostStream = (props) => {
     const [ slideData, setSlideData ] = useState();
 
     useEffect(() => {
-        props.socket.on("team lobby get tokenhost", token => {
+        props.socket.on("team lobby get token host "+ props.mainId, token => {
             getToken(token);
         });
-        props.socket.on('ping host', () => {
-            props.socket.emit("slide data", sendSlideData);
+        props.socket.on('ping host ' +props.mainId, () => {
+            props.socket.emit("slide data", sendSlideData, props.mainId);
         });
     }, [])
 
@@ -87,7 +87,7 @@ const HostStream = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            props.socket.emit("team lobby start", mySessionId, "host");
+            props.socket.emit("team lobby start", mySessionId, "host "+props.mainId);
         }
     }
 
@@ -305,7 +305,7 @@ const HostStream = (props) => {
     useEffect(() => {
         if (slideData) {
             sendSlideData = slideData;
-            props.socket.emit("slide data", slideData);
+            props.socket.emit("slide data", slideData, props.mainId);
         }
     }, [slideData])
 

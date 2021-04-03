@@ -13,7 +13,7 @@ let subscribers = [];
 
 const TeamStream = (props) => {
 
-    let sessionName = props.sessionName ? props.sessionName : 'StreamTest1';
+    let sessionName = props.sessionName ? props.sessionName : 'SessionA';
     let userName = props.user ? props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
 
     const [ mySessionId, setMySessionId ] = useState(sessionName);
@@ -36,11 +36,11 @@ const TeamStream = (props) => {
     }
 
     useEffect(() => {
-        props.socket.on("team lobby get tokenstream", token => {
+        props.socket.on("team lobby get token stream " + props.lobbyId, token => {
             getToken(token);
         })
 
-        props.socket.on("slide data", data => {
+        props.socket.on("slide data "+props.mainId, data => {
             let slideBundle = data;
             if (slideBundle.round === -1) {
                 slideBundle.slide = emptySlide;
@@ -110,7 +110,7 @@ const TeamStream = (props) => {
         if (props.token !== undefined) {
             connect(props.token);
         } else {
-            props.socket.emit("team lobby start", mySessionId, "stream");
+            props.socket.emit("team lobby start", mySessionId, "stream "+props.lobbyId);
         }
     }
 
@@ -158,7 +158,7 @@ const TeamStream = (props) => {
         subscribeToStreamDestroyed();
 
         setLocalUser(localUserModel);
-        props.socket.emit('ping host');
+        props.socket.emit('ping host', props.mainId);
         // setUserpublisher(publisher);
     }
 
