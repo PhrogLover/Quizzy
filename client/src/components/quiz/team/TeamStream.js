@@ -18,7 +18,7 @@ let subscribers = [];
 
 const TeamStream = (props) => {
 
-    let sessionName = props.sessionName ? props.sessionName : 'SessionA';
+    let sessionName = props.sessionName ? props.sessionName : 'StreamTest1';
     let userName = props.user ? props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
 
     const [ mySessionId, setMySessionId ] = useState(sessionName);
@@ -30,24 +30,30 @@ const TeamStream = (props) => {
     const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
-    const [ slideData, setSlideData ] = useState();
+    const [ slideData, setSlideData ] = useState({
+        slide: null,
+        error: null,
+        showAns: null,
+        timer: null,
+        slideWidthPass: null
+    });
 
     const ENDPOINT = "http://localhost:5000/";
     const socket = SocketIOClient(ENDPOINT);
 
     useEffect(() => {
-        socket.on("team lobby get token", token => {
+        socket.on("team lobby get tokenstream", token => {
             getToken(token);
         })
 
         socket.on("slide data", data => {
             let slideBundle = {};
-            if (data.quiz !== null) slideBundle.quiz = data.quiz;
             if (data.slide !== null) slideBundle.slide = data.slide;
             if (data.error !== null) slideBundle.error = data.error;
             if (data.showAns !== null) slideBundle.showAns = data.showAns;
             if (data.timer !== null) slideBundle.timer = data.timer;
             if (data.slideWidthPass !== null) slideBundle.slideWidthPass = data.slideWidthPass;
+            console.log(slideBundle);
             setSlideData(slideBundle);
         })
 
@@ -124,7 +130,7 @@ const TeamStream = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            socket.emit("team lobby start", mySessionId);
+            socket.emit("team lobby start", mySessionId, "stream");
         }
     }
 
@@ -146,43 +152,44 @@ const TeamStream = (props) => {
             });
     }
 
-    const [ userPublisher, setUserpublisher ] = useState(false);
+    // const [ userPublisher, setUserpublisher ] = useState(false);
 
-    useEffect(() => {
-        if (localUser) {
-            localUser.getStreamManager().on('streamPlaying', (e) => {
-                userPublisher.videos[0].video.parentElement.classList.remove('custom-class');
-            });
-        }
-    }, [userPublisher])
+    // useEffect(() => {
+    //     if (localUser) {
+    //         localUser.getStreamManager().on('streamPlaying', (e) => {
+    //             userPublisher.videos[0].video.parentElement.classList.remove('custom-class');
+    //         });
+    //     }
+    // }, [userPublisher])
 
     function connectWebCam() {
-        let publisher = OV.initPublisher(undefined, {
-            audioSource: undefined,
-            videoSource: undefined,
-            publishAudio: localUserModel.isAudioActive(),
-            publishVideo: localUserModel.isVideoActive(),
-            resolution: '640x480',
-            frameRate: 30,
-            insertMode: 'APPEND',
-        });
+        // let publisher = OV.initPublisher(undefined, {
+        //     audioSource: undefined,
+        //     videoSource: undefined,
+        //     publishAudio: localUserModel.isAudioActive(),
+        //     publishVideo: localUserModel.isVideoActive(),
+        //     resolution: '640x480',
+        //     frameRate: 30,
+        //     insertMode: 'APPEND',
+        // });
 
-        if (session.capabilities.publish) {
-            session.publish(publisher).then(() => {
-                if (props.joinSession) {
-                    props.joinSession();
-                }
-            });
-        }
+        // if (session.capabilities.publish) {
+        //     session.publish(publisher).then(() => {
+        //         if (props.joinSession) {
+        //             props.joinSession();
+        //         }
+        //     });
+        // }
         localUserModel.setNickname(myUserName);
         localUserModel.setConnectionId(session.connection.connectionId);
         localUserModel.setScreenShareActive(false);
-        localUserModel.setStreamManager(publisher);
+        // localUserModel.setStreamManager(publisher);
         subscribeToUserChanged();
         subscribeToStreamDestroyed();
 
         setLocalUser(localUserModel);
-        setUserpublisher(publisher);
+        socket.emit('ping host');
+        // setUserpublisher(publisher);
     }
 
     function leaveSession() {
@@ -341,45 +348,13 @@ const TeamStream = (props) => {
         setShowExtensionDialog(false);
     }
 
-    function toggleChat(property) {
-        let display = property;
-
-        if (display === undefined) {
-            display = chatDisplay === 'none' ? 'block' : 'none';
-        }
-        if (display === 'block') {
-            setChatDisplay(display);
-            setMessageReceived(false);
-        } else {
-            console.log('chat', display);
-            setChatDisplay(display);
-        }
-    }
-
-    function checkNotification(event) {
-        setMessageReceived(chatDisplay === 'none');
-    }
-
     return ( 
         <div id="layout" className="team-lobby">
         <DialogExtensionComponent showDialog={showExtensionDialog} cancelClicked={closeDialogExtension} />
             <div className="team-lobby-left">
                 
                 <div className="members-stream-section">
-                    <div className="user-stream-wrapper">
-                        <div className="user-stream-container-ratio">
-                            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                                
-                                    <div className="user-stream-container">
-                                        <div className="OT_root OT_publisher custom-class" id="localUser">
-                                            <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
-                                        </div>
-                                    </div>
-                                
-                            )}
-                        </div>
-                    </div>
-                    { slideData && <SlideView quiz = {slideData.quiz} slide = {slideData.slide} error = {slideData.error} showAns = {slideData.showAns} timer = {slideData.timer} slideWidthPass = {slideData.slideWidthPass} toggleIcon={toggleIcon}/> }
+                    { slideData && slideData.slide && <SlideView quiz = {props.quiz} slide = {slideData.slide} error = {slideData.error} showAns = {slideData.showAns} timer = {slideData.timer} slideWidthPass = {slideData.slideWidthPass} toggleIcon={toggleIcon}/> }
                     {subState.map((sub, i) => (
                         <div className="user-stream-wrapper">
                             <div className="user-stream-container-ratio">
@@ -391,18 +366,6 @@ const TeamStream = (props) => {
                             </div>
                         </div>
                     ))}
-                </div>
-                <div className="team-lobby-toolbar">
-                    <ToolbarComponent
-                        sessionId={mySessionId}
-                        user={localUser}
-                        showNotification={messageReceived}
-                        camStatusChanged={camStatusChanged}
-                        micStatusChanged={micStatusChanged}
-                        toggleFullscreen={toggleFullscreen}
-                        leaveSession={leaveSession}
-                        toggleChat={toggleChat}
-                    />
                 </div>
             </div>
         </div>

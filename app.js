@@ -38,10 +38,14 @@ io.on('connection', (socket) => {
     socket.on('slide data', (data) => {
         io.emit('slide data', data);
     });
-    socket.on('team lobby start', (sessionId) => {
+    socket.on('ping host', () => {
+        console.log("ping")
+        io.emit('ping host');
+    });
+    socket.on('team lobby start', (sessionId, id) => {
         createSession(sessionId).then((sessionId) => createToken(sessionId))
         .then((token) => {
-            io.emit('team lobby get token', token);
+            io.emit('team lobby get token'+id, token);
         })        
     });
 });

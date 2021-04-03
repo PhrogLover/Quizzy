@@ -30,10 +30,7 @@ const HostStream = (props) => {
     const [ showExtensionDialog, setShowExtensionDialog ] = useState(false);
     const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
-    const quizUrl = "http://localhost:5000/api/quizzes/quiz/ee62889a-7a84-4d30-b2b6-81d524bb6597";
-    const {data: quiz, isPending, error } = useFetch(quizUrl);
     const [ slideData, setSlideData ] = useState({
-        quiz: null,
         slide: null,
         error: null,
         showAns: null,
@@ -45,9 +42,13 @@ const HostStream = (props) => {
     const socket = SocketIOClient(ENDPOINT);
 
     useEffect(() => {
-        socket.on("team lobby get token", token => {
+        socket.on("team lobby get tokenhost", token => {
             getToken(token);
-        })
+        });
+        socket.on("ping host", () => {
+            console.log("ping")
+            socket.emit("slide data", slideData);
+        });
 
         return () => socket.disconnect();
     }, [])
@@ -117,7 +118,7 @@ const HostStream = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            socket.emit("team lobby start", mySessionId);
+            socket.emit("team lobby start", mySessionId, "host");
         }
     }
 
@@ -145,6 +146,8 @@ const HostStream = (props) => {
         if (localUser) {
             localUser.getStreamManager().on('streamPlaying', (e) => {
                 userPublisher.videos[0].video.parentElement.classList.remove('custom-class');
+                camStatusChanged();
+                micStatusChanged();
             });
         }
     }, [userPublisher])
@@ -354,7 +357,7 @@ const HostStream = (props) => {
     }
 
     useEffect(() => {
-        if (slideData.quiz !== null) socket.emit("slide data", slideData);
+        if (slideData.slide !== null) socket.emit("slide data", slideData);
     }, [slideData])
 
     return ( 
@@ -367,22 +370,20 @@ const HostStream = (props) => {
                     <div className="user-stream-wrapper">
                         <div className="user-stream-container-ratio">
                             {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                                
-                                    <div className="user-stream-container">
-                                        <div className="OT_root OT_publisher custom-class" id="localUser">
-                                            <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
-                                        </div>
+                                <div className="user-stream-container">
+                                    <div className="OT_root OT_publisher custom-class" id="localUser">
+                                        <StreamComponent toggleIcon = {toggleIcon} user={localUser} handleNickname={nicknameChanged} />
                                     </div>
-                                
+                                </div>
                             )}
                         </div>
                     </div>
-                    { quiz && <SlideScript quiz = {quiz} onSlideChange={setSlideData} onSlideChangeVar={slideData} /> }
+                    <SlideScript quiz = { props.quiz } onSlideChange={setSlideData} onSlideChangeVar={slideData} />
                     {subState.map((sub, i) => (
-                        <div className="user-stream-wrapper">
+                        <div key={i} className="user-stream-wrapper">
                             <div className="user-stream-container-ratio">
                                 <div className="user-stream-container">
-                                    <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+                                    <div className="OT_root OT_publisher custom-class" id="remoteUsers">
                                         <StreamComponent toggleIcon = {toggleIcon} user={sub} streamId={sub.streamManager.stream.streamId} />
                                     </div>
                                 </div>

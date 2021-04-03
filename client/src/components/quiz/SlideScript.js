@@ -41,6 +41,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
         }
         else if (quizIntro) {
             setIsPending(true);
+            setCurrentSlideScript(emptySlide);
             setScriptButtonDisabled(true);
             console.log(quiz)
             setTimeout(() => {
@@ -59,6 +60,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
             setScriptButtonDisabled(true);
             setScriptButtonValue("Quiz in Progress...");
             setIsPending(true);
+            setCurrentSlideScript(emptySlide);
             setTimeout(() => {
                 //pre-round time
                 console.log("pre-round time");
@@ -91,6 +93,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
                 }
                 setTimer(null);
                 setIsPending(true);
+                setCurrentSlideScript(emptySlide);
                 setTimeout(() => {
                     //question transition time
                     console.log("question transition time");
@@ -122,6 +125,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
                 return;
             }
             setIsPending(true);
+            setCurrentSlideScript(emptySlide);
             setTimeout(() => {
                 setCurrentSlideScript(quiz.slides[roundIndex][0]);
                 if (roundsRemaining !== 1 && !quiz.showAns) {
@@ -144,6 +148,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
             setScriptButtonDisabled(true);
             setScriptButtonValue("Quiz in Progress...")
             setIsPending(true);
+            setCurrentSlideScript(emptySlide);
             setTimeout(() => {
                 //pre-round time
             }, 5000);
@@ -164,6 +169,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
                 }, 1000 * quiz.slides[roundIndex][i].answerShowTime);
                 await sleep(1000 * quiz.slides[roundIndex][i].answerShowTime); 
                 setIsPending(true);
+                setCurrentSlideScript(emptySlide);
                 setTimeout(() => {
                     //question transition time
                     console.log("answer transition time");
@@ -172,6 +178,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
             }
             setShowAns(false);
             setIsPending(true);
+            setCurrentSlideScript(emptySlide);
             if (roundsRemaining === 1) {
                 setCurrentSlideScript(emptySlide);
                 setScriptButtonValue("Calculate Leaderboard")
@@ -200,12 +207,11 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar }) => {
 
     return ( 
         <>
+            <SlideView isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } /> 
             { isPending && <>
-                <SlideView slide={ emptySlide } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} slideWidthPass = "width--100per" quiz = { quiz }/>
                 <button disabled>Quiz in Progress...</button>
             </> }
             { !isPending && <>
-                <SlideView slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } /> 
                 <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript}>{ scriptButtonValue }</button>
             </> }
         </>

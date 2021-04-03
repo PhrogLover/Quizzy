@@ -21,11 +21,9 @@
 }
 .quiz-slides-view{
   position: relative;
-  width: 82%;
-  max-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: auto;
+  height: 100%;
+  display: block;
 
 }
 .members-stream-section{
@@ -61,8 +59,8 @@
   position: relative;
   min-width: 300px;
   max-width: 300px;
-  /* border-left: 1px var(--colour-grey) solid; */
-  filter:drop-shadow(0 0 0.1rem black);
+  border-left: 1px var(--colour-grey) solid;
+  /* filter:drop-shadow(0 0 0.1rem black); */
 }
 .team-chat-section{
   position: relative;

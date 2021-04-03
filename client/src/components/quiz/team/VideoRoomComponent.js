@@ -8,6 +8,7 @@ import ChatComponent from '../../chat/ChatComponent';
 import UserModel from '../../../models/user-model';
 import ToolbarComponent from '../../toolbar/ToolbarComponent';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import TeamStream from './TeamStream';
 
 let OV = null;
 var localUserModel = new UserModel();
@@ -95,7 +96,7 @@ const VideoRoomComponent = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            props.socket.emit("team lobby start", mySessionId);
+            props.socket.emit("team lobby start", mySessionId, "room");
         }
     }
 
@@ -441,8 +442,8 @@ const VideoRoomComponent = (props) => {
                     <div className="quiz-stream-section">
                         <div className="quiz-slides-view">
                             <div className="quiz-slides-ratio">
-                                {/* <p>Insert Quiz Streaming here</p> */}
-                            </div>
+                                <TeamStream quiz = { props.quiz } />
+                            </div>  
                         </div>
                         
                     </div>
@@ -496,7 +497,7 @@ const VideoRoomComponent = (props) => {
                 }
             </div>
         
-        </>
+    </>
    );
 }
  
