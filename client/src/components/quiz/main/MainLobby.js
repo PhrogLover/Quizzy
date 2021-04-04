@@ -1,7 +1,6 @@
 import "./mainlobby.css";
-import LobbyGridElement from "./LobbyGridElement";
 import GeneralChat from "../GeneralChat";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import VideoRoomComponent from "../team/VideoRoomComponent";
 import HostStream from "../host/HostStream";
 import GetUniqueId from "../../../scripts/GetUniqueId"
@@ -73,7 +72,17 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                         }
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyData.map((lobby, i) => (
-                                <LobbyGridElement key={ i } quiz={ quiz } lobby={ lobby } teamLobbyHandler = { teamLobbyHandler } />
+                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name))}>
+                                    <div className="lobby-grid-index">{ lobby.index }</div>            
+                                    <div className="team-name">{ lobby.name }</div>
+                                    <div className="players-in-lobby">0/{ quiz.numberOfPlayers }</div>
+                                    <div className="players-list"> 
+                                        <div className="players-header"> Players:</div>
+                                        <div className="players-names">
+                                            {/* insert player /list here with the map function */}
+                                        </div>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>
