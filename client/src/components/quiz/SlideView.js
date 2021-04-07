@@ -3,7 +3,7 @@ import useFitText from "use-fit-text";
 import Family from "./Family";
 import Timer from "./Timer";
 
-const SlideView = ( { quiz, isPending, onSlideChange, onSlideChangeVar, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
+const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
 
     const [ index, setIndex ] = useState({
         round: 0,
@@ -21,7 +21,10 @@ const SlideView = ( { quiz, isPending, onSlideChange, onSlideChangeVar, slide, e
     }
     
     useEffect(() => {
-        if (slide.type === "none") {
+        if (slide.type === "judge") {
+            //do nothing
+        }
+        else if (slide.type === "none") {
             setIndex({
                 round: -1,
                 question: -1

@@ -4,12 +4,14 @@ import { useState } from "react";
 import VideoRoomComponent from "../team/VideoRoomComponent";
 import HostStream from "../host/HostStream";
 import GetUniqueId from "../../../scripts/GetUniqueId"
+import AnswerJudge from "../host/AnswerJudge";
 
 const MainLobby = ({ quiz, nextMessage, id, socket }) => {
 
     const [ slideOpen, setSlideOpen] = useState(false);
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState(lobbyDataInit());
+    const [ round, setRound ] = useState(1);
     const chatSize = quiz.numberOfTeams * quiz.numberOfPlayers;
 
     // let randomTeamNumber = Math.floor(Math.random()*23 +2);
@@ -38,6 +40,13 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
             type: "team",
             id: id,
             name: name
+        }
+        setLobbyState(newState);
+    }
+
+    function judgingDone() {
+        const newState = {
+            type: "leaderboard"
         }
         setLobbyState(newState);
     }
@@ -91,6 +100,9 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                     <div className="main-body">
                         <VideoRoomComponent sessionName = { "TeamLobby"+lobbyState.id } mainId = { id } socket = { socket } transmitSessionName={"MainQuiz"+id} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
                     </div> }
+                { lobbyState.type === "judge" &&
+                    <AnswerJudge quiz = { quiz } socket = { socket } setLobbyState = { judgingDone } mainId = { id } round = { round } />
+                }
                 <div className="main-chat">
                     <GeneralChat mainId = { id } chatSize={ chatSize } socket = { socket } />
                 </div>

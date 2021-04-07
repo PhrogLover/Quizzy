@@ -94,7 +94,11 @@ const VideoRoomComponent = (props) => {
             //console.log('token received: ', this.props.token);
             connect(props.token);
         } else {
-            props.socket.emit("team lobby start", mySessionId, "room "+props.lobbyState.id);
+            const sendWindow = {
+                confirm: window.confirm,
+                assign: window.location.assign
+            }
+            props.socket.emit("team lobby start", mySessionId, "room "+props.lobbyState.id, sendWindow);
         }
     }
 
