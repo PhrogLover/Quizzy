@@ -47,15 +47,15 @@ io.on('connection', (socket) => {
     socket.on('ping host', (id) => {
         io.emit('ping host '+id);
     });
-    socket.on('team lobby start', (sessionId, id) => {
-        createSession(sessionId).then((sessionId) => createToken(sessionId))
+    socket.on('team lobby start', (sessionId, id, window) => {
+        createSession(sessionId, window).then((sessionId) => createToken(sessionId))
         .then((token) => {
             io.emit('team lobby get token '+id, token);
         })        
     });
 });
 
-function createSession(sessionId) {
+function createSession(sessionId, window) {
     return new Promise((resolve, reject) => {
         var data = JSON.stringify({ customSessionId: sessionId });
         axios
@@ -75,21 +75,21 @@ function createSession(sessionId) {
                     resolve(sessionId);
                 } else {
                     console.log(error);
-                    // console.warn(
-                    //     'No connection to OpenVidu Server. This may be a certificate error at ' + OPENVIDU_SERVER_URL,
-                    // );
-                    // if (
-                    //     window.confirm(
-                    //         'No connection to OpenVidu Server. This may be a certificate error at "' +
-                    //             OPENVIDU_SERVER_URL +
-                    //             '"\n\nClick OK to navigate and accept it. ' +
-                    //             'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
-                    //             this.OPENVIDU_SERVER_URL +
-                    //             '"',
-                    //     )
-                    // ) {
-                    //     window.location.assign(this.OPENVIDU_SERVER_URL + '/accept-certificate');
-                    // }
+                    console.warn(
+                        'No connection to OpenVidu Server. This may be a certificate error at ' + OPENVIDU_SERVER_URL,
+                    );
+                    if (
+                        window.confirm(
+                            'No connection to OpenVidu Server. This may be a certificate error at "' +
+                                OPENVIDU_SERVER_URL +
+                                '"\n\nClick OK to navigate and accept it. ' +
+                                'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
+                                this.OPENVIDU_SERVER_URL +
+                                '"',
+                        )
+                    ) {
+                        window.assign(this.OPENVIDU_SERVER_URL + '/accept-certificate');
+                    }
                 }
             });
     });

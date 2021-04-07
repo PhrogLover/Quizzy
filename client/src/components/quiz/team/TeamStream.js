@@ -110,7 +110,11 @@ const TeamStream = (props) => {
         if (props.token !== undefined) {
             connect(props.token);
         } else {
-            props.socket.emit("team lobby start", mySessionId, "stream "+props.lobbyId);
+            const sendWindow = {
+                confirm: window.confirm,
+                assign: window.location.assign
+            }
+            props.socket.emit("team lobby start", mySessionId, "stream "+props.lobbyId, sendWindow);
         }
     }
 
