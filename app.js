@@ -35,12 +35,16 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, id) => {
         io.emit('chat message '+id, msg);
     });
+    socket.on('update sheet', (sheet, id) => {
+        io.emit('update sheet '+id, sheet);
+    });
+    socket.on('send sheet', (sheet, lobbyId, mainId) => {
+        io.emit('send sheet '+mainId, sheet, lobbyId);
+    });
     socket.on('slide data', (data, id) => {
-        console.log(data)
         io.emit('slide data '+id, data);
     });
     socket.on('ping host', (id) => {
-        console.log("ping")
         io.emit('ping host '+id);
     });
     socket.on('team lobby start', (sessionId, id) => {

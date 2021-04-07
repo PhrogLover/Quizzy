@@ -8,6 +8,7 @@ import UserModel from '../../../models/user-model';
 import ToolbarComponent from '../../toolbar/ToolbarComponent';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import TeamStream from './TeamStream';
+import AnswerSheet from './AnswerSheet';
 
 let OV = null;
 var localUserModel = new UserModel();
@@ -487,7 +488,7 @@ const VideoRoomComponent = (props) => {
                                 </div>
                             </div>
                             
-                            answer sheet here
+                            { localUser && <AnswerSheet mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } questionCount = { props.quiz.numberOfQuestions } /> }
                             
                         </div>
                         <div className="team-chat">
