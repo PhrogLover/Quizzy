@@ -6,11 +6,13 @@
     position: absolute;
     top:0;
     left: 0;
-    z-index: 999999;
-    min-width: 400px !important;
+    z-index: 100;
+    min-width: 50px !important;
+    border: 1px white solid;
   }
   .toolbar{
     padding: 0 !important;
+    
   }
   
   .headerLight{
@@ -26,7 +28,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    min-width: 400px;
+    min-width: 50px;
   }
   #navChatButton {
     position: absolute;

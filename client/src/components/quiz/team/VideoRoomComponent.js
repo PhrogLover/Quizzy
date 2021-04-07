@@ -351,11 +351,11 @@ const VideoRoomComponent = (props) => {
         let newWidth=0;
         let newHeight=0;
         if (sectionHeight > sectionWidth) {
-            newWidth = sectionWidth*0.9;
+            newWidth = sectionWidth*0.99;
             newHeight = newWidth * 0.5625;
         }
          else{
-            newHeight = sectionHeight*0.9;
+            newHeight = sectionHeight*0.99;
             newWidth = newHeight * 1.7778;
          }
 
@@ -365,6 +365,28 @@ const VideoRoomComponent = (props) => {
         // console.log(newHeight);
 
         return {maxHeight: newHeight+"px", maxWidth: newWidth+ "px" };
+    }
+
+
+    function toggleLayout(){
+        
+        let mainSectionStyle="";
+        let quizStreamStyle = "";
+        let lobbyToolbarStyle = "";
+        let membersCamerasStyle = "";
+        if (!tcOpen){
+            mainSectionStyle="flexDirection: row-reverse"
+            lobbyToolbarStyle = "position: absolute, bottom: 0";
+            quizStreamStyle ="height: 100%, paddingBottom: 40px, width:100%";
+            membersCamerasStyle = "height: 100% , paddingBottom: 40px, minWidth: 210px";
+        }
+        else{
+            mainSectionStyle="flexDirection: column"
+            lobbyToolbarStyle = "position: relative";
+            quizStreamStyle ="height: 75%"
+            membersCamerasStyle = "height: 75%";
+            
+        }
     }
 
 

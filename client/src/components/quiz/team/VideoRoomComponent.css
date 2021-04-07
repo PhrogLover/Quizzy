@@ -1,6 +1,6 @@
 /* Dan's Stuff */
 .quiz-stream-section{
-  height: 70%;
+  height: 75%;
   flex-grow: 1;
   background-color: var(--bg-colour);
   width:100%;
@@ -46,7 +46,7 @@
 .members-stream-section{
   padding: 5px;
   min-height: fit-content;
-  height: 25%;
+  height: 20%;
   background-color: var(--bg-color);
   width: 100%;
   display: flex;
@@ -55,6 +55,7 @@
   flex-direction: row;
   position: relative;
   flex-wrap: wrap;  
+  border: 1px white solid;
 }
 .team-lobby-left{
   height: 100%;
@@ -63,6 +64,10 @@
   position: relative;
   overflow: hidden;
   border: indianred 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .team-lobby-right{
   display: flex;
@@ -84,7 +89,6 @@
   max-width: 300px;
   display: flex;
   flex-direction: column;
-
 }
 .team-chat{
   position: relative;
@@ -210,7 +214,7 @@
 .user-stream-wrapper{
   min-width: 100px;
   width: 19%;
-  max-width: 250px;
+  max-width: 200px;
   height: fit-content ;
   margin: 0 0.5% 5px 0.5%;
   

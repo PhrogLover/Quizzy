@@ -59,7 +59,7 @@ const ToolbarComponent = (props) => {
     }
 
     return ( 
-        <AppBar className="toolbar" id="header">
+        <AppBar className="toolbar " id="header">
                 <Toolbar className="toolbar">
                     <div id="navSessionInfo">
                         <img
