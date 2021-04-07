@@ -51,6 +51,7 @@ const VideoRoomComponent = (props) => {
     }, [subState.length])
 
     useEffect(() => {
+        window.addEventListener('resize', () => {setQuizStreamSize(resizeSlide())});
         window.addEventListener('beforeunload', onbeforeunload);
         joinSession();
 
@@ -335,19 +336,29 @@ const VideoRoomComponent = (props) => {
     const [tcOpen,settcOpen] = useState(true);
     const closeTeamChat = () => settcOpen(false);
 
+    const [ slideSize, setSlideSize ] = useState("qss-normal");
+
+    useEffect(() => {
+        if (tcOpen) {
+            setSlideSize("qss-normal");
+        }
+        else {
+            setSlideSize("qss-wide");
+        }
+    }, [tcOpen])
+
 
 
     const teamLobbyMenuRef = React.createRef();
 
     const quizStreamRef = React.createRef();
 
-    let quizStreamSize = resizeSlide();
+    const [ quizStreamSize, setQuizStreamSize ] = useState(resizeSlide());
 
     useEffect(() => {
-        console.log("bruhhhhhh");
-        quizStreamSize = resizeSlide();
-        
-    },[tcOpen])
+        // console.log($("#quiz-stream-section").width(), $("#quiz-stream-section").height())
+        setQuizStreamSize(resizeSlide());
+    },[slideSize])
 
     // React.useEffect(() => {
     //     window.addEventListener("resize", handleResize());
@@ -355,10 +366,9 @@ const VideoRoomComponent = (props) => {
     // });
 
     function resizeSlide() {
-        
+        console.log("resize");
         let sectionWidth= $("#quiz-stream-section").width();
         let sectionHeight= $("#quiz-stream-section").height();
-
 
         let newWidth=0;
         let newHeight=0;
@@ -370,11 +380,6 @@ const VideoRoomComponent = (props) => {
             newHeight = sectionHeight;
             newWidth = newHeight * 1.7778;
          }
-
-
-        // let newWidth = quizStreamRef.offsetWidth;
-        // let newHeight = quizStreamRef.current.clientHeight;
-        // console.log(newHeight);
 
         return {maxHeight: newHeight+"px", maxWidth: newWidth+ "px" };
     }
@@ -476,7 +481,7 @@ const VideoRoomComponent = (props) => {
                             toggleChat={toggleChat}
                         />
                     </div>
-                    <div id = "quiz-stream-section" className={"quiz-stream-section " + (tcOpen? "qss-normal":"qss-wide")} ref={quizStreamRef}>
+                    <div id = "quiz-stream-section" className={"quiz-stream-section " + slideSize} ref={quizStreamRef}>
                         <div className="quiz-slides-view" style={quizStreamSize}>                            
                             <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } />
                         </div>
