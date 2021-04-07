@@ -1,62 +1,6 @@
 /* Dan's Stuff */
-.quiz-stream-section{
-  height: 75%;
-  flex-grow: 1;
-  background-color: var(--bg-colour);
-  width:100%;
-  color: var(--font-colour);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  flex-direction: column;
-  border: pink 1px solid;
-}
-.quiz-slides-ratio{
-  position: relative;
-  max-width: 100%;
-  max-height:100%;
-  width: 50%  ;
-  height: 100%;
-  /* padding-top: 56.25%; */
-  background-color: var(--colour-black2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* border: blue 1px solid; */
-  overflow: hidden;
 
-}
-.quiz-slides-view{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  color: black;
-  border: yellow 1px solid;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  overflow: hidden;
-  filter: drop-shadow(0 0 0.3rem black);
-  margin: auto;
-
-
-}
-.members-stream-section{
-  padding: 5px;
-  min-height: fit-content;
-  height: 20%;
-  background-color: var(--bg-color);
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  position: relative;
-  flex-wrap: wrap;  
-  border: 1px white solid;
-}
+/* Constants */
 .team-lobby-left{
   height: 100%;
   width: 100%;
@@ -67,7 +11,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 .team-lobby-right{
   display: flex;
@@ -82,6 +25,115 @@
   /* border-left: 1px var(--colour-grey) solid; */
   filter:drop-shadow(0 0 0.1rem black);
 }
+.quiz-slides-ratio{
+  position: relative;
+  max-width: 100%;
+  max-height:100%;
+  width: 50%  ;
+  height: 100%;
+  /* padding-top: 56.25%; */
+  background-color: var(--colour-black2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: blue 1px solid; */
+  overflow: hidden;
+}
+.quiz-slides-view{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: black;
+  border: yellow 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  filter: drop-shadow(0 0 0.3rem black);
+  margin: auto;
+}
+.quiz-stream-section{
+  flex-grow: 1;
+  background-color: var(--bg-colour);
+  width:100%;
+  color: var(--font-colour);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  border: pink 1px solid;
+}
+.members-stream-section{
+  padding: 5px;
+  min-height: fit-content;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-wrap: wrap;  
+  border: 1px white solid;
+}
+.team-lobby-toolbar{
+  min-height: 40px;
+  height: 40px;
+  background-color: var(--bg-colour);
+  width: 100%;
+}
+.user-stream-wrapper{
+  min-width: 100px;
+  max-width: 200px;
+  height: fit-content ;
+  margin: 0 0.5% 5px 0.5%;
+}
+
+/* Cinematic Layout */
+.tll-wide{
+  flex-direction: row-reverse;
+}
+.qss-wide{
+  height: 100%;
+  padding-bottom: 40px;
+}
+.mss-wide{
+  flex-direction: column;
+  height: 100%;
+  min-height: 1000px;
+  min-width: 110px;
+  width: 20%;
+  padding-bottom: 40px;
+}
+.tlt-wide{
+  position: absolute;
+  bottom: 0;
+}
+.usw-wide{
+  width: 90%;
+}
+
+/* Normal Layout */
+.qss-normal{
+  height: 75%;
+}
+.tll-normal{
+  flex-direction: column;
+}
+.mss-normal{
+  flex-direction: row;
+  height: 25%;
+  width: 100%;
+}
+.tlt-normal{
+  position: relative;
+}
+.usw-normal{
+  width: 19%;
+}
+
+
+/* Team Chat Section */
 .team-chat-section{
   position: relative;
   min-height: 100%;
@@ -117,7 +169,6 @@
   max-width: 300px;
   display: flex;
   flex-direction: column;
-
 }
 .leave-team-button{
   outline: none;
@@ -152,13 +203,6 @@
   height: inherit;
   min-width: 100%;
 }
-.team-lobby-toolbar{
-  min-height: 40px;
-  height: 40px;
-  background-color: var(--bg-colour);
-  width: 100%;
-  position: relative;
-}
 .open-team-button{
   position: absolute;
   /* transform: translateX(-100%); */
@@ -186,39 +230,28 @@
 }
 .collapse-team-button{
   position: absolute;
-  transform: translateX(-100%);
-  margin-top: 50%;
-  width: 25px;
-  min-height: 25px;
+  margin-top: 1px;
+  margin-left: 5px;
+  width: 28px;
+  min-height: 28px;
   display:flex;
   align-items: center;
   justify-content: center;
-  border-bottom-left-radius: var(--border-radius);
-  border-top-left-radius: var(--border-radius);
+  border-radius: var(--border-radius);
   z-index: 1;
   left:0;
 
   background-color:transparent;
-  transition: 200ms;
-  opacity: 60%;
   color: var(--colour-white);
 }
 .collapse-team-button:hover{
   background-color: var(--colour-black2);
   filter: brightness(150%);
   cursor: pointer;
-  opacity: 100%;
 }
 
 /* Users Cameras */
-.user-stream-wrapper{
-  min-width: 100px;
-  width: 19%;
-  max-width: 200px;
-  height: fit-content ;
-  margin: 0 0.5% 5px 0.5%;
-  
-}
+
 .user-stream-container-ratio{
   width: 100%;
   padding-top: 75%;
@@ -236,7 +269,6 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-
 }
 .team-menu{
   width:150px;
@@ -281,7 +313,13 @@
 }
 
 
-
+@media screen and (max-width:650px){
+  .team-lobby-right{
+    position: absolute;
+    right: 0;
+    z-index: 1001;
+  }
+}
 
 
 

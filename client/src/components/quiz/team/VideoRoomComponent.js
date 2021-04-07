@@ -341,25 +341,33 @@ const VideoRoomComponent = (props) => {
 
     const quizStreamRef = React.createRef();
 
+    let quizStreamSize = resizeSlide();
+
     useEffect(() => {
-        resizeSlide()
-    })
+        console.log("bruhhhhhh");
+        quizStreamSize = resizeSlide();
+        
+    },[tcOpen])
+
+    // React.useEffect(() => {
+    //     window.addEventListener("resize", handleResize());
+    //     console.log("bruhhhhhh")
+    // });
 
     function resizeSlide() {
         
         let sectionWidth= $("#quiz-stream-section").width();
         let sectionHeight= $("#quiz-stream-section").height();
-        // let sectionHeight = quizStreamRef.current.offsetHeight;
-        // let sectionWidth = quizStreamRef.current.offsetHeight;
+
 
         let newWidth=0;
         let newHeight=0;
-        if (sectionHeight > sectionWidth) {
-            newWidth = sectionWidth*0.99;
+        if (sectionHeight > (0.5625*sectionWidth)) {
+            newWidth = sectionWidth;
             newHeight = newWidth * 0.5625;
         }
          else{
-            newHeight = sectionHeight*0.99;
+            newHeight = sectionHeight;
             newWidth = newHeight * 1.7778;
          }
 
@@ -369,28 +377,6 @@ const VideoRoomComponent = (props) => {
         // console.log(newHeight);
 
         return {maxHeight: newHeight+"px", maxWidth: newWidth+ "px" };
-    }
-
-
-    function toggleLayout(){
-        
-        let mainSectionStyle="";
-        let quizStreamStyle = "";
-        let lobbyToolbarStyle = "";
-        let membersCamerasStyle = "";
-        if (!tcOpen){
-            mainSectionStyle="flexDirection: row-reverse"
-            lobbyToolbarStyle = "position: absolute, bottom: 0";
-            quizStreamStyle ="height: 100%, paddingBottom: 40px, width:100%";
-            membersCamerasStyle = "height: 100% , paddingBottom: 40px, minWidth: 210px";
-        }
-        else{
-            mainSectionStyle="flexDirection: column"
-            lobbyToolbarStyle = "position: relative";
-            quizStreamStyle ="height: 75%"
-            membersCamerasStyle = "height: 75%";
-            
-        }
     }
 
 
@@ -424,15 +410,14 @@ const VideoRoomComponent = (props) => {
     return ( <>
             {!tcOpen &&
                 <div className="open-team-button" onClick={() => settcOpen(true)} >
-                    <i className="fas fa-comment"/>
+                    <i className="fas fa-bars"/>
                 </div>
             }
         
             <div id="layout" className="team-lobby">
-                <div className="team-lobby-left">
-                    
-                    <div className="members-stream-section">
-                        <div className="user-stream-wrapper">
+                <div className={"team-lobby-left " + (tcOpen? "tll-normal":"tll-wide")}>
+                    <div className={"members-stream-section " + (tcOpen? "mss-normal":"mss-wide")} >
+                        <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
                             <div className="user-stream-container-ratio">
                                 {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                                     
@@ -447,28 +432,28 @@ const VideoRoomComponent = (props) => {
                             
                             
                         </div>
-                        {/* <div className="user-stream-wrapper">
+                        <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
                                 <div className="user-stream-container-ratio">
                                 
                                 </div>
                             </div>
-                            <div className="user-stream-wrapper">
+                            <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
                                 <div className="user-stream-container-ratio">
                                 
                                 </div>
                             </div>
-                            <div className="user-stream-wrapper">
+                            <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
                                 <div className="user-stream-container-ratio">
                                 
                                 </div>
                             </div>
-                            <div className="user-stream-wrapper">
+                            <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
                                 <div className="user-stream-container-ratio">
                                     
                                 </div>
-                            </div> */}
+                            </div>
                         {subState.map((sub, i) => (
-                            <div className="user-stream-wrapper">
+                            <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
                                 <div className="user-stream-container-ratio">
                                     <div className="user-stream-container">
                                         <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
@@ -479,7 +464,7 @@ const VideoRoomComponent = (props) => {
                             </div>
                         ))}
                     </div>
-                    <div className="team-lobby-toolbar">
+                    <div className={"team-lobby-toolbar "+ (tcOpen? "tlt-normal":"tlt-wide")}>
                         <ToolbarComponent
                             sessionId={mySessionId}
                             user={localUser}
@@ -491,17 +476,14 @@ const VideoRoomComponent = (props) => {
                             toggleChat={toggleChat}
                         />
                     </div>
-                    <div id = "quiz-stream-section" className="quiz-stream-section" ref={quizStreamRef}>
-                        <div className="quiz-slides-view" style={resizeSlide()}>                            
+                    <div id = "quiz-stream-section" className={"quiz-stream-section " + (tcOpen? "qss-normal":"qss-wide")} ref={quizStreamRef}>
+                        <div className="quiz-slides-view" style={quizStreamSize}>                            
                             <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } />
                         </div>
                     </div>
                 </div>
                 {tcOpen &&
                 <div className="team-lobby-right">
-                    <div className="collapse-team-button" onClick={() => settcOpen(false)} >
-                        <i className="fas fa-arrow-right"/>
-                    </div>
                     
                     <div className="team-chat-section">
                         <div className="answer-sheet-section">
@@ -511,6 +493,9 @@ const VideoRoomComponent = (props) => {
                                 </button>
                                 <div className="chat-label">
                                     Answer Sheet
+                                </div>
+                                <div className="collapse-team-button" onClick={() => settcOpen(false)} >
+                                    <i className="fas fa-arrow-right"/>
                                 </div>
                             </div>
                             

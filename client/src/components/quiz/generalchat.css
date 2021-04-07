@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: flex-end;
     flex-direction: row;
-    font-size: 16px;
+    font-size: 18px;
     position: relative;
 }
 .chat-toolbar-buttons{
