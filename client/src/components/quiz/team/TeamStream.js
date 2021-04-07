@@ -292,10 +292,9 @@ const TeamStream = (props) => {
     }
 
     return ( 
-        <div id="layout" className="team-lobby">
-            <div className="team-lobby-left">
-                <div className="members-stream-section">
+                <div className="slide-stream">
                     { slideData && slideData.slide && <SlideView quiz = {props.quiz} slide = {slideData.slide} error = {slideData.error} showAns = {slideData.showAns} timer = {slideData.timer} slideWidthPass = {slideData.slideWidthPass} toggleIcon={toggleIcon}/> }
+                    <div className="hosts-cameras">
                     {subState.map((sub, i) => (
                         <div key={i} className="user-stream-wrapper">
                             <div className="user-stream-container-ratio">
@@ -307,9 +306,8 @@ const TeamStream = (props) => {
                             </div>
                         </div>
                     ))}
+                    </div>
                 </div>
-            </div>
-        </div>
    );
 }
  

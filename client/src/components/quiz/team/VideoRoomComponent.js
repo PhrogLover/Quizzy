@@ -334,6 +334,39 @@ const VideoRoomComponent = (props) => {
 
     const teamLobbyMenuRef = React.createRef();
 
+    const quizStreamRef = React.createRef();
+
+    useEffect(() => {
+        resizeSlide()
+    })
+
+    function resizeSlide() {
+        
+        let sectionWidth= $("#quiz-stream-section").width();
+        let sectionHeight= $("#quiz-stream-section").height();
+        // let sectionHeight = quizStreamRef.current.offsetHeight;
+        // let sectionWidth = quizStreamRef.current.offsetHeight;
+
+        let newWidth=0;
+        let newHeight=0;
+        if (sectionHeight > sectionWidth) {
+            newWidth = sectionWidth*0.9;
+            newHeight = newWidth * 0.5625;
+        }
+         else{
+            newHeight = sectionHeight*0.9;
+            newWidth = newHeight * 1.7778;
+         }
+
+
+        // let newWidth = quizStreamRef.offsetWidth;
+        // let newHeight = quizStreamRef.current.clientHeight;
+        // console.log(newHeight);
+
+        return {maxHeight: newHeight+"px", maxWidth: newWidth+ "px" };
+    }
+
+
     function TeamLobbyMenu() {
 
         // const [activeMenu,setActiveMenu] = useState('main');
@@ -387,7 +420,7 @@ const VideoRoomComponent = (props) => {
                             
                             
                         </div>
-                        <div className="user-stream-wrapper">
+                        {/* <div className="user-stream-wrapper">
                                 <div className="user-stream-container-ratio">
                                 
                                 </div>
@@ -406,7 +439,7 @@ const VideoRoomComponent = (props) => {
                                 <div className="user-stream-container-ratio">
                                     
                                 </div>
-                            </div>
+                            </div> */}
                         {subState.map((sub, i) => (
                             <div className="user-stream-wrapper">
                                 <div className="user-stream-container-ratio">
@@ -431,11 +464,9 @@ const VideoRoomComponent = (props) => {
                             toggleChat={toggleChat}
                         />
                     </div>
-                    <div className="quiz-stream-section">
-                        <div className="quiz-slides-view">
-                            <div className="quiz-slides-ratio">
-                                <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } />
-                            </div>  
+                    <div id = "quiz-stream-section" className="quiz-stream-section" ref={quizStreamRef}>
+                        <div className="quiz-slides-view" style={resizeSlide()}>                            
+                            <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } />
                         </div>
                     </div>
                 </div>
