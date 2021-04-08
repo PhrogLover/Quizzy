@@ -84,7 +84,7 @@ const Navbar = ({ user, setGoogleObj }) => {
                 <div className="dropMenu" ref={dropdownRef}>
                     {/* <CSSTransistion in={activeMenu === 'main'} unmountOnExit timeout={500} classNames="menu-primary"> */}
                         <div className="menu">
-                            <Link to="/profile/?id=1&tab=home">
+                            <Link to="/profile/?tab=home">
                                 <div className="profile-item" onClick = {closeDropdown}>
                                     <div className="profile-picture-dropdown">
                                         <img src={user.imageUrl} alt="NO"/>

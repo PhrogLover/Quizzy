@@ -13,14 +13,25 @@ import LoginRerouter from './components/login/LoginRerouter';
 import LoginDerouter from './components/login/LoginDerouter';
 
 function App() {
-  const [ googleObj, setGoogleObj ] = useState({
-    email: "aryjeleng@gmail.com",
-    familyName: "Lengvenis",
-    givenName: "Arijus",
-    googleId: "112380395290543152389",
-    imageUrl: "https://lh3.googleusercontent.com/-3hP2gkuIj-M/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckUVLf3SPlN7M1LkxUym_XQw6sYAw/s96-c/photo.jpg",
-    name: "Arijus Lengvenis"
-  });
+  const [ googleObj, setGoogleObj ] = useState(null);
+
+  // {
+  //   email: "aryjeleng@gmail.com",
+  //   familyName: "Lengvenis",
+  //   givenName: "Arijus",
+  //   googleId: "112380395290543152389",
+  //   imageUrl: "https://lh3.googleusercontent.com/-3hP2gkuIj-M/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckUVLf3SPlN7M1LkxUym_XQw6sYAw/s96-c/photo.jpg",
+  //   name: "Arijus Lengvenis"
+  // }
+
+  // {
+  //   email: "quizzyapp.dev@gmail.com"
+  //   familyName: "Admin"
+  //   givenName: "Quizzy"
+  //   googleId: "106812796264951400312"
+  //   imageUrl: "https://lh5.googleusercontent.com/-a7zvn0K9S3I/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDv_BhF6AuY08z9CbmJ-F9pFYIjA/s96-c/photo.jpg"
+  //   name: "Quizzy Admin"
+  // }
 
   function onSuccessGoogle({ profileObj }) {
     console.log(profileObj)

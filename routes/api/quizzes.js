@@ -13,7 +13,7 @@ for (let i = 0; i < quizzes.length; i++) {
 }
 
 router.get('/homepage', (req, res) => {
-    res.json(quizzesReal.quizzes);
+    res.json(quizzesReal.quizzes.filter(quiz => (quiz.deployIds)));
 });
 
 router.post('/newQuiz', (req, res) => {
