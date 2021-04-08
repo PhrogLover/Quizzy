@@ -24,6 +24,15 @@ function App() {
   //   name: "Arijus Lengvenis"
   // }
 
+  // {
+  //   email: "quizzyapp.dev@gmail.com"
+  //   familyName: "Admin"
+  //   givenName: "Quizzy"
+  //   googleId: "106812796264951400312"
+  //   imageUrl: "https://lh5.googleusercontent.com/-a7zvn0K9S3I/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDv_BhF6AuY08z9CbmJ-F9pFYIjA/s96-c/photo.jpg"
+  //   name: "Quizzy Admin"
+  // }
+
   function onSuccessGoogle({ profileObj }) {
     console.log(profileObj)
     setGoogleObj(profileObj);
