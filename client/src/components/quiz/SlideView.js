@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useFitText from "use-fit-text";
 import Family from "./Family";
+import AnswerJudge from "./host/AnswerJudge";
 import Timer from "./Timer";
 
 const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
@@ -190,6 +191,9 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                                     { answers }
                                 </div> }
                         </div>
+                    }
+                    { slide.type === "judge" &&
+                        <AnswerJudge/>
                     }
                 </div>
             </div>

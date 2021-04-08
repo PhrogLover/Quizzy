@@ -314,8 +314,8 @@ const HostStream = (props) => {
     }, [slideData])
 
     return ( 
-        <div id="layout" className="team-lobby">
-            <div className="members-stream-section">
+        <div id="layout" className="host-lobby">
+            <div className="host-camera">
                 <div className="user-stream-wrapper">
                     <div className="user-stream-container-ratio">
                         {localUser !== undefined && localUser.getStreamManager() !== undefined && (
@@ -327,9 +327,10 @@ const HostStream = (props) => {
                         )}
                     </div>
                 </div>
-                <SlideScript quiz = { props.quiz } onSlideChange={setSlideData} onSlideChangeVar={slideData} />
             </div>
-            <div className="team-lobby-toolbar">
+            <SlideScript quiz = { props.quiz } onSlideChange={setSlideData} onSlideChangeVar={slideData} />
+            
+            <div className="host-lobby-toolbar">
                 <ToolbarComponent
                     sessionId={mySessionId}
                     user={localUser}

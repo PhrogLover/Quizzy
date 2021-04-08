@@ -109,5 +109,5 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
             </div>
      );
 }
- 
+
 export default MainLobby;
