@@ -4,7 +4,7 @@ import Quizholder from "./Quizholder";
 import { Button } from "../basic/Button";
 import HelpIcon from "../basic/HelpIcon";
 
-const Homepage = () => {
+const Homepage = ({ user }) => {
 
     return ( <>
         <div className="homepage">

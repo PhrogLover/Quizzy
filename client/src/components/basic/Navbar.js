@@ -12,7 +12,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 
-const Navbar = ({ setGoogleObj }) => {
+const Navbar = ({ user, setGoogleObj }) => {
 
     const [open, setOpen] = useState(false);
     const closeDropdown = () => setOpen(false);
@@ -87,12 +87,11 @@ const Navbar = ({ setGoogleObj }) => {
                             <Link to="/profile/?id=1&tab=home">
                                 <div className="profile-item" onClick = {closeDropdown}>
                                     <div className="profile-picture-dropdown">
-                                        profile image
-                                        {/* insert profile image */}
+                                        <img src={user.imageUrl} alt="NO"/>
                                     </div>
                                     <div className="profile-dropdown-body">
                                         <div className="username-dropdown">
-                                            Insert Username
+                                            { user.name }
                                         </div>
                                         <div className="view-profile-link" >                                                                                
                                             View Your Profile                                        

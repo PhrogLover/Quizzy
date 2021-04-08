@@ -19,7 +19,6 @@ router.get('/homepage', (req, res) => {
 router.post('/newQuiz', (req, res) => {
     if (req.body) {
         let newQuiz = req.body;
-        newQuiz.creator = "AriG7";
         newQuiz.rating = 4.3;
         if (newQuiz.type === "standard") {
             newQuiz.family = "-";
@@ -67,6 +66,26 @@ router.get('/quiz/chat/:id', (req, res) => {
         else {
             res.json({ msg: "There is no quiz with the id: " + req.params.id});
         }
+    }
+})
+
+router.get('/profile/:id', (req, res) => {
+    res.json(quizzesReal.quizzes.filter(quiz => quiz.creatorId === req.params.id));
+})
+
+router.put('/update', (req, res) => {
+    const found = quizzesReal.quizzes.some(quiz => quiz.id === req.body.id);
+
+    if (found) {
+        for (let i = 0; i < quizzesReal.quizzes.length; i++) {
+            if (quizzesReal.quizzes[i].id === req.body.id) {
+                quizzesReal.quizzes[i] = req.body.quiz;
+                break;
+            }
+        }
+    }
+    else {
+        res.json({ msg: "There is no quiz with the id: " + req.body.id});
     }
 })
 

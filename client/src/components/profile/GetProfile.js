@@ -7,7 +7,7 @@ import ProfileTeams from "./ProfileTeams";
 import ProfileQuizzes from "./ProfileQuizzes";
 import ProfileHome from "./ProfileHome";
 
-const GetProfile = () => {
+const GetProfile = ({ user }) => {
     const { search } = useLocation();
     const { id, tab } = queryString.parse(search);
     const profileUrl = "http://localhost:5000/api/profiles/" + id;
@@ -22,7 +22,7 @@ const GetProfile = () => {
             { profile && <>
                 <Profile profile = { profile } id={id} />
                 { tab === "friends" && <ProfileFriends profile = {profile} /> }
-                { tab === "quizzes" && <ProfileQuizzes profile = {profile} /> }
+                { tab === "quizzes" && <ProfileQuizzes profile = {profile} user={user} /> }
                 { tab === "teams" && <ProfileTeams profile = {profile} /> }
                 { tab !== "friends" && tab !== "quizzes" && tab !== "teams" && <ProfileHome profile = {profile} /> }
             </>
