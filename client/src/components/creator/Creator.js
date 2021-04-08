@@ -10,12 +10,14 @@ import GetUniqueId from "../../scripts/GetUniqueId";
 import HelpIcon from "../basic/HelpIcon";
 import { Button } from "../basic/Button";
 
-const Creator = () => {
+const Creator = ({ user }) => {
     const history = useHistory();
     
     const [ isPending, setIsPending ] = useState(false);
     const [ quiz, setQuiz] = useState({
         id: GetUniqueId(),
+        creatorId: user.googleId,
+        creator: user.name,
         title: null,
         category: null,
         family: null,
@@ -30,7 +32,8 @@ const Creator = () => {
         seasonIteration: 1,
         time: new Date(),
         slides: [],
-        showAns: true
+        showAns: true,
+        deployIds: []
     });
 
     const [slides, setSlides ] = useState(init())

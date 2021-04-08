@@ -15,8 +15,6 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
     const [ round, setRound ] = useState(1);
     const chatSize = quiz.numberOfTeams * quiz.numberOfPlayers;
 
-    // let randomTeamNumber = Math.floor(Math.random()*23 +2);
-
     function lobbyDataInit() {
         let lobbyCount = [];
         for (let i = 1; i <= quiz.numberOfTeams; i++) {
