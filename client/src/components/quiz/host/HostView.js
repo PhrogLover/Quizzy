@@ -17,15 +17,15 @@ const HostView = ({ user, mainId, socket, quiz }) => {
 
     return ( 
         <div id="layout" className="host-lobby">
-            { lobbyState.type === "main" &&
-                <div className="main-body">
-                    <div className="main-header">
-                        <div className="quiz-title">{ quiz.title } by <i> { quiz.creator } </i></div>
-                        <div className="instructions">
-                            if Host: make sure that the players in your lobby are happy, minimaze foul activity, cheating, profanity as much as possible. At the bottom you have blah blah...
-                            if Player: respect other players, don't take away the fun fron the experience by cheating, have fun. At the bottom you can choose your blah blah...
-                        </div>
+            <div className="main-body">
+                <div className="main-header">
+                    <div className="quiz-title">{ quiz.title } by <i> { quiz.creator } </i></div>
+                    <div className="instructions">
+                        if Host: make sure that the players in your lobby are happy, minimaze foul activity, cheating, profanity as much as possible. At the bottom you have blah blah...
+                        if Player: respect other players, don't take away the fun fron the experience by cheating, have fun. At the bottom you can choose your blah blah...
                     </div>
+                </div>
+                { lobbyState.type === "main" &&
                     <div className="lobby-body">                      
                         <div className="slide-page">
                             <div className="slide-window">
@@ -33,10 +33,11 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                             </div>
                         </div>
                     </div>
-                </div> }
-                { lobbyState.type === "judge" &&
+                 }
+                 { lobbyState.type === "judge" &&
                     <AnswerJudge quiz = { quiz } socket = { socket } setLobbyState = { judgingDone } mainId = { mainId } round = { round } />
                 }
+            </div>
         </div>
    );
 }

@@ -65,10 +65,10 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
                         </div>
                     </div>
                 </div> }
-                { lobbyState.type === "team" && 
-                    <div className="main-body">
-                        <TeamLobby sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
-                    </div> }
+            { lobbyState.type === "team" && 
+                <div className="main-body">
+                    <TeamLobby sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
+                </div> }
         </div>
      );
 }
