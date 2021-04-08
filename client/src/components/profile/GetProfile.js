@@ -9,8 +9,8 @@ import ProfileHome from "./ProfileHome";
 
 const GetProfile = ({ user }) => {
     const { search } = useLocation();
-    const { id, tab } = queryString.parse(search);
-    const profileUrl = "http://localhost:5000/api/profiles/" + id;
+    const { tab } = queryString.parse(search);
+    const profileUrl = "http://localhost:5000/api/profiles/1";
     const { data: profile, isPending, error} = useFetch(profileUrl);
 
     ///profile/?id=1&tab=home
@@ -20,7 +20,7 @@ const GetProfile = ({ user }) => {
             { error && <div className="error">{ error }</div> }
             { isPending && <div className="loading">Loading...</div> }
             { profile && <>
-                <Profile profile = { profile } id={id} />
+                <Profile profile = { profile } id={1} />
                 { tab === "friends" && <ProfileFriends profile = {profile} /> }
                 { tab === "quizzes" && <ProfileQuizzes profile = {profile} user={user} /> }
                 { tab === "teams" && <ProfileTeams profile = {profile} /> }

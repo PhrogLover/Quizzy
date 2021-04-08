@@ -8,7 +8,7 @@ const Profile = ({ profile, id }) => {
     
     function NavItem(props){
         return(
-            <Link to={"/profile/?id="+props.id+"&tab="+props.tab}>
+            <Link to={"/profile/?tab="+props.tab}>
                 <div className = "nav-item"  >
                     {props.children}
                 </div>
@@ -40,16 +40,16 @@ const Profile = ({ profile, id }) => {
                         </div>
                     </div>
                     <div className="profile-nav-bar">
-                        <NavItem id={`${id}`} tab="home">                            
+                        <NavItem tab="home">                            
                             Home
                         </NavItem>
-                        <NavItem id={`${id}`} tab="quizzes">                            
+                        <NavItem tab="quizzes">                            
                             Quizzes
                         </NavItem>
-                        <NavItem id={`${id}`} tab="teams">                       
+                        <NavItem tab="teams">                       
                             Teams
                         </NavItem>
-                        <NavItem id={`${id}`} tab="friends">
+                        <NavItem tab="friends">
                             Friends
                         </NavItem>
                         {/* <NavItem>

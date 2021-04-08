@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import MainLobby from "./main/MainLobby";
 
-const GetQuiz = () => {
+const GetQuiz = ({ user }) => {
     const { id } = useParams();
     const quizUrl = "http://localhost:5000/api/quizzes/quiz/" + id;
     const {data: quiz, isPending: quizIsPending, error: quizError } = useFetch(quizUrl);
@@ -20,7 +20,7 @@ const GetQuiz = () => {
         <>
             { quizIsPending && <div className="loading">Loading...</div> }
             { quizError && <div className="error">{ quizError }</div> }
-            { quiz && <MainLobby quiz = { quiz } id={id} socket={ socket } /> }
+            { quiz && <MainLobby user = { user } quiz = { quiz } id={id} socket={ socket } /> }
         </>
     );
 }
