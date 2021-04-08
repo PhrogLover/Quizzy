@@ -145,23 +145,24 @@ const Navbar = ({ user, setGoogleObj }) => {
                                     </div>                        
                                 </DropdownItem>
                             </div>
-                            <Link to="/signout">
-                                < div className="functionals" onClick = {closeDropdown}>
-                                    <DropdownItem icon="fas fa-sign-out-alt">
-                                    <div className="item-text" >                                
-                                        <GoogleLogout
+                            
+                            < div className="functionals" onClick = {closeDropdown}>
+                                <DropdownItem icon="fas fa-sign-out-alt">
+                                    <GoogleLogout
                                         clientId="1037252816787-78e8dvck7mdfvbnaclmppu7qvinfnjap.apps.googleusercontent.com"
                                         buttonText="Logout"
                                         render={renderProps => (
-                                            <button onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</button>
+                                            <button className="logout-button" onClick={renderProps.onClick} disabled={renderProps.disabled}></button>
                                         )}
                                         onLogoutSuccess={() => (setGoogleObj(null))}
                                         >
-                                        </GoogleLogout>                               
+                                    </GoogleLogout> 
+                                    <div className="item-text" >
+                                        Log Out                                                           
                                     </div>
-                                    </DropdownItem> 
-                                </div>
-                            </Link>
+                                </DropdownItem> 
+                            </div>
+                            
                         </div>
                     {/* </CSSTransistion> */}
                 </div>
@@ -178,7 +179,7 @@ const Navbar = ({ user, setGoogleObj }) => {
                         <div id="nav-logo" className="nav-logo">
                             <img src="/images/Temp_Icon.png"/>
                         </div>
-                        <div id="title" className="title">QuizWebApp</div>
+                        <div id="title" className="title">Quizzy</div>
                     </Link>
                 </div>
                 <div className="round-wrapper dropdown-button" onClick= {() => setOpen(!open)}>                 

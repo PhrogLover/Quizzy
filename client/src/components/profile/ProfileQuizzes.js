@@ -43,11 +43,26 @@ const ProfileQuizzes = ({ profile, user }) => {
                     { isPending && <div className="Loading">Loading...</div>}
                     { quizzes && quizzes.length === 0 && <span>This user / you has/have created no quizzes</span> }
                     { quizzes && quizzes.map((quiz) => (
-                        <button key={quiz.id} type="button" onClick={() => (publishQuiz(quiz))}>
-                            <div className="quiz">
-                                { quiz.id }
+                        <div className="quiz-item-container">
+                            <div className="quiz-item-labels">
+                                <div className="quiz-item-title">
+                                    {quiz.title}
+                                </div>
+                                <div className="quiz-item-type">
+                                    {quiz.type}
+                                </div>
                             </div>
-                        </button>
+                            <div className="quiz-item-buttons">
+                                <button>
+                                    Edit Quiz
+                                </button>           
+                                <button key={quiz.id} type="button" onClick={() => (publishQuiz(quiz))}>
+                                    <div className="quiz">
+                                        Publish
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>             
