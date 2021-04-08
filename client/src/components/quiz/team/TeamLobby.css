@@ -329,7 +329,7 @@
 
 #header {
   color: #ffffff;
-  background-color: red;
+  background-color: var(--nav-bg);
   padding: 0 14px 0 0;
   position: absolute;
   top: 0;
@@ -344,7 +344,7 @@
 }
 
 #titleContent{
-  max-width: 100px;
+  max-width: 500px;
   background-color: #494949;
   margin: 5px -18px;
   padding: 0px 15px;

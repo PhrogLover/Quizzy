@@ -37,7 +37,7 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
     }
 
     return ( 
-        <div className="player-view">
+        <>
             { lobbyState.type === "main" &&
                 <div className="main-body">
                     <div className="main-header">
@@ -69,7 +69,7 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
                 <div className="main-body">
                     <TeamLobby sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
                 </div> }
-        </div>
+        </>
      );
 }
  

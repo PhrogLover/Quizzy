@@ -16,7 +16,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
     }
 
     return ( 
-        <div id="layout" className="host-lobby">
+        <>
             <div className="main-body">
                 <div className="main-header">
                     <div className="quiz-title">{ quiz.title } by <i> { quiz.creator } </i></div>
@@ -38,7 +38,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                     <AnswerJudge quiz = { quiz } socket = { socket } setLobbyState = { judgingDone } mainId = { mainId } round = { round } />
                 }
             </div>
-        </div>
+        </>
    );
 }
  
