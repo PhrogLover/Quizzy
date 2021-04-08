@@ -3,6 +3,7 @@ import GeneralChat from "../GeneralChat";
 import { useState } from "react";
 import VideoRoomComponent from "../team/VideoRoomComponent";
 import HostStream from "../host/HostStream";
+import HostView from "../host/HostView";
 import GetUniqueId from "../../../scripts/GetUniqueId"
 import AnswerJudge from "../host/AnswerJudge";
 
@@ -75,7 +76,8 @@ const MainLobby = ({ quiz, nextMessage, id, socket }) => {
                                     <i className="fas fa-table"/>
                                 </div>
                                 <div className="slide-window">
-                                    <HostStream mainId = { id } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+id}/>
+                                    <HostView id = { id } socket = { socket } quiz={ quiz } />
+                                    
                                 </div>
                             </div>
                         }
