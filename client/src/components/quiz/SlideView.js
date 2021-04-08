@@ -193,7 +193,32 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                         </div>
                     }
                     { slide.type === "judge" &&
-                        <AnswerJudge/>
+                        // EDIT THIS DIV IN THE STYLE YOU NEED IT TO BE
+                        <div id="answer-slide" className="slide">
+                        <div className="slide-bg"/>
+                            <div className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
+                                    Question { slide.quest }
+                            </div>
+                            <div id="question-round-number" className="question-round-number" ref={ questionRoundRef } style={{ fontSize: questionRoundFontSize }}>
+                                    Round { slide.round } 
+                            </div>
+                            { !slide.img &&                    
+                                <div className="slide-text center" ref={questionTextAnswerRef} style={{ fontSize: questionTextAnswerFontSize }}>
+                                    { slide.question }
+                                </div>
+                            }
+                            { slide.img &&                                              
+                                <div className="slide-text top" ref={questionTextAnswerRef} style={{ fontSize: questionTextAnswerFontSize }}>
+                                    { slide.question }
+                                </div>
+                            }
+                            <div className="slide-img">
+                                { slide.img && <img src={ slide.img } alt="question_image"/> }
+                            </div>
+                            { showAns &&<div className="answer-box center" ref={answerRef} style={{ fontSize: answerFontSize }}>
+                                { answers }
+                            </div> }
+                    </div>
                     }
                 </div>
             </div>

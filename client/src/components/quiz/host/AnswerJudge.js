@@ -55,11 +55,13 @@ const AnswerJudge = ({ quiz, socket, mainId, round, setLobbyState }) => {
                 let correctAnswer = quiz.slides[round][j+1].answers.some((answer) => answer.includes(orderedArray[i][j]));
                 if (!correctAnswer) {
                     //set current slide to this slide for judging
-                    yield {
+                    let tempSlide = {
                         slide: quiz.slides[round][j+1],
                         index: j,
                         answer: orderedArray[i][j]
                     }
+                    tempSlide.slide.type = "judge";
+                    yield tempSlide;
                 }
                 else {
                     setCorrectAnswers((prevState) => (prevState[j].sheet.push(orderedArray[i][j])));
@@ -73,7 +75,7 @@ const AnswerJudge = ({ quiz, socket, mainId, round, setLobbyState }) => {
     return ( 
         <div className="answer-judge">
             { currentSlide && currentSlide !== "end" && <>
-                <SlideView quiz = { quiz } />
+                <SlideView quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" />
                 <button type="button" onClick={answerAllowed}>Allow</button>
                 <button type="button" onClick={() => (setCurrentSlide(answerParser().slide))}>Deny</button>
             </>}
