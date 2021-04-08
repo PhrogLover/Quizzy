@@ -38,7 +38,6 @@
 .normal-title{
     clip-path: polygon(0 24%, 100% 24%, 100% 100%, 0% 100%);
 }
-
 .question-slide{
     position: relative;
 }
@@ -218,6 +217,7 @@
 .slide-resize-me{
     height: fit-content;
 }
+
 .width--20per{
     width:20%;
 }
@@ -239,6 +239,12 @@
 .width--800{
     width:800px;
 
+}
+.quiz-start-button{
+    position: absolute;
+    z-index: 50;
+    top: 50%;
+    left: 10px;
 }
 
 

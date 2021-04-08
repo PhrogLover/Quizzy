@@ -7,7 +7,7 @@
   max-height: 100%;
   position: relative;
   overflow: hidden;
-  border: indianred 1px solid;
+  /* border: indianred 1px solid; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +44,7 @@
   width: 100%;
   height: 100%;
   color: black;
-  border: yellow 1px solid;
+  /* border: yellow 1px solid; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,7 +63,7 @@
   align-items: center;
   position: relative;
   flex-direction: column;
-  border: pink 1px solid;
+  /* border: pink 1px solid; */
 }
 .members-stream-section{
   padding: 5px;
@@ -74,7 +74,7 @@
   justify-content: center;
   position: relative;
   flex-wrap: wrap;  
-  border: 1px white solid;
+  /* border: 1px white solid; */
 }
 .team-lobby-toolbar{
   min-height: 40px;
@@ -102,7 +102,7 @@
   height: 100%;
   min-height: 1000px;
   min-width: 110px;
-  width: 20%;
+  width: 18%;
   padding-bottom: 40px;
 }
 .tlt-wide{
@@ -110,7 +110,7 @@
   bottom: 0;
 }
 .usw-wide{
-  width: 90%;
+  width: 85%;
 }
 
 /* Normal Layout */
