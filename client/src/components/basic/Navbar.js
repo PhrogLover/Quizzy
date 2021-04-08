@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
 import "./navbar.css";
 import { Link } from "react-router-dom";
+import { GoogleLogout } from 'react-google-login';
 import './dropdown.css';
 // import ReportABug from './ReportABug';
 import { Button } from './Button';
@@ -11,7 +12,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 
-const Navbar = () => {
+const Navbar = ({ setGoogleObj }) => {
 
     const [open, setOpen] = useState(false);
     const closeDropdown = () => setOpen(false);
@@ -149,7 +150,15 @@ const Navbar = () => {
                                 < div className="functionals" onClick = {closeDropdown}>
                                     <DropdownItem icon="fas fa-sign-out-alt">
                                     <div className="item-text" >                                
-                                        Sign Out                               
+                                        <GoogleLogout
+                                        clientId="1037252816787-78e8dvck7mdfvbnaclmppu7qvinfnjap.apps.googleusercontent.com"
+                                        buttonText="Logout"
+                                        render={renderProps => (
+                                            <button onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</button>
+                                        )}
+                                        onLogoutSuccess={() => (setGoogleObj(null))}
+                                        >
+                                        </GoogleLogout>                               
                                     </div>
                                     </DropdownItem> 
                                 </div>

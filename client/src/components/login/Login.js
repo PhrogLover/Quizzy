@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
 import { Button } from "../basic/Button";
 import Background from "./Background";
+import GoogleLogin from 'react-google-login';
 import "./login.css";
 
-
-const Login = () => {
+const Login = ({ onSuccessGoogle, onFailureGoogle}) => {
     return ( 
         <div className="login-section">
             <Background></Background>
@@ -31,27 +30,27 @@ const Login = () => {
                 </div>
                 <section id="login-api">
                     <div className="login-buttons">
-                        {/* Include login apis */}
-                        <Link to="/">
-                            <Button buttonStyle="btn--solid" buttonColour="btn--white-colour">
-                                Google
-                            </Button>                        
-                        </Link>
-                        <Link to="/">
+                        <GoogleLogin
+                            clientId="1037252816787-78e8dvck7mdfvbnaclmppu7qvinfnjap.apps.googleusercontent.com"
+                            buttonText="Login"
+                            onSuccess={ onSuccessGoogle }
+                            onFailure={ onFailureGoogle }
+                        /> 
+                        <div>
                             <Button buttonStyle="btn--solid" buttonColour="btn--blue-colour">
                                 Facebook
                             </Button>                        
-                        </Link>
-                        <Link to="/">
+                        </div>
+                        <div>
                             <Button buttonStyle="btn--solid" buttonColour="btn--secondary-colour">
                                 Something else
                             </Button>                        
-                        </Link>
-                        <Link to="/">
+                        </div>
+                        <div>
                             <Button buttonStyle="btn--solid" buttonColour="btn--primary-colour">
                                 Temporary Login
                             </Button>                        
-                        </Link>
+                        </div>
                     </div>
                  </section>
                 

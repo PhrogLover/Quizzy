@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from './components/basic/Navbar';
 import Footer from './components/basic/Footer';
@@ -8,47 +9,62 @@ import Homepage from './components/homepage/Homepage';
 import NotFound from './components/basic/NotFound';
 import GetQuiz from './components/quiz/GetQuiz';
 import GetProfile from './components/profile/GetProfile';
-import HostStream from "./components/quiz/host/HostStream";
-import TeamStream from './components/quiz/team/TeamStream';
+import LoginRerouter from './components/login/LoginRerouter';
+import LoginDerouter from './components/login/LoginDerouter';
 
 function App() {
+  const [ googleObj, setGoogleObj ] = useState(null);
+
+  function onSuccessGoogle({ profileObj }) {
+    console.log(profileObj)
+    setGoogleObj(profileObj);
+  }
+
+  function onFailureGoogle(err) {
+    console.log(err);
+  }
+
   return (
-    <Router>
       <div className="App">
-        <header>
-          <Navbar />
-        </header>
-        <Switch>
-          <Route exact path="/">
-            <Homepage />
-            <Footer/>
-          </Route>
-          <Route exact path="/profile">
-            <GetProfile />
-            <Footer/>
-          </Route>
-          <Route path="/mainLobby/:id">
-            <GetQuiz />
-          </Route>
-          <Route exact path="/host/">
-            <HostStream sessionName={"StreamTest1"}/>
-          </Route>
-          <Route exact path="/team/">
-            <TeamStream sessionName={"StreamTest1"} />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/creator">
-            <Creator />
-          </Route>
-          <Route path="*">
-            <NotFound />
-            <Footer/>
-          </Route>
-        </Switch>
+        <Router>
+          <header>
+            <Navbar setGoogleObj = { setGoogleObj }/>
+          </header>
+          <Switch>
+            { !googleObj && <>
+            <Route exact path="/login">
+              <Login onSuccessGoogle = { onSuccessGoogle } onFailureGoogle = { onFailureGoogle }/>
+            </Route> 
+            <Route path="*">
+              <LoginRerouter />
+            </Route> </>}
+            { googleObj && <>
+            <Route exact path="/login">
+              <LoginDerouter />
+            </Route>
+            <Route exact path="/">
+              <Homepage />
+              <Footer/>
+            </Route>
+            <Route exact path="/profile">
+              <GetProfile />
+              <Footer/>
+            </Route>
+            <Route exact path="/mainLobby/:id">
+              <GetQuiz />
+            </Route>
+            <Route exact path="/creator">
+              <Creator />
+            </Route> 
+            </>}
+            { googleObj &&
+              <Route path="*">
+                <NotFound />
+                <Footer/>
+              </Route> }
+          </Switch>
+        </Router>
       </div>
-    </Router>
     
   );
 }

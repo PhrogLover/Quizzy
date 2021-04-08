@@ -339,15 +339,9 @@ const VideoRoomComponent = (props) => {
     const [ slideSize, setSlideSize ] = useState("qss-normal");
 
     useEffect(() => {
-        if (tcOpen) {
-            setSlideSize("qss-normal");
-        }
-        else {
-            setSlideSize("qss-wide");
-        }
+        if (tcOpen) setSlideSize("qss-normal");
+        else setSlideSize("qss-wide");
     }, [tcOpen])
-
-
 
     const teamLobbyMenuRef = React.createRef();
 
@@ -356,14 +350,8 @@ const VideoRoomComponent = (props) => {
     const [ quizStreamSize, setQuizStreamSize ] = useState(resizeSlide());
 
     useEffect(() => {
-        // console.log($("#quiz-stream-section").width(), $("#quiz-stream-section").height())
         setQuizStreamSize(resizeSlide());
     },[slideSize])
-
-    // React.useEffect(() => {
-    //     window.addEventListener("resize", handleResize());
-    //     console.log("bruhhhhhh")
-    // });
 
     function resizeSlide() {
         console.log("resize");
