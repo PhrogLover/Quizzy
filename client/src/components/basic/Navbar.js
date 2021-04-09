@@ -36,7 +36,6 @@ const Navbar = ({ user, setGoogleObj }) => {
                 <div className="dark-filter"/>
                 <ClickAwayListener onClickAway={closeReportBug}>
                     <div className="report-a-bug-section">
-                        
                         <img className="report-bg" src="/images/report_bg.png" alt="report_bg.png"></img>
                         <div className="report-container">
                             <div className="report-help">
@@ -182,8 +181,18 @@ const Navbar = ({ user, setGoogleObj }) => {
                         <div id="title" className="title">Quizzy</div>
                     </Link>
                 </div>
-                <div className="round-wrapper dropdown-button" onClick= {() => setOpen(!open)}>                 
-                    {/* profile image */}
+                <div className="navbar-buttons-container">
+                    <div className=" round-wrapper create-dropdown navbar-buttons">
+                        <i className="fas fa-plus"></i>
+                    </div>
+                    <div className="round-wrapper notification-dropdown navbar-buttons">
+                        <i className="fas fa-bell"></i>
+                    </div>
+                    <div className="round-wrapper dropdown-button navbar-buttons" onClick= {() => setOpen(!open)}>                 
+                        {user &&
+                            <img src={user.imageUrl} alt="NO"/>
+                        }
+                    </div>
                 </div>
             </div>
             {open && <Dropdown></Dropdown>}
