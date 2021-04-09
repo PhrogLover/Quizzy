@@ -13,7 +13,7 @@ let subscribers = [];
 
 const TeamStream = (props) => {
 
-    let sessionName = props.sessionName ? props.sessionName : 'SessionA';
+    let sessionName = props.sessionName;
     let userName = props.user ? props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
 
     const [ mySessionId, setMySessionId ] = useState(sessionName);

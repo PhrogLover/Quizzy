@@ -1,22 +1,26 @@
 import "./playerview.css";
 import { useState, useEffect } from "react";
+import $ from "jquery";
 
 import TeamLobby from "../team/TeamLobby";
 
 const PlayerView = ({ user, quiz, mainId, socket }) => {
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
-    const [ lobbyData, setLobbyData ] = useState(lobbyDataInit());
+    const [ lobbyData, setLobbyData ] = useState([]);
 
-    function lobbyDataInit() {
-        let lobbyCount = [];
-        for (let i = 1; i <= quiz.numberOfTeams; i++) {
-            lobbyCount.push({id: quiz.deployIds[i-1], index: i, name: `Team Lobby ${i}` });
-        }
-        return lobbyCount;
-    }
+    useEffect(() => {
+        socket.on("lobby data change "+mainId, (newLobbyData) => {
+            setLobbyData(newLobbyData);
+        })
+    }, [])
+
+    useEffect(() => {
+        socket.emit('lobby data call', mainId);
+    }, [])
 
     function makeGrid(){
+        console.log(lobbyData);
         let numOfCols = Math.floor(Math.sqrt(lobbyData.length));
         // console.log(numOfCols);
         let gridStyle="";
@@ -27,13 +31,21 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
         return {gridTemplateColumns: gridStyle};
     }
 
-    function teamLobbyHandler(id, name) {
+    function teamLobbyHandler(id, name, player) {
         const newState = {
             type: "team",
             id: id,
             name: name
         }
+        let newLobbyData = $.extend(true, [], lobbyData);
+        for (let i = 0; i < newLobbyData.length; i++) {
+            if (newLobbyData[i].id === id) {
+                newLobbyData[i].players.push(player);
+                break;
+            }
+        }
         setLobbyState(newState);
+        socket.emit("lobby data change", mainId, newLobbyData);
     }
 
     return ( 
@@ -50,14 +62,18 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
                     <div className="lobby-body">
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyData.map((lobby, i) => (
-                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name))}>
+                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name, user.name))}>
                                     <div className="lobby-grid-index">{ lobby.index }</div>            
                                     <div className="team-name">{ lobby.name }</div>
-                                    <div className="players-in-lobby">0/{ quiz.numberOfPlayers }</div>
+                                    <div className="players-in-lobby">{ lobby.players.length }/{ quiz.numberOfPlayers }</div>
                                     <div className="players-list"> 
                                         <div className="players-header"> Players:</div>
                                         <div className="players-names">
-                                            {/* insert player /list here with the map function */}
+                                            { lobby.players.map(player => (
+                                                <div className="player">
+                                                    { player }
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +83,7 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
                 </div> }
             { lobbyState.type === "team" && 
                 <div className="main-body">
-                    <TeamLobby sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } setLobbyState = { setLobbyState } quiz = { quiz } />
+                    <TeamLobby user = { user } sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } lobbyData = { lobbyData } setLobbyState = { setLobbyState } quiz = { quiz } />
                 </div> }
         </>
      );

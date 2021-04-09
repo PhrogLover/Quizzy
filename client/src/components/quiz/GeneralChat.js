@@ -4,7 +4,7 @@ import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../scripts/GetUniqueId";
 import generateColour from "../../scripts/generateColour";
 
-const GeneralChat = ( { mainId, socket, chatSize }) => {
+const GeneralChat = ( { mainId, socket }) => {
     const [ chat, setChat ] = useState([]);
 
     useEffect(() => {
@@ -13,18 +13,11 @@ const GeneralChat = ( { mainId, socket, chatSize }) => {
         });
     }, [])
 
-    if (chatSize < 50) {
-        chatSize = 50;
-    }
-
     const [ text, setText ] = useState("");
     const [ pin, setPin ] = useState("Insert a Pin Here");
     const [ pinCheck, setPinCheck ] = useState(false);
 
     function sendHandler(e) {
-        if (chat.length > chatSize) {
-            chat.splice(0,1);
-        }
         e.preventDefault();
         if (text === "") {
             return;
