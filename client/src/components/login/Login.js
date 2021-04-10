@@ -15,7 +15,7 @@ const Login = ({ onSuccessGoogle, onFailureGoogle}) => {
                             <img src="/images/Temp_Icon.png"/>
                         </div>
                         <div id="title">                        
-                            <h1 >QuizWebApp</h1>
+                            <h1 >Quizzy</h1>
                         </div> 
                 </div>
                 <div className="introtext-container">

@@ -52,7 +52,7 @@ const ProfileHome = ( { profile }) => {
                     </div>
                     <div className="profile-container">
                         <div className="profile-container-header">
-                            <i class="fas fa-home"></i> Home
+                            <i className="fas fa-home"></i> Home
                         </div>
 
                     </div>
