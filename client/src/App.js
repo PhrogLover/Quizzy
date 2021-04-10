@@ -11,6 +11,7 @@ import GetQuiz from './components/quiz/GetQuiz';
 import GetProfile from './components/profile/GetProfile';
 import LoginRerouter from './components/login/LoginRerouter';
 import LoginDerouter from './components/login/LoginDerouter';
+import TestJudge from './components/quiz/host/TestJudge';
 
 function App() {
   const [ googleObj, setGoogleObj ] = useState(null);
@@ -59,6 +60,9 @@ function App() {
             { googleObj && <>
             <Route exact path="/login">
               <LoginDerouter />
+            </Route>
+            <Route exact path="/test">
+              <TestJudge user = {googleObj} />
             </Route>
             <Route exact path="/">
               <Homepage user={googleObj} />

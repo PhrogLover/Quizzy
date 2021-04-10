@@ -100,7 +100,7 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
             { error && <div className="loading">{ error }</div> }
             <div className="slides" id="slides">
                 <div className={`slide-resize-me ${slideSize} `}>
-                    { slide.type !== "question" && 
+                    { slide.type !== "question" && slide.type !== "judge" &&
                         <div id="intro-slide" className=" slide">
                             { slide.type === "round" && <> 
                                 <div className="slide-bg"/>

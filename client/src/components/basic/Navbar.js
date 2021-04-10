@@ -181,6 +181,7 @@ const Navbar = ({ user, setGoogleObj }) => {
                         <div id="title" className="title">Quizzy</div>
                     </Link>
                 </div>
+                <Link to="/test">TEST</Link>
                 <div className="navbar-buttons-container">
                     <div className=" round-wrapper create-dropdown navbar-buttons">
                         <i className="fas fa-plus"></i>

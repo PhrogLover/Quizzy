@@ -9,9 +9,7 @@ const AnswerSheet = ({ mainId, lobbyId, socket, questionCount }) => {
             setAnswerSheet(sheet);
         })
         socket.on('ping sheet '+mainId, () => {
-            setTimeout( () => {
-                socket.emit('send sheet', answerSheet, lobbyId, mainId)
-            }, Math.floor(Math.random() * 100));
+            socket.emit('send sheet', answerSheet, lobbyId, mainId)
         })
     }, [])
 
