@@ -34,7 +34,6 @@ function App() {
   // }
 
   function onSuccessGoogle({ profileObj }) {
-    console.log(profileObj)
     setGoogleObj(profileObj);
   }
 
@@ -45,9 +44,10 @@ function App() {
   return (
       <div className="App">
         <Router>
+          { googleObj && 
           <header>
             <Navbar user={googleObj} setGoogleObj = { setGoogleObj }/>
-          </header>
+          </header> }
           <Switch>
             { !googleObj && <>
             <Route exact path="/login">

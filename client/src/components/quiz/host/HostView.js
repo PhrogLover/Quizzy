@@ -6,7 +6,18 @@ import AnswerJudge from '../host/AnswerJudge';
 const HostView = ({ user, mainId, socket, quiz }) => {
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
+    const [ lobbyData, setLobbyData ] = useState([]);
     const [ round, setRound ] = useState(1);
+
+    useEffect(() => {
+        socket.on('lobby data change '+mainId, (newLobbyData) => {
+            setLobbyData(newLobbyData);
+        })
+    }, [])
+
+    useEffect(() => {
+        socket.emit('lobby data call',mainId);
+    }, [])
 
     function judgingDone() {
         const newState = {
@@ -29,7 +40,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                     <div className="lobby-body">                      
                         <div className="slide-page">
                             <div className="slide-window">
-                                <HostStream id = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />
+                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 import "./profilequizzes.css";
 import useFetch from "../../hooks/useFetch";
+import socketIOClient from "socket.io-client";
 import { useHistory } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GetUniqueId from "../../scripts/GetUniqueId";
 
 const ProfileQuizzes = ({ profile, user }) => {
@@ -18,8 +19,21 @@ const ProfileQuizzes = ({ profile, user }) => {
         return idList
     }
 
+    const ENDPOINT = "http://localhost:5000/";
+    const socket = socketIOClient(ENDPOINT);
+
+    useEffect(() => {
+        return () => socket.disconnect();
+    }, []);
+
     function publishQuiz(quiz) {
         quiz.deployIds = generateIds(quiz.numberOfTeams);
+        let lobbyCount = [];
+        for (let i = 1; i <= quiz.numberOfTeams; i++) {
+            lobbyCount.push({id: quiz.deployIds[i-1], index: i, players: [], name: `Team Lobby ${i}` });
+        }
+        socket.emit('lobby data create', quiz.id, lobbyCount);
+
         const body = {
             id: quiz.id,
             quiz: quiz

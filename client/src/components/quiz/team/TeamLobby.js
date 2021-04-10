@@ -17,8 +17,8 @@ let subscribers = [];
 
 const TeamLobby = (props) => {
 
-    let sessionName = props.sessionName ? props.sessionName : 'SessionA';
-    let userName = props.user ? props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
+    let sessionName = props.sessionName;
+    let userName = props.user.name;
 
     const [ mySessionId, setMySessionId ] = useState(sessionName);
     const [ myUserName, setMyUserName ] = useState(userName);
@@ -33,7 +33,15 @@ const TeamLobby = (props) => {
         const newState = {
             type: "main"
         }
+        let newLobbyData = $.extend(true, [], props.lobbyData);
+        for (let i = 0; i < newLobbyData.length; i++) {
+            if (newLobbyData[i].id === props.lobbyState.id) {
+                newLobbyData[i].players = newLobbyData[i].players.filter(player => (player !== props.user.name));
+                break;
+            }
+        }
         props.setLobbyState(newState);
+        props.socket.emit('lobby data change', props.mainId, newLobbyData);
     }
 
     useEffect(() => {
@@ -354,7 +362,6 @@ const TeamLobby = (props) => {
     },[slideSize])
 
     function resizeSlide() {
-        console.log("resize");
         let sectionWidth= $("#quiz-stream-section").width();
         let sectionHeight= $("#quiz-stream-section").height();
 
