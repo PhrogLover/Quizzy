@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
     socket.on('lobby data create', (id, data) => {
         let newQuizLobbyData = {};
         newQuizLobbyData[id] = data;
-        const found = lobbydata.some(lobby => (lobby === newQuizLobbyData));
+        const found = lobbyData.some(lobby => (lobby === newQuizLobbyData));
         if (found) {
             for (let i = 0; i < lobbyData.length; i++) {
                 if (lobbyData[i][id]) {
@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
             }
         }
         else {
-            lobbydata.push(newQuizLobbyData);
+            lobbyData.push(newQuizLobbyData);
         }
     })
     socket.on('lobby data delete', (id) => {
