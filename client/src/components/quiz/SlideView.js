@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import useFitText from "use-fit-text";
 import Family from "./Family";
-import AnswerJudge from "./host/AnswerJudge";
 import Timer from "./Timer";
 
-const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass } ) => {
+const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass, answerSheet } ) => {
 
     const [ index, setIndex ] = useState({
         round: 0,
@@ -60,12 +59,13 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                 error: error,
                 showAns: showAns,
                 timer: timer,
-                slideWidthPass: slideWidthPass
+                slideWidthPass: slideWidthPass,
+                answerSheet: answerSheet
             }
             console.log(slideBundle)
             onSlideChange(slideBundle);
         }
-    }, [quiz, index, error, showAns, timer, slideWidthPass])
+    }, [quiz, index, error, showAns, timer, slideWidthPass, answerSheet])
 
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,

@@ -2,12 +2,16 @@ import { useState, useEffect } from "react";
 
 const AnswerSheet = ({ mainId, lobbyId, socket, questionCount }) => {
 
-    console.log(lobbyId)
     const [ answerSheet, setAnswerSheet ] = useState(initState());
 
     useEffect(() => {
         socket.on('update sheet '+lobbyId, (sheet) => {
             setAnswerSheet(sheet);
+        })
+        socket.on('ping sheet '+mainId, () => {
+            setTimeout( () => {
+                socket.emit('send sheet', answerSheet, lobbyId, mainId)
+            }, Math.floor(Math.random() * 100));
         })
     }, [])
 
@@ -25,7 +29,6 @@ const AnswerSheet = ({ mainId, lobbyId, socket, questionCount }) => {
     function onSheetChange(ans, i) {
         let answers = [...answerSheet];
         answers[i].value = ans;
-        console.log(answers)
         socket.emit("update sheet", answers, lobbyId);
     }
 

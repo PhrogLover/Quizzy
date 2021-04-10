@@ -21,6 +21,7 @@ const AnswerJudge = ({ quiz, socket, mainId, round, setLobbyState }) => {
     }, [])
 
     useEffect(() => {
+        console.log(answers.length)
         if (answers.length === quiz.numberOfTeams) {
             setCurrentSlide(answerParser().slide);
         }

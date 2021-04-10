@@ -26,6 +26,19 @@ const HostView = ({ user, mainId, socket, quiz }) => {
         setLobbyState(newState);
     }
 
+    function sendAnswerSheet() {
+        const newState = {
+            type: "judge"
+        }
+        setLobbyState(newState);
+    }
+
+    useEffect(() => {
+        if (lobbyState.type === "judge") {
+            socket.emit('ping sheet', mainId);
+        }
+    }, [lobbyState])
+
     return ( 
         <>
             <div className="main-body">
@@ -40,7 +53,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                     <div className="lobby-body">                      
                         <div className="slide-page">
                             <div className="slide-window">
-                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />
+                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} sendAnswerSheet = {sendAnswerSheet} />
                             </div>
                         </div>
                     </div>

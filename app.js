@@ -105,6 +105,9 @@ io.on('connection', (socket) => {
     socket.on('update sheet', (sheet, id) => {
         io.emit('update sheet '+id, sheet);
     });
+    socket.on('ping sheet', (id) => {
+        io.emit('ping sheet '+id);
+    })
     socket.on('send sheet', (sheet, lobbyId, mainId) => {
         io.emit('send sheet '+mainId, sheet, lobbyId);
     });

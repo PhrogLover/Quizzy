@@ -119,8 +119,6 @@ const HostStream = (props) => {
         if (localUser) {
             localUser.getStreamManager().on('streamPlaying', (e) => {
                 userPublisher.videos[0].video.parentElement.classList.remove('custom-class');
-                camStatusChanged();
-                micStatusChanged();
             });
         }
     }, [userPublisher])
@@ -328,7 +326,7 @@ const HostStream = (props) => {
                     </div>
                 </div>
             </div>
-            <SlideScript quiz = { props.quiz } onSlideChange={setSlideData} onSlideChangeVar={slideData} />
+            <SlideScript quiz = { props.quiz } onSlideChange={setSlideData} onSlideChangeVar={slideData} sendAnswerSheet = { props.sendAnswerSheet }/>
             
             <div className="host-lobby-toolbar">
                 <ToolbarComponent

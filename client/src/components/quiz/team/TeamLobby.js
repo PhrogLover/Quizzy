@@ -28,6 +28,7 @@ const TeamLobby = (props) => {
     const [ chatDisplay, setChatDisplay ] = useState('none');
     const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
+    const [ answerSheetVisible, setAnswerSheetVisible ] = useState(false);
 
     function backHandler() {
         const newState = {
@@ -478,7 +479,7 @@ const TeamLobby = (props) => {
                     </div>
                     <div id = "quiz-stream-section" className={"quiz-stream-section " + slideSize} ref={quizStreamRef}>
                         <div className="quiz-slides-view" style={quizStreamSize}>                            
-                            <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } />
+                            <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } setAnswerSheetVisible = { setAnswerSheetVisible } />
                         </div>
                     </div>
                 </div>
@@ -499,7 +500,7 @@ const TeamLobby = (props) => {
                                 </div>
                             </div>
                             
-                            { localUser && <AnswerSheet mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } questionCount = { props.quiz.numberOfQuestions } /> }
+                            { localUser && answerSheetVisible && <AnswerSheet mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } questionCount = { props.quiz.numberOfQuestions } /> }
                             
                         </div>
                         <div className="team-chat">

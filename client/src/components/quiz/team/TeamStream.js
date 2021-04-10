@@ -52,6 +52,7 @@ const TeamStream = (props) => {
                 slideBundle.slide = props.quiz.slides[slideBundle.round][slideBundle.question];
             }
             setSlideData(slideBundle);
+            props.setAnswerSheetVisible(slideBundle.answerSheet);
         })
     }, [])
 
@@ -114,7 +115,10 @@ const TeamStream = (props) => {
                 confirm: window.confirm,
                 assign: window.location.assign
             }
-            props.socket.emit("team lobby start", mySessionId, "stream "+props.lobbyId, sendWindow);
+            setTimeout(() => {
+                props.socket.emit("team lobby start", mySessionId, "stream "+props.lobbyId, sendWindow);
+            }, 100)
+            
         }
     }
 
@@ -137,33 +141,14 @@ const TeamStream = (props) => {
     }
 
     function connectWebCam() {
-        // let publisher = OV.initPublisher(undefined, {
-        //     audioSource: undefined,
-        //     videoSource: undefined,
-        //     publishAudio: localUserModel.isAudioActive(),
-        //     publishVideo: localUserModel.isVideoActive(),
-        //     resolution: '640x480',
-        //     frameRate: 30,
-        //     insertMode: 'APPEND',
-        // });
-
-        // if (session.capabilities.publish) {
-        //     session.publish(publisher).then(() => {
-        //         if (props.joinSession) {
-        //             props.joinSession();
-        //         }
-        //     });
-        // }
         localUserModel.setNickname(myUserName);
         localUserModel.setConnectionId(session.connection.connectionId);
         localUserModel.setScreenShareActive(false);
-        // localUserModel.setStreamManager(publisher);
         subscribeToUserChanged();
         subscribeToStreamDestroyed();
 
         setLocalUser(localUserModel);
         props.socket.emit('ping host', props.mainId);
-        // setUserpublisher(publisher);
     }
 
     function leaveSession() {
