@@ -85,8 +85,8 @@ const Navbar = ({ user, setGoogleObj }) => {
                         <div className="menu">
                             <Link to="/profile/?tab=home">
                                 <div className="profile-item" onClick = {closeDropdown}>
-                                    <div className="profile-picture-dropdown">
-                                        <img src={user.imageUrl} alt="NO"/>
+                                    <div className="profile-picture-dropdown">                                       
+                                        <img src={user.imageUrl} alt="NO"/>                                        
                                     </div>
                                     <div className="profile-dropdown-body">
                                         <div className="username-dropdown">
@@ -189,10 +189,8 @@ const Navbar = ({ user, setGoogleObj }) => {
                     <div className="round-wrapper notification-dropdown navbar-buttons">
                         <i className="fas fa-bell"></i>
                     </div>
-                    <div className="round-wrapper dropdown-button navbar-buttons" onClick= {() => setOpen(!open)}>                 
-                        {user &&
-                            <img src={user.imageUrl} alt="NO"/>
-                        }
+                    <div className="round-wrapper dropdown-button navbar-buttons" onClick= {() => setOpen(!open)}>
+                        <img src={user.imageUrl} alt="NO"/>
                     </div>
                 </div>
             </div>

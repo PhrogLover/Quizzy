@@ -10,8 +10,13 @@ import GetUniqueId from "../../scripts/GetUniqueId";
 import HelpIcon from "../basic/HelpIcon";
 import { Button } from "../basic/Button";
 
+
 const Creator = ({ user }) => {
     const history = useHistory();
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     
     const [ isPending, setIsPending ] = useState(false);
     const [ quiz, setQuiz] = useState({

@@ -3,8 +3,13 @@ import './homepage.css';
 import Quizholder from "./Quizholder";
 import { Button } from "../basic/Button";
 import HelpIcon from "../basic/HelpIcon";
+import { useEffect } from "react";
 
 const Homepage = ({ user }) => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     return ( <>
         <div className="homepage">

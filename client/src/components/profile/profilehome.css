@@ -2,7 +2,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 30% auto;
-    column-gap: 10px;
+    column-gap: 20px;
 }
 .profile-stats{
     overflow: hidden;
@@ -51,7 +51,6 @@
     height: fit-content;
     width: 100%;
     padding: 0 10px;
-    border: blue 1px solid;
     border-radius: var(--border-radius);
     background-color: var(--colour-black2);
     color: var(--font-colour);
