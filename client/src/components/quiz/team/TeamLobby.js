@@ -33,7 +33,6 @@ const TeamLobby = (props) => {
     const [ outerAnswerSheet, setOuterAnswerSheet ] = useState();
 
     function sendAnswerSheet() {
-        console.log(outerTemp, props.lobbyState.id);
         props.socket.emit('send sheet', outerTemp, props.lobbyState.id, props.mainId);
     }
 

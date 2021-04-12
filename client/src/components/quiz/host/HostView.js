@@ -43,15 +43,16 @@ const HostView = ({ user, mainId, socket, quiz }) => {
         socket.emit('lobby data call',mainId);
     }, [])
 
-    function judgingDone() {
+    function judgingDone(pointsArray) {
+        console.log(pointsArray);
         const newState = {
             type: "leaderboard"
         }
         setLobbyState(newState);
+        console.log("dunzo");
     }
 
     function sendAnswerSheet() {
-        console.log("TURNOVER")
         const newState = {
             type: "judge"
         }
