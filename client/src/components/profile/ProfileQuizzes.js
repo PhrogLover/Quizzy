@@ -1,11 +1,10 @@
 import "./profilequizzes.css";
 import useFetch from "../../hooks/useFetch";
-import socketIOClient from "socket.io-client";
 import { useHistory } from "react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import GetUniqueId from "../../scripts/GetUniqueId";
 
-const ProfileQuizzes = ({ profile, user }) => {
+const ProfileQuizzes = ({ profile, user, socket }) => {
     const quizUrl = `http://localhost:5000/api/quizzes/profile/${user.googleId}`;
     const { data: quizzes, isPending, error} = useFetch(quizUrl);
     const [ sending, setSending ] = useState(false);
@@ -18,13 +17,6 @@ const ProfileQuizzes = ({ profile, user }) => {
         }
         return idList
     }
-
-    const ENDPOINT = "http://localhost:5000/";
-    const socket = socketIOClient(ENDPOINT);
-
-    useEffect(() => {
-        return () => socket.disconnect();
-    }, []);
 
     function publishQuiz(quiz) {
         quiz.deployIds = generateIds(quiz.numberOfTeams);

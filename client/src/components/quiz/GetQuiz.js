@@ -1,20 +1,11 @@
-import { useEffect } from "react";
-import socketIOClient from "socket.io-client";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import MainLobby from "./main/MainLobby";
 
-const GetQuiz = ({ user }) => {
+const GetQuiz = ({ user, socket }) => {
     const { id } = useParams();
     const quizUrl = "http://localhost:5000/api/quizzes/quiz/" + id;
     const {data: quiz, isPending: quizIsPending, error: quizError } = useFetch(quizUrl);
-
-    const ENDPOINT = "http://localhost:5000/";
-    const socket = socketIOClient(ENDPOINT);
-
-    useEffect(() => {
-        return () => socket.disconnect();
-    }, []);
 
     return ( 
         <>

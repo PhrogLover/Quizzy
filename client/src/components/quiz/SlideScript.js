@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SlideView from "./SlideView";
 import "./slideview.css";
 
-const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar, sendAnswerSheet }) => {
+const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ showAns, setShowAns ] = useState(false);
     const [ currentSlideScript, setCurrentSlideScript ] = useState(quiz.slides[0]);
@@ -26,6 +26,10 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar, sendAnswerSheet })
     let quizIntro = globalQuizIntro;
     let endOfQuiz = globalEndOfQuiz;
 
+    useEffect(() => {
+        console.log(answerSheet);
+    }, [answerSheet])
+
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms))
     }
@@ -44,7 +48,6 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar, sendAnswerSheet })
             setIsPending(true);
             setCurrentSlideScript(emptySlide);
             setScriptButtonDisabled(true);
-            console.log(quiz)
             setTimeout(() => {
                 roundIndex++;
                 setGlobalRoundIndex(roundIndex);
@@ -115,9 +118,8 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar, sendAnswerSheet })
                 }, 1000);
                 await sleep(1000);
             }
-            setAnswerSheet(false);
-            sendAnswerSheet();
             setTimer(null);
+            setAnswerSheet(false);
             if (roundsRemaining === 1 && !quiz.showAns) {
                 setCurrentSlideScript(emptySlide);
                 setScriptButtonValue("Calculate Leaderboard")
@@ -211,7 +213,7 @@ const SlideScript = ({ quiz, onSlideChange, onSlideChangeVar, sendAnswerSheet })
 
     return ( 
         <>
-            <SlideView isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } /> 
+            <SlideView slideData={slideData} isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } /> 
             <div className="quiz-start-button">
                 { isPending && <>
                     <button disabled>Quiz in Progress...</button>

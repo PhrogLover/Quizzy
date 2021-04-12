@@ -7,13 +7,37 @@ const HostView = ({ user, mainId, socket, quiz }) => {
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState([]);
+    const [ answers, setAnswers ] = useState([]);
+    const [ correctAnswers, setCorrectAnswers ] = useState([]);
     const [ round, setRound ] = useState(1);
 
     useEffect(() => {
         socket.on('lobby data change '+mainId, (newLobbyData) => {
             setLobbyData(newLobbyData);
-        })
+        });
+        socket.on("send sheet "+mainId, (sheet, lobbyId) => {
+            let obj = {
+                id: lobbyId,
+                sheet: sheet
+            }
+            console.log(obj, answers.some(answer => answer.sheet === obj.sheet));
+            const found = answers.some(answer => answer.sheet === obj.sheet);
+            if (!found) {
+                setAnswers((prevState) => ([...prevState, obj]));
+                setCorrectAnswers((prevState) => ([...prevState, {
+                    id: lobbyId,
+                    sheet: []
+                }]));
+            }
+        });
     }, [])
+
+    useEffect(() => {
+        const activeLobbies = lobbyData.filter(lobby => (lobby.players.length > 0));
+        if (answers.length === activeLobbies.length && activeLobbies.length !== 0) {
+            sendAnswerSheet();
+        }
+    }, [answers])
 
     useEffect(() => {
         socket.emit('lobby data call',mainId);
@@ -27,17 +51,12 @@ const HostView = ({ user, mainId, socket, quiz }) => {
     }
 
     function sendAnswerSheet() {
+        console.log("TURNOVER")
         const newState = {
             type: "judge"
         }
         setLobbyState(newState);
     }
-
-    useEffect(() => {
-        if (lobbyState.type === "judge") {
-            socket.emit('ping sheet', mainId);
-        }
-    }, [lobbyState])
 
     return ( 
         <>
@@ -53,13 +72,13 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                     <div className="lobby-body">                      
                         <div className="slide-page">
                             <div className="slide-window">
-                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} sendAnswerSheet = {sendAnswerSheet} />
+                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />
                             </div>
                         </div>
                     </div>
-                 }
-                 { lobbyState.type === "judge" &&
-                    <AnswerJudge quiz = { quiz } socket = { socket } setLobbyState = { judgingDone } mainId = { mainId } round = { round } />
+                }
+                {  lobbyState.type === "judge" &&
+                    <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } answers = { answers } correctAnswers = { correctAnswers } setCorrectAnswers = { setCorrectAnswers } />
                 }
             </div>
         </>

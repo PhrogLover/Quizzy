@@ -3,7 +3,7 @@ import useFitText from "use-fit-text";
 import Family from "./Family";
 import Timer from "./Timer";
 
-const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass, answerSheet } ) => {
+const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass, answerSheet, slideData } ) => {
 
     const [ index, setIndex ] = useState({
         round: 0,
@@ -60,9 +60,13 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                 showAns: showAns,
                 timer: timer,
                 slideWidthPass: slideWidthPass,
-                answerSheet: answerSheet
+                answerSheet: answerSheet,
+                sendSheet: false
             }
             console.log(slideBundle)
+            if (slideData && slideData.answerSheet && !slideBundle.answerSheet) {
+                slideBundle.sendSheet = true;
+            }
             onSlideChange(slideBundle);
         }
     }, [quiz, index, error, showAns, timer, slideWidthPass, answerSheet])

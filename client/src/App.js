@@ -1,6 +1,7 @@
 import './App.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import socketIOClient from "socket.io-client";
 import Navbar from './components/basic/Navbar';
 import Footer from './components/basic/Footer';
 import Login from './components/login/Login';
@@ -42,6 +43,13 @@ function App() {
     console.log(err);
   }
 
+  const ENDPOINT = "http://localhost:5000/";
+  const socket = socketIOClient(ENDPOINT);
+
+  useEffect(() => {
+      return () => socket.disconnect();
+  }, []);
+
   return (
       <div className="App">
         <Router>
@@ -69,11 +77,11 @@ function App() {
               <Footer/>
             </Route>
             <Route exact path="/profile">
-              <GetProfile user={googleObj} />
+              <GetProfile user={googleObj} socket={socket} />
               <Footer/>
             </Route>
             <Route exact path="/mainLobby/:id">
-              <GetQuiz user={googleObj} />
+              <GetQuiz user={googleObj} socket={socket} />
             </Route>
             <Route exact path="/creator">
               <Creator user={googleObj} />

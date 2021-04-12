@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const AnswerSheet = ({ mainId, lobbyId, socket, questionCount }) => {
+const AnswerSheet = ({ mainId, lobbyId, socket, questionCount, setOuterAnswerSheet }) => {
 
     const [ answerSheet, setAnswerSheet ] = useState(initState());
 
@@ -8,12 +8,11 @@ const AnswerSheet = ({ mainId, lobbyId, socket, questionCount }) => {
         socket.on('update sheet '+lobbyId, (sheet) => {
             setAnswerSheet(sheet);
         })
-        socket.on('ping sheet '+mainId, () => {
-            setTimeout(() => {
-                socket.emit('send sheet', answerSheet, lobbyId, mainId)
-            }, Math.floor(Math.random() * 100));
-        })
     }, [])
+
+    useEffect(() => {
+        setOuterAnswerSheet(answerSheet);
+    }, [answerSheet])
 
     function initState() {
         let answers = [];

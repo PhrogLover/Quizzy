@@ -14,6 +14,7 @@ let OV = null;
 var localUserModel = new UserModel();
 let leaveSessionVar = null;
 let subscribers = [];
+let outerTemp = [];
 
 const TeamLobby = (props) => {
 
@@ -29,6 +30,16 @@ const TeamLobby = (props) => {
     const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
     const [ answerSheetVisible, setAnswerSheetVisible ] = useState(false);
+    const [ outerAnswerSheet, setOuterAnswerSheet ] = useState();
+
+    function sendAnswerSheet() {
+        console.log(outerTemp, props.lobbyState.id);
+        props.socket.emit('send sheet', outerTemp, props.lobbyState.id, props.mainId);
+    }
+
+    useEffect(() => {
+        outerTemp = outerAnswerSheet;
+    }, [outerAnswerSheet])
 
     function backHandler() {
         const newState = {
@@ -479,7 +490,7 @@ const TeamLobby = (props) => {
                     </div>
                     <div id = "quiz-stream-section" className={"quiz-stream-section " + slideSize} ref={quizStreamRef}>
                         <div className="quiz-slides-view" style={quizStreamSize}>                            
-                            <TeamStream sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } setAnswerSheetVisible = { setAnswerSheetVisible } />
+                            <TeamStream sendAnswerSheet ={sendAnswerSheet} sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } answerSheetVisible={answerSheetVisible} setAnswerSheetVisible = { setAnswerSheetVisible } />
                         </div>
                     </div>
                 </div>
@@ -500,7 +511,7 @@ const TeamLobby = (props) => {
                                 </div>
                             </div>
                             
-                            { localUser && answerSheetVisible && <AnswerSheet mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } questionCount = { props.quiz.numberOfQuestions } /> }
+                            { localUser && answerSheetVisible && <AnswerSheet mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } questionCount = { props.quiz.numberOfQuestions } setOuterAnswerSheet = {setOuterAnswerSheet} /> }
                             
                         </div>
                         <div className="team-chat">

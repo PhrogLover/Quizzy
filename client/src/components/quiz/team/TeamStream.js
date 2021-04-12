@@ -42,6 +42,10 @@ const TeamStream = (props) => {
 
         props.socket.on("slide data "+props.mainId, data => {
             let slideBundle = data;
+            if (slideBundle.sendSheet) {
+                console.log('SEND YO SHEETS')
+                props.sendAnswerSheet();
+            }
             if (slideBundle.round === -1) {
                 slideBundle.slide = emptySlide;
             }
@@ -148,7 +152,7 @@ const TeamStream = (props) => {
         subscribeToStreamDestroyed();
 
         setLocalUser(localUserModel);
-        props.socket.emit('ping host', props.mainId);
+        if (slideData.slide === null) props.socket.emit('ping host', props.mainId);
     }
 
     function leaveSession() {

@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import $ from "jquery";
 import SlideView from "../SlideView";
 
-const AnswerJudge = ({ quiz, socket, mainId, round, setLobbyState, testAnswerSheet, testCorrectAnswerSheet }) => {
-    const [ answers, setAnswers ] = useState([]);
-    const [ correctAnswers, setCorrectAnswers ] = useState([]);
+const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setCorrectAnswers }) => {
     const [ currentSlide, setCurrentSlide ] = useState(null);
     const [ index, setIndex ] = useState();
     const [ submittedAnswer, setSubmittedAnswer ] = useState();
@@ -16,28 +14,9 @@ const AnswerJudge = ({ quiz, socket, mainId, round, setLobbyState, testAnswerShe
     const parse = answerParser();
 
     useEffect(() => {
-        if (testAnswerSheet) {
-            setAnswers(testAnswerSheet);
-            setCorrectAnswers(testCorrectAnswerSheet);
-        }
-        socket.on("send sheet "+mainId, (sheet, lobbyId) => {
-            console.log(sheet, answers.length)
-            setAnswers([...answers, {
-                id: lobbyId,
-                sheet: sheet
-            }]);
-            setCorrectAnswers([...correctAnswers, {
-                id: lobbyId,
-                sheet: []
-            }]);
-        })
+        console.log("ANSWERS: ", answers, correctAnswers)
+        setCurrentSlide(parse.next().value);
     }, [])
-
-    useEffect(() => {
-        if (answers.length === 2) {
-            setCurrentSlide(parse.next().value);
-        }
-    }, [answers])
 
     useEffect(() => {
         if (currentSlide === "end") {
@@ -57,7 +36,7 @@ const AnswerJudge = ({ quiz, socket, mainId, round, setLobbyState, testAnswerShe
         //splice answer arrays into question-wise arrays instead of team-wise
         let orderedArray = [];
         let orderedSheet = [];
-        for (let i = 0; i < answers[i].sheet.length; i++) {
+        for (let i = 0; i < answers[0].sheet.length; i++) {
             for (let j = 0; j < answers.length; j++) {
                 orderedSheet.push(answers[j].sheet[i]);
             }

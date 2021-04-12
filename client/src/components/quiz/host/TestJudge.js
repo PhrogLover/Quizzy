@@ -88,7 +88,7 @@ const TestJudge = ({ user }) => {
 
     return ( 
         <div className="test-judge">
-            { quiz && <AnswerJudge testAnswerSheet = {testAnswerSheet} testCorrectAnswerSheet = { testCorrectAnswerSheet } quiz = {quiz} socket = {socket} mainId = {id} round = {1} setLobbyState = {end} />}
+            { quiz && <AnswerJudge answers = {testAnswerSheet} correctAnswers = { testCorrectAnswerSheet } setCorrectAnswers = {setTestCorrectAnswerSheet} quiz = {quiz} round = {1} setLobbyState = {end} />}
         </div>
      );
 }
