@@ -1,29 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-const AnswerSheet = ({ mainId, lobbyId, socket, questionCount, setOuterAnswerSheet }) => {
-
-    const [ answerSheet, setAnswerSheet ] = useState(initState());
+const AnswerSheet = ({ lobbyId, socket, answerSheet, setAnswerSheet, sendAnswerSheet }) => {
 
     useEffect(() => {
         socket.on('update sheet '+lobbyId, (sheet) => {
             setAnswerSheet(sheet);
         })
     }, [])
-
-    useEffect(() => {
-        setOuterAnswerSheet(answerSheet);
-    }, [answerSheet])
-
-    function initState() {
-        let answers = [];
-        for (let i = 0; i < questionCount; i++) {
-            answers.push({
-                index: i+1,
-                value: ""
-            });
-        }
-        return answers;
-    }
 
     function onSheetChange(ans, i) {
         let answers = [...answerSheet];
@@ -34,6 +17,7 @@ const AnswerSheet = ({ mainId, lobbyId, socket, questionCount, setOuterAnswerShe
     return ( 
         <>
             <div className="answer-sheet">
+                { answerSheet === [] && <div className="no-sheet">Answers Sent</div>}
                 { answerSheet.map((answer, i) => (
                     <div key={i} className="answer">
                         <label htmlFor={`answer${answer.index}`}>Answer for Q{answer.index}</label>
@@ -41,7 +25,7 @@ const AnswerSheet = ({ mainId, lobbyId, socket, questionCount, setOuterAnswerShe
                     </div>
                 ))}
             </div>
-            <button type="button" onClick={() => (socket.emit("send sheet", answerSheet, lobbyId, mainId))}>Test send sheet</button>
+            <button type="button" onClick={sendAnswerSheet}>Send Answer Sheet</button>
         </>
      );
 }

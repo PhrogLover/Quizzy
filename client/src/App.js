@@ -15,7 +15,14 @@ import LoginDerouter from './components/login/LoginDerouter';
 import TestJudge from './components/quiz/host/TestJudge';
 
 function App() {
-  const [ googleObj, setGoogleObj ] = useState(null);
+  const [ googleObj, setGoogleObj ] = useState({
+    email: "quizzyapp.dev@gmail.com",
+    familyName: "Admin",
+    givenName: "Quizzy",
+    googleId: "106812796264951400312",
+    imageUrl: "https://lh5.googleusercontent.com/-a7zvn0K9S3I/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDv_BhF6AuY08z9CbmJ-F9pFYIjA/s96-c/photo.jpg",
+    name: "Quizzy Admin"
+  });
 
   // {
   //   email: "aryjeleng@gmail.com",
@@ -27,11 +34,11 @@ function App() {
   // }
 
   // {
-  //   email: "quizzyapp.dev@gmail.com"
-  //   familyName: "Admin"
-  //   givenName: "Quizzy"
-  //   googleId: "106812796264951400312"
-  //   imageUrl: "https://lh5.googleusercontent.com/-a7zvn0K9S3I/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDv_BhF6AuY08z9CbmJ-F9pFYIjA/s96-c/photo.jpg"
+  //   email: "quizzyapp.dev@gmail.com",
+  //   familyName: "Admin",
+  //   givenName: "Quizzy",
+  //   googleId: "106812796264951400312",
+  //   imageUrl: "https://lh5.googleusercontent.com/-a7zvn0K9S3I/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDv_BhF6AuY08z9CbmJ-F9pFYIjA/s96-c/photo.jpg",
   //   name: "Quizzy Admin"
   // }
 

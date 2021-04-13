@@ -56,6 +56,10 @@ const TestJudge = ({ user }) => {
                 sheet: sheet
             });
         }
+        temp[0].sheet[0].value = "1";
+        temp[0].sheet[1].value = "2";
+        temp[0].sheet[2].value = "3";
+        temp[0].sheet[3].value = "4";
         temp[0].sheet[4].value = "Bye so";
         return temp;
     }

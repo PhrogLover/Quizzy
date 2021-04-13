@@ -3,6 +3,8 @@ import "./hostview.css";
 import HostStream from './HostStream';
 import AnswerJudge from '../host/AnswerJudge';
 
+let keepAnswers = [];
+
 const HostView = ({ user, mainId, socket, quiz }) => {
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
@@ -20,9 +22,11 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                 id: lobbyId,
                 sheet: sheet
             }
-            console.log(obj, answers.some(answer => answer.sheet === obj.sheet));
-            const found = answers.some(answer => answer.sheet === obj.sheet);
-            if (!found) {
+            const found = keepAnswers.some(answer => answer.id === obj.id);
+            const postFound = answers.some(answer => answer.id === obj.id);
+            if (!found || (!postFound && keepAnswers === [])) {
+                console.log("NEW OBJ: ", obj)
+                keepAnswers.push(obj);
                 setAnswers((prevState) => ([...prevState, obj]));
                 setCorrectAnswers((prevState) => ([...prevState, {
                     id: lobbyId,
@@ -42,6 +46,12 @@ const HostView = ({ user, mainId, socket, quiz }) => {
     useEffect(() => {
         socket.emit('lobby data call',mainId);
     }, [])
+
+    useEffect(() => {
+        if (lobbyState === "judge") {
+            keepAnswers = [];
+        }
+    }, [lobbyState])
 
     function judgingDone(pointsArray) {
         console.log(pointsArray);

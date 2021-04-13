@@ -30,15 +30,26 @@ const TeamLobby = (props) => {
     const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
     const [ answerSheetVisible, setAnswerSheetVisible ] = useState(false);
-    const [ outerAnswerSheet, setOuterAnswerSheet ] = useState();
+    const [ answerSheet, setAnswerSheet ] = useState(initState());
+
+    function initState() {
+        let answers = [];
+        for (let i = 0; i < props.quiz.numberOfQuestions; i++) {
+            answers.push({
+                index: i+1,
+                value: ""
+            });
+        }
+        return answers;
+    }
 
     function sendAnswerSheet() {
         props.socket.emit('send sheet', outerTemp, props.lobbyState.id, props.mainId);
     }
 
     useEffect(() => {
-        outerTemp = outerAnswerSheet;
-    }, [outerAnswerSheet])
+        outerTemp = answerSheet;
+    }, [answerSheet])
 
     function backHandler() {
         const newState = {
@@ -510,7 +521,7 @@ const TeamLobby = (props) => {
                                 </div>
                             </div>
                             
-                            { localUser && answerSheetVisible && <AnswerSheet mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } questionCount = { props.quiz.numberOfQuestions } setOuterAnswerSheet = {setOuterAnswerSheet} /> }
+                            { localUser && answerSheetVisible && <AnswerSheet lobbyId = { props.lobbyState.id } socket = { props.socket } sendAnswerSheet = { sendAnswerSheet } answerSheet = { answerSheet } setAnswerSheet = {setAnswerSheet} /> }
                             
                         </div>
                         <div className="team-chat">

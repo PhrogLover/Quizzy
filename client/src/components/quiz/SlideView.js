@@ -3,7 +3,9 @@ import useFitText from "use-fit-text";
 import Family from "./Family";
 import Timer from "./Timer";
 
-const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass, answerSheet, slideData, submittedAnswer } ) => {
+let saveAnswerSheet = false;
+
+const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass, answerSheet, slideData, submittedAnswer = "" } ) => {
 
     const [ index, setIndex ] = useState({
         round: 0,
@@ -11,7 +13,7 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
     });
 
     let answers = "";
-    if(slide.type === "question") {
+    if(slide.type === "question" || slide.type === "judge") {
         for (let i = 0; i < slide.answers.length; i++) {
             answers += slide.answers[i];
             if (i !== slide.answers.length-1) {
@@ -64,12 +66,13 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                 sendSheet: false
             }
             // console.log(slideBundle)
-            if (slideData && slideData.answerSheet && !slideBundle.answerSheet) {
+            if (saveAnswerSheet && !slideBundle.answerSheet) {
                 slideBundle.sendSheet = true;
             }
+            saveAnswerSheet = slideBundle.answerSheet;
             onSlideChange(slideBundle);
         }
-    }, [quiz, index, error, showAns, timer, slideWidthPass, answerSheet])
+    }, [quiz, index, showAns, timer, answerSheet])
 
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,
@@ -92,6 +95,10 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
         minFontSize: 3,
     });
     const { fontSize: answerFontSize, ref: answerRef } = useFitText({
+        maxFontSize: 300,
+        minFontSize: 3,
+    });
+    const { fontSize: submittedAnswerFontSize, ref: submittedAnswerRef } = useFitText({
         maxFontSize: 300,
         minFontSize: 3,
     });
@@ -219,10 +226,10 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                             <div className="slide-img">
                                 { slide.img && <img src={ slide.img } alt="question_image"/> }
                             </div>
-                            { showAns &&<div className="answer-box center" ref={answerRef} style={{ fontSize: answerFontSize }}>
+                            <div className="answer-box center" ref={answerRef} style={{ fontSize: answerFontSize }}>
                                 { answers }
-                            </div> }
-                            <div className="submitted-answer">{ submittedAnswer }</div>
+                            </div>
+                            <div className="submitted-answer" ref={submittedAnswerRef} style={{ fontSize: submittedAnswerFontSize }}>{ submittedAnswer }</div>
                     </div>
                     }
                 </div>

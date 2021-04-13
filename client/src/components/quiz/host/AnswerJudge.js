@@ -14,6 +14,10 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
     const parse = answerParser();
 
     useEffect(() => {
+        console.log("CA: ",correctAnswers)
+    }, [correctAnswers])
+
+    useEffect(() => {
         console.log("ANSWERS: ", answers, correctAnswers)
         setCurrentSlide(parse.next().value);
     }, [])
@@ -25,7 +29,7 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
             for (let i = 0; i < correctAnswers.length; i++) {
                 pointsArr.push({
                     id: correctAnswers[i].id,
-                    points: correctAnswers[i].length
+                    points: correctAnswers[i].sheet.length
                 });
             }
             setLobbyState(pointsArr);
@@ -61,8 +65,8 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
                         setIndex(j);
                         setSubmittedAnswer(orderedArray[i][j]);
                         setCurrIndex({
-                            i: i,
-                            j: j+1
+                            i: i+1,
+                            j: j
                         })
                         tempSlide.type = "judge";
                         yield tempSlide;
@@ -82,7 +86,7 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
     return ( 
         <div className="answer-judge">
             { currentSlide && currentSlide !== "end" && <>
-                <SlideView showAns = { true } quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" submittedAnswer = { submittedAnswer} />
+                <SlideView showAns = { true } quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" submittedAnswer = { submittedAnswer.value } />
                 <button type="button" onClick={answerAllowed}>Allow</button>
                 <button type="button" onClick={() => (setCurrentSlide(parse.next().value))}>Deny</button>
             </>}
