@@ -45,6 +45,8 @@ const TeamLobby = (props) => {
 
     function sendAnswerSheet() {
         props.socket.emit('send sheet', outerTemp, props.lobbyState.id, props.mainId);
+        setAnswerSheet(initState());
+        setAnswerSheetVisible(false);
     }
 
     useEffect(() => {
@@ -522,7 +524,7 @@ const TeamLobby = (props) => {
                             </div>
                             
                             { localUser && answerSheetVisible && <AnswerSheet lobbyId = { props.lobbyState.id } socket = { props.socket } sendAnswerSheet = { sendAnswerSheet } answerSheet = { answerSheet } setAnswerSheet = {setAnswerSheet} /> }
-                            
+                            { localUser && !answerSheetVisible && <div className="no-answer-sheet">No Answer Sheet At The Moment</div> } 
                         </div>
                         <div className="team-chat">
                             <div className="team-chat-toolbar">
