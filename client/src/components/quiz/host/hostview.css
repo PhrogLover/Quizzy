@@ -1,0 +1,52 @@
+.host-header{
+    width:100%;
+    min-height: fit-content;
+    height: 5%;
+    color: var(--colour-black2);
+    font-weight: 500;
+    background-color: var(--primary-colour);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.host-body{
+    border:1px white solid;
+    max-width: 100%;
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.host-left{
+    min-width: 300px;
+    width: 300px;
+    border:forestgreen 1px solid;
+    height: 100%;
+    color: var(--font-colour);
+}
+.host-middle{
+    width: 100%;
+    color: var(--font-colour);
+    border:yellow 1px solid;
+    height: 100%;
+}
+.spare-space{
+    border: blue 1px solid;
+}
+.host-right{
+    min-width: 300px;
+    width: 300px;
+    border:forestgreen 1px solid;
+    height: 100%;
+    color: var(--font-colour);
+}
+.host-camera{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    border: 5px white solid;
+    z-index: 100;
+}

@@ -6,6 +6,7 @@
     flex-direction: column;
     font-family: var(--font);
     height: 100%;
+    color: var(--colour-black2);
     /* border: 5px blue solid; */
 }
 .slide{
@@ -240,12 +241,7 @@
     width:800px;
 
 }
-.quiz-start-button{
-    position: absolute;
-    z-index: 50;
-    top: 50%;
-    left: 10px;
-}
+
 
 
 

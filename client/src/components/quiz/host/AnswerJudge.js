@@ -86,7 +86,10 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
     return ( 
         <div className="answer-judge">
             { currentSlide && currentSlide !== "end" && <>
-                <SlideView showAns = { true } quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" submittedAnswer = { submittedAnswer.value } />
+                <div className="judge-questions-slides">
+                    <SlideView showAns = { true } quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" />
+                </div>
+                <div className="submitted-answer">{ submittedAnswer.value }</div>
                 <button type="button" onClick={answerAllowed}>Allow</button>
                 <button type="button" onClick={() => (setCurrentSlide(parse.next().value))}>Deny</button>
             </>}

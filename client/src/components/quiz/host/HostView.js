@@ -60,6 +60,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
         }
         setLobbyState(newState);
         console.log("dunzo");
+        window.document.getElementById("main-host-slideview").className = "main-host-slideview";
     }
 
     function sendAnswerSheet() {
@@ -67,30 +68,33 @@ const HostView = ({ user, mainId, socket, quiz }) => {
             type: "judge"
         }
         setLobbyState(newState);
+        window.document.getElementById("main-host-slideview").className = "main-host-slideview invisible";
     }
 
     return ( 
         <>
             <div className="main-body">
-                <div className="main-header">
-                    <div className="quiz-title">{ quiz.title } by <i> { quiz.creator } </i></div>
-                    <div className="instructions">
-                        if Host: make sure that the players in your lobby are happy, minimaze foul activity, cheating, profanity as much as possible. At the bottom you have blah blah...
-                        if Player: respect other players, don't take away the fun fron the experience by cheating, have fun. At the bottom you can choose your blah blah...
-                    </div>
+                <div className="host-header">
+                    <div className="host-title">{ quiz.title }</div>
                 </div>
-                { lobbyState.type === "main" &&
-                    <div className="lobby-body">                      
-                        <div className="slide-page">
-                            <div className="slide-window">
-                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />
-                            </div>
+                
+                <div className="host-body">
+                    <div className="host-left">
+                        list of users divided into teams, dropdown button for team to see names, with report/kick button next to each. 
+                    </div> 
+                    <div className="host-middle">                                                                          
+                        <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
+                        <div className="spare-space">
+                        {  lobbyState.type === "judge" &&               
+                            <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } answers = { answers } correctAnswers = { correctAnswers } setCorrectAnswers = { setCorrectAnswers } />
+                        }
                         </div>
+                        
                     </div>
-                }
-                {  lobbyState.type === "judge" &&
-                    <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } answers = { answers } correctAnswers = { correctAnswers } setCorrectAnswers = { setCorrectAnswers } />
-                }
+                    <div className="host-right">
+                        maybe put miscellaous (?) stuff here, which host will not use often since the lobby chat will be open 95% of the time this area is just for extra space.
+                    </div> 
+                </div>
             </div>
         </>
    );

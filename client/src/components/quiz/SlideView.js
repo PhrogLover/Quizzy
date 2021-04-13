@@ -205,7 +205,7 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                     }
                     { slide.type === "judge" &&
                         // EDIT THIS DIV IN THE STYLE YOU NEED IT TO BE
-                        <div id="answer-slide" className="slide">
+                        <div id="question-slide" className="slide">
                         <div className="slide-bg"/>
                             <div className="slide-number above" ref={ questionRef } style={{ fontSize: questionFontSize }}>
                                     Question { slide.quest }
@@ -226,10 +226,7 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
                             <div className="slide-img">
                                 { slide.img && <img src={ slide.img } alt="question_image"/> }
                             </div>
-                            <div className="answer-box center" ref={answerRef} style={{ fontSize: answerFontSize }}>
-                                { answers }
-                            </div>
-                            <div className="submitted-answer" ref={submittedAnswerRef} style={{ fontSize: submittedAnswerFontSize }}>{ submittedAnswer }</div>
+                            
                     </div>
                     }
                 </div>

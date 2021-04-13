@@ -213,14 +213,18 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
 
     return ( 
         <>
-            <SlideView slideData={slideData} isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } /> 
-            <div className="quiz-start-button">
-                { isPending && <>
-                    <button disabled>Quiz in Progress...</button>
-                </> }
-                { !isPending && <>
-                    <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript}>{ scriptButtonValue }</button>
-                </> }
+            <div className="slide-toolbar">
+                <div className="quiz-start-button">
+                    { isPending && <>
+                        <button disabled>Quiz in Progress...</button>
+                    </> }
+                    { !isPending && <>
+                        <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript}>{ scriptButtonValue }</button>
+                    </> }
+                </div>
+            </div>
+            <div id="main-host-slideview" className="main-host-slideview">
+                <SlideView slideData={slideData} isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } /> 
             </div>
         </>
      );

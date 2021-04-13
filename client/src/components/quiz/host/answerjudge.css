@@ -1,0 +1,14 @@
+.judge-questions-slides{
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    transform: translateY(calc(-100%)) translateY(-42px);
+
+    /* just a temp fix */
+}
+.answer-judge{
+    position: relative;
+}
+.answer-judge button{
+    z-index: 999999999;
+}

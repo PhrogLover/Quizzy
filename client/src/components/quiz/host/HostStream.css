@@ -1,0 +1,27 @@
+.host-lobby{
+    width: 100%;
+    background-color: transparent;
+    height: fit-content;
+    border:1px pink solid;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: var(--colour-black2);
+}
+.slide-toolbar{
+    min-height: 40px;
+    width: 100%;
+    background-color: lightblue;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quiz-start-button{
+    z-index: 50;
+}
+.host-lobby-toolbar{
+    width: 100%;
+    position: relative;
+    height: 40px;
+}
