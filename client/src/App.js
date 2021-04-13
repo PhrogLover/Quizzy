@@ -13,6 +13,7 @@ import GetProfile from './components/profile/GetProfile';
 import LoginRerouter from './components/login/LoginRerouter';
 import LoginDerouter from './components/login/LoginDerouter';
 import TestJudge from './components/quiz/host/TestJudge';
+import TestLeaderboard from './components/quiz/host/TestLeaderboard';
 
 function App() {
   const [ googleObj, setGoogleObj ] = useState({
@@ -77,7 +78,7 @@ function App() {
               <LoginDerouter />
             </Route>
             <Route exact path="/test">
-              <TestJudge user = {googleObj} />
+              <TestLeaderboard user = { googleObj }/>
             </Route>
             <Route exact path="/">
               <Homepage user={googleObj} />

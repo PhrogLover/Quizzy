@@ -31,7 +31,7 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
         return {gridTemplateColumns: gridStyle};
     }
 
-    function teamLobbyHandler(id, name, player) {
+    function teamLobbyHandler(id, name, player, playerId) {
         const newState = {
             type: "team",
             id: id,
@@ -40,7 +40,10 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
         let newLobbyData = $.extend(true, [], lobbyData);
         for (let i = 0; i < newLobbyData.length; i++) {
             if (newLobbyData[i].id === id) {
-                newLobbyData[i].players.push(player);
+                newLobbyData[i].players.push({
+                    id: playerId,
+                    name: player
+                });
                 break;
             }
         }
@@ -62,7 +65,7 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
                     <div className="lobby-body">
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyData.map((lobby, i) => (
-                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name, user.name))}>
+                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name, user.name, user.googleId))}>
                                     <div className="lobby-grid-index">{ lobby.index }</div>            
                                     <div className="team-name">{ lobby.name }</div>
                                     <div className="players-in-lobby">{ lobby.players.length }/{ quiz.numberOfPlayers }</div>
@@ -71,7 +74,7 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
                                         <div className="players-names">
                                             { lobby.players.map(player => (
                                                 <div className="player">
-                                                    { player }
+                                                    { player.name }
                                                 </div>
                                             ))}
                                         </div>

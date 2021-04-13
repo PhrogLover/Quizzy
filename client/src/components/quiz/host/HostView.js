@@ -1,7 +1,9 @@
 import React, { useState, useEffect  } from 'react';
 import "./hostview.css";
+import $ from "jquery";
 import HostStream from './HostStream';
 import AnswerJudge from '../host/AnswerJudge';
+import Leaderboard from '../../basic/Leaderboard';
 
 let keepAnswers = [];
 
@@ -9,6 +11,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState([]);
+    const [ leaderboard, setLeaderboard ] = useState(leaderboardInit());
     const [ answers, setAnswers ] = useState([]);
     const [ correctAnswers, setCorrectAnswers ] = useState([]);
     const [ round, setRound ] = useState(1);
@@ -16,6 +19,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
     useEffect(() => {
         socket.on('lobby data change '+mainId, (newLobbyData) => {
             setLobbyData(newLobbyData);
+            setLeaderboard(leaderboardUpdate(newLobbyData));
         });
         socket.on("send sheet "+mainId, (sheet, lobbyId) => {
             let obj = {
@@ -55,12 +59,51 @@ const HostView = ({ user, mainId, socket, quiz }) => {
 
     function judgingDone(pointsArray) {
         console.log(pointsArray);
-        const newState = {
+        let leaderboardData = $.extend(true, [], leaderboard);
+        pointsArray.map((team) => {
+            for (let i = 0; i < leaderboardData.length; i++) {
+                if (leaderboardData[i][0].id === team.id) {
+                    leaderboardData[i][round] = {
+                        id: team.id,
+                        points: team.points
+                    }
+                    break;
+                }
+            }
+        });
+        console.log(leaderboardData);
+        let newState = {
             type: "leaderboard"
         }
+        if (quiz.showAns) newState.type = "main";
+        setLeaderboard(leaderboardData);
         setLobbyState(newState);
         console.log("dunzo");
         window.document.getElementById("main-host-slideview").className = "main-host-slideview";
+    }
+
+    function leaderboardInit() {
+        let leaderboardArr = [];
+        for (let i = 0; i < quiz.numberOfTeams; i++) {
+            let tempArr = []
+            for (let j = 0; j <= quiz.numberOfRounds; j++) {
+                tempArr.push([]);
+            }
+            leaderboardArr.push(tempArr);
+        }
+        return leaderboardArr;
+    }
+
+    function leaderboardUpdate(lobbyData) {
+        let leaderboardArr = $.extend(true, [], leaderboard);
+        for (let i = 0; i < leaderboardArr.length; i++) {
+            leaderboardArr[i][0] = {
+                id: lobbyData[i].id,
+                name: lobbyData[i].name,
+                players: lobbyData[i].players
+            }
+        }
+        return leaderboardArr;
     }
 
     function sendAnswerSheet() {
@@ -92,6 +135,9 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                         
                     </div>
                     <div className="host-right">
+                    {  lobbyState.type === "leaderboard" &&
+                        <Leaderboard user = { user } teamList = { leaderboard } />
+                    }
                         maybe put miscellaous (?) stuff here, which host will not use often since the lobby chat will be open 95% of the time this area is just for extra space.
                     </div> 
                 </div>

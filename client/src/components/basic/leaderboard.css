@@ -1,0 +1,13 @@
+.leaderboard {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+.leaderboard .coloured {
+    background-color: gold;
+}
+
+.leaderboard .not-participated {
+    background-color: blue;
+}
