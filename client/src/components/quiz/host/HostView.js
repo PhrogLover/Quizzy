@@ -114,6 +114,7 @@ const HostView = ({ user, mainId, socket, quiz }) => {
         window.document.getElementById("main-host-slideview").className = "main-host-slideview invisible";
     }
 
+
     return ( 
         <>
             <div className="main-body">
@@ -125,12 +126,18 @@ const HostView = ({ user, mainId, socket, quiz }) => {
                     <div className="host-left">
                         list of users divided into teams, dropdown button for team to see names, with report/kick button next to each. 
                     </div> 
-                    <div className="host-middle">                                                                          
-                        <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
-                        <div className="spare-space">
-                        {  lobbyState.type === "judge" &&               
-                            <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } answers = { answers } correctAnswers = { correctAnswers } setCorrectAnswers = { setCorrectAnswers } />
-                        }
+                    <div className="host-middle">
+                        <div className="middle-wrapper">
+                            <div className="host-stream-wrapper">                                                                 
+                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
+                            </div>
+                        </div>  
+                        <div className="judge-section">                            
+                            {  lobbyState.type === "judge" &&  
+                                <div className="judge-section-container">             
+                                    <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } answers = { answers } correctAnswers = { correctAnswers } setCorrectAnswers = { setCorrectAnswers } />
+                                </div>
+                            }                         
                         </div>
                         
                     </div>

@@ -83,15 +83,54 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
         //end of judging phase for this round
     }
 
+    const [ judgeSlideSize, setJudgeSlideSize ] = useState(resizeSlide());
+    const [ judgeSlideHeight, setJudgeSlideHeight ] = useState(getHeight());
+
+    useEffect(() => {
+        setJudgeSlideSize(resizeSlide());
+        setJudgeSlideHeight(getHeight());
+    },[])
+
+    useEffect(() => {
+        function handleResize() {
+            setJudgeSlideSize(resizeSlide());
+            setJudgeSlideHeight(getHeight());
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return _ => {
+        window.removeEventListener('resize', handleResize)
+        }
+    })
+
+    function resizeSlide() {
+        let sectionWidth= $("#host-slideview-wrapper").width();
+        let sectionHeight= $("#host-slideview-wrapper").height();
+        return {maxHeight: sectionHeight+"px", maxWidth: sectionWidth+ "px" };
+    }
+    function getHeight() {
+        let sectionHeight= $("#main-host-slideview").height();
+        return {height: sectionHeight+"px"};
+    }
+
     return ( 
         <div className="answer-judge">
+            <div className="judge-prompt"> JUDGEMENT DAY</div>
             { currentSlide && currentSlide !== "end" && <>
-                <div className="judge-questions-slides">
-                    <SlideView showAns = { true } quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" />
+                <div className="judge-questions-slides" style={judgeSlideHeight}>
+                    <div className="judge-slide-wrapper" style={judgeSlideSize}>
+                        <SlideView showAns = { true } quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" />
+                    </div>
                 </div>
-                <div className="submitted-answer">{ submittedAnswer.value }</div>
-                <button type="button" onClick={answerAllowed}>Allow</button>
-                <button type="button" onClick={() => (setCurrentSlide(parse.next().value))}>Deny</button>
+                <div className="judge-container"> 
+                    <div className="correct-answer"> Correct Answer was: "<i> Acutal Answer </i>"</div>
+                    <div className="submitted-answer"> Submitted Answer was: "<i>{ submittedAnswer.value }</i>"</div>
+                    <div className="judge-buttons">
+                        <button className="judge-allow-button" type="button" onClick={answerAllowed}><i className="fas fa-check"></i> Allow</button>
+                        <button className="judge-deny-button" type="button" onClick={() => (setCurrentSlide(parse.next().value))}><i className="fas fa-times"></i>Deny</button>
+                    </div>
+                </div>
             </>}
         </div>
      );

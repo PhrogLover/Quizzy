@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import SlideView from "./SlideView";
 import "./slideview.css";
+import $ from "jquery";
+
 
 const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
     const [ isPending, setIsPending ] = useState(false);
@@ -11,6 +13,10 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
     const [ roundsRemaining, setRoundsRemaining ] = useState(quiz.numberOfRounds);
     const [ scriptButtonValue, setScriptButtonValue ] = useState("Start Quiz");
     const [ scriptButtonDisabled, setScriptButtonDisabled ] = useState(false);
+    const [ scriptButtonStyle, setScriptButtonStyle ] = useState({
+        backgroundColor: "var(--colour-green)",
+        border: "2px var(--colour-green)",
+    });
     const [ globalRoundIndex, setGlobalRoundIndex ] = useState(null);
     const [ globalQuizIntro, setGlobalQuizIntro ] = useState(true);
     const [ globalEndOfQuiz, setGlobalEndOfQuiz ] = useState(false);
@@ -53,16 +59,25 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
                 setGlobalRoundIndex(roundIndex);
                 setCurrentSlideScript(quiz.slides[roundIndex][0]);
                 setIsPending(false);
-                setScriptButtonValue("Start Next round");
+                setScriptButtonValue("Start Next Round");
                 quizIntro = false;
                 setGlobalQuizIntro(quizIntro);
                 setScriptButtonDisabled(false);
+                setScriptButtonStyle({
+                    backgroundColor: "var(--primary-colour)",
+                    border: "2px var(--primary-colour)",
+                })
             }, 5000);
             await sleep(5000);
         }
         else if (!showAns) {
             setScriptButtonDisabled(true);
             setScriptButtonValue("Quiz in Progress...");
+            setScriptButtonStyle({
+                border: "var(--colour-grey) 2px solid",
+                backgroundColor: "transparent",
+                color: "var(--colour-grey)"
+            })
             setIsPending(true);
             setCurrentSlideScript(emptySlide);
             setTimeout(() => {
@@ -123,6 +138,10 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
             if (roundsRemaining === 1 && !quiz.showAns) {
                 setCurrentSlideScript(emptySlide);
                 setScriptButtonValue("Calculate Leaderboard")
+                setScriptButtonStyle({
+                    border: "var(--colour-green) 2px solid",
+                    backgroundColor: "var(--colour-green)",
+                })
                 endOfQuiz = true;
                 setGlobalEndOfQuiz(endOfQuiz);
                 setScriptButtonDisabled(false);
@@ -143,6 +162,10 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
                 setIsPending(false);
                 setShowAns(true);
                 setScriptButtonDisabled(false);
+                setScriptButtonStyle({
+                    backgroundColor: "var(--secondary-colour)",
+                    border: "2px var(--secondary-colour)",
+                });
                 if (quiz.showAns) setScriptButtonValue("Reveal Answers")
                 else setScriptButtonValue("Next Round")
                 //Question phase done
@@ -153,6 +176,11 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
         else if (quiz.showAns) {
             setScriptButtonDisabled(true);
             setScriptButtonValue("Quiz in Progress...")
+            setScriptButtonStyle({
+                border: "var(--colour-grey) 2px solid",
+                backgroundColor: "transparent",
+                color: "var(--colour-grey)"
+            })
             setIsPending(true);
             setCurrentSlideScript(emptySlide);
             setTimeout(() => {
@@ -188,6 +216,10 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
             if (roundsRemaining === 1) {
                 setCurrentSlideScript(emptySlide);
                 setScriptButtonValue("Calculate Leaderboard")
+                setScriptButtonStyle({
+                    border: "var(--colour-green) 2px solid",
+                    backgroundColor: "var(--colour-green)",
+                })
                 setIsPending(false);
                 endOfQuiz = true;
                 setGlobalEndOfQuiz(endOfQuiz);
@@ -211,20 +243,59 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
         }        
     }
 
+    const [ hostStreamSize, setHostStreamSize ] = useState(resizeStream());
+
+    useEffect(() => {
+        setHostStreamSize(resizeStream());
+    },[])
+
+    useEffect(() => {
+        function handleResize() {
+            setHostStreamSize(resizeStream());
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return _ => {
+        window.removeEventListener('resize', handleResize)
+        }
+    })
+
+    function resizeStream() {
+        let sectionWidth= $("#main-host-slideview").width();
+        let sectionHeight= $("#main-host-slideview").height();
+
+        let newWidth=0;
+        let newHeight=0;
+
+        if ((sectionHeight) > (0.5625*sectionWidth)) {
+            newWidth = sectionWidth;
+            newHeight = newWidth * 0.5625;
+        }
+         else{
+            newHeight = sectionHeight;
+            newWidth = newHeight * 1.7778;
+         }
+
+        return {maxHeight: newHeight+"px", maxWidth: newWidth+ "px" };
+    }
+
     return ( 
         <>
             <div className="slide-toolbar">
                 <div className="quiz-start-button">
                     { isPending && <>
-                        <button disabled>Quiz in Progress...</button>
+                        <button className="in-progress-button" disabled>Quiz in Progress...</button>
                     </> }
                     { !isPending && <>
-                        <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript}>{ scriptButtonValue }</button>
+                        <button disabled = {scriptButtonDisabled} onClick={changeCurrentSlideScript} style={scriptButtonStyle}>{ scriptButtonValue }</button>
                     </> }
                 </div>
             </div>
-            <div id="main-host-slideview" className="main-host-slideview">
+            <div id="main-host-slideview" className="main-host-slideview" >
+                <div id ="host-slideview-wrapper" className="host-slideview-wrapper" style ={hostStreamSize}>
                 <SlideView slideData={slideData} isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } /> 
+                </div>
             </div>
         </>
      );

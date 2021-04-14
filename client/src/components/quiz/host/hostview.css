@@ -9,9 +9,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 0 0.3rem black);
+    z-index: 10;
 }
 .host-body{
-    border:1px white solid;
     max-width: 100%;
     width: 100%;
     height: 95%;
@@ -23,30 +24,56 @@
 .host-left{
     min-width: 300px;
     width: 300px;
-    border:forestgreen 1px solid;
     height: 100%;
     color: var(--font-colour);
+    filter: drop-shadow(0 0 0.3rem black);
+    background-color: var(--colour-black);
+    z-index: 9;
 }
 .host-middle{
     width: 100%;
     color: var(--font-colour);
-    border:yellow 1px solid;
+    height: 100%;
+    position: relative;
+}
+.middle-wrapper{
+    height: 70%;
+    width: 100%;
+}
+.host-stream-wrapper{
+    width: 100%;
     height: 100%;
 }
-.spare-space{
-    border: blue 1px solid;
+.judge-section{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .host-right{
     min-width: 300px;
     width: 300px;
-    border:forestgreen 1px solid;
     height: 100%;
     color: var(--font-colour);
+    filter: drop-shadow(0 0 0.3rem black);
+    background-color: var(--colour-black);
+    z-index: 9;
 }
 .host-camera{
     position: absolute;
     bottom: 50px;
-    left: 50px;
-    border: 5px white solid;
+    left: 20px;
     z-index: 100;
+    width: 150px;
+}
+.judge-section-container{
+    width: 90%;
+    height: 90%;
+    background-color: var(--colour-black2);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }

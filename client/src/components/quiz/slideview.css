@@ -183,6 +183,7 @@
     background-color: lightgrey;
     font-weight: bold;
     box-shadow: 0 4px 5px;
+    z-index: 50;
 }
 .timer-container{
     top:4%;
