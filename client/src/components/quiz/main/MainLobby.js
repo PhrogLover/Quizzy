@@ -7,6 +7,7 @@ import PlayerView from "./PlayerView";
 const MainLobby = ({ user, quiz, id, socket }) => {
 
     const [ userState, setUserState ] = useState("player");
+    const [ round, setRound ] = useState(null);
     const chatSize = quiz.numberOfTeams * quiz.numberOfPlayers;
 
     useEffect(() => {
@@ -15,10 +16,16 @@ const MainLobby = ({ user, quiz, id, socket }) => {
         }
     }, [])
 
+    useEffect(() => {
+        socket.on('set round '+id, (round) => {
+            setRound(round);
+        })
+    }, [])
+
     return (
             <div className="main-lobby">
-                { userState === "player" && <PlayerView user = { user } quiz = { quiz } socket = { socket } mainId = { id } /> }
-                { userState === "host" && <HostView user = { user } quiz = { quiz } socket = { socket } mainId = { id }/> }
+                { userState === "player" && <PlayerView round={ round } user = { user } quiz = { quiz } socket = { socket } mainId = { id } /> }
+                { userState === "host" && <HostView round={ round } user = { user } quiz = { quiz } socket = { socket } mainId = { id }/> }
                 <div className="main-chat">
                     <GeneralChat mainId = { id } chatSize={ chatSize } socket = { socket } />
                 </div>

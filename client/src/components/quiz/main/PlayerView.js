@@ -4,7 +4,7 @@ import $ from "jquery";
 
 import TeamLobby from "../team/TeamLobby";
 
-const PlayerView = ({ user, quiz, mainId, socket }) => {
+const PlayerView = ({ user, quiz, mainId, socket, round }) => {
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState([]);

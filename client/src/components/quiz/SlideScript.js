@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import SlideView from "./SlideView";
 import "./slideview.css";
 
-const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
+const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket, mainId }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ showAns, setShowAns ] = useState(false);
     const [ currentSlideScript, setCurrentSlideScript ] = useState(quiz.slides[0]);
@@ -11,9 +11,13 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar }) => {
     const [ roundsRemaining, setRoundsRemaining ] = useState(quiz.numberOfRounds);
     const [ scriptButtonValue, setScriptButtonValue ] = useState("Start Quiz");
     const [ scriptButtonDisabled, setScriptButtonDisabled ] = useState(false);
-    const [ globalRoundIndex, setGlobalRoundIndex ] = useState(null);
+    const [ globalRoundIndex, setGlobalRoundIndex ] = useState(0);
     const [ globalQuizIntro, setGlobalQuizIntro ] = useState(true);
     const [ globalEndOfQuiz, setGlobalEndOfQuiz ] = useState(false);
+
+    useEffect(() => {
+        socket.emit('set round', globalRoundIndex, mainId);
+    }, [globalRoundIndex])
 
     const emptySlide = {
         id: 0,

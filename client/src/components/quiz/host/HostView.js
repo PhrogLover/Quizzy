@@ -7,14 +7,13 @@ import Leaderboard from '../../basic/Leaderboard';
 
 let keepAnswers = [];
 
-const HostView = ({ user, mainId, socket, quiz }) => {
+const HostView = ({ user, mainId, socket, quiz, round }) => {
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState([]);
     const [ leaderboard, setLeaderboard ] = useState(leaderboardInit());
     const [ answers, setAnswers ] = useState([]);
     const [ correctAnswers, setCorrectAnswers ] = useState([]);
-    const [ round, setRound ] = useState(1);
 
     useEffect(() => {
         socket.on('lobby data change '+mainId, (newLobbyData) => {
