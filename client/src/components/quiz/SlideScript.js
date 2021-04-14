@@ -13,15 +13,11 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
     const [ roundsRemaining, setRoundsRemaining ] = useState(quiz.numberOfRounds);
     const [ scriptButtonValue, setScriptButtonValue ] = useState("Start Quiz");
     const [ scriptButtonDisabled, setScriptButtonDisabled ] = useState(false);
-<<<<<<< HEAD
     const [ scriptButtonStyle, setScriptButtonStyle ] = useState({
         backgroundColor: "var(--colour-green)",
         border: "2px var(--colour-green)",
     });
-    const [ globalRoundIndex, setGlobalRoundIndex ] = useState(null);
-=======
     const [ globalRoundIndex, setGlobalRoundIndex ] = useState(0);
->>>>>>> ac2c63f5f1457f66cd985e387d5a57f85a2e091f
     const [ globalQuizIntro, setGlobalQuizIntro ] = useState(true);
     const [ globalEndOfQuiz, setGlobalEndOfQuiz ] = useState(false);
 
