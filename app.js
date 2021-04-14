@@ -62,6 +62,9 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         //console.log('Client disconnected');
     });
+    socket.on('set round', (round, id) => {
+        io.emit('set round '+id, round);
+    })
     socket.on('chat message', (msg, id) => {
         io.emit('chat message '+id, msg);
     });
