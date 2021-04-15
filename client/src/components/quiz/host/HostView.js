@@ -18,6 +18,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
 
     useEffect(() => {
         socket.on('lobby data change '+mainId, (newLobbyData) => {
+            console.log(newLobbyData)
             setLobbyData(newLobbyData);
             setLeaderboard(leaderboardUpdate(newLobbyData));
         });
@@ -147,11 +148,11 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                         { lobbyData.map((lobby, i) => (
                             <div key={i} className="lobby-search">
                                 <div className="lobby-name">{ lobby.name }</div>
-                                { lobby.players.map((player, j) => {
+                                { lobby.players.map((player, j) => (
                                     <div key={j} className="player-search">
-                                        { player }
+                                        { player.name }
                                     </div>
-                                })}
+                                ))}
                             </div>
                         ))}
                     </div> 

@@ -5,26 +5,25 @@ const HostReview = ({ hostId }) => {
 
     const [ comment, setComment ] = useState("");
     const [ rating, setRating ] = useState(null);
+    const [ done, setDone ] = useState(false);
 
     function submitReview(e) {
         e.preventDefault();
         const body = {
             id: hostId,
+            rating: rating,
             comment: comment
         }
         fetch('http://localhost:5000/api/profiles/review', {
             method: 'PUT',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(body)
-        })
+        }).then(setDone(true));
     }
-
-
-
-
 
     return ( 
         <div className="host-review">
+            { !done && 
             <form className="host-review-container" onSubmit={ submitReview }>
                     <div className="host-review-header">
                         Did You Like The Host?
@@ -46,7 +45,8 @@ const HostReview = ({ hostId }) => {
                         <textarea className="host-review-text-area" type="text" id="comment" value={ comment } onChange={(text => (setComment(text.target.value)))} />
                         <button className="submit-review-button" type="submit" >Submit Review</button>
                     </div>
-            </form>
+            </form> }
+            { done && <div className="thank-you">Thank you for the review!</div> }
         </div>
      );
 }

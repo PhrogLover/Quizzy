@@ -26,7 +26,7 @@ router.put('/review', (req, res) => {
             if (profiles[i].id === req.body.id) {
                 let newProfile = profiles[i];
                 newProfile.rating = parseFloat(Number.parseFloat((newProfile.rating * newProfile.numberOfRatings + req.body.rating)/(newProfile.numberOfRatings + 1)).toFixed(1));
-                newProfile.rating.numberOfRatings++;
+                newProfile.numberOfRatings++;
                 profiles[i] = newProfile;
             }
         }
