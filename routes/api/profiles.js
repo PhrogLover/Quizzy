@@ -14,6 +14,11 @@ router.get('/:id', (req, res) => {
     }
 })
 
+router.post('/add', (req, res) => {
+    let newUser = req.body;
+    profiles.push(newUser);
+})
+
 router.put('/review', (req, res) => {
     const found = profiles.some(profile => (profile.id === req.body.id));
     if (found) {
@@ -21,7 +26,7 @@ router.put('/review', (req, res) => {
             if (profiles[i].id === req.body.id) {
                 let newProfile = profiles[i];
                 newProfile.rating = parseFloat(Number.parseFloat((newProfile.rating * newProfile.numberOfRatings + req.body.rating)/(newProfile.numberOfRatings + 1)).toFixed(1));
-                newProfile.rating.numberOfRatings++;
+                newProfile.numberOfRatings++;
                 profiles[i] = newProfile;
             }
         }

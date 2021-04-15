@@ -21,7 +21,7 @@ const Creator = ({ user }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ quiz, setQuiz] = useState({
         id: GetUniqueId(),
-        creatorId: user.googleId,
+        creatorId: user.id,
         creator: user.name,
         title: null,
         category: null,

@@ -6,7 +6,7 @@ import GetUniqueId from "../../scripts/GetUniqueId";
 import { Link } from "react-router-dom";
 
 const ProfileQuizzes = ({ profile, user, socket }) => {
-    const quizUrl = `http://localhost:5000/api/quizzes/profile/${user.googleId}`;
+    const quizUrl = `http://localhost:5000/api/quizzes/profile/${user.id}`;
     const { data: quizzes, isPending, error} = useFetch(quizUrl);
     const [ sending, setSending ] = useState(false);
     let history = useHistory();

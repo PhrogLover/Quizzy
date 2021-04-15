@@ -70,7 +70,7 @@ const PlayerView = ({ user, quiz, mainId, socket, round }) => {
                     <div className="lobby-body">
                         <div className="lobby-grid" style = {makeGrid()}>
                             { lobbyData.map((lobby, i) => (
-                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name, user.name, user.googleId))}>
+                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name, user.name, user.id))}>
                                     <div className="lobby-grid-index">{ lobby.index }</div>            
                                     <div className="team-name">{ lobby.name }</div>
                                     <div className="players-in-lobby">{ lobby.players.length }/{ quiz.numberOfPlayers }</div>
