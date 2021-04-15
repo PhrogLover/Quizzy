@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { useHistory } from "react-router";
 import { useState } from "react";
 import GetUniqueId from "../../scripts/GetUniqueId";
+import { Link } from "react-router-dom";
 
 const ProfileQuizzes = ({ profile, user, socket }) => {
     const quizUrl = `http://localhost:5000/api/quizzes/profile/${user.googleId}`;
@@ -66,32 +67,40 @@ const ProfileQuizzes = ({ profile, user, socket }) => {
                     { quizzes && quizzes.map((quiz) => (
                         <div className="quiz-item-container"  key={quiz.id}>
                             { quiz.deployIds && quiz.deployIds.length > 0 && <>
-                                <div className="quiz-item-labels">
-                                    <div className="quiz-item-title">
-                                        {quiz.title}
-                                    </div>
+                                <div className="live-status">
+                                        <i className="far fa-dot-circle"></i>
+                                        LIVE
+                                    </div>  
+                                <div className="quiz-item-labels">                                    
                                     <div className="quiz-item-type">
                                         {quiz.type}
                                     </div>
+                                    <div className="quiz-item-title">
+                                        {quiz.title}
+                                    </div>
+                                    
                                 </div>
                                 <div className="quiz-item-buttons">
-                                    <button className="edit-quiz-button">
-                                        <i className="fas fa-edit"></i>
-                                        Edit
-                                    </button>           
-                                    <button className="publish-quiz-button" type="button" onClick={() => (closeQuiz(quiz))}>
-                                        <i className="fas fa-upload"></i>
-                                        Close
+                                    
+                                    <button className="publish-quiz-button" type="button">
+                                        <Link to={`/mainLobby/${quiz.id}`}>                                       
+                                            <i className="fas fa-share"></i>
+                                            Join
+                                        </Link>
+                                    </button>     
+                                    <button className="un-publish-quiz-button" type="button" onClick={() => (closeQuiz(quiz))}>
+                                        <i className="fas fa-times"></i>
+                                        Remove
                                     </button>
                                 </div>
                             </> }
                             { quiz.deployIds.length === 0 && <>
                                 <div className="quiz-item-labels">
-                                    <div className="quiz-item-title">
-                                        {quiz.title}
-                                    </div>
                                     <div className="quiz-item-type">
                                         {quiz.type}
+                                    </div>
+                                    <div className="quiz-item-title">
+                                        {quiz.title}
                                     </div>
                                 </div>
                                 <div className="quiz-item-buttons">
