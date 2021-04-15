@@ -64,6 +64,7 @@ const TeamStream = (props) => {
             }
             setSlideData(slideBundle);
             props.setAnswerSheetVisible(slideBundle.answerSheet);
+            props.setEndOfQuiz(slideBundle.endOfQuiz);
         })
     }, [])
 

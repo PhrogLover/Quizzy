@@ -2,7 +2,7 @@ import "./profilehome.css";
 
 const ProfileHome = ( { profile }) => {
         
-    
+    console.log(profile)
     function StatsItem(props){
         return(
             <div className = "stats-item">
