@@ -5,7 +5,7 @@ import $ from "jquery";
 
 import TeamLobby from "../team/TeamLobby";
 
-const PlayerView = ({ user, quiz, mainId, socket, round }) => {
+const PlayerView = ({ user, quiz, mainId, socket }) => {
     let history = useHistory();
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
