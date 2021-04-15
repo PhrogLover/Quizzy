@@ -4,7 +4,7 @@ import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../scripts/GetUniqueId";
 import generateColour from "../../scripts/generateColour";
 
-const GeneralChat = ( { mainId, socket }) => {
+const GeneralChat = ( {userState, mainId, socket }) => {
     const [ chat, setChat ] = useState([]);
 
     useEffect(() => {
@@ -48,16 +48,18 @@ const GeneralChat = ( { mainId, socket }) => {
     const [pinEditable,setPinEditable] = useState(false);
 
     return ( <>
-            {!gcOpen &&
+            {!gcOpen && userState === "player" && 
                 <div className="open-chat-button" onClick={() => setgcOpen(true)} >
                     <i className="fas fa-comment-alt"/>
                 </div>
             }
             {gcOpen && <div className= "general-chat">
                 <div className="chat-toolbar-container">
+                    {userState === "player" &&
                     <div className="collapse-chat-button chat-toolbar-buttons" onClick={() => setgcOpen(false)} >
                         <i className="fas fa-times"/>
                     </div>
+                    }
                     <div className="chat-toolbar-buttons">
                     <i className="fas fa-user-friends"/>
                     </div>

@@ -27,7 +27,7 @@ const MainLobby = ({ user, quiz, id, socket }) => {
                 { userState === "player" && <PlayerView user = { user } quiz = { quiz } socket = { socket } mainId = { id } /> }
                 { userState === "host" && <HostView round={ round } user = { user } quiz = { quiz } socket = { socket } mainId = { id }/> }
                 <div className="main-chat">
-                    <GeneralChat mainId = { id } chatSize={ chatSize } socket = { socket } />
+                    <GeneralChat userState = {userState} mainId = { id } chatSize={ chatSize } socket = { socket } />
                 </div>
             </div>
      );

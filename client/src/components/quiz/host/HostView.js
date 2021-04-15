@@ -173,9 +173,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                         </div>
                         
                     </div>
-                    <div className="host-right">
-                        maybe put miscellaous (?) stuff here, which host will not use often since the lobby chat will be open 95% of the time this area is just for extra space.
-                    </div> 
+                    <div className="host-right"></div> 
                 </div>
             </div>
         </>
