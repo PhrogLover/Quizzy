@@ -19,7 +19,7 @@ function App() {
     email: "quizzyapp.dev@gmail.com",
     familyName: "Admin",
     givenName: "Quizzy",
-    googleId: "106812796264951400312",
+    id: "106812796264951400312",
     imageUrl: "https://lh5.googleusercontent.com/-a7zvn0K9S3I/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDv_BhF6AuY08z9CbmJ-F9pFYIjA/s96-c/photo.jpg",
     name: "Quizzy Admin"
   });
@@ -28,7 +28,7 @@ function App() {
   //   email: "aryjeleng@gmail.com",
   //   familyName: "Lengvenis",
   //   givenName: "Arijus",
-  //   googleId: "112380395290543152389",
+  //   id: "112380395290543152389",
   //   imageUrl: "https://lh3.googleusercontent.com/-3hP2gkuIj-M/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckUVLf3SPlN7M1LkxUym_XQw6sYAw/s96-c/photo.jpg",
   //   name: "Arijus Lengvenis"
   // }
@@ -37,7 +37,7 @@ function App() {
   //   email: "quizzyapp.dev@gmail.com",
   //   familyName: "Admin",
   //   givenName: "Quizzy",
-  //   googleId: "106812796264951400312",
+  //   id: "106812796264951400312",
   //   imageUrl: "https://lh5.googleusercontent.com/-a7zvn0K9S3I/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDv_BhF6AuY08z9CbmJ-F9pFYIjA/s96-c/photo.jpg",
   //   name: "Quizzy Admin"
   // }
@@ -68,7 +68,20 @@ function App() {
             id: profileObj.googleId,
             name: profileObj.name,
             imageUrl: profileObj.imageUrl,
-            email: profileObj.email
+            email: profileObj.email,
+            donor: false, 
+            status: "New User",
+            registerTime: new Date(),
+            created: 0,
+            hosted: 0,
+            won: 0,
+            answered: 0,
+            participated:0,
+            seasonal: 0,
+            partOfTeam: false,
+            teamName: "",
+            rating: 4,
+            numberOfRatings: 1
           }
           //additional stats as well.
           console.log(userObj)
