@@ -1,32 +1,46 @@
 .leaderboard {
     position: relative;
-    width: 1000px;
-    height: fit-content;
+    width: 100%;
+    height: 100%;
     color: white;
-    ;
+    border: 1px solid red;
+    padding: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.team-name{
+    font-size: inherit;
 }
 
 .leaderboard .coloured {
-    background-color: gold;
-    color: black;
+    filter: brightness(150%);
 }
 
 .leaderboard .not-participated {
-    background-color: blue;
+    filter: brightness(70%);
+
 }
 
 /* Leaderboard Table */
 
 table{
-    border: aqua 1px solid;
     width: 100%;
-    height: 56.25%;
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 th{
-    border: 1px solid white;
+    border-radius: var(--border-radius);
+    border: 1px var(--colour-black2) solid;
+    background-color: var(--primary-colour);
+    color: var(--colour-black2);
+
 }
 td{
-    border: 1px solid white;
+    border: 1px var(--colour-black2) solid; 
+    border-radius: var(--border-radius);
+    background-color: var(--colour-black);
+    color: var(--font-colour);
 
 }

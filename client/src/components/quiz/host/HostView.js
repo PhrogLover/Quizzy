@@ -154,8 +154,9 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                         ))}
                     </div> 
                     <div className="host-middle">
-                        <button type="button" onClick={closeQuiz}>Close Quiz</button>
                         <div className="middle-wrapper">
+                            <button className="close-quiz-button" type="button" onClick={closeQuiz}>End Quiz</button>
+
                             <div className="host-stream-wrapper">                                                                 
                                 <HostStream user = { user } teamList = { leaderboard } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
                             </div>
