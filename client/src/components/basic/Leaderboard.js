@@ -1,10 +1,24 @@
 import "./leaderboard.css";
 import $ from "jquery";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const Leaderboard = ({ teamList, user }) => {
 
     const [ leaderboard, setLeaderboard ] = useState(initLeaderboard($.extend(true, [], teamList)));
+    const [ lbDimensions, setLbDimensions] = useState(resizeLeaderBoard());
+
+    useEffect(() => {
+        setLbDimensions(resizeLeaderBoard());
+    },[])
+
+    function resizeLeaderBoard() {
+        let sectionWidth= $("#leaderboard").width();
+        let sectionHeight= $("#leaderboard").height();
+        let fontSize = sectionHeight/(2*(leaderboard.length)+3);
+
+        console.log("height " + sectionHeight + " font " +fontSize + " length " + leaderboard.length);
+        return {height: sectionHeight+"px", width: sectionWidth+ "px", fontSize: fontSize+"px" };
+    }
     
 
     function initLeaderboard(teamList) {
@@ -39,20 +53,20 @@ const Leaderboard = ({ teamList, user }) => {
     }    
 
     return ( 
-        <div className="leaderboard">
+        <div id="leaderboard" className="leaderboard" style={lbDimensions}>
             <table>
                 <thead>
                     <tr>
                         <th rowSpan="3">
                             Team Name
                         </th>
-                        <th colSpan={leaderboard[0].length}>
+                        <th colSpan={leaderboard[0].length-1}>
                             Points
                         </th>
                     </tr>
                     <tr>
-                        <th colSpan={leaderboard[0].length-1}>
-                            Rounds
+                        <th colSpan={leaderboard[0].length-2}>
+                            Round
                         </th>
                         <th rowSpan="2">
                             Total
@@ -68,8 +82,8 @@ const Leaderboard = ({ teamList, user }) => {
                     { leaderboard.map((team, i) => (
                         <tr key={i} className={(team[0].players && team[0].players.some(player => (player.id === user.id)) ? "coloured" : "not-coloured")}>{/* if they have not participated in any of the rounds */}
                             { !team.some(score => (score.points !== undefined)) && <>
-                                <td  className="not-participated">{ team[0].name }</td>
-                                <td colSpan={leaderboard[0].length}>bruh you got no points mannn</td> 
+                                <td className="not-participated">{ team[0].name }</td>
+                                <td className="not-participated" colSpan={leaderboard[0].length}>bruh you got no points mannn</td> 
                                 </>
                             }
                             { team.some(score => (score.points !== undefined)) &&  

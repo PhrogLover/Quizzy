@@ -1,0 +1,71 @@
+.host-review{
+    width: 100%;
+    height: 100%;
+    padding: 5px 20px;
+    color: var(--font-colour);
+    position: relative;
+}
+.host-review-header{
+    width: 100%;
+    text-align: center;
+}
+.host-review-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.comment-review-container{
+    font-size: 15px;
+}
+.host-review-text-area{
+    width: 90%;
+    height: 80px;
+    transition: 200ms;
+    resize: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    border: var(--bg-colour) 3px solid;
+    padding: 5px;
+    font-size: 14px;
+}
+.host-review-text-area:hover{
+    border: var(--primary-colour) 3px solid;
+}
+.host-review-text-area:focus{
+    border: var(--primary-colour) 3px solid;
+    height: 180px;
+}
+.stars input{
+    display: none;
+}
+.stars{
+    font-size: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.stars label{
+    margin: 5px ;
+}
+.stars label:hover{
+    cursor: pointer;    
+}
+.yellow-star{
+    color: var(--primary-colour);
+    filter: drop-shadow(0 0 0.3rem var(--primary-colour));
+}
+.plain-star{
+    color: grey;
+}
+.submit-review-button{
+    border: var(--primary-colour) 2px solid;
+    background:transparent;
+    color: var(--primary-colour);
+    padding: 5px 10px;
+}
+.submit-review-button:hover{
+    background-color: var(--primary-colour);
+    color: var(--colour-black2);
+}

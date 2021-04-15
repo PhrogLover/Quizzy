@@ -146,10 +146,18 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
                 if (quiz.showAns) {
                     setShowAns(true);
                     setScriptButtonValue("Reveal Answers");
+                    setScriptButtonStyle({
+                        border: "var(--colour-red) 2px solid",
+                        backgroundColor: "var(--colour-red)",
+                    })
                 }
                 else {
                     setLeaderboard(true);
                     setScriptButtonValue("Calculate Leaderboard");
+                    setScriptButtonStyle({
+                        border: "var(--colour-green) 2px solid",
+                        backgroundColor: "var(--colour-green)",
+                    })
                 }
                 setScriptButtonDisabled(false);
                 setScriptButtonStyle({
@@ -207,6 +215,12 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
                 setIsPending(false);
                 setScriptButtonDisabled(false);
                 setScriptButtonValue("Calculate Leaderboard");
+                setScriptButtonStyle({
+                    border: "var(--colour-green) 2px solid",
+                    backgroundColor: "var(--colour-green)",
+                    color: "var(--colour-black2)"
+                })
+
                 console.log("Answer phase end");
             }, 5000);
             await sleep(5000);  
@@ -230,8 +244,9 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
                 if (roundsRemaining === 1) {
                     setScriptButtonValue("End of Quiz!")
                     setScriptButtonStyle({
-                        border: "var(--colour-green) 2px solid",
-                        backgroundColor: "var(--colour-green)",
+                        border: "var(--primary-colour) 2px solid",
+                        backgroundColor: "var(--primary-colour)",
+                        color: "var(--colour-black2)"
                     })
                     setEndOfQuiz(true);
                     //quiz done
