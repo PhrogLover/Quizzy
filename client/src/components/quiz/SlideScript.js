@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import SlideView from "./SlideView";
 import "./slideview.css";
 import $ from "jquery";
+import Leaderboard from "../basic/Leaderboard";
 
 
-const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket, mainId }) => {
+const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket, mainId, teamList, user }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ showAns, setShowAns ] = useState(false);
     const [ currentSlideScript, setCurrentSlideScript ] = useState(quiz.slides[0]);
@@ -19,7 +20,9 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
     });
     const [ globalRoundIndex, setGlobalRoundIndex ] = useState(0);
     const [ globalQuizIntro, setGlobalQuizIntro ] = useState(true);
-    const [ globalEndOfQuiz, setGlobalEndOfQuiz ] = useState(false);
+    const [ endOfQuiz, setEndOfQuiz ] = useState(false);
+    const [ leaderboard, setLeaderboard ] = useState(false);
+    const [ showLeaderboard, setShowLeaderboard ] = useState(false);
 
     useEffect(() => {
         socket.emit('set round', globalRoundIndex, mainId);
@@ -34,7 +37,6 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
 
     let roundIndex = globalRoundIndex;
     let quizIntro = globalQuizIntro;
-    let endOfQuiz = globalEndOfQuiz;
 
     useEffect(() => {
         console.log(answerSheet);
@@ -47,14 +49,11 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
     async function changeCurrentSlideScript() {
         console.log('Round index: '+roundIndex);
         console.log('Quiz intro: '+quizIntro);
-        console.log('End of quiz: '+endOfQuiz);
         console.log('Show answer(state): '+showAns);
         console.log('Rounds remaining: '+roundsRemaining);
-        if (endOfQuiz) {
-            console.log("woo");
-            //show leaderboard
-        }
-        else if (quizIntro) {
+
+        if (quizIntro) {
+            setShowLeaderboard(false);
             setIsPending(true);
             setCurrentSlideScript(emptySlide);
             setScriptButtonDisabled(true);
@@ -74,7 +73,7 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
             }, 5000);
             await sleep(5000);
         }
-        else if (!showAns) {
+        else if (!showAns && !leaderboard) {
             setScriptButtonDisabled(true);
             setScriptButtonValue("Quiz in Progress...");
             setScriptButtonStyle({
@@ -139,45 +138,30 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
             }
             setTimer(null);
             setAnswerSheet(false);
-            if (roundsRemaining === 1 && !quiz.showAns) {
-                setCurrentSlideScript(emptySlide);
-                setScriptButtonValue("Calculate Leaderboard")
-                setScriptButtonStyle({
-                    border: "var(--colour-green) 2px solid",
-                    backgroundColor: "var(--colour-green)",
-                })
-                endOfQuiz = true;
-                setGlobalEndOfQuiz(endOfQuiz);
-                setScriptButtonDisabled(false);
-                //quiz done
-                console.log("Quiz done");
-                return;
-            }
             setIsPending(true);
             setCurrentSlideScript(emptySlide);
             setTimeout(() => {
                 setCurrentSlideScript(quiz.slides[roundIndex][0]);
-                if (roundsRemaining !== 1 && !quiz.showAns) {
-                    roundIndex++;
-                    setGlobalRoundIndex(roundIndex);
-                    setRoundsRemaining(roundsRemaining-1);
-                    setCurrentSlideScript(quiz.slides[roundIndex][0]);
-                }
                 setIsPending(false);
-                setShowAns(true);
+                if (quiz.showAns) {
+                    setShowAns(true);
+                    setScriptButtonValue("Reveal Answers");
+                }
+                else {
+                    setLeaderboard(true);
+                    setScriptButtonValue("Calculate Leaderboard");
+                }
                 setScriptButtonDisabled(false);
                 setScriptButtonStyle({
                     backgroundColor: "var(--secondary-colour)",
                     border: "2px var(--secondary-colour)",
                 });
-                if (quiz.showAns) setScriptButtonValue("Reveal Answers")
-                else setScriptButtonValue("Next Round")
                 //Question phase done
                 console.log("Question phase done");
             }, 5000); 
             await sleep(5000);   
         }
-        else if (quiz.showAns) {
+        else if (quiz.showAns && !leaderboard) {
             setScriptButtonDisabled(true);
             setScriptButtonValue("Quiz in Progress...")
             setScriptButtonStyle({
@@ -217,34 +201,55 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
             setShowAns(false);
             setIsPending(true);
             setCurrentSlideScript(emptySlide);
-            if (roundsRemaining === 1) {
-                setCurrentSlideScript(emptySlide);
-                setScriptButtonValue("Calculate Leaderboard")
+            setTimeout(() => {
+                setLeaderboard(true);
+                setCurrentSlideScript(quiz.slides[roundIndex][0]);
+                setIsPending(false);
+                setScriptButtonDisabled(false);
+                setScriptButtonValue("Calculate Leaderboard");
+                console.log("Answer phase end");
+            }, 5000);
+            await sleep(5000);  
+        }
+        else if (leaderboard) {
+            setScriptButtonDisabled(true);
+            setScriptButtonValue("Calculating leaderboard...")
+            setScriptButtonStyle({
+                border: "var(--colour-grey) 2px solid",
+                backgroundColor: "transparent",
+                color: "var(--colour-grey)"
+            })
+            setCurrentSlideScript(emptySlide);
+            setTimeout(() => {
+                //leaderboard suspense time
+                console.log("Leaderboard");
+                setShowLeaderboard(true);
+                setLeaderboard(false);
+                setGlobalQuizIntro(true);
+                quizIntro = true;
+                if (roundsRemaining === 1) {
+                    setScriptButtonValue("End of Quiz!")
+                    setScriptButtonStyle({
+                        border: "var(--colour-green) 2px solid",
+                        backgroundColor: "var(--colour-green)",
+                    })
+                    setEndOfQuiz(true);
+                    //quiz done
+                    console.log("End of Quiz");
+                    return;
+                }
                 setScriptButtonStyle({
                     border: "var(--colour-green) 2px solid",
                     backgroundColor: "var(--colour-green)",
                 })
-                setIsPending(false);
-                endOfQuiz = true;
-                setGlobalEndOfQuiz(endOfQuiz);
+                setScriptButtonValue("Prepare For Next Round");
                 setScriptButtonDisabled(false);
-                console.log("Quiz end");
-                return;
-            }
-            else {
                 roundIndex++;
                 setGlobalRoundIndex(roundIndex);
                 setRoundsRemaining(roundsRemaining-1);
-            }
-            setTimeout(() => {
-                setCurrentSlideScript(quiz.slides[roundIndex][0]);
-                setIsPending(false);
-                setScriptButtonDisabled(false);
-                setScriptButtonValue("Next Round")
-                console.log("Answer phase end");
             }, 5000);
-            await sleep(5000);  
-        }        
+            await sleep(5000);
+        }     
     }
 
     const [ hostStreamSize, setHostStreamSize ] = useState(resizeStream());
@@ -298,7 +303,8 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
             </div>
             <div id="main-host-slideview" className="main-host-slideview" >
                 <div id ="host-slideview-wrapper" className="host-slideview-wrapper" style ={hostStreamSize}>
-                <SlideView slideData={slideData} isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } /> 
+                    <SlideView endOfQuiz = { endOfQuiz } showLeaderboard = { showLeaderboard } slideData={slideData} isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } />
+                    {/* { showLeaderboard && <Leaderboard user = { user } teamList = { teamList } /> }  OVERLAY */}
                 </div>
             </div>
         </>

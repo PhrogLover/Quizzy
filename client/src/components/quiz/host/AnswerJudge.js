@@ -61,15 +61,13 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
                 if (!correctAnswer) {
                     //set current slide to this slide for judging
                     if (orderedArray[i][j].value !== "") {
-                        let tempSlide = quiz.slides[round][i+1];
                         setIndex(j);
                         setSubmittedAnswer(orderedArray[i][j]);
                         setCurrIndex({
                             i: i+1,
                             j: j
                         })
-                        tempSlide.type = "judge";
-                        yield tempSlide;
+                        yield quiz.slides[round][i+1];
                     }
                 }
                 else {
@@ -120,7 +118,7 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
             { currentSlide && currentSlide !== "end" && <>
                 <div className="judge-questions-slides" style={judgeSlideHeight}>
                     <div className="judge-slide-wrapper" style={judgeSlideSize}>
-                        <SlideView showAns = { true } quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" />
+                        <SlideView quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" judge = { true } />
                     </div>
                 </div>
                 <div className="judge-container"> 

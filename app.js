@@ -123,6 +123,9 @@ io.on('connection', (socket) => {
             io.emit('team lobby get token '+id, token);
         })        
     });
+    socket.on('leaderboard', (data, id) => {
+        io.emit('leaderboard '+id, data);
+    })
 });
 
 function createSession(sessionId, window) {

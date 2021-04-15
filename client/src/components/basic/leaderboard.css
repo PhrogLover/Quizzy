@@ -1,9 +1,14 @@
 .leaderboard {
-        
+    position: relative;
+    width: 1000px;
+    height: fit-content;
+    color: white;
+    ;
 }
 
 .leaderboard .coloured {
     background-color: gold;
+    color: black;
 }
 
 .leaderboard .not-participated {

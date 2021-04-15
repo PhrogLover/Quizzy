@@ -16,7 +16,7 @@ let sendSlideData = {};
 const HostStream = (props) => {
 
     let sessionName = props.sessionName ? props.sessionName : 'SessionA';
-    let userName = props.user ? props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
+    let userName = props.user.name ? props.user.name : 'OpenVidu_User' + Math.floor(Math.random() * 100);
 
     const [ mySessionId, setMySessionId ] = useState(sessionName);
     const [ myUserName, setMyUserName ] = useState(userName);
@@ -327,7 +327,7 @@ const HostStream = (props) => {
                 </div>
             </div>
             <div className="slide-script">
-                <SlideScript socket = {props.socket} mainId={props.mainId} quiz = { props.quiz } slideData={slideData} onSlideChange={setSlideData} onSlideChangeVar={slideData}/>
+                <SlideScript user = { props.user } teamList = { props.teamList } socket = {props.socket} mainId={props.mainId} quiz = { props.quiz } slideData={slideData} onSlideChange={setSlideData} onSlideChangeVar={slideData}/>
             </div>
             <div className="host-lobby-toolbar">
                 <ToolbarComponent
