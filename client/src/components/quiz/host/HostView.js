@@ -51,6 +51,10 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
     }, [])
 
     useEffect(() => {
+        socket.emit('leaderboard', leaderboard, mainId);
+    }, [leaderboard])
+
+    useEffect(() => {
         if (lobbyState === "judge") {
             keepAnswers = [];
         }
@@ -128,7 +132,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                     <div className="host-middle">
                         <div className="middle-wrapper">
                             <div className="host-stream-wrapper">                                                                 
-                                <HostStream mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
+                                <HostStream user = { user } teamList = { leaderboard } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
                             </div>
                         </div>  
                         <div className="judge-section">                            

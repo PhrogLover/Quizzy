@@ -57,15 +57,7 @@ const TeamLobby = (props) => {
         const newState = {
             type: "main"
         }
-        let newLobbyData = $.extend(true, [], props.lobbyData);
-        for (let i = 0; i < newLobbyData.length; i++) {
-            if (newLobbyData[i].id === props.lobbyState.id) {
-                newLobbyData[i].players = newLobbyData[i].players.filter(player => (player.id !== props.user.googleId));
-                break;
-            }
-        }
         props.setLobbyState(newState);
-        props.socket.emit('lobby data change', props.mainId, newLobbyData);
     }
 
     useEffect(() => {
@@ -90,6 +82,14 @@ const TeamLobby = (props) => {
         return () => {
             window.removeEventListener('beforeunload', onbeforeunload);
             leaveSession();
+            let newLobbyData = $.extend(true, [], props.lobbyData);
+            for (let i = 0; i < newLobbyData.length; i++) {
+                if (newLobbyData[i].id === props.lobbyState.id) {
+                    newLobbyData[i].players = newLobbyData[i].players.filter(player => (player.id !== props.user.googleId));
+                    break;
+                }
+            }
+            props.socket.emit('lobby data change', props.mainId, newLobbyData);
         }
     }, [])
 
@@ -502,7 +502,7 @@ const TeamLobby = (props) => {
                     </div>
                     <div id = "quiz-stream-section" className={"quiz-stream-section " + slideSize} ref={quizStreamRef}>
                         <div className="quiz-slides-view" style={quizStreamSize}>                            
-                            <TeamStream sendAnswerSheet ={sendAnswerSheet} sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } answerSheetVisible={answerSheetVisible} setAnswerSheetVisible = { setAnswerSheetVisible } />
+                            <TeamStream user = { props.user } sendAnswerSheet ={sendAnswerSheet} sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } answerSheetVisible={answerSheetVisible} setAnswerSheetVisible = { setAnswerSheetVisible } />
                         </div>
                     </div>
                 </div>

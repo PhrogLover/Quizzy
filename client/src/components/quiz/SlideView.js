@@ -5,7 +5,7 @@ import Timer from "./Timer";
 
 let saveAnswerSheet = false;
 
-const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, timer, slideWidthPass, answerSheet, slideData, submittedAnswer = "" } ) => {
+const SlideView = ( { quiz, onSlideChange, slide, showAns = false, timer, slideWidthPass, answerSheet, slideData, submittedAnswer = "", endOfQuiz, showLeaderboard } ) => {
 
     const [ index, setIndex ] = useState({
         round: 0,
@@ -13,7 +13,7 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
     });
 
     let answers = "";
-    if(slide.type === "question" || slide.type === "judge") {
+    if(slide.type === "question") {
         for (let i = 0; i < slide.answers.length; i++) {
             answers += slide.answers[i];
             if (i !== slide.answers.length-1) {
@@ -21,6 +21,10 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
             }
         }
     }
+
+    useEffect(() => {
+        console.log("Phantom: ", showAns, answers);
+    }, [showAns, answers])
     
     useEffect(() => {
         if (slide.type === "judge") {
@@ -58,12 +62,13 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
             let slideBundle = {
                 round: index.round,
                 question: index.question,
-                error: error,
                 showAns: showAns,
                 timer: timer,
                 slideWidthPass: slideWidthPass,
                 answerSheet: answerSheet,
-                sendSheet: false
+                sendSheet: false,
+                showLeaderboard: showLeaderboard,
+                endOfQuiz: endOfQuiz
             }
             // console.log(slideBundle)
             if (saveAnswerSheet && !slideBundle.answerSheet) {
@@ -72,7 +77,7 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
             saveAnswerSheet = slideBundle.answerSheet;
             onSlideChange(slideBundle);
         }
-    }, [quiz, index, showAns, timer, answerSheet])
+    }, [quiz, index, showAns, timer, answerSheet, endOfQuiz, showLeaderboard])
 
     const { fontSize: roundFontSize, ref: roundRef } = useFitText({
         maxFontSize: 300,
@@ -98,17 +103,12 @@ const SlideView = ( { quiz, onSlideChange, slide, error = "", showAns = false, t
         maxFontSize: 300,
         minFontSize: 3,
     });
-    const { fontSize: submittedAnswerFontSize, ref: submittedAnswerRef } = useFitText({
-        maxFontSize: 300,
-        minFontSize: 3,
-    });
 
     //const slideWidthes = ['width--20per','width--50per','width--80per','width--100per','width--200','width--400','width--800'];
     const [ slideSize, setSlideSize ] = useState(slideWidthPass);    
 
     return (
         <>
-            { error && <div className="loading">{ error }</div> }
             <div className="slides" id="slides">
                 <div className={`slide-resize-me ${slideSize} `}>
                     { slide.type !== "question" && slide.type !== "judge" &&
