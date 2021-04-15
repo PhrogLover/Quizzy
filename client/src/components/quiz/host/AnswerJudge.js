@@ -118,7 +118,7 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
             { currentSlide && currentSlide !== "end" && <>
                 <div className="judge-questions-slides" style={judgeSlideHeight}>
                     <div className="judge-slide-wrapper" style={judgeSlideSize}>
-                        <SlideView quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" />
+                        <SlideView quiz = { quiz } slide = { currentSlide } slideWidthPass = "width--100per" judge = { true } />
                     </div>
                 </div>
                 <div className="judge-container"> 
