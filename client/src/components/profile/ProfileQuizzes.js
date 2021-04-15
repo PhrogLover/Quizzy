@@ -18,6 +18,20 @@ const ProfileQuizzes = ({ profile, user, socket }) => {
         return idList
     }
 
+    function closeQuiz(quiz) {
+        quiz.deployIds = [];
+        const body = {
+            id: quiz.id,
+            quiz: quiz
+        }
+        fetch('http://localhost:5000/api/quizzes/update', {
+            method: 'PUT',
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(body)
+        }).then(socket.emit('lobby data delete', quiz.id))
+        .then(history.push("/"));
+    }
+
     function publishQuiz(quiz) {
         quiz.deployIds = generateIds(quiz.numberOfTeams);
         let lobbyCount = [];
@@ -48,26 +62,49 @@ const ProfileQuizzes = ({ profile, user, socket }) => {
                     { error && <div className="error">{ error }</div>}
                     { isPending && <div className="Loading">Loading...</div>}
                     { quizzes && quizzes.length === 0 && <span>This user / you has/have created no quizzes</span> }
+                    { quizzes && quizzes.length === 0 && <div className="empty">You have not Created any Quizzed thus far!</div> } 
                     { quizzes && quizzes.map((quiz) => (
                         <div className="quiz-item-container"  key={quiz.id}>
-                            <div className="quiz-item-labels">
-                                <div className="quiz-item-title">
-                                    {quiz.title}
+                            { quiz.deployIds && quiz.deployIds.length > 0 && <>
+                                <div className="quiz-item-labels">
+                                    <div className="quiz-item-title">
+                                        {quiz.title}
+                                    </div>
+                                    <div className="quiz-item-type">
+                                        {quiz.type}
+                                    </div>
                                 </div>
-                                <div className="quiz-item-type">
-                                    {quiz.type}
+                                <div className="quiz-item-buttons">
+                                    <button className="edit-quiz-button">
+                                        <i className="fas fa-edit"></i>
+                                        Edit
+                                    </button>           
+                                    <button className="publish-quiz-button" type="button" onClick={() => (closeQuiz(quiz))}>
+                                        <i className="fas fa-upload"></i>
+                                        Close
+                                    </button>
                                 </div>
-                            </div>
-                            <div className="quiz-item-buttons">
-                                <button className="edit-quiz-button">
-                                    <i className="fas fa-edit"></i>
-                                    Edit
-                                </button>           
-                                <button className="publish-quiz-button" type="button" onClick={() => (publishQuiz(quiz))}>
-                                    <i className="fas fa-upload"></i>
-                                    Publish
-                                </button>
-                            </div>
+                            </> }
+                            { quiz.deployIds.length === 0 && <>
+                                <div className="quiz-item-labels">
+                                    <div className="quiz-item-title">
+                                        {quiz.title}
+                                    </div>
+                                    <div className="quiz-item-type">
+                                        {quiz.type}
+                                    </div>
+                                </div>
+                                <div className="quiz-item-buttons">
+                                    <button className="edit-quiz-button">
+                                        <i className="fas fa-edit"></i>
+                                        Edit
+                                    </button>           
+                                    <button className="publish-quiz-button" type="button" onClick={() => (publishQuiz(quiz))}>
+                                        <i className="fas fa-upload"></i>
+                                        Publish
+                                    </button>
+                                </div>
+                            </> }
                         </div>
                     ))}
                 </div>

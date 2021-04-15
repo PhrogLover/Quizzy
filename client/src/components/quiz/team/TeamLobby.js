@@ -9,6 +9,7 @@ import ToolbarComponent from '../../toolbar/ToolbarComponent';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import TeamStream from './TeamStream';
 import AnswerSheet from './AnswerSheet';
+import HostReview from './HostReview';
 
 let OV = null;
 var localUserModel = new UserModel();
@@ -30,6 +31,7 @@ const TeamLobby = (props) => {
     const [ messageReceived, setMessageReceived ] = useState(false);
     const [ token, getToken ] = useState();
     const [ answerSheetVisible, setAnswerSheetVisible ] = useState(false);
+    const [ endOfQuiz, setEndOfQuiz ] = useState(false);
     const [ answerSheet, setAnswerSheet ] = useState(initState());
 
     function initState() {
@@ -502,7 +504,7 @@ const TeamLobby = (props) => {
                     </div>
                     <div id = "quiz-stream-section" className={"quiz-stream-section " + slideSize} ref={quizStreamRef}>
                         <div className="quiz-slides-view" style={quizStreamSize}>                            
-                            <TeamStream user = { props.user } sendAnswerSheet ={sendAnswerSheet} sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } answerSheetVisible={answerSheetVisible} setAnswerSheetVisible = { setAnswerSheetVisible } />
+                            <TeamStream user = { props.user } sendAnswerSheet ={sendAnswerSheet} sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } answerSheetVisible={answerSheetVisible} setAnswerSheetVisible = { setAnswerSheetVisible } setEndOfQuiz = { setEndOfQuiz } />
                         </div>
                     </div>
                 </div>
@@ -523,8 +525,9 @@ const TeamLobby = (props) => {
                                 </div>
                             </div>
                             
-                            { localUser && answerSheetVisible && <AnswerSheet lobbyId = { props.lobbyState.id } socket = { props.socket } sendAnswerSheet = { sendAnswerSheet } answerSheet = { answerSheet } setAnswerSheet = {setAnswerSheet} /> }
-                            { localUser && !answerSheetVisible && <div className="no-answer-sheet">No Answer Sheet At The Moment</div> } 
+                            { localUser && answerSheetVisible && !endOfQuiz && <AnswerSheet lobbyId = { props.lobbyState.id } socket = { props.socket } sendAnswerSheet = { sendAnswerSheet } answerSheet = { answerSheet } setAnswerSheet = {setAnswerSheet} /> }
+                            { localUser && !answerSheetVisible && !endOfQuiz && <div className="no-answer-sheet">No Answer Sheet At The Moment</div> }
+                            { localUser && endOfQuiz && <HostReview hostId = { props.quiz.creatorId } /> }
                         </div>
                         <div className="team-chat">
                             <div className="team-chat-toolbar">

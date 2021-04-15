@@ -1,13 +1,14 @@
 import React, { useState, useEffect  } from 'react';
 import "./hostview.css";
+import { useHistory } from "react-router-dom"
 import $ from "jquery";
 import HostStream from './HostStream';
 import AnswerJudge from '../host/AnswerJudge';
-import Leaderboard from '../../basic/Leaderboard';
 
 let keepAnswers = [];
 
 const HostView = ({ user, mainId, socket, quiz, round }) => {
+    let history = useHistory();
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState([]);
@@ -60,6 +61,20 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
         }
     }, [lobbyState])
 
+    function closeQuiz() {
+        quiz.deployIds = [];
+        const body = {
+            id: quiz.id,
+            quiz: quiz
+        }
+        fetch('http://localhost:5000/api/quizzes/update', {
+            method: 'PUT',
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(body)
+        }).then(socket.emit('lobby data delete', mainId))
+        .then(history.push("/"));
+    }
+
     function judgingDone(pointsArray) {
         console.log(pointsArray);
         let leaderboardData = $.extend(true, [], leaderboard);
@@ -76,9 +91,8 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
         });
         console.log(leaderboardData);
         let newState = {
-            type: "leaderboard"
+            type: "main"
         }
-        if (quiz.showAns) newState.type = "main";
         setLeaderboard(leaderboardData);
         setLobbyState(newState);
         console.log("dunzo");
@@ -127,9 +141,20 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                 
                 <div className="host-body">
                     <div className="host-left">
-                        list of users divided into teams, dropdown button for team to see names, with report/kick button next to each. 
+                        list of users divided into teams, dropdown button for team to see names, with report/kick button next to each.
+                        { lobbyData.map((lobby, i) => (
+                            <div key={i} className="lobby-search">
+                                <div className="lobby-name">{ lobby.name }</div>
+                                { lobby.players.map((player, j) => {
+                                    <div key={j} className="player-search">
+                                        { player }
+                                    </div>
+                                })}
+                            </div>
+                        ))}
                     </div> 
                     <div className="host-middle">
+                        <button type="button" onClick={closeQuiz}>Close Quiz</button>
                         <div className="middle-wrapper">
                             <div className="host-stream-wrapper">                                                                 
                                 <HostStream user = { user } teamList = { leaderboard } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
@@ -145,9 +170,6 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                         
                     </div>
                     <div className="host-right">
-                    {  lobbyState.type === "leaderboard" &&
-                        <Leaderboard user = { user } teamList = { leaderboard } />
-                    }
                         maybe put miscellaous (?) stuff here, which host will not use often since the lobby chat will be open 95% of the time this area is just for extra space.
                     </div> 
                 </div>

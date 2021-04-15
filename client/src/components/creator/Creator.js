@@ -237,11 +237,13 @@ const Creator = ({ user }) => {
                         
                         { !isPending && 
                         <div className="bottom-buttons-container">
-                            <Button buttonStyle="btn--solid" buttonColour="btn--secondary-colour">
-                                <i className="fas fa-trash-alt"></i> Delete & Exit 
-                            </Button>
+                            <button type="button" onClick={() => (history.push("/"))}>
+                                <Button buttonType="button"  buttonStyle="btn--solid" buttonColour="btn--secondary-colour">
+                                    <i className="fas fa-trash-alt"></i> Delete & Exit 
+                                </Button>
+                            </button>
                             <div className="button-gap"/>
-                            <Button buttonStyle="btn--solid" buttonColour="btn--primary-colour">
+                            <Button buttonType="submit" buttonStyle="btn--solid" buttonColour="btn--primary-colour">
                                 <i className="fas fa-save"></i> Save Draft & Exit 
                             </Button>
                             <div className="button-gap"/>
