@@ -76,6 +76,8 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
     }
 
     function judgingDone(pointsArray) {
+        setAnswers([]);
+        setCorrectAnswers([]);
         console.log(pointsArray);
         let leaderboardData = $.extend(true, [], leaderboard);
         pointsArray.map((team) => {

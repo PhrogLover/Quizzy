@@ -14,6 +14,11 @@ router.get('/:id', (req, res) => {
     }
 })
 
+router.post('/add', (req, res) => {
+    let newUser = req.body;
+    profiles.push(newUser);
+})
+
 router.put('/review', (req, res) => {
     const found = profiles.some(profile => (profile.id === req.body.id));
     if (found) {

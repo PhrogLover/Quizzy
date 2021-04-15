@@ -66,7 +66,7 @@ const Leaderboard = ({ teamList, user }) => {
                 </thead>
                 <tbody>
                     { leaderboard.map((team, i) => (
-                        <tr key={i} className={(team[0].players && team[0].players.some(player => (player.id === user.googleId)) ? "coloured" : "not-coloured")}>{/* if they have not participated in any of the rounds */}
+                        <tr key={i} className={(team[0].players && team[0].players.some(player => (player.id === user.id)) ? "coloured" : "not-coloured")}>{/* if they have not participated in any of the rounds */}
                             { !team.some(score => (score.points !== undefined)) && <>
                                 <td  className="not-participated">{ team[0].name }</td>
                                 <td colSpan={leaderboard[0].length}>bruh you got no points mannn</td> 

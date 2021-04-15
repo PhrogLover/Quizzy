@@ -10,7 +10,7 @@ import ProfileHome from "./ProfileHome";
 const GetProfile = ({ user, socket }) => {
     const { search } = useLocation();
     const { tab } = queryString.parse(search);
-    const profileUrl = "http://localhost:5000/api/profiles/"+user.googleId;
+    const profileUrl = "http://localhost:5000/api/profiles/"+user.id;
     const { data: profile, isPending, error} = useFetch(profileUrl);
 
     ///profile/?id=1&tab=home

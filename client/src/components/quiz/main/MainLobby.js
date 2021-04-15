@@ -11,7 +11,7 @@ const MainLobby = ({ user, quiz, id, socket }) => {
     const chatSize = quiz.numberOfTeams * quiz.numberOfPlayers;
 
     useEffect(() => {
-        if (user.googleId === quiz.creatorId) {
+        if (user.id === quiz.creatorId) {
             setUserState("host");
         }
     }, [])

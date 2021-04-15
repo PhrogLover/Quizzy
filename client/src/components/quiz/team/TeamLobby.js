@@ -87,7 +87,7 @@ const TeamLobby = (props) => {
             let newLobbyData = $.extend(true, [], props.lobbyData);
             for (let i = 0; i < newLobbyData.length; i++) {
                 if (newLobbyData[i].id === props.lobbyState.id) {
-                    newLobbyData[i].players = newLobbyData[i].players.filter(player => (player.id !== props.user.googleId));
+                    newLobbyData[i].players = newLobbyData[i].players.filter(player => (player.id !== props.user.id));
                     break;
                 }
             }
