@@ -1,7 +1,5 @@
 .leaderboard {
-    text-align: center;
-    justify-content: center;
-    display: flex;
+        
 }
 
 .leaderboard .coloured {
@@ -10,4 +8,20 @@
 
 .leaderboard .not-participated {
     background-color: blue;
+}
+
+/* Leaderboard Table */
+
+table{
+    border: aqua 1px solid;
+    width: 100%;
+    height: 56.25%;
+}
+
+th{
+    border: 1px solid white;
+}
+td{
+    border: 1px solid white;
+
 }

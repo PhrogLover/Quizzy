@@ -539,10 +539,10 @@ const TeamLobby = (props) => {
                                 {ddOpen && <TeamLobbyMenu/>}
                             </div>
                             {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                                <div className="OT_root OT_publisher custom-class" style={{ display: chatDisplay }}>
+                                <div className="OT_root OT_publisher custom-class" style={{ display: true }}>
                                     <ChatComponent
                                         user={localUser}
-                                        chatDisplay={chatDisplay}
+                                        chatDisplay={true}
                                         close={toggleChat}
                                         messageReceived={checkNotification}
                                     />

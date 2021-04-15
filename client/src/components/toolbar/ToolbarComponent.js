@@ -103,13 +103,13 @@ const ToolbarComponent = (props) => {
                         <IconButton color="secondary" className="navButton" onClick={leaveSession} id="navLeaveButton">
                             <PowerSettingsNew />
                         </IconButton>
-                         <IconButton color="inherit" onClick={toggleChat} id="navChatButton">
+                         {/* <IconButton color="inherit" onClick={toggleChat} id="navChatButton">
                             {props.showNotification && <div id="point" className="" />}
                             <QuestionAnswer />
                             {/* <Tooltip title="Chat">
                                 
-                            </Tooltip> */}
-                        </IconButton>
+                            </Tooltip> 
+                        </IconButton> */}
                     </div>
                 </Toolbar>
             </AppBar>
