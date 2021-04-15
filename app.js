@@ -85,10 +85,11 @@ io.on('connection', (socket) => {
         }
     })
     socket.on('lobby data delete', (id) => {
-        const found = lobbydata.some(lobby => (lobby[id]));
+        const found = lobbyData.some(lobby => (lobby[id]));
         if (found) {
-            lobbydata = lobbydata.filter(lobby => (!lobby[id]));
+            lobbyData = lobbyData.filter(lobby => (!lobby[id]));
         }
+        io.emit("end lobby "+id);
     })
     socket.on('lobby data change', (id, data) => {
         let newQuizLobbyData = {};

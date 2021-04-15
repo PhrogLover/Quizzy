@@ -1,10 +1,12 @@
 import "./playerview.css";
+import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import $ from "jquery";
 
 import TeamLobby from "../team/TeamLobby";
 
 const PlayerView = ({ user, quiz, mainId, socket, round }) => {
+    let history = useHistory();
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState([]);
@@ -12,6 +14,9 @@ const PlayerView = ({ user, quiz, mainId, socket, round }) => {
     useEffect(() => {
         socket.on("lobby data change "+mainId, (newLobbyData) => {
             setLobbyData(newLobbyData);
+        })
+        socket.on("end lobby "+mainId, () => {
+            history.push("/");
         })
     }, [])
 

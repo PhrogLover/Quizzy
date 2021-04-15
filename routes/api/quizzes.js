@@ -5,15 +5,8 @@ const router = express.Router();
 const quizzesReal = require('../../client/json/Quizzes_save');
 const quizzes = require('../../client/json/Quizzes');
 
-//uuid - 36 char long
-let generalChat = [];
-
-for (let i = 0; i < quizzes.length; i++) {
-    quizzesReal.quizzes.push(quizzes[i]);
-}
-
 router.get('/homepage', (req, res) => {
-    res.json(quizzesReal.quizzes.filter(quiz => (quiz.deployIds)));
+    res.json(quizzesReal.quizzes.filter(quiz => (quiz.deployIds && quiz.deployIds.length > 0)));
 });
 
 router.post('/newQuiz', (req, res) => {
