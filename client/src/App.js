@@ -24,6 +24,8 @@ function App() {
     name: "Quizzy Admin"
   });
 
+  console.log(new Date().toString());
+
   // {
   //   email: "aryjeleng@gmail.com",
   //   familyName: "Lengvenis",
@@ -77,7 +79,7 @@ function App() {
             email: profileObj.email,
             donor: false, 
             status: "New User",
-            registerTime: new Date(),
+            registerTime: new Date().toString(),
             created: 0,
             hosted: 0,
             won: 0,

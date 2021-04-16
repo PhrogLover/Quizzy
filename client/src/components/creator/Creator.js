@@ -35,7 +35,7 @@ const Creator = ({ user }) => {
         timePerQuestion: 60,
         seasonFreq: null,
         seasonIteration: 1,
-        time: new Date(),
+        time: new Date().toString(),
         slides: [],
         showAns: true,
         showLeaderboards: true,
