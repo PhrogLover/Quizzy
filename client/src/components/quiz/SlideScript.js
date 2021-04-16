@@ -259,9 +259,6 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
                 })
                 setScriptButtonValue("Prepare For Next Round");
                 setScriptButtonDisabled(false);
-                roundIndex++;
-                setGlobalRoundIndex(roundIndex);
-                setRoundsRemaining(roundsRemaining-1);
             }, 5000);
             await sleep(5000);
         }     

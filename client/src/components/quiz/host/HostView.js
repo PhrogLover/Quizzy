@@ -6,6 +6,8 @@ import HostStream from './HostStream';
 import AnswerJudge from '../host/AnswerJudge';
 
 let keepAnswers = [];
+let keepCorrAnswers = [];
+let keepActiveLobbies = 0;
 
 const HostView = ({ user, mainId, socket, quiz, round }) => {
     let history = useHistory();
@@ -15,6 +17,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
     const [ leaderboard, setLeaderboard ] = useState(leaderboardInit());
     const [ answers, setAnswers ] = useState([]);
     const [ correctAnswers, setCorrectAnswers ] = useState([]);
+    const [ activeLobbies, setActiveLobbies ] = useState(0);
 
     useEffect(() => {
         socket.on('lobby data change '+mainId, (newLobbyData) => {
@@ -22,28 +25,42 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
             setLobbyData(newLobbyData);
             setLeaderboard(leaderboardUpdate(newLobbyData));
         });
+    }, [])
+
+    useEffect(() => {
         socket.on("send sheet "+mainId, (sheet, lobbyId) => {
             let obj = {
                 id: lobbyId,
                 sheet: sheet
             }
             const found = keepAnswers.some(answer => answer.id === obj.id);
-            const postFound = answers.some(answer => answer.id === obj.id);
-            if (!found || (!postFound && keepAnswers === [])) {
+            if (!found) {
                 console.log("NEW OBJ: ", obj)
                 keepAnswers.push(obj);
-                setAnswers((prevState) => ([...prevState, obj]));
-                setCorrectAnswers((prevState) => ([...prevState, {
+                keepCorrAnswers.push({
                     id: lobbyId,
                     sheet: []
-                }]));
+                });
+                
+                console.log(keepAnswers.length,keepActiveLobbies);
+                setCorrectAnswers(keepCorrAnswers);
+                setAnswers(keepAnswers);
             }
         });
     }, [])
 
     useEffect(() => {
-        const activeLobbies = lobbyData.filter(lobby => (lobby.players.length > 0));
-        if (answers.length === activeLobbies.length && activeLobbies.length !== 0) {
+        const temp = lobbyData.filter(lobby => (lobby.players.length > 0));
+        setActiveLobbies(temp.length);
+    }, [lobbyData])
+
+    useEffect(() => {
+        keepActiveLobbies = activeLobbies;
+    }, [activeLobbies])
+
+    useEffect(() => {
+        console.log("JUDGEMENT");
+        if (answers.length === keepActiveLobbies && keepActiveLobbies !== 0) {
             sendAnswerSheet();
         }
     }, [answers])
@@ -77,8 +94,6 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
     }
 
     function judgingDone(pointsArray) {
-        setAnswers([]);
-        setCorrectAnswers([]);
         console.log(pointsArray);
         let leaderboardData = $.extend(true, [], leaderboard);
         pointsArray.map((team) => {
@@ -99,6 +114,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
         setLeaderboard(leaderboardData);
         setLobbyState(newState);
         console.log("dunzo");
+        
         window.document.getElementById("main-host-slideview").className = "main-host-slideview";
     }
 
@@ -133,7 +149,6 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
         setLobbyState(newState);
         window.document.getElementById("main-host-slideview").className = "main-host-slideview invisible";
     }
-
 
     return ( 
         <>

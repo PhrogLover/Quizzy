@@ -21,10 +21,6 @@ const SlideView = ( { quiz, onSlideChange, slide, showAns = false, timer, slideW
             }
         }
     }
-
-    useEffect(() => {
-        console.log("Phantom: ", showAns, answers);
-    }, [showAns, answers])
     
     useEffect(() => {
         if (judge) {

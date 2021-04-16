@@ -28,7 +28,7 @@ const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 let lobbyData = [];
-let temp = {"ee62889a-7a84-4d30-b2b6-81d524bb6597": [
+let temp = {"95a77bac-dba2-4ba9-a207-3b7bbcfe58b5": [
     {id: "8673b838-6f16-4580-acc8-b6809df74c3a", index: 1, players: Array(0), name: "Team Lobby 1"},
     {id: "9d53382b-eacb-4839-b490-2c6a8b370d0a", index: 2, players: Array(0), name: "Team Lobby 2"},
     {id: "e7dd8b05-afde-49e6-9c77-18bb2f966c0b", index: 3, players: Array(0), name: "Team Lobby 3"},
@@ -48,12 +48,7 @@ let temp = {"ee62889a-7a84-4d30-b2b6-81d524bb6597": [
     {id: "fb222518-b43a-43d4-8115-e4b0fc59e529", index: 17, players: Array(0), name: "Team Lobby 17"},
     {id: "80627033-e191-42da-9f32-6c2d29b2b767", index: 18, players: Array(0), name: "Team Lobby 18"},
     {id: "c52f11dd-b1e8-44d3-bf98-420f97a4c344", index: 19, players: Array(0), name: "Team Lobby 19"},
-    {id: "54d4ac11-badb-438d-86fd-a98fa3753ea8", index: 20, players: Array(0), name: "Team Lobby 20"},
-    {id: "6494761b-4471-4e5a-81a1-b4dbb3c3bd32", index: 21, players: Array(0), name: "Team Lobby 21"},
-    {id: "26233a9d-2900-4b19-b069-6922b3907256", index: 22, players: Array(0), name: "Team Lobby 22"},
-    {id: "80fda64e-fe57-4fc9-80f3-95706e3ef1e0", index: 23, players: Array(0), name: "Team Lobby 23"},
-    {id: "a573a122-9165-4293-b86d-02f7ed280981", index: 24, players: Array(0), name: "Team Lobby 24"},
-    {id: "91b2b002-af54-4255-9765-c799fe0247fa", index: 25, players: Array(0), name: "Team Lobby 25"}
+    {id: "54d4ac11-badb-438d-86fd-a98fa3753ea8", index: 20, players: Array(0), name: "Team Lobby 20"}
 ]}
 lobbyData.push(temp);
 

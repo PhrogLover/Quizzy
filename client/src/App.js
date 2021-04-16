@@ -58,7 +58,7 @@ function App() {
         if (!data.msg) {
           const userObj = {
             id: profileObj.googleId,
-            name: data.username,
+            name: data.name,
             imageUrl: data.imageUrl,
             email: data.email
           }
