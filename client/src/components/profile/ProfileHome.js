@@ -7,7 +7,7 @@ const ProfileHome = ( { profile }) => {
         return(
             <div className = "stats-item">
                 <span>
-                { profile.username } 
+                { profile.name } 
                 { props.children }
                 </span>
             </div>        

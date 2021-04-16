@@ -58,6 +58,7 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
         for (let i = currIndex.i; i < orderedArray.length; i++) {
             for (let j = currIndex.j; j < orderedArray[i].length; j++) {
                 let correctAnswer = quiz.slides[round][i+1].answers.some((answer) => answer === orderedArray[i][j].value);
+                if (!quiz.slides[round][i+1].caseSensitive) correctAnswer = quiz.slides[round][i+1].answers.some((answer) => answer.toLowerCase() === orderedArray[i][j].value.toLowerCase());
                 if (!correctAnswer) {
                     //set current slide to this slide for judging
                     if (orderedArray[i][j].value !== "") {
