@@ -69,6 +69,12 @@ function App() {
             name: profileObj.name,
             imageUrl: profileObj.imageUrl,
             email: profileObj.email,
+          }
+          const userObjSend = {
+            id: profileObj.googleId,
+            name: profileObj.name,
+            imageUrl: profileObj.imageUrl,
+            email: profileObj.email,
             donor: false, 
             status: "New User",
             registerTime: new Date(),
@@ -84,11 +90,11 @@ function App() {
             numberOfRatings: 1
           }
           //additional stats as well.
-          console.log(userObj)
+          console.log(userObjSend)
           fetch('http://localhost:5000/api/profiles/add', {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
-            body: JSON.stringify(userObj)
+            body: JSON.stringify(userObjSend)
         }).then(setGoogleObj(userObj));
         }
     })
