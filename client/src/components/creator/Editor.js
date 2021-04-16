@@ -128,7 +128,7 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                         <div className="checkbox-answer-casesen">
                             <div className="checkbox-answer-casesen-label" htmlFor="case-sensitive">Make Answer(s) Case Sensitive</div>
                             <div className="custom-checkbox">
-                                <input type="checkbox" onChange={value => (changeSlideHandler("caseSensitive", value.target.checked))}/>
+                                <input type="checkbox" checked={ slide.caseSensitive } onChange={value => (changeSlideHandler("caseSensitive", value.target.checked))}/>
                             </div>
                         </div>
                         { slide.img && <>                    

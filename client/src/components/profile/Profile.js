@@ -39,7 +39,7 @@ const Profile = ({ profile, id }) => {
                         </div>
                         </div>
                         <div className="profile-username"> 
-                            { profile.username }
+                            { profile.name }
                             <div className="profile-status">
                             { profile.status }
                             </div>

@@ -35,9 +35,12 @@ const Creator = ({ user }) => {
         timePerQuestion: 60,
         seasonFreq: null,
         seasonIteration: 1,
-        time: new Date(),
+        time: new Date().toString(),
         slides: [],
         showAns: true,
+        showLeaderboards: true,
+        showFinalLeaderboard: true,
+        allowLeaderboard: true,
         deployIds: []
     });
 
@@ -93,9 +96,7 @@ const Creator = ({ user }) => {
 
     function slidesState() {
         let template = [];
-        let id = 1;
         template.push({
-            id: id,
             round: 0,
             quest: -1,
             type: "intro",
@@ -111,11 +112,9 @@ const Creator = ({ user }) => {
                 template[0].family = "Insert Family Name";
             }
         }
-        id++;
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
             template.push([]);
             template[i].push({
-                id: id,
                 round: i,
                 quest: 0,
                 type: "round",
@@ -131,10 +130,8 @@ const Creator = ({ user }) => {
                 template[i][0].transition = slides[i][0].transition || template[i][0].transition;
                 template[i][0].endTime = slides[i][0].endTime || template[i][0].endTime;
             }
-            id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
                 template[i].push({
-                    id: id,
                     round: i,
                     quest: j,
                     type: "question",
@@ -156,7 +153,6 @@ const Creator = ({ user }) => {
                     template[i][j].suspenseTime = slides[i][j].suspenseTime || template[i][j].suspenseTime;
                     template[i][j].answerShowTime = slides[i][j].answerShowTime || template[i][j].answerShowTime;
                 }
-                id++;
             }
         }
         return template;
@@ -192,6 +188,7 @@ const Creator = ({ user }) => {
     }
 
     function submitHandler(e) {
+        console.log("")
         e.preventDefault();
         setIsPending(true);
         quiz.slides = slides;

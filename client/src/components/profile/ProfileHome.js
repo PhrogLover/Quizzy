@@ -7,7 +7,7 @@ const ProfileHome = ( { profile }) => {
         return(
             <div className = "stats-item">
                 <span>
-                { profile.username } 
+                { profile.name } 
                 { props.children }
                 </span>
             </div>        
@@ -15,6 +15,7 @@ const ProfileHome = ( { profile }) => {
     }
 
     function DateFormat(date){
+        console.log(date);
         // console.log(date);
         let dateList= date.split(" ");
         // console.log(dateList);
