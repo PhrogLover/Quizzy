@@ -3,6 +3,7 @@ import { useState } from "react";
 import HelpIcon from "../basic/HelpIcon";
 import Attribute from "./Attribute";
 import "./editor.css";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const Editor = ( { slide, changeSlideHandler, quiz } ) => {
 
@@ -38,23 +39,33 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
     const answersRef = React.createRef();
 
     const [asOpen,setAsOpen] = useState(false);
-    const closeAdvancedSettngs = () => setAsOpen(false);    
+    const closeAdvancedSettings = () => setAsOpen(false);    
 
     function AdvancedSettings(){
         if (slide.type === "question"){
             return(
-                <div className="advanced-settings">
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={6} selected = { slide.suspenseTime }/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = { slide.answerShowTime } defaultVal={9}/>
-                </div>
+                <ClickAwayListener
+                mouseEvent="onMouseDown"
+                touchEvent="onTouchStart" 
+                onClickAway={closeAdvancedSettings}>
+                    <div className="advanced-settings">
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Time Before Answer is Shown for this Question" name="suspenseTime" start = {2} finish = {20} steps = {2} defaultVal={6} selected = { slide.suspenseTime }/>
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Answer Reveal Time" name="answerShowTime" start = {6} finish = {30} steps = {3} selected = { slide.answerShowTime } defaultVal={9}/>
+                    </div>
+                </ClickAwayListener>
             )
         }
         else{
             return(
-                <div className="advanced-settings">
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} defaultVal={5} selected = { slide.transition }/>
-                    <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} defaultVal={30} selected = { slide.endTime }/>
-                </div>
+                <ClickAwayListener
+                mouseEvent="onMouseDown"
+                touchEvent="onTouchStart" 
+                onClickAway={closeAdvancedSettings}>
+                    <div className="advanced-settings">
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Transition Time after Each Question" name="transition" start = {3} finish = {10} defaultVal={5} selected = { slide.transition }/>
+                        <Attribute onChangeHandler = {changeSlideHandler} title="Extra Time after Round Ends" name="endTime" start = {5} finish = {90} steps = {5} defaultVal={30} selected = { slide.endTime }/>
+                    </div>
+                </ClickAwayListener>
             )
         }
     }
@@ -70,7 +81,7 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                     
                         { quiz.showAns && <div className="top-bar-dropdown">
                             <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle"> Advanced Settings <i className="fas fa-angle-down"/></button>
-                            { asOpen && <AdvancedSettings></AdvancedSettings>}             
+                            { asOpen && <AdvancedSettings/>}             
                         </div> }
                     </div>
                 </>
@@ -81,7 +92,7 @@ const Editor = ( { slide, changeSlideHandler, quiz } ) => {
                         <Attribute onChangeHandler = {changeSlideHandler} title="Question Time for This Round" name="timeOverride" start = {10} finish = {90} steps = {5} defaultVal={ quiz.timePerQuestion } selected = { slide.timeOverride }/>
                         <div className="top-bar-dropdown">
                             <button  type="button" onClick={() => setAsOpen(!asOpen)} className="advanced-settings-toggle">Advanced Settings <i className="fas fa-angle-down"/></button>    
-                            { asOpen && <AdvancedSettings></AdvancedSettings>}
+                            { asOpen && <AdvancedSettings/>}
                         </div>
                     </div>
                     

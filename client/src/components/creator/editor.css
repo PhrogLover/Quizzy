@@ -14,8 +14,8 @@
 .editor-body textarea {
     resize: none;
     min-width: 300px;
-    width: 60%;
-    min-height: 50px;
+    width: 80%;
+    min-height: 100px;
     height: 10%;
     overflow-y: auto;
     text-align: center;
