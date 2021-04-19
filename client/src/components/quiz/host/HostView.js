@@ -15,8 +15,6 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ lobbyData, setLobbyData ] = useState([]);
     const [ leaderboard, setLeaderboard ] = useState(leaderboardInit());
-    const [ answers, setAnswers ] = useState([]);
-    const [ correctAnswers, setCorrectAnswers ] = useState([]);
     const [ activeLobbies, setActiveLobbies ] = useState(0);
 
     useEffect(() => {
@@ -25,6 +23,11 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
             setLobbyData(newLobbyData);
             setLeaderboard(leaderboardUpdate(newLobbyData));
         });
+        return () => {
+            keepAnswers = [];
+            keepCorrAnswers = [];
+            keepActiveLobbies = 0;
+        }
     }, [])
 
     useEffect(() => {
@@ -36,15 +39,16 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
             const found = keepAnswers.some(answer => answer.id === obj.id);
             if (!found) {
                 console.log("NEW OBJ: ", obj)
-                keepAnswers.push(obj);
                 keepCorrAnswers.push({
                     id: lobbyId,
                     sheet: []
                 });
-                
-                console.log(keepAnswers.length,keepActiveLobbies);
-                setCorrectAnswers(keepCorrAnswers);
-                setAnswers(keepAnswers);
+                keepAnswers.push(obj);
+                console.log(keepAnswers.length, keepActiveLobbies);
+                if (keepAnswers.length === keepActiveLobbies && keepActiveLobbies !== 0) {
+                    console.log("JUDGEMENT");
+                    sendAnswerSheet();
+                }
             }
         });
     }, [])
@@ -59,25 +63,12 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
     }, [activeLobbies])
 
     useEffect(() => {
-        console.log("JUDGEMENT");
-        if (answers.length === keepActiveLobbies && keepActiveLobbies !== 0) {
-            sendAnswerSheet();
-        }
-    }, [answers])
-
-    useEffect(() => {
         socket.emit('lobby data call',mainId);
     }, [])
 
     useEffect(() => {
         socket.emit('leaderboard', leaderboard, mainId);
     }, [leaderboard])
-
-    useEffect(() => {
-        if (lobbyState === "judge") {
-            keepAnswers = [];
-        }
-    }, [lobbyState])
 
     function closeQuiz() {
         quiz.deployIds = [];
@@ -94,6 +85,8 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
     }
 
     function judgingDone(pointsArray) {
+        keepAnswers = [];
+        keepCorrAnswers = [];
         console.log(pointsArray);
         let leaderboardData = $.extend(true, [], leaderboard);
         pointsArray.map((team) => {
@@ -182,7 +175,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                         <div className="judge-section">                            
                             {  lobbyState.type === "judge" &&  
                                 <div className="judge-section-container">             
-                                    <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } answers = { answers } correctAnswers = { correctAnswers } setCorrectAnswers = { setCorrectAnswers } />
+                                    <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } ans = { keepAnswers } correctAns = { keepCorrAnswers } />
                                 </div>
                             }                         
                         </div>

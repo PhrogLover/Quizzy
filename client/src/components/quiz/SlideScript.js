@@ -59,6 +59,7 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
             setScriptButtonDisabled(true);
             setTimeout(() => {
                 roundIndex++;
+                setRoundsRemaining(roundsRemaining-1);
                 setGlobalRoundIndex(roundIndex);
                 setCurrentSlideScript(quiz.slides[roundIndex][0]);
                 setIsPending(false);
@@ -241,7 +242,7 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
                 setLeaderboard(false);
                 setGlobalQuizIntro(true);
                 quizIntro = true;
-                if (roundsRemaining === 1) {
+                if (roundsRemaining === 0) {
                     setScriptButtonValue("End of Quiz!")
                     setScriptButtonStyle({
                         border: "var(--primary-colour) 2px solid",

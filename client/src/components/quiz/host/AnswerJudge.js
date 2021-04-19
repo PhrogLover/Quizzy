@@ -3,15 +3,18 @@ import { useState, useEffect } from "react";
 import $ from "jquery";
 import SlideView from "../SlideView";
 
-const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setCorrectAnswers }) => {
+const AnswerJudge = ({ quiz, round, setLobbyState, ans, correctAns }) => {
     const [ currentSlide, setCurrentSlide ] = useState(null);
     const [ index, setIndex ] = useState();
     const [ submittedAnswer, setSubmittedAnswer ] = useState();
+    const [ slideAnswers, setSlideAnswers ] = useState();
+    const [ answers, setAnswers ] = useState(ans);
+    const [ correctAnswers, setCorrectAnswers ] = useState(correctAns);
+    const parse = answerParser();
     const [ currIndex, setCurrIndex ] = useState({
         i: 0,
         j: 0
-    })
-    const parse = answerParser();
+    });
 
     useEffect(() => {
         console.log("CA: ",correctAnswers)
@@ -19,11 +22,12 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
 
     useEffect(() => {
         console.log("ANSWERS: ", answers, correctAnswers)
-        setCurrentSlide(parse.next().value);
+        if (answers.length > 0 && correctAnswers.length > 0) setCurrentSlide(parse.next().value);
     }, [])
 
     useEffect(() => {
         if (currentSlide === "end") {
+            console.log(currIndex);
             //change lobbyState
             let pointsArr = [];
             for (let i = 0; i < correctAnswers.length; i++) {
@@ -43,6 +47,10 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
         setCurrentSlide(parse.next().value);
     }
 
+    useEffect(() => {
+        console.log("CHANGED: ", currIndex);
+    }, [currIndex])
+
     function* answerParser() {
         //splice answer arrays into question-wise arrays instead of team-wise
         let orderedArray = [];
@@ -54,9 +62,16 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
             orderedArray.push(orderedSheet);
             orderedSheet = [];
         }
+
+        let i = currIndex.i;
+        let j = currIndex.j;
+        console.log(i, j, "BEGIN");
+
         //cycle through answers;if answer not in array of answers, display slide with buttons to mark it as correct or not
-        for (let i = currIndex.i; i < orderedArray.length; i++) {
-            for (let j = currIndex.j; j < orderedArray[i].length; j++) {
+        
+        for (; i < orderedArray.length; i++) {
+            for (; j < orderedArray[i].length; j++) {
+                console.log(i,j, currIndex);
                 let correctAnswer = quiz.slides[round][i+1].answers.some((answer) => answer === orderedArray[i][j].value);
                 if (!quiz.slides[round][i+1].caseSensitive) correctAnswer = quiz.slides[round][i+1].answers.some((answer) => answer.toLowerCase() === orderedArray[i][j].value.toLowerCase());
                 if (!correctAnswer) {
@@ -64,11 +79,28 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
                     if (orderedArray[i][j].value !== "") {
                         setIndex(j);
                         setSubmittedAnswer(orderedArray[i][j]);
-                        setCurrIndex({
-                            i: i+1,
-                            j: j
-                        })
-                        yield quiz.slides[round][i+1];
+                        if (currIndex.j === orderedArray[i].length-1) {
+                            setCurrIndex({
+                                i: i+1,
+                                j: 0
+                            })
+                        }
+                        else {
+                            setCurrIndex({
+                                i: i,
+                                j: j+1
+                            })
+                        }                     
+                        let answers = "";
+                        const slide = quiz.slides[round][i+1];
+                        for (let i = 0; i < slide.answers.length; i++) {
+                            answers += slide.answers[i];
+                            if (i !== slide.answers.length-1) {
+                                answers += " OR ";
+                            }
+                        }
+                        setSlideAnswers(answers);
+                        yield slide;
                     }
                 }
                 else {
@@ -76,8 +108,16 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
                     temp[j].sheet.push(orderedArray[i][j]);
                     setCorrectAnswers(temp);
                 }
+                if (currIndex.j !== 0 && currIndex.j === orderedArray[i].length-1) {
+                    setCurrIndex({
+                        i: i+1,
+                        j: 0
+                    });
+                }
             }
+            j = 0;
         }
+        console.log("END: ", currIndex)
         return "end";
         //end of judging phase for this round
     }
@@ -123,7 +163,7 @@ const AnswerJudge = ({ quiz, round, setLobbyState, answers, correctAnswers, setC
                     </div>
                 </div>
                 <div className="judge-container"> 
-                    <div className="correct-answer"> Correct Answer was: "<i> Acutal Answer </i>"</div>
+                    <div className="correct-answer"> Correct Answer was: "<i> { slideAnswers } </i>"</div>
                     <div className="submitted-answer"> Submitted Answer was: "<i>{ submittedAnswer.value }</i>"</div>
                     <div className="judge-buttons">
                         <button className="judge-allow-button" type="button" onClick={answerAllowed}><i className="fas fa-check"></i> Allow</button>
