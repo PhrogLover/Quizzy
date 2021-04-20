@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "./answersheet.css";
 
 const AnswerSheet = ({ lobbyId, socket, answerSheet, setAnswerSheet, sendAnswerSheet }) => {
 
@@ -15,18 +16,20 @@ const AnswerSheet = ({ lobbyId, socket, answerSheet, setAnswerSheet, sendAnswerS
     }
 
     return ( 
-        <>
-            <div className="answer-sheet">
-                { answerSheet === [] && <div className="no-sheet">Answers Sent</div>}
-                { answerSheet.map((answer, i) => (
-                    <div key={i} className="answer">
-                        <label htmlFor={`answer${answer.index}`}>Answer for Q{answer.index}</label>
-                        <input type="text" value={answer.value} onChange={text => (onSheetChange(text.target.value, answer.index-1))} name={`answer${answer.index}`}/>
-                    </div>
-                ))}
+        <div className="answer-sheet-container">
+            <div className="answer-sheet-scroll">
+                <div className="answer-sheet">
+                    { answerSheet === [] && <div className="no-sheet">Answers Sent</div>}
+                    { answerSheet.map((answer, i) => (
+                        <div key={i} className="answer">
+                            <label htmlFor={`answer${answer.index}`}> {answer.index}:</label>
+                            <input type="text" value={answer.value} onChange={text => (onSheetChange(text.target.value, answer.index-1))} name={`answer${answer.index}`}/>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <button type="button" onClick={sendAnswerSheet}>Send Answer Sheet</button>
-        </>
+            <button className="send-answers-sheet" type="button" onClick={sendAnswerSheet}>Send Answer Sheet</button>
+        </div>
      );
 }
  

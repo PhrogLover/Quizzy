@@ -1,0 +1,86 @@
+.no-answer-sheet{
+    color:var(--primary-colour);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-style: italic;
+}
+.no-sheet{
+    color:var(--font-colour);
+
+}
+.answer-sheet-container{
+    position: relative;
+    width: 100%;
+    height: calc(-40px + 100%);
+
+}
+.answer-sheet-scroll{
+    overflow-y: auto;
+    width: 100%;
+    height: calc(-50px + 100%);
+}
+.answer-sheet{
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+    padding: 5px;
+}
+.answer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--font-colour);
+    margin: 5px 0;
+    padding: 5px 2px;
+    border: none;
+}
+.answer label{
+    width:5%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 5px 0 0;
+    padding: 0;
+    font-style: italic;
+    color: var(--primary-colour);
+    font-size: 15px;
+    font-weight: 500;
+}
+.answer input{
+    width: 85%;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--colour-black2);
+    font-size: 15px;
+    padding: 2px;
+    outline: none;
+    background-color: var(--colour-black2);
+    transition: 100ms;
+    color: var(--colour-white);
+
+}
+.answer input:hover{
+    border: 2px solid var(--colour-black3);
+    background-color: var(--colour-black3);
+}
+.answer input:focus{
+    background-color: var(--colour-white);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--primary-colour);
+    color: var(--colour-black2);
+}
+.send-answers-sheet{
+    width: 95%;
+    margin-top: 10px;
+    min-height: 30px;
+    height: 30px;
+    background-color: var(--primary-colour);
+    border-radius: var(--border-radius);
+    color: var(--colour-black2);
+    border: none;
+}
+.send-answers-sheet:hover{
+    filter: brightness(0.9);
+}
