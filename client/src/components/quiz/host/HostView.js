@@ -14,6 +14,8 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
     const [ activeLobbies, setActiveLobbies ] = useState(0);
+    const [ pointsArray, setPointsArray ] = useState([]);
+    const [ showLeaderboard, setShowLeaderboard ] = useState(false);
 
     useEffect(() => {
         return () => {
@@ -55,6 +57,27 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
         keepActiveLobbies = activeLobbies;
     }, [activeLobbies])
 
+    useEffect(() => {
+        if (showLeaderboard) {
+            keepAnswers = [];
+            keepCorrAnswers = [];
+            console.log(pointsArray);
+            let leaderboardData = $.extend(true, [], teamList);
+            pointsArray.map((team) => {
+                for (let i = 0; i < leaderboardData.length; i++) {
+                    if (leaderboardData[i][0].id === team.id) {
+                        leaderboardData[i][round] = {
+                            id: team.id,
+                            points: team.points
+                        }
+                        break;
+                    }
+                }
+            });
+            setLeaderboard(leaderboardData);
+        }
+    }, [showLeaderboard])
+
     function closeQuiz() {
         quiz.deployIds = [];
         const body = {
@@ -70,25 +93,10 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
     }
 
     function judgingDone(pointsArray) {
-        keepAnswers = [];
-        keepCorrAnswers = [];
-        console.log(pointsArray);
-        let leaderboardData = $.extend(true, [], teamList);
-        pointsArray.map((team) => {
-            for (let i = 0; i < leaderboardData.length; i++) {
-                if (leaderboardData[i][0].id === team.id) {
-                    leaderboardData[i][round] = {
-                        id: team.id,
-                        points: team.points
-                    }
-                    break;
-                }
-            }
-        });
+        setPointsArray(pointsArray);
         let newState = {
             type: "main"
         }
-        setLeaderboard(leaderboardData);
         setLobbyState(newState);
         console.log("dunzo");
         
@@ -129,7 +137,7 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
                             <button className="close-quiz-button" type="button" onClick={closeQuiz}>End Quiz</button>
 
                             <div className="host-stream-wrapper">                                                                 
-                                <HostStream user = { user } teamList = { teamList } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
+                                <HostStream showLeaderboard = { showLeaderboard } setShowLeaderboard = { setShowLeaderboard } user = { user } teamList = { teamList } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
                             </div>
                         </div>  
                         <div className="judge-section">                            

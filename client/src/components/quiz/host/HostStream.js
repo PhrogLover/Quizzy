@@ -327,7 +327,7 @@ const HostStream = (props) => {
                 </div>
             </div>
             <div className="slide-script">
-                <SlideScript user = { props.user } teamList = { props.teamList } socket = {props.socket} mainId={props.mainId} quiz = { props.quiz } slideData={slideData} onSlideChange={setSlideData} onSlideChangeVar={slideData}/>
+                <SlideScript showLeaderboard = { props.showLeaderboard } setShowLeaderboard = { props.setShowLeaderboard } user = { props.user } teamList = { props.teamList } socket = {props.socket} mainId={props.mainId} quiz = { props.quiz } slideData={slideData} onSlideChange={setSlideData} onSlideChangeVar={slideData}/>
             </div>
             <div className="host-lobby-toolbar">
                 <ToolbarComponent

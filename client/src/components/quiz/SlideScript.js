@@ -5,7 +5,7 @@ import $ from "jquery";
 import Leaderboard from "../basic/Leaderboard";
 
 
-const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket, mainId, teamList, user }) => {
+const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket, mainId, teamList, user, showLeaderboard, setShowLeaderboard }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ showAns, setShowAns ] = useState(false);
     const [ currentSlideScript, setCurrentSlideScript ] = useState(quiz.slides[0]);
@@ -22,7 +22,6 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
     const [ globalQuizIntro, setGlobalQuizIntro ] = useState(true);
     const [ endOfQuiz, setEndOfQuiz ] = useState(false);
     const [ leaderboard, setLeaderboard ] = useState(false);
-    const [ showLeaderboard, setShowLeaderboard ] = useState(false);
 
     useEffect(() => {
         socket.emit('set round', globalRoundIndex, mainId);
