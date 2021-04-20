@@ -73,7 +73,7 @@ const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mai
                     <div className="general-menu" >
                         <div className="leaderboard-button" onClick={handlelbPopUp}>
                             <DropdownItem icon={"fas fa-medal"}>
-                                LeaderBoard
+                                Leaderboard
                             </DropdownItem>
                         </div>
                         <DropdownItem icon={"bruh"}>

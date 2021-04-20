@@ -317,7 +317,10 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
             <div id="main-host-slideview" className="main-host-slideview" >
                 <div id ="host-slideview-wrapper" className="host-slideview-wrapper" style ={hostStreamSize}>
                     <SlideView endOfQuiz = { endOfQuiz } showLeaderboard = { showLeaderboard } slideData={slideData} isPending={ isPending } slide={ currentSlideScript } onSlideChange={onSlideChange} onSlideChangeVar={onSlideChangeVar} showAns = { showAns } timer = { timer } slideWidthPass = "width--100per" quiz = { quiz } answerSheet = { answerSheet } />
-                    {/* { showLeaderboard && <Leaderboard user = { user } teamList = { teamList } /> }  OVERLAY */}
+                    { showLeaderboard && 
+                    <div className="host-slide-leaderboard">
+                        <Leaderboard user = { user } teamList = { teamList } />
+                    </div> }
                 </div>
             </div>
         </>
