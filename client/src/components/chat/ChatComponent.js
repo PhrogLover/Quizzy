@@ -84,7 +84,7 @@ const ChatComponent = (props) => {
                         ))}
                     </div>
 
-                    <div id="messageInput" className="message-input-container">                        
+                    <div id="messageInput" className="team-message-input-container">                        
                         <input 
                             placeholder="Send a message..."
                             id="chatInput"
