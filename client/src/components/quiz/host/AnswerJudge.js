@@ -163,8 +163,8 @@ const AnswerJudge = ({ quiz, round, setLobbyState, ans, correctAns }) => {
                     <div className="submitted-answer"> Submitted Answer was: "<i>{ submittedAnswer.value }</i>"</div>
                     <div className="judge-buttons">
                         <button className="judge-allow-button" type="button" onClick={answerAllowed}><i className="fas fa-check"></i> Allow</button>
-                        <button className="judge-deny-button" type="button" onClick={() => (setCurrentSlide(parse.next().value))}><i className="fas fa-times"></i>Deny</button>
-                    </div>
+                        <button className="judge-deny-button" type="button" onClick={() => (setCurrentSlide(parse.next().value))}><i className="fas fa-times"></i> Deny</button>
+                    </div> 
                 </div>
             </>}
         </div>
