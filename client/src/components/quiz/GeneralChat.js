@@ -99,10 +99,9 @@ const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mai
                     <div className="chat-toolbar-buttons">
                     <i className="fas fa-user-friends"/>
                     </div>
-                    {leaderboard && <div className="chat-toolbar-buttons" onClick={() => setgcDropdown(!gcDropdown)}>
+                    <div className="chat-toolbar-buttons" onClick={() => setgcDropdown(!gcDropdown)}>
                         <i className="fas fa-ellipsis-h"/>
                     </div>
-                    }
                     <div className="chat-label">
                         Lobby Chat
                     </div>

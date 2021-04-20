@@ -391,6 +391,8 @@ const TeamLobby = (props) => {
 
     const [ quizStreamSize, setQuizStreamSize ] = useState(resizeSlide());
 
+    const [ smallTeamChat, setSmallTeamChat] = useState(true);
+
     useEffect(() => {
         setQuizStreamSize(resizeSlide());
     },[slideSize])
@@ -429,7 +431,10 @@ const TeamLobby = (props) => {
 
         return (
             <>
-                <ClickAwayListener onClickAway={closeDropdown}>
+                <ClickAwayListener 
+                mouseEvent="onMouseDown"
+                touchEvent="onTouchStart" 
+                onClickAway={closeDropdown}>
                     <div className="team-menu" ref={teamLobbyMenuRef}>
                         <DropdownItem icon={"bruh"}>
                             bruh
@@ -500,8 +505,7 @@ const TeamLobby = (props) => {
                 <div className="team-lobby-right">
                     
                     <div className="team-chat-section">
-                        <div className="answer-sheet-section">
-                            <div className="answer-sheet-toolbar">
+                    <div className="answer-sheet-toolbar">
                                 <button className="leave-team-button" type="button" onClick={backHandler}>
                                     <i className="fas fa-sign-out-alt"></i>
                                 </button>
@@ -512,13 +516,15 @@ const TeamLobby = (props) => {
                                     <i className="fas fa-arrow-right"/>
                                 </div>
                             </div>
-                            
+                        <div className={"answer-sheet-section " + (smallTeamChat? "big-a-sheet":"small-a-sheet")}>
                             { localUser && answerSheetVisible && !endOfQuiz && <AnswerSheet lobbyId = { props.lobbyState.id } socket = { props.socket } sendAnswerSheet = { sendAnswerSheet } answerSheet = { answerSheet } setAnswerSheet = {setAnswerSheet} /> }
                             { localUser && !answerSheetVisible && !endOfQuiz && <div className="no-answer-sheet">Waiting For Questions...</div> }
                             { localUser && endOfQuiz && <HostReview hostId = { props.quiz.creatorId } /> }
                         </div>
-                        <div className="team-chat">
-                            <div className="team-chat-toolbar">
+                        <div className="team-chat-toolbar">
+                                <div className="toggle-team-size-button" onClick={() => setSmallTeamChat(!smallTeamChat)} >
+                                    <i className={!smallTeamChat? "fas fa-chevron-down":"fas fa-chevron-up"}></i>
+                                </div>
                                 <div className="chat-label">
                                     Team Chat
                                 </div>
@@ -529,8 +535,10 @@ const TeamLobby = (props) => {
                                 </div>
                                 {ddOpen && <TeamLobbyMenu/>}
                             </div>
+                        <div className={"team-chat " + (smallTeamChat? "small-a-sheet":"big-a-sheet")}>
+                            
                             {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                                <div className="OT_root OT_publisher custom-class" style={{ display: true }}>
+                                <div className="team-chat-wrapper" style={{ display: true }}>
                                     <ChatComponent
                                         profilePic = { props.user.imageUrl }
                                         user={localUser}

@@ -144,11 +144,13 @@
 }
 .team-chat{
   position: relative;
-  min-height: 40%;
-  height: calc(-40px + 40%) ;
+  min-height: fit-content;
   background-color: var(--bg-colour);
   width: 100%;
-  
+}
+.team-chat-wrapper{
+  width: 100%;
+  height: 100%;
 }
 .team-chat-toolbar{
   height: 40px;
@@ -168,10 +170,37 @@
   background-color: var(--bg-colour);
   min-width: 300px;
   max-width: 300px;
-  height: calc(-40px + 60%) ;
-  max-height: calc(-40px + 60%);
   display: flex;
   flex-direction: column;
+}
+.big-a-sheet{
+  height: calc(-40px + 70%);
+  max-height: calc(-40px + 70%);
+}
+.small-a-sheet{
+  height: calc(-40px + 30%) ;
+  max-height: calc(-40px + 30%);
+}
+.toggle-team-size-button{
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 5px;
+  width: 28px;
+  min-height: 28px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  z-index: 1;
+  left:0;
+
+  background-color:transparent;
+  color: var(--colour-white);
+}
+.toggle-team-size-button:hover{
+  background-color: var(--colour-black2);
+  filter: brightness(150%);
+  cursor: pointer;
 }
 .leave-team-button{
   outline: none;
@@ -208,9 +237,9 @@
 .open-team-button{
   position: absolute;
   /* transform: translateX(-100%); */
-  margin-top: 48vh;
-  width: 25px;
-  min-height: 25px;
+  top: 8px; 
+  width: 30px;
+  min-height: 30px;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -218,6 +247,7 @@
   border-top-left-radius: var(--border-radius);
   z-index: 1;
   right:0;
+  font-size: 20px;
 
   background-color:transparent;
   transition: 200ms;
