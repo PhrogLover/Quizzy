@@ -534,7 +534,7 @@ const TeamLobby = (props) => {
                             </div>
                             
                             { localUser && answerSheetVisible && !endOfQuiz && <AnswerSheet lobbyId = { props.lobbyState.id } socket = { props.socket } sendAnswerSheet = { sendAnswerSheet } answerSheet = { answerSheet } setAnswerSheet = {setAnswerSheet} /> }
-                            { localUser && !answerSheetVisible && !endOfQuiz && <div className="no-answer-sheet">No Answer Sheet At The Moment</div> }
+                            { localUser && !answerSheetVisible && !endOfQuiz && <div className="no-answer-sheet">Waiting For Questions...</div> }
                             { localUser && endOfQuiz && <HostReview hostId = { props.quiz.creatorId } /> }
                         </div>
                         <div className="team-chat">

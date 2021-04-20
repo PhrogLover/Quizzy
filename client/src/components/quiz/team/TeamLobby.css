@@ -145,6 +145,7 @@
 .team-chat{
   position: relative;
   min-height: 40%;
+  height: calc(-40px + 40%) ;
   background-color: var(--bg-colour);
   width: inherit;
 }
@@ -163,10 +164,11 @@
 }
 .answer-sheet-section{
   position: relative;
-  flex-grow: 1;
   background-color: var(--bg-colour);
   min-width: 300px;
   max-width: 300px;
+  height: calc(-40px + 60%) ;
+  max-height: calc(-40px + 60%);
   display: flex;
   flex-direction: column;
 }
@@ -183,9 +185,8 @@
   margin-right: 5px;
 }
 .answer-sheet-toolbar{
-  height: 40px;
+  min-height: 40px;
   padding: 3px;
-  min-height: fit-content;
   width: 100%;
   background-color: var(--colour-black2);
   display: flex;

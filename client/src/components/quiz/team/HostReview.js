@@ -41,7 +41,7 @@ const HostReview = ({ hostId }) => {
                         <label onClick={()=>setRating(1)} className={(rating >= 1)? "yellow-star":"plain-star"} for="star-1"><i className="fas fa-star"></i></label>
                     </div>
                     <div className="comment-review-container">
-                        <div>Leave A Comment For The Host! <i>(optional)</i> {rating}</div>
+                        <div>Leave A Comment For The Host! <i>(optional)</i></div>
                         <textarea className="host-review-text-area" type="text" id="comment" value={ comment } onChange={(text => (setComment(text.target.value)))} />
                         <button className="submit-review-button" type="submit" >Submit Review</button>
                     </div>
