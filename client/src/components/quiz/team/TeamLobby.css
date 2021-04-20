@@ -147,7 +147,8 @@
   min-height: 40%;
   height: calc(-40px + 40%) ;
   background-color: var(--bg-colour);
-  width: inherit;
+  width: 100%;
+  
 }
 .team-chat-toolbar{
   height: 40px;

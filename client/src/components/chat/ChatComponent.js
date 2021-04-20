@@ -64,14 +64,8 @@ const ChatComponent = (props) => {
     }
 
     return ( 
-        <div id="chatContainer">
-                <div id="chatComponent" style={styleChat}>
-                    <div id="chatToolbar">
-                        <span>{props.user.getStreamManager().stream.session.sessionId} - CHAT</span>
-                        <IconButton id="closeButton" onClick={close}>
-                            <HighlightOff color="secondary" />
-                        </IconButton>
-                    </div>
+        <div id="chatContainer" className="chat-container">
+                <div id="chatComponent" className="chat-component" style={styleChat}>
                     <div className="message-wrap" ref={chatScroll}>
                         {messageList.map((data, i) => (
                             <div
@@ -81,13 +75,12 @@ const ChatComponent = (props) => {
                                     'message' + (data.connectionId !== props.user.getConnectionId() ? ' left' : ' right')
                                 }
                             >
-                                <canvas id={'userImg-' + i} width="60" height="60" className="user-img" />
+                                <div id={'userImg-' + i} className="user-img" />
                                 <div className="msg-detail">
                                     <div className="msg-info">
                                         <p> {data.nickname}</p>
                                     </div>
                                     <div className="msg-content">
-                                        <span className="triangle" />
                                         <p className="text">{data.message}</p>
                                     </div>
                                 </div>
@@ -95,19 +88,18 @@ const ChatComponent = (props) => {
                         ))}
                     </div>
 
-                    <div id="messageInput">
-                        <input
-                            placeholder="Send a messge"
+                    <div id="messageInput" className="message-input-container">                        
+                        <input 
+                            placeholder="Send a message..."
                             id="chatInput"
                             value={message}
                             onChange={event => (setMessage(event.target.value))}
                             onKeyPress={handlePressKey}
                         />
-                        <Tooltip title="Send message">
-                            <Fab size="small" id="sendButton" onClick={sendMessage}>
-                                <Send />
-                            </Fab>
-                        </Tooltip>
+                        <button id="sendButton" onClick={sendMessage} className="team-send-button">
+                            Send
+                        </button>
+                        
                     </div>
                 </div>
             </div>

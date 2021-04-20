@@ -206,7 +206,7 @@
 .message-input:focus{
     border: var(--primary-colour) 2px solid;
     background-color: var(--bg-colour);
-    outline:0;
+    outline:none;
 }
 
 .send-button{
