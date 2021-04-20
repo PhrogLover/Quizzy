@@ -1,5 +1,5 @@
 import React, { useState, useEffect  } from 'react';
-import "./HostStream.css";
+import "./hoststream.css";
 import { OpenVidu } from 'openvidu-browser';
 import $ from "jquery";
 import StreamComponent from '../../stream/StreamComponent';

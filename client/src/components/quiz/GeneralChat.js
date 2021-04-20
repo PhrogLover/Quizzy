@@ -4,7 +4,7 @@ import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../scripts/GetUniqueId";
 import generateColour from "../../scripts/generateColour";
 
-const GeneralChat = ( {userState, mainId, socket }) => {
+const GeneralChat = ( { gcOpen, setgcOpen, userState, mainId, socket }) => {
     const [ chat, setChat ] = useState([]);
 
     useEffect(() => {
@@ -41,7 +41,6 @@ const GeneralChat = ( {userState, mainId, socket }) => {
         }, 36)
     }
 
-    const [gcOpen,setgcOpen] = useState(true);
     const closeGeneralChat = () => setgcOpen(false);
 
     const [pinMessageOpen,setPmOpen] = useState(false);
