@@ -3,6 +3,7 @@ import GeneralChat from "../GeneralChat";
 import { useEffect, useState } from "react";
 import HostView from "../host/HostView";
 import PlayerView from "./PlayerView";
+import LeaderboardPopUp from "../../basic/LeaderboardPopUp";
 
 const MainLobby = ({ user, quiz, id, socket }) => {
 
@@ -24,14 +25,17 @@ const MainLobby = ({ user, quiz, id, socket }) => {
     }, [])
 
     const [gcOpen,setgcOpen] = useState(true);
+    const [lbToggle,setlbToggle] = useState(false);
+
 
     return (
             <div className="main-lobby">
-                { userState !== "host" && <PlayerView  gcOpen = { gcOpen } setgcOpen = { setgcOpen } userState = { userState } setUserState = { setUserState } user = { user } quiz = { quiz } socket = { socket } mainId = { id } /> }
+                { userState !== "host" && <PlayerView  gcOpen = { gcOpen } setgcOpen = { setgcOpen } lbToggle = { lbToggle } setlbToggle = { setlbToggle } userState = { userState } setUserState = { setUserState } user = { user } quiz = { quiz } socket = { socket } mainId = { id } /> }
                 { userState === "host" && <HostView round={ round } user = { user } quiz = { quiz } socket = { socket } mainId = { id }/> }
                 <div className="main-chat">
-                    <GeneralChat gcOpen = { gcOpen } setgcOpen = { setgcOpen } userState = {userState} mainId = { id } chatSize={ chatSize } socket = { socket } />
+                    <GeneralChat gcOpen = { gcOpen } setgcOpen = { setgcOpen } lbToggle = { lbToggle } setlbToggle = { setlbToggle } userState = {userState} mainId = { id } chatSize={ chatSize } socket = { socket } />
                 </div>
+                {lbToggle && <LeaderboardPopUp/>}
             </div>
      );
 }

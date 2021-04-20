@@ -209,6 +209,31 @@
     outline:none;
 }
 
+.general-menu{
+    width:150px;
+    height:max-content;
+    background-color: var(--nav-bg);
+    position:absolute;
+    border-radius: var(--border-radius);
+    margin-right: 10px;
+    top: 35px;
+    right: 0;
+    overflow: hidden;
+    z-index: 199999;
+    /* border: var(--colour-grey) 1px solid; */
+    filter:drop-shadow(0 0 0.1rem black);
+    padding: 5px;
+  
+    /* Makes text unselectable */ 
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    font-family: var(--font);
+  }
+  .leaderboard-button{
+      cursor: pointer;
+  }
 .send-button{
     border-bottom-right-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);

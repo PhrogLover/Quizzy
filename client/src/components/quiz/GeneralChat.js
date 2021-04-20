@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import GeneralChatElement from "./GeneralChatElement";
 import GetUniqueId from "../../scripts/GetUniqueId";
 import generateColour from "../../scripts/generateColour";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-const GeneralChat = ( { gcOpen, setgcOpen, userState, mainId, socket }) => {
+
+const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mainId, socket }) => {
     const [ chat, setChat ] = useState([]);
 
     useEffect(() => {
@@ -46,6 +48,41 @@ const GeneralChat = ( { gcOpen, setgcOpen, userState, mainId, socket }) => {
     const [pinMessageOpen,setPmOpen] = useState(false);
     const [pinEditable,setPinEditable] = useState(false);
 
+
+    const [gcDropdown, setgcDropdown] = useState(false);
+    const closegcDropdown = () => setgcDropdown(false);
+
+    function GcDropdown() {       
+    
+        function DropdownItem(props){
+            return(
+                <div className = "menu-item">
+                    <div className="dropdown-icon"><i className= {props.icon}/></div>
+                    {props.children}
+                </div>        
+            )}
+
+        return (
+            <>
+                <ClickAwayListener onClickAway={closegcDropdown}>
+                    <div className="general-menu" >
+                        <div className="leaderboard-button" onClick={() => setlbToggle(true)}>
+                            <DropdownItem icon={"fas fa-medal"}>
+                                LeaderBoard
+                            </DropdownItem>
+                        </div>
+                        <DropdownItem icon={"bruh"}>
+                            Bruhhhhh
+                        </DropdownItem>
+                        
+                    </div>
+                </ClickAwayListener>
+            </>
+        );
+    }
+
+    
+
     return ( <>
             {!gcOpen && userState === "player" && 
                 <div className="open-chat-button" onClick={() => setgcOpen(true)} >
@@ -62,13 +99,14 @@ const GeneralChat = ( { gcOpen, setgcOpen, userState, mainId, socket }) => {
                     <div className="chat-toolbar-buttons">
                     <i className="fas fa-user-friends"/>
                     </div>
-                    <div className="chat-toolbar-buttons">
+                    <div className="chat-toolbar-buttons" onClick={() => setgcDropdown(!gcDropdown)}>
                         <i className="fas fa-ellipsis-h"/>
                     </div>
                     <div className="chat-label">
                         Lobby Chat
                     </div>
                 </div>
+                {gcDropdown && <GcDropdown/>}
                 <div className="pinned-message-container">                    
                     <div className="pinned-message-box">
                         {pinMessageOpen && <div className="collapse-pin-message" onClick={ () => setPmOpen(!pinMessageOpen)}> <i className="fas fa-compress-alt"></i></div>}
@@ -105,7 +143,9 @@ const GeneralChat = ( { gcOpen, setgcOpen, userState, mainId, socket }) => {
                         </div>
                     </form>
                 </div>
+                
             </div>
+            
             }
         </>
     );

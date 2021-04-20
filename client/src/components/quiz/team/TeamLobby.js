@@ -466,26 +466,6 @@ const TeamLobby = (props) => {
                             
                             
                         </div>
-                        <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
-                                <div className="user-stream-container-ratio">
-                                
-                                </div>
-                            </div>
-                            <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
-                                <div className="user-stream-container-ratio">
-                                
-                                </div>
-                            </div>
-                            <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
-                                <div className="user-stream-container-ratio">
-                                
-                                </div>
-                            </div>
-                            <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
-                                <div className="user-stream-container-ratio">
-                                    
-                                </div>
-                            </div>
                         {subState.map((sub, i) => (
                             <div className={"user-stream-wrapper "  + (tcOpen? "usw-normal":"usw-wide")}>
                                 <div className="user-stream-container-ratio">

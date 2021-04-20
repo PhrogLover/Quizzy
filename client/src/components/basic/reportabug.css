@@ -10,16 +10,6 @@
     /* border: 5px white solid; */
     color: var(--font-colour);
 }
-.dark-filter{
-    z-index: 1000000;
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    opacity: 60%;
-    background-color: black;
-}
 .report-bg{
     position: fixed;
     z-index: 1000001;

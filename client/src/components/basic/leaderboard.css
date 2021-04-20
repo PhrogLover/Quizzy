@@ -9,6 +9,14 @@
     justify-content: center;
     align-items: center;
 }
+.leaderboard-overlay{
+    height: var(--section-height);
+    width: 50%;
+    background-color: var(--colour-black2);
+    position: fixed;
+    z-index: 1000001;
+    transform: translate(-300px,50%);
+}
 .team-name{
     font-size: inherit;
 }
