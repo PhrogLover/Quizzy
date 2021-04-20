@@ -17,6 +17,7 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
     const [ pointsArray, setPointsArray ] = useState([]);
     const [ showLeaderboard, setShowLeaderboard ] = useState(false);
     const [ saveLeaderboard, setSaveLeaderboard ] = useState(false);
+    const [ judgeDoneText, setJudgeDoneText ] = useState("");
 
     useEffect(() => {
         return () => {
@@ -94,6 +95,10 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
     }
 
     function judgingDone(pointsArray) {
+        setJudgeDoneText("Answer Judging Has Ended");
+        setTimeout(() => {
+            setJudgeDoneText("");
+        }, 5000);
         setPointsArray(pointsArray);
         let newState = {
             type: "main"
@@ -146,7 +151,8 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
                                 <div className="judge-section-container">             
                                     <AnswerJudge quiz = { quiz } setLobbyState = { judgingDone } round = { round } ans = { keepAnswers } correctAns = { keepCorrAnswers } />
                                 </div>
-                            }                         
+                            }
+                            { judgeDoneText && <div>{ judgeDoneText }</div> }                      
                         </div>
                         
                     </div>
