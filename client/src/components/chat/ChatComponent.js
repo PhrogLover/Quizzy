@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import IconButton from '@material-ui/core/IconButton';
-import Fab from '@material-ui/core/Fab';
-import HighlightOff from '@material-ui/icons/HighlightOff';
-import Send from '@material-ui/icons/Send';
 
 import './ChatComponent.css';
-import { Tooltip } from '@material-ui/core';
 
 const ChatComponent = (props) => {
     const styleChat = { display: props.chatDisplay };
@@ -17,19 +12,20 @@ const ChatComponent = (props) => {
     useEffect(() => {
         props.user.getStreamManager().stream.session.on('signal:chat', (event) => {
             const data = JSON.parse(event.data);
-            const newMessage = { connectionId: event.from.connectionId, nickname: data.nickname, message: data.message };
-            // const document = window.document;
-            // setTimeout(() => {
-            //     const userImg = document.getElementById('userImg-' + (messageList.length - 1));
-            //     const video = document.getElementById('video-' + data.streamId);
-            //     const avatar = userImg.getContext('2d');
-            //     avatar.drawImage(video, 200, 120, 285, 285, 0, 0, 60, 60);
-            //     props.messageReceived();
-            // }, 50);
+            const newMessage = { connectionId: event.from.connectionId, nickname: data.nickname, message: data.message, imgUrl: data.imgUrl };
+            setTimeout(() => {
+                props.messageReceived();
+            }, 50);
             setMessageList(prevNames => [...prevNames, newMessage]);
             scrollToBottom();
         });
     }, [])
+
+    useEffect(() => {
+        if (window.document.getElementById('userImg-' + (messageList.length - 1))) {
+            window.document.getElementById('userImg-' + (messageList.length - 1)).innerHTML = `<img src=${ messageList[messageList.length - 1].imgUrl }></img>`;
+        }
+    }, [messageList])
 
     function handlePressKey(event) {
         if (event.key === 'Enter') {
@@ -41,7 +37,7 @@ const ChatComponent = (props) => {
         if (props.user && message) {
             let newMessage = message.replace(/ +(?= )/g, '');
             if (newMessage !== '' && newMessage !== ' ') {
-                const data = { message: newMessage, nickname: props.user.getNickname(), streamId: props.user.getStreamManager().stream.streamId };
+                const data = { message: newMessage, nickname: props.user.getNickname(), streamId: props.user.getStreamManager().stream.streamId, imgUrl: props.profilePic };
                 props.user.getStreamManager().stream.session.signal({
                     data: JSON.stringify(data),
                     type: 'chat',

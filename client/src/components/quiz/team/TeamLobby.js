@@ -552,6 +552,7 @@ const TeamLobby = (props) => {
                             {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                                 <div className="OT_root OT_publisher custom-class" style={{ display: true }}>
                                     <ChatComponent
+                                        profilePic = { props.user.imageUrl }
                                         user={localUser}
                                         chatDisplay={true}
                                         close={toggleChat}
