@@ -1,9 +1,11 @@
 import "./leaderboard.css";
 import $ from "jquery";
 import { useState,useEffect } from "react";
+import GetUniqueId from "../../scripts/GetUniqueId";
 
 const Leaderboard = ({ teamList, user }) => {
 
+    const leaderboardId = "leaderboard" + GetUniqueId();
     const [ leaderboard, setLeaderboard ] = useState(initLeaderboard($.extend(true, [], teamList)));
     const [ lbDimensions, setLbDimensions] = useState(resizeLeaderBoard());
 
@@ -12,8 +14,8 @@ const Leaderboard = ({ teamList, user }) => {
     },[])
 
     function resizeLeaderBoard() {
-        let sectionWidth= $("#leaderboard").width();
-        let sectionHeight= $("#leaderboard").height();
+        let sectionWidth= $("#"+leaderboardId).width();
+        let sectionHeight= $("#"+leaderboardId).height();
         let fontSize = sectionHeight/(2*(leaderboard.length)+3);
 
         return {height: sectionHeight+"px", width: sectionWidth+ "px", fontSize: fontSize+"px" };
@@ -51,7 +53,7 @@ const Leaderboard = ({ teamList, user }) => {
     }    
 
     return ( 
-        <div id="leaderboard" className="leaderboard" style={lbDimensions}>
+        <div id={leaderboardId} className="leaderboard" style={lbDimensions}>
             <table>
                 <thead>
                     <tr>
