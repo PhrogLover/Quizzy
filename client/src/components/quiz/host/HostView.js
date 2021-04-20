@@ -16,6 +16,7 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
     const [ activeLobbies, setActiveLobbies ] = useState(0);
     const [ pointsArray, setPointsArray ] = useState([]);
     const [ showLeaderboard, setShowLeaderboard ] = useState(false);
+    const [ saveLeaderboard, setSaveLeaderboard ] = useState(false);
 
     useEffect(() => {
         return () => {
@@ -58,7 +59,7 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
     }, [activeLobbies])
 
     useEffect(() => {
-        if (showLeaderboard) {
+        if (saveLeaderboard) {
             keepAnswers = [];
             keepCorrAnswers = [];
             console.log(pointsArray);
@@ -76,7 +77,7 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
             });
             setLeaderboard(leaderboardData);
         }
-    }, [showLeaderboard])
+    }, [saveLeaderboard])
 
     function closeQuiz() {
         quiz.deployIds = [];
@@ -137,7 +138,7 @@ const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard,
                             <button className="close-quiz-button" type="button" onClick={closeQuiz}>End Quiz</button>
 
                             <div className="host-stream-wrapper">                                                                 
-                                <HostStream showLeaderboard = { showLeaderboard } setShowLeaderboard = { setShowLeaderboard } user = { user } teamList = { teamList } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
+                                <HostStream setSaveLeaderboard = {setSaveLeaderboard} showLeaderboard = { showLeaderboard } setShowLeaderboard = { setShowLeaderboard } user = { user } teamList = { teamList } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
                             </div>
                         </div>  
                         <div className="judge-section">                            

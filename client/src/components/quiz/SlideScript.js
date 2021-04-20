@@ -5,7 +5,7 @@ import $ from "jquery";
 import Leaderboard from "../basic/Leaderboard";
 
 
-const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket, mainId, teamList, user, showLeaderboard, setShowLeaderboard }) => {
+const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket, mainId, teamList, user, showLeaderboard, setShowLeaderboard, setSaveLeaderboard }) => {
     const [ isPending, setIsPending ] = useState(false);
     const [ showAns, setShowAns ] = useState(false);
     const [ currentSlideScript, setCurrentSlideScript ] = useState(quiz.slides[0]);
@@ -234,6 +234,7 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
                 color: "var(--colour-grey)"
             })
             setCurrentSlideScript(emptySlide);
+            setSaveLeaderboard(true);
             setTimeout(() => {
                 //leaderboard suspense time
                 console.log("Leaderboard");
@@ -241,6 +242,7 @@ const SlideScript = ({ quiz, onSlideChange, slideData, onSlideChangeVar, socket,
                 setLeaderboard(false);
                 setGlobalQuizIntro(true);
                 quizIntro = true;
+                setSaveLeaderboard(false);
                 if (roundsRemaining === 0) {
                     setScriptButtonValue("End of Quiz!")
                     setScriptButtonStyle({

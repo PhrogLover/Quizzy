@@ -16,7 +16,6 @@ const Leaderboard = ({ teamList, user }) => {
         let sectionHeight= $("#leaderboard").height();
         let fontSize = sectionHeight/(2*(leaderboard.length)+3);
 
-        console.log("height " + sectionHeight + " font " +fontSize + " length " + leaderboard.length);
         return {height: sectionHeight+"px", width: sectionWidth+ "px", fontSize: fontSize+"px" };
     }
     
@@ -43,7 +42,6 @@ const Leaderboard = ({ teamList, user }) => {
             }
         }
 
-        console.log(teamList)
         return teamList;
     }
 
