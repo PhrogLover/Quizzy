@@ -9,20 +9,13 @@ let keepAnswers = [];
 let keepCorrAnswers = [];
 let keepActiveLobbies = 0;
 
-const HostView = ({ user, mainId, socket, quiz, round }) => {
+const HostView = ({ user, mainId, socket, quiz, round, teamList, setLeaderboard, lobbyData }) => {
     let history = useHistory();
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
-    const [ lobbyData, setLobbyData ] = useState([]);
-    const [ leaderboard, setLeaderboard ] = useState(leaderboardInit());
     const [ activeLobbies, setActiveLobbies ] = useState(0);
 
     useEffect(() => {
-        socket.on('lobby data change '+mainId, (newLobbyData) => {
-            console.log(newLobbyData)
-            setLobbyData(newLobbyData);
-            setLeaderboard(leaderboardUpdate(newLobbyData));
-        });
         return () => {
             keepAnswers = [];
             keepCorrAnswers = [];
@@ -62,14 +55,6 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
         keepActiveLobbies = activeLobbies;
     }, [activeLobbies])
 
-    useEffect(() => {
-        socket.emit('lobby data call',mainId);
-    }, [])
-
-    useEffect(() => {
-        socket.emit('leaderboard', leaderboard, mainId);
-    }, [leaderboard])
-
     function closeQuiz() {
         quiz.deployIds = [];
         const body = {
@@ -88,7 +73,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
         keepAnswers = [];
         keepCorrAnswers = [];
         console.log(pointsArray);
-        let leaderboardData = $.extend(true, [], leaderboard);
+        let leaderboardData = $.extend(true, [], teamList);
         pointsArray.map((team) => {
             for (let i = 0; i < leaderboardData.length; i++) {
                 if (leaderboardData[i][0].id === team.id) {
@@ -100,7 +85,6 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                 }
             }
         });
-        console.log(leaderboardData);
         let newState = {
             type: "main"
         }
@@ -109,30 +93,6 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
         console.log("dunzo");
         
         window.document.getElementById("main-host-slideview").className = "main-host-slideview";
-    }
-
-    function leaderboardInit() {
-        let leaderboardArr = [];
-        for (let i = 0; i < quiz.numberOfTeams; i++) {
-            let tempArr = []
-            for (let j = 0; j <= quiz.numberOfRounds; j++) {
-                tempArr.push([]);
-            }
-            leaderboardArr.push(tempArr);
-        }
-        return leaderboardArr;
-    }
-
-    function leaderboardUpdate(lobbyData) {
-        let leaderboardArr = $.extend(true, [], leaderboard);
-        for (let i = 0; i < leaderboardArr.length; i++) {
-            leaderboardArr[i][0] = {
-                id: lobbyData[i].id,
-                name: lobbyData[i].name,
-                players: lobbyData[i].players
-            }
-        }
-        return leaderboardArr;
     }
 
     function sendAnswerSheet() {
@@ -169,7 +129,7 @@ const HostView = ({ user, mainId, socket, quiz, round }) => {
                             <button className="close-quiz-button" type="button" onClick={closeQuiz}>End Quiz</button>
 
                             <div className="host-stream-wrapper">                                                                 
-                                <HostStream user = { user } teamList = { leaderboard } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
+                                <HostStream user = { user } teamList = { teamList } mainId = { mainId } socket = { socket } quiz={ quiz } sessionName={"MainQuiz"+mainId} />                        
                             </div>
                         </div>  
                         <div className="judge-section">                            

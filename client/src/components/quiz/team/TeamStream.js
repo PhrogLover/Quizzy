@@ -17,7 +17,6 @@ const TeamStream = (props) => {
     let sessionName = props.sessionName;
     let userName = props.user ? props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
 
-    const [ teamList, setTeamList ] = useState();
     const [ mySessionId, setMySessionId ] = useState(sessionName);
     const [ myUserName, setMyUserName ] = useState(userName);
     const [ session, setSession ] = useState();
@@ -41,10 +40,6 @@ const TeamStream = (props) => {
     useEffect(() => {
         props.socket.on("team lobby get token stream " + props.lobbyId, token => {
             getToken(token);
-        })
-
-        props.socket.on("leaderboard "+props.mainId, leaderboard => {
-            setTeamList(leaderboard);
         })
 
         props.socket.on("slide data "+props.mainId, data => {
@@ -295,7 +290,7 @@ const TeamStream = (props) => {
     return ( 
                 <div className="slide-stream">
                     { slideData.slide && !slideData.showLeaderboard && <SlideView quiz = {props.quiz} slide = {slideData.slide} error = {slideData.error} showAns = {slideData.showAns} timer = {slideData.timer} slideWidthPass = {slideData.slideWidthPass} toggleIcon={toggleIcon}/> }
-                    { slideData.showLeaderboard && <Leaderboard user = { props.user } teamList = { teamList } /> }
+                    { slideData.showLeaderboard && <Leaderboard user = { props.user } teamList = { props.teamList } /> }
                     <div className="hosts-cameras">
                     {subState.map((sub, i) => (
                         <div key={i} className="user-stream-wrapper">

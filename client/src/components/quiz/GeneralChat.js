@@ -6,7 +6,7 @@ import generateColour from "../../scripts/generateColour";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
-const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mainId, socket }) => {
+const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mainId, socket, leaderboard }) => {
     const [ chat, setChat ] = useState([]);
 
     useEffect(() => {
