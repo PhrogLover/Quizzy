@@ -22,7 +22,6 @@ const TeamLobby = (props) => {
     let sessionName = props.sessionName;
     let userName = props.user.name;
 
-
     const [ mySessionId, setMySessionId ] = useState(sessionName);
     const [ myUserName, setMyUserName ] = useState(userName);
     const [ session, setSession ] = useState();
@@ -492,7 +491,7 @@ const TeamLobby = (props) => {
                     </div>
                     <div id = "quiz-stream-section" className={"quiz-stream-section " + slideSize} ref={quizStreamRef}>
                         <div className="quiz-slides-view" style={quizStreamSize}>                            
-                            <TeamStream user = { props.user } sendAnswerSheet ={sendAnswerSheet} sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } answerSheetVisible={answerSheetVisible} setAnswerSheetVisible = { setAnswerSheetVisible } setEndOfQuiz = { setEndOfQuiz } />
+                            <TeamStream teamList = { props.teamList } user = { props.user } sendAnswerSheet ={sendAnswerSheet} sessionName = { props.transmitSessionName } mainId = { props.mainId } lobbyId = { props.lobbyState.id } socket = { props.socket } quiz = { props.quiz } answerSheetVisible={answerSheetVisible} setAnswerSheetVisible = { setAnswerSheetVisible } setEndOfQuiz = { setEndOfQuiz } />
                         </div>
                     </div>
                 </div>

@@ -5,23 +5,15 @@ import $ from "jquery";
 
 import TeamLobby from "../team/TeamLobby";
 
-const PlayerView = ({ gcOpen, setgcOpen, userState, setUserState, user, quiz, mainId, socket }) => {
+const PlayerView = ({ gcOpen, setgcOpen, userState, setUserState, user, quiz, mainId, socket, teamList, lobbyData }) => {
     let history = useHistory();
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
-    const [ lobbyData, setLobbyData ] = useState([]);
 
     useEffect(() => {
-        socket.on("lobby data change "+mainId, (newLobbyData) => {
-            setLobbyData(newLobbyData);
-        })
         socket.on("end lobby "+mainId, () => {
             history.push("/");
         })
-    }, [])
-
-    useEffect(() => {
-        socket.emit('lobby data call', mainId);
     }, [])
 
     function makeGrid(){
@@ -99,7 +91,7 @@ const PlayerView = ({ gcOpen, setgcOpen, userState, setUserState, user, quiz, ma
                 </>}
             { lobbyState.type === "team" && 
                 <div className="main-body">
-                    <TeamLobby gcOpen = { gcOpen } setgcOpen = { setgcOpen } userState = { userState } setUserState = { setUserState } user = { user } sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } lobbyData = { lobbyData } setLobbyState = { setLobbyState } quiz = { quiz } />
+                    <TeamLobby teamList = { teamList } gcOpen = { gcOpen } setgcOpen = { setgcOpen } userState = { userState } setUserState = { setUserState } user = { user } sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } lobbyData = { lobbyData } setLobbyState = { setLobbyState } quiz = { quiz } />
                 </div> }
         </>
      );
