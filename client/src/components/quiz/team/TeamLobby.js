@@ -100,7 +100,7 @@ const TeamLobby = (props) => {
             }
             props.socket.emit('lobby data change', props.mainId, newLobbyData);
             
-        }
+         }
     }, [])
 
     useEffect(() => {

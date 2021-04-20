@@ -120,7 +120,7 @@ const Creator = ({ user }) => {
                 type: "round",
                 title: "Insert Title",
                 img: null,
-                timeOverride: slides[i][0].timeOverride,
+                timeOverride: slides[i][0] ? slides[i][0].timeOverride : 60,
                 transition: 5,
                 endTime: 30
             })
@@ -139,7 +139,7 @@ const Creator = ({ user }) => {
                     answers: [],
                     caseSensitive: false,
                     img: null,
-                    timeOverride: slides[i][j].timeOverride,
+                    timeOverride: slides[i][j] ? slides[i][0].timeOverride : 60,
                     readTime: 6,
                     suspenseTime: 6,
                     answerShowTime: 9,
