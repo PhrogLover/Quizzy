@@ -122,9 +122,6 @@ function App() {
             <Route exact path="/login">
               <LoginDerouter />
             </Route>
-            <Route exact path="/test">
-              <TestLeaderboard user = { googleObj }/>
-            </Route>
             <Route exact path="/">
               <Homepage user={googleObj} />
               <Footer/>
