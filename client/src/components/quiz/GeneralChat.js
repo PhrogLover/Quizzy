@@ -6,7 +6,7 @@ import generateColour from "../../scripts/generateColour";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
-const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mainId, socket, leaderboard }) => {
+const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mainId, socket, leaderboard, user }) => {
     const [ chat, setChat ] = useState([]);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mai
         const message = {
             id: GetUniqueId(),
             text: text,
-            creator: "AriG7",
+            creator: user.name,
             colour: generateColour(),
             pinned: pinCheck
         }

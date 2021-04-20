@@ -72,7 +72,7 @@ const MainLobby = ({ user, quiz, id, socket }) => {
                 { userState !== "host" && <PlayerView lobbyData = { lobbyData } teamList = { teamList } gcOpen = { gcOpen } setgcOpen = { setgcOpen } lbToggle = { lbToggle } setlbToggle = { setlbToggle } userState = { userState } setUserState = { setUserState } user = { user } quiz = { quiz } socket = { socket } mainId = { id } /> }
                 { userState === "host" && <HostView lobbyData = { lobbyData } teamList = { teamList } setLeaderboard = { setLeaderboard } round={ round } user = { user } quiz = { quiz } socket = { socket } mainId = { id }/> }
                 <div className="main-chat">
-                    <GeneralChat leaderboard = { teamList } gcOpen = { gcOpen } setgcOpen = { setgcOpen } lbToggle = { lbToggle } setlbToggle = { setlbToggle } userState = {userState} mainId = { id } chatSize={ chatSize } socket = { socket } />
+                    <GeneralChat leaderboard = { teamList } gcOpen = { gcOpen } setgcOpen = { setgcOpen } lbToggle = { lbToggle } setlbToggle = { setlbToggle } userState = {userState} mainId = { id } chatSize={ chatSize } socket = { socket } user = { user } />
                 </div>
                 {lbToggle && <LeaderboardPopUp/>}
             </div>
