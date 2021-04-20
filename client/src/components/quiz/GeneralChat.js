@@ -52,6 +52,11 @@ const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mai
     const [gcDropdown, setgcDropdown] = useState(false);
     const closegcDropdown = () => setgcDropdown(false);
 
+    const handlelbPopUp = () => {
+        setgcDropdown(false);
+        setlbToggle(true)
+    }
+
     function GcDropdown() {       
     
         function DropdownItem(props){
@@ -66,7 +71,7 @@ const GeneralChat = ( { lbToggle, setlbToggle, gcOpen, setgcOpen, userState, mai
             <>
                 <ClickAwayListener onClickAway={closegcDropdown}>
                     <div className="general-menu" >
-                        <div className="leaderboard-button" onClick={() => setlbToggle(true)}>
+                        <div className="leaderboard-button" onClick={handlelbPopUp}>
                             <DropdownItem icon={"fas fa-medal"}>
                                 LeaderBoard
                             </DropdownItem>

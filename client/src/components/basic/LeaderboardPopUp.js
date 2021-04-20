@@ -22,9 +22,11 @@ const LeaderboardPopUp = ({ lbToggle, setlbToggle, teamList, user }) => {
 
     return ( <>        
             <div className="dark-filter"/>
-            <div className="leaderboard-overlay" >
-                <Leaderboard teamList ={ teamList } user = { user }/>
-            </div>
+            <ClickAwayListener onClickAway={() => setlbToggle(false)}>
+                <div className="leaderboard-overlay" >
+                    <Leaderboard teamList ={ teamList } user = { user }/>
+                </div>
+            </ClickAwayListener>
         </>
         
      );

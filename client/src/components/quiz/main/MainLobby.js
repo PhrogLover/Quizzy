@@ -74,7 +74,7 @@ const MainLobby = ({ user, quiz, id, socket }) => {
                 <div className="main-chat">
                     <GeneralChat leaderboard = { teamList } gcOpen = { gcOpen } setgcOpen = { setgcOpen } lbToggle = { lbToggle } setlbToggle = { setlbToggle } userState = {userState} mainId = { id } chatSize={ chatSize } socket = { socket } />
                 </div>
-                {lbToggle && <LeaderboardPopUp/>}
+                {lbToggle && <LeaderboardPopUp teamList = { teamList } user = { user } setlbToggle = {setlbToggle} />}
             </div>
      );
 }
