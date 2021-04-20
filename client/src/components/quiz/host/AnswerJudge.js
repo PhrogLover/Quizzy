@@ -40,16 +40,14 @@ const AnswerJudge = ({ quiz, round, setLobbyState, ans, correctAns }) => {
         }
     }, [currentSlide])
 
-    function answerAllowed() {
-        let temp = $.extend(true, [], correctAnswers);
-        temp[index].sheet.push(submittedAnswer);
-        setCorrectAnswers(temp);
-        setCurrentSlide(parse.next().value);
+    function addAnswer(index, answer) {
+        setCorrectAnswers(prevState => ([ ...prevState.slice(0, index), {...prevState[index], sheet: [...prevState[index].sheet, answer] }, ...prevState.slice(index+1) ] ));
     }
 
-    useEffect(() => {
-        console.log("CHANGED: ", currIndex);
-    }, [currIndex])
+    function answerAllowed() {
+        addAnswer(index, submittedAnswer);
+        setCurrentSlide(parse.next().value);
+    }
 
     function* answerParser() {
         //splice answer arrays into question-wise arrays instead of team-wise
@@ -104,9 +102,7 @@ const AnswerJudge = ({ quiz, round, setLobbyState, ans, correctAns }) => {
                     }
                 }
                 else {
-                    let temp = $.extend(true, [], correctAnswers);
-                    temp[j].sheet.push(orderedArray[i][j]);
-                    setCorrectAnswers(temp);
+                    addAnswer(j, orderedArray[i][j]);
                 }
                 if (currIndex.j !== 0 && currIndex.j === orderedArray[i].length-1) {
                     setCurrIndex({
