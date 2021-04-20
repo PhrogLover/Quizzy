@@ -5,7 +5,7 @@ import $ from "jquery";
 
 import TeamLobby from "../team/TeamLobby";
 
-const PlayerView = ({ user, quiz, mainId, socket }) => {
+const PlayerView = ({ gcOpen, setgcOpen, userState, setUserState, user, quiz, mainId, socket }) => {
     let history = useHistory();
 
     const [ lobbyState, setLobbyState ] = useState({ type: "main" });
@@ -58,7 +58,7 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
 
     return ( 
         <>
-            { lobbyState.type === "main" &&
+            { lobbyState.type === "main" && <>
                 <div className="main-body">
                     <div className="main-header">
                         <div className="quiz-title">{ quiz.title } by <i> { quiz.creator } </i></div>
@@ -67,31 +67,39 @@ const PlayerView = ({ user, quiz, mainId, socket }) => {
                             if Player: respect other players, don't take away the fun fron the experience by cheating, have fun. At the bottom you can choose your blah blah...
                         </div>
                     </div>
-                    <div className="lobby-body">
-                        <div className="lobby-grid" style = {makeGrid()}>
-                            { lobbyData.map((lobby, i) => (
-                                <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name, user.name, user.id))}>
-                                    <div className="lobby-grid-index">{ lobby.index }</div>            
-                                    <div className="team-name">{ lobby.name }</div>
-                                    <div className="players-in-lobby">{ lobby.players.length }/{ quiz.numberOfPlayers }</div>
-                                    <div className="players-list"> 
-                                        <div className="players-header"> Players:</div>
-                                        <div className="players-names">
-                                            { lobby.players.map(player => (
-                                                <div className="player">
-                                                    { player.name }
-                                                </div>
-                                            ))}
+                 
+                        <div className="lobby-body">
+                            
+                            <div className="lobby-grid" style = {makeGrid()}>
+                                { lobbyData.map((lobby, i) => (
+                                    <div key={i} className="lobby-grid-element" onClick={(e) => (teamLobbyHandler(lobby.id, lobby.name, user.name, user.id))}>
+                                        <div className="lobby-grid-index">{ lobby.index }</div>            
+                                        <div className="team-name">{ lobby.name }</div>
+                                        <div className="players-in-lobby">{ lobby.players.length }/{ quiz.numberOfPlayers }</div>
+                                        <div className="players-list"> 
+                                            <div className="players-header"> Players:</div>
+                                            <div className="players-names">
+                                                { lobby.players.map(player => (
+                                                    <div className="player">
+                                                        { player.name }
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                          
+                        
                     </div>
-                </div> }
+                </div> 
+                <div className="lobby-chat-right">
+                                Lobby Chat here
+                        </div>
+                </>}
             { lobbyState.type === "team" && 
                 <div className="main-body">
-                    <TeamLobby user = { user } sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } lobbyData = { lobbyData } setLobbyState = { setLobbyState } quiz = { quiz } />
+                    <TeamLobby gcOpen = { gcOpen } setgcOpen = { setgcOpen } userState = { userState } setUserState = { setUserState } user = { user } sessionName = { "TeamLobby"+lobbyState.id } mainId = { mainId } socket = { socket } transmitSessionName={"MainQuiz"+mainId} lobbyState = { lobbyState } lobbyData = { lobbyData } setLobbyState = { setLobbyState } quiz = { quiz } />
                 </div> }
         </>
      );

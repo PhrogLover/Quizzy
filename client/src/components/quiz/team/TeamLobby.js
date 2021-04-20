@@ -22,6 +22,7 @@ const TeamLobby = (props) => {
     let sessionName = props.sessionName;
     let userName = props.user.name;
 
+
     const [ mySessionId, setMySessionId ] = useState(sessionName);
     const [ myUserName, setMyUserName ] = useState(userName);
     const [ session, setSession ] = useState();
@@ -59,7 +60,10 @@ const TeamLobby = (props) => {
         const newState = {
             type: "main"
         }
+        props.setUserState("spectator");
         props.setLobbyState(newState);
+        props.setgcOpen(true);
+        console.log(props.userState);
     }
 
     useEffect(() => {
@@ -79,7 +83,10 @@ const TeamLobby = (props) => {
     useEffect(() => {
         window.addEventListener('resize', () => {setQuizStreamSize(resizeSlide())});
         window.addEventListener('beforeunload', onbeforeunload);
+        props.setUserState("player");
+        console.log(props.userState);
         joinSession();
+        
 
         return () => {
             window.removeEventListener('beforeunload', onbeforeunload);
@@ -92,6 +99,7 @@ const TeamLobby = (props) => {
                 }
             }
             props.socket.emit('lobby data change', props.mainId, newLobbyData);
+            
         }
     }, [])
 

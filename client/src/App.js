@@ -56,23 +56,10 @@ function App() {
     .then((data) => {
       console.log(data);
         if (!data.msg) {
-          const userObj = {
-            id: profileObj.googleId,
-            name: data.name,
-            imageUrl: data.imageUrl,
-            email: data.email
-          }
-          console.log(userObj)
-          setGoogleObj(userObj);
+          setGoogleObj(data);
         }
         else {
           const userObj = {
-            id: profileObj.googleId,
-            name: profileObj.name,
-            imageUrl: profileObj.imageUrl,
-            email: profileObj.email,
-          }
-          const userObjSend = {
             id: profileObj.googleId,
             name: profileObj.name,
             imageUrl: profileObj.imageUrl,
@@ -92,11 +79,10 @@ function App() {
             numberOfRatings: 1
           }
           //additional stats as well.
-          console.log(userObjSend)
           fetch('http://localhost:5000/api/profiles/add', {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
-            body: JSON.stringify(userObjSend)
+            body: JSON.stringify(userObj)
         }).then(setGoogleObj(userObj));
         }
     })
