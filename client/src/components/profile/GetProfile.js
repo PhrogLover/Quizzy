@@ -20,7 +20,7 @@ const GetProfile = ({ user, socket }) => {
             { error && <div className="error">{ error }</div> }
             { isPending && <div className="loading">Loading...</div> }
             { profile && <>
-                <Profile profile = { profile } id={1} />
+                <Profile profile = { profile } id={1} user = { user } />
                 { tab === "friends" && <ProfileFriends profile = {profile} /> }
                 { tab === "quizzes" && <ProfileQuizzes profile = {profile} user={user} socket={socket} /> }
                 { tab === "teams" && <ProfileTeams profile = {profile} /> }
