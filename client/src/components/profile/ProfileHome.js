@@ -1,13 +1,12 @@
 import "./profilehome.css";
 
-const ProfileHome = ( { profile }) => {
+const ProfileHome = ( { user }) => {
         
-    console.log(profile)
     function StatsItem(props){
         return(
             <div className = "stats-item">
                 <span>
-                { profile.name } 
+                { user.name } 
                 { props.children }
                 </span>
             </div>        
@@ -33,22 +32,22 @@ const ProfileHome = ( { profile }) => {
                             <i className="fas fa-chart-area"></i> Stats
                         </div>
                         <StatsItem >
-                        <span> joined on <i className="stat">{DateFormat( profile.registerTime )}</i> </span>
+                        <span> joined on <i className="stat">{DateFormat( user.registerTime )}</i> </span>
                         </StatsItem>
                         <StatsItem >
-                        <span> created <i className="stat">{ profile.created }</i> quizzes </span>
+                        <span> created <i className="stat">{ user.created }</i> quizzes </span>
                         </StatsItem>
                         <StatsItem >
-                        <span> won <i className="stat">{ profile.won }</i> quizzes </span>
+                        <span> won <i className="stat">{ user.won }</i> quizzes </span>
                         </StatsItem >
                         <StatsItem >
-                        <span> answered <i className="stat">{ profile.answered }</i> questions </span>
+                        <span> answered <i className="stat">{ user.answered }</i> questions </span>
                         </StatsItem>
                         <StatsItem>
-                        <span> participated in <i className="stat">{ profile.participated }</i> quizzes </span>
+                        <span> participated in <i className="stat">{ user.participated }</i> quizzes </span>
                         </StatsItem>
                         <StatsItem>
-                        <span> participated in <i className="stat">{ profile.seasonal }</i> Seasonal quizzes </span>
+                        <span> participated in <i className="stat">{ user.seasonal }</i> Seasonal quizzes </span>
                         </StatsItem>
                     </div>
                     <div className="profile-container">

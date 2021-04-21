@@ -1,6 +1,6 @@
 import "./profilefriends.css"
 
-const ProfileFriends = ({ profile }) => {
+const ProfileFriends = ({ user }) => {
     return ( 
         <div className="profile-main">       
             <div className="profile-friends">

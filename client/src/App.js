@@ -23,8 +23,6 @@ function App() {
     name: "Quizzy Admin"
   });
 
-  console.log(new Date().toString());
-
   // {
   //   email: "aryjeleng@gmail.com",
   //   familyName: "Lengvenis",

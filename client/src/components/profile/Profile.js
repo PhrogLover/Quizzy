@@ -2,7 +2,7 @@ import "./profile.css";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Profile = ({ profile, id, user }) => {
+const Profile = ({ id, user }) => {
 
     useEffect(() => {
         window.scrollTo(0, 300)
@@ -39,11 +39,11 @@ const Profile = ({ profile, id, user }) => {
                         </div>
                         </div>
                         <div className="profile-username"> 
-                            { profile.name }
+                            { user.name }
                             <div className="profile-status">
-                            { profile.status }
+                            { user.status }
                             </div>
-                            {!profile.donor &&
+                            {!user.donor &&
                             <div className="donor-award">
                                 <i className="fas fa-award"></i>
                             </div>
