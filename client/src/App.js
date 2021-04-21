@@ -12,7 +12,6 @@ import GetQuiz from './components/quiz/GetQuiz';
 import GetProfile from './components/profile/GetProfile';
 import LoginRerouter from './components/login/LoginRerouter';
 import LoginDerouter from './components/login/LoginDerouter';
-import TestLeaderboard from './components/quiz/host/TestLeaderboard';
 
 function App() {
   const [ googleObj, setGoogleObj ] = useState({
@@ -111,32 +110,36 @@ function App() {
             <Navbar user={googleObj} setGoogleObj = { setGoogleObj }/>
           </header> }
           <Switch>
-            { !googleObj && <>
+            { !googleObj && 
             <Route exact path="/login">
               <Login onSuccessGoogle = { onSuccessGoogle } onFailureGoogle = { onFailureGoogle }/>
-            </Route> 
+            </Route> }
+            { !googleObj && 
             <Route path="*">
               <LoginRerouter />
-            </Route> </>}
-            { googleObj && <>
+            </Route> }
+            { googleObj &&
             <Route exact path="/login">
               <LoginDerouter />
-            </Route>
+            </Route> }
+            { googleObj &&
             <Route exact path="/">
               <Homepage user={googleObj} />
               <Footer/>
-            </Route>
+            </Route> }
+            { googleObj &&
             <Route exact path="/profile">
               <GetProfile user={googleObj} socket={socket} />
               <Footer/>
-            </Route>
+            </Route> }
+            { googleObj &&
             <Route exact path="/mainLobby/:id">
               <GetQuiz user={googleObj} socket={socket} />
-            </Route>
+            </Route> }
+            { googleObj &&
             <Route exact path="/creator">
               <Creator user={googleObj} />
-            </Route> 
-            </>}
+            </Route> }
             { googleObj &&
               <Route path="*">
                 <NotFound />
