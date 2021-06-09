@@ -53,9 +53,9 @@ let temp = {"95a77bac-dba2-4ba9-a207-3b7bbcfe58b5": [
 lobbyData.push(temp);
 
 io.on('connection', (socket) => {
-    // console.log("New client connected");
+    console.log("New client connected", socket.id);
     socket.on('disconnect', () => {
-        //console.log('Client disconnected');
+        console.log('Client disconnected', socket.id);
     });
     socket.on('set round', (round, id) => {
         io.emit('set round '+id, round);
