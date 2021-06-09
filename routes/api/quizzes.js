@@ -2,36 +2,32 @@
 
 const express = require('express');
 const router = express.Router();
-const quizzesReal = require('../../client/json/Quizzes_save');
-const quizzes = require('../../client/json/Quizzes');
+const quizzes = require('../../client/json/Quizzes').quizzes;
 
 router.get('/homepage', (req, res) => {
-    res.json(quizzesReal.quizzes.filter(quiz => (quiz.deployIds && quiz.deployIds.length > 0)));
+    res.json(quizzes.filter(quiz => (quiz.deployIds && quiz.deployIds.length > 0)));
 });
 
 router.post('/newQuiz', (req, res) => {
     if (req.body) {
         let newQuiz = req.body;
-        newQuiz.rating = 4.3;
+        newQuiz.rating = null;
         if (newQuiz.type === "standard") {
             newQuiz.family = "-";
         }
         if (!newQuiz.category) {
             newQuiz.category = "-";
         }
-        quizzesReal.quizzes.push(newQuiz);
+        quizzes.push(newQuiz);
     }
 })
 
 router.get('/quiz/:id', (req, res) => {
-    if (req.params.id === "1" || req.params.id === "2" || req.params.id === "3" || req.params.id === "4") {
-        req.params.id = parseInt(req.params.id);
-    }
-    const found = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
+    const found = quizzes.some(quiz => (quiz.id === req.params.id));
     if (found) {
-        for (let i = 0; i < quizzesReal.quizzes.length; i++) {
-            if (quizzesReal.quizzes[i].id === req.params.id) {
-                res.json(quizzesReal.quizzes[i]);
+        for (let i = 0; i < quizzes.length; i++) {
+            if (quizzes[i].id === req.params.id) {
+                res.json(quizzes[i]);
             }
         }
         
@@ -52,7 +48,7 @@ router.get('/quiz/chat/:id', (req, res) => {
         }
     }
     else {
-        const foundInit = quizzesReal.quizzes.some(quiz => (quiz.id === req.params.id));
+        const foundInit = quizzes.some(quiz => (quiz.id === req.params.id));
         if (foundInit) {
             generalChat.push([req.params.id]);
         }
@@ -63,16 +59,16 @@ router.get('/quiz/chat/:id', (req, res) => {
 })
 
 router.get('/profile/:id', (req, res) => {
-    res.json(quizzesReal.quizzes.filter(quiz => quiz.creatorId === req.params.id));
+    res.json(quizzes.filter(quiz => quiz.creatorId === req.params.id));
 })
 
 router.put('/update', (req, res) => {
-    const found = quizzesReal.quizzes.some(quiz => quiz.id === req.body.id);
+    const found = quizzes.some(quiz => quiz.id === req.body.id);
 
     if (found) {
-        for (let i = 0; i < quizzesReal.quizzes.length; i++) {
-            if (quizzesReal.quizzes[i].id === req.body.id) {
-                quizzesReal.quizzes[i] = req.body.quiz;
+        for (let i = 0; i < quizzes.length; i++) {
+            if (quizzes[i].id === req.body.id) {
+                quizzes[i] = req.body.quiz;
                 break;
             }
         }
@@ -83,10 +79,10 @@ router.put('/update', (req, res) => {
 })
 
 router.delete('/delete', (req, res) => {
-    const found = quizzesReal.quizzes.some(quiz => quiz.id === parseInt(req.body.id));
+    const found = quizzes.some(quiz => quiz.id === parseInt(req.body.id));
 
     if (found) {
-        console.log("Deleted: ",quizzesReal.quizzes.filter(quiz => quiz.id !== parseInt(req.body.id)));
+        console.log("Deleted: ",quizzes.filter(quiz => quiz.id !== parseInt(req.body.id)));
     }
 })
 

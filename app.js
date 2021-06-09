@@ -22,7 +22,7 @@ const io = require("socket.io")(server, {
     }
 });
 
-const quizzes = require('./client/json/Quizzes_save.json').quizzes;
+const quizzes = require('./client/json/Quizzes.json').quizzes;
 const OPENVIDU_SERVER_URL = 'https://localhost:4443';
 const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
