@@ -4,7 +4,7 @@ import MainLobby from "./main/MainLobby";
 
 const GetQuiz = ({ user, socket }) => {
     const { id } = useParams();
-    const quizUrl = "http://localhost:5000/api/quizzes/quiz/" + id;
+    const quizUrl = "http://localhost:5000/api/quizzes/quiz/full/" + id;
     const {data: quiz, isPending: quizIsPending, error: quizError } = useFetch(quizUrl);
 
     return ( 

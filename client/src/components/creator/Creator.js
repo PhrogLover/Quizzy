@@ -48,9 +48,8 @@ const Creator = ({ user }) => {
 
     function init() {
         let template = [];
-        let id = 1;
         template.push({
-            id: id,
+            quizId: quiz.id,
             round: 0,
             quest: -1,
             type: "intro",
@@ -58,11 +57,9 @@ const Creator = ({ user }) => {
             family: "Insert Family Name",
             img: null
         });
-        id++;
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
             template.push([]);
             template[i].push({
-                id: id,
                 round: i,
                 quest: 0,
                 type: "round",
@@ -72,10 +69,8 @@ const Creator = ({ user }) => {
                 transition: 5,
                 endTime: 30
             })
-            id++;
             for (let j = 1; j <= quiz.numberOfQuestions; j++) {
                 template[i].push({
-                    id: id,
                     round: i,
                     quest: j,
                     type: "question",
@@ -88,7 +83,6 @@ const Creator = ({ user }) => {
                     suspenseTime: 6,
                     answerShowTime: 9,
                 });
-                id++;
             }
         }
         return template;
@@ -97,6 +91,7 @@ const Creator = ({ user }) => {
     function slidesState() {
         let template = [];
         template.push({
+            quizId: quiz.id,
             round: 0,
             quest: -1,
             type: "intro",
@@ -191,11 +186,14 @@ const Creator = ({ user }) => {
         console.log("")
         e.preventDefault();
         setIsPending(true);
-        quiz.slides = slides;
         fetch('http://localhost:5000/api/quizzes/newQuiz', {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
-            body: JSON.stringify(quiz)
+            body: JSON.stringify(
+                {
+                    quiz: quiz,
+                    slides: slides
+                })
         }).then(setIsPending(false))
         .then(history.push("/"));
     }
@@ -208,6 +206,10 @@ const Creator = ({ user }) => {
     useEffect(() => {
         setSlides(timePropagate());
     }, [quiz.timePerQuestion])
+
+    useEffect(() => {
+        console.log(slides)
+    }, [slides])
 
     const refUniqueID = React.createRef();
 

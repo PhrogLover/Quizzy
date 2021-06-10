@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const quizzes = require('../../client/json/Quizzes').quizzes;
+const slides = require('../../client/json/Slides').slides;
 
 router.get('/homepage', (req, res) => {
     res.json(quizzes.filter(quiz => (quiz.deployIds && quiz.deployIds.length > 0)));
@@ -10,7 +11,8 @@ router.get('/homepage', (req, res) => {
 
 router.post('/newQuiz', (req, res) => {
     if (req.body) {
-        let newQuiz = req.body;
+        let newQuiz = req.body.quiz;
+        let newSlides = req.body.slides;
         newQuiz.rating = null;
         if (newQuiz.type === "standard") {
             newQuiz.family = "-";
@@ -19,6 +21,7 @@ router.post('/newQuiz', (req, res) => {
             newQuiz.category = "-";
         }
         quizzes.push(newQuiz);
+        slides.push(newSlides);
     }
 })
 
@@ -31,6 +34,29 @@ router.get('/quiz/:id', (req, res) => {
             }
         }
         
+    }
+    else {
+        res.json({ msg: "There is no quiz with the id: " + req.params.id});
+    }
+})
+
+router.get('/quiz/full/:id', (req, res) => {
+    const foundSlide = slides.some(slide => (slide[0].quizId === req.params.id));
+    const foundQuiz = quizzes.some(quiz => (quiz.id === req.params.id));
+
+    if (foundSlide && foundQuiz) {
+        let quiz;
+        for (let i = 0; i < quizzes.length; i++) {
+            if (quizzes[i].id === req.params.id) {
+                quiz = quizzes[i];
+            }
+        }
+        for (let i = 0; i < slides.length; i++) {
+            if (slides[i][0].quizId === req.params.id) {
+                quiz.slides = slides[i];
+                res.json(quiz);
+            }
+        }
     }
     else {
         res.json({ msg: "There is no quiz with the id: " + req.params.id});

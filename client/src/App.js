@@ -47,7 +47,6 @@ function App() {
         return res.json();
     })
     .then((data) => {
-      console.log(data);
         if (!data.msg) {
           setGoogleObj(data);
         }
