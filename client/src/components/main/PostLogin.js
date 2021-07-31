@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import socketIOClient from "socket.io-client";
 import Navbar from '../basic/Navbar';
 import Footer from '../basic/Footer';
@@ -14,11 +14,19 @@ let sock;
 
 const PostLogin = ({ user, setGoogleObj }) => {
 
+    const [ clients, setClients ] = useState([]);
+
     const ENDPOINT = "http://localhost:5000/";
     const [ socket, setSocket ] = useState();
     
     useEffect(() => {
-      if (socket) sock = socket;
+      if (socket) {
+        sock = socket;
+        socket.emit('client update', user);
+        socket.on('client update', clientsList => {
+          setClients(clientsList);
+        })
+      }
     }, [socket])
 
     useEffect(() => {
@@ -29,7 +37,7 @@ const PostLogin = ({ user, setGoogleObj }) => {
     return ( 
         <Router>
           <header>
-            <Navbar user={user} setGoogleObj = { setGoogleObj }/>
+            <Navbar user={user} setGoogleObj = { setGoogleObj } clients ={ clients }/>
           </header>
           <Switch>
             <Route exact path="/login">

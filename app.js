@@ -27,6 +27,8 @@ const OPENVIDU_SERVER_URL = 'https://localhost:4443';
 const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
+let clients = [];
+
 let lobbyData = [];
 let temp = {"95a77bac-dba2-4ba9-a207-3b7bbcfe58b5": [
     {id: "8673b838-6f16-4580-acc8-b6809df74c3a", index: 1, players: Array(0), name: "Team Lobby 1"},
@@ -53,9 +55,18 @@ let temp = {"95a77bac-dba2-4ba9-a207-3b7bbcfe58b5": [
 lobbyData.push(temp);
 
 io.on('connection', (socket) => {
-    console.log("New client connected", socket.id);
+
+    socket.on('client update', client => {
+        client.socketId = socket.id;
+        clients.push(client);
+        io.emit('client update', clients);
+        console.log('login', clients);
+    });
+    
     socket.on('disconnect', () => {
-        console.log('Client disconnected', socket.id);
+        clients = clients.filter(client => (client.socketId !== socket.id));
+        io.emit('client update', clients);
+        console.log('logout', clients);
     });
     socket.on('set round', (round, id) => {
         io.emit('set round '+id, round);

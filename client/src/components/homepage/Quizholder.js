@@ -8,7 +8,6 @@ import HelpIcon from "../basic/HelpIcon"
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import FilterText from "./FilterText";
 
 
 const Quizholder = () => {
@@ -66,7 +65,13 @@ const Quizholder = () => {
                 </p>
                 <div className="search-bar-container">
                     <HelpIcon ref={ searchBarRef }>Search up the quiz of your choosing, use the filters on the right!</HelpIcon>
-                    <FilterText  filter = { filterSelector } filterTitle = { filterTitle } setFilterTitle = { setFilterTitle } filterCategory = { filterCategory } setFilterCategory = { setFilterCategory } filterCreator = { filterCreator } setFilterCreator = { setFilterCreator } setFilterDrop = { setFilterDrop }/>
+                    <div className="search-bar">
+                        <span id="filter-text">
+                            { filterSelector === "filter-title" && <input type="text" name="filter-title" value={filterTitle} onChange={text => (setFilterTitle(text.target.value))}></input> }
+                            { filterSelector === "filter-category" && <input type="text" name="filter-category" value={filterCategory} onChange={text => (setFilterCategory(text.target.value))}></input> }
+                            { filterSelector === "filter-creator" && <input type="text" name="filter-creator" value={filterCreator} onChange={text => (setFilterCreator(text.target.value))}></input> }
+                        </span>
+                    </div>
                     <span>
                         Search by:
                         {[DropdownButton].map((DropdownType, idx) => (
@@ -131,7 +136,7 @@ const Quizholder = () => {
                                 (filterCategory === "" || quiz.category.toLowerCase().includes(filterCategory.toLowerCase())) && 
                                 (filterCreator === "" || quiz.creator.toLowerCase().includes(filterCreator.toLowerCase())) && 
                                 (!filterSeasonal || quiz.type === "seasonal")) ) 
-                                } sortRating = { sortRating } deleteHandler = { deleteHandler } />
+                                } sortRating = { sortRating } />
                             }
                         </div>
                     </div>                        

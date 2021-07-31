@@ -10,9 +10,7 @@ import HelpIcon from './HelpIcon';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
-
-
-const Navbar = ({ user, setGoogleObj }) => {
+const Navbar = ({ user, setGoogleObj, clients }) => {
 
     const [open, setOpen] = useState(false);
     const closeDropdown = () => setOpen(false);
@@ -182,6 +180,9 @@ const Navbar = ({ user, setGoogleObj }) => {
                     </Link>
                 </div>
                 <div className="navbar-buttons-container">
+                    <div>
+                        Number of Online Players: { clients.length }
+                    </div>
                     <div className=" round-wrapper create-dropdown navbar-buttons">
                         <i className="fas fa-plus"></i>
                     </div>
