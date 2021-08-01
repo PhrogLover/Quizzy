@@ -9,9 +9,10 @@ import GetUniqueId from "../../scripts/GetUniqueId";
 // import { OverlayTrigger , Tooltip } from "react-bootstrap";
 import HelpIcon from "../basic/HelpIcon";
 import { Button } from "../basic/Button";
+import QuizSelector from "../basic/QuizSelector";
 
 
-const Creator = ({ user }) => {
+const Creator = ({ user, socket }) => {
     const history = useHistory();
 
     useEffect(() => {
@@ -219,15 +220,8 @@ const Creator = ({ user }) => {
                 <h1>Welcome to the Quiz Creator!</h1>
             </div>
             <form className="creator-form" onSubmit={ submitHandler }>
-            
                     <div className="input-uniqueid-container">
-                        <HelpIcon ref={refUniqueID}>
-                            Quickly set up your <strong> Seasonal Quiz </strong> by entering its Unique ID
-                        </HelpIcon>
-                        <div className="uniqueid-label" htmlFor="seasonal-setup-id">
-                            Unique ID:
-                        </div>
-                        <input type="text" name="seasonal-setup-id" className="uniqueid-input"/>
+                        <QuizSelector user = { user } socket = { socket } creator = { true }/>
                     </div>
                     <div className="main-form">
                         <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } GetUniqueId = { GetUniqueId }/>

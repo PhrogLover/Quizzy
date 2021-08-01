@@ -10,15 +10,10 @@ import DateTimePicker from 'react-datetime-picker';
 import FieldAttribute from "./FieldAttribute";
 // import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
 
-const Attributes = ({ onChangeHandler, quiz, GetUniqueId }) => {
-
-    function CopyClipboard(text) {
-        navigator.clipboard.writeText(text);
-    }
+const Attributes = ({ onChangeHandler, quiz }) => {
 
     const domainRef = React.createRef();
     const typeRef = React.createRef();
-    const idGenRef = React.createRef();
     const timePerQRef = React.createRef();
 
     return ( 
@@ -70,17 +65,6 @@ const Attributes = ({ onChangeHandler, quiz, GetUniqueId }) => {
                                 </span>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="id-generator-container">
-                        <div className="id-generator-main">
-                            <div className="id-gen-label" htmlFor="private-id"> <HelpIcon ref={idGenRef}>You can see this after creating the quiz in your <strong>Profile Page</strong></HelpIcon> Quiz Unique ID: </div>
-                            <input type="text" readOnly name="private-id" value ={ quiz.id } className="id-generator"/>
-                            <div className="copy-clipboard-button" onClick={() =>(CopyClipboard(quiz.id))}><i className="far fa-clipboard"></i></div>
-                        </div>
-                        <div className="id-generator-buttons">
-                            <div className="new-quizid-button" onClick={() => (onChangeHandler("id", GetUniqueId()))}><i className="fas fa-sync-alt"></i>Generate New ID</div>
-                        </div>                
                     </div>
                 </div>
 

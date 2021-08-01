@@ -55,7 +55,7 @@ const PostLogin = ({ user, setGoogleObj }) => {
               <GetQuiz user={user} socket={socket} />
             </Route>
             <Route exact path="/creator">
-              <Creator user={user} />
+              <Creator user={user} socket = { socket } />
             </Route>
               <Route path="*">
                 <NotFound />
