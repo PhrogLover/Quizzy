@@ -208,8 +208,8 @@ const Creator = ({ user }) => {
     }, [quiz.timePerQuestion])
 
     useEffect(() => {
-        console.log(slides)
-    }, [slides])
+        console.log(quiz)
+    }, [quiz])
 
     const refUniqueID = React.createRef();
 

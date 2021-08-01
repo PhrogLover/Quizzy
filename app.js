@@ -60,13 +60,11 @@ io.on('connection', (socket) => {
         client.socketId = socket.id;
         clients.push(client);
         io.emit('client update', clients);
-        console.log('login', clients);
     });
     
     socket.on('disconnect', () => {
         clients = clients.filter(client => (client.socketId !== socket.id));
         io.emit('client update', clients);
-        console.log('logout', clients);
     });
     socket.on('set round', (round, id) => {
         io.emit('set round '+id, round);

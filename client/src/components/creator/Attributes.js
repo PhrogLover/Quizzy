@@ -7,6 +7,7 @@ import { useRef, useEffect } from "react";
 
 
 import DateTimePicker from 'react-datetime-picker';
+import FieldAttribute from "./FieldAttribute";
 // import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
 
 const Attributes = ({ onChangeHandler, quiz, GetUniqueId }) => {
@@ -104,7 +105,7 @@ const Attributes = ({ onChangeHandler, quiz, GetUniqueId }) => {
             </div>
             <div className="attributes-right">
                 <div className="attributes-right-top">  
-                        <Attribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25} selected = {quiz.numberOfTeams}/>
+                        <FieldAttribute onChangeHandler = { onChangeHandler } title = "Number of Teams" name = "numberOfTeams" start = {2} finish = {25} selected = {quiz.numberOfTeams}/>
                         <Attribute onChangeHandler = { onChangeHandler } title = "Players per Team" name = "numberOfPlayers" finish = {5} selected = {quiz.numberOfPlayers}/>   
                         <Attribute onChangeHandler = { onChangeHandler } title = "Number of Rounds" name = "numberOfRounds" finish = {10} selected = {quiz.numberOfRounds}/>
                         <Attribute onChangeHandler = { onChangeHandler } title = "Questions per Round" name = "numberOfQuestions" start = {5} finish = {20} selected = {quiz.numberOfQuestions}/>
