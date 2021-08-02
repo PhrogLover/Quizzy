@@ -7,10 +7,19 @@ import { useRef, useEffect } from "react";
 
 
 import DateTimePicker from 'react-datetime-picker';
+import DatePicker from "react-date-picker";
+import TimePicker from "react-time-picker";
 import FieldAttribute from "./FieldAttribute";
 // import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
 
 const Attributes = ({ onChangeHandler, quiz }) => {
+
+    useEffect(() => {
+        // document.querySelector(".react-datetime-picker").classList.add("react-datetime-picker--open");
+        // document.querySelector(".react-datetime-picker").classList.remove("react-datetime-picker--closed");
+        // document.querySelector(".react-datetime-picker__calendar").classList.add(".react-datetime-picker__calendar--open");
+        // document.querySelector(".react-datetime-picker__calendar").classList.remove(".react-datetime-picker__calendar--closed");
+    }, [])
 
     const domainRef = React.createRef();
     const typeRef = React.createRef();
@@ -105,17 +114,23 @@ const Attributes = ({ onChangeHandler, quiz }) => {
 
         
                     <div className="date-time-container">
-                        <DateTimePicker
-                        value={ quiz.time } 
-                        onChange={ time => (onChangeHandler("time", time))}
-                        dayPlaceholder="DD"
-                        monthPlaceholder="MM"
-                        yearPlaceholder="YYYY"
-                        hourPlaceholder="HH"
-                        minutePlaceholder="mm"
-                        className= "wrapper"
-                        format="dd-MM-y HH:mm"
-                        calendarIcon={null}
+                        {/* <DateTimePicker
+                            value={ quiz.time } 
+                            onChange={ time => (onChangeHandler("time", time))}
+                            dayPlaceholder="DD"
+                            monthPlaceholder="MM"
+                            yearPlaceholder="YYYY"
+                            hourPlaceholder="HH"
+                            minutePlaceholder="mm"
+                            className= "wrapper"
+                            format="dd-MM-y HH:mm"
+                            calendarIcon={null}
+                        /> */}
+                        <DatePicker 
+                            isOpen={ true }
+                        />
+                        <TimePicker 
+                            isOpen={ true }
                         />
                     </div>
                 </div> 

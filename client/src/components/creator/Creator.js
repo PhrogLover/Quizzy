@@ -36,7 +36,7 @@ const Creator = ({ user, socket }) => {
         timePerQuestion: 60,
         seasonFreq: null,
         seasonIteration: 1,
-        time: new Date().toString(),
+        time: new Date(),
         slides: [],
         showAns: true,
         showLeaderboards: true,
