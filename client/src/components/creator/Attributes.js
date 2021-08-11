@@ -3,10 +3,7 @@ import "./attributes.css";
 import "./reactDateTime.css";
 import HelpIcon from "../basic/HelpIcon";
 import React from "react";
-import { useRef, useEffect } from "react";
-
-
-import DateTimePicker from 'react-datetime-picker';
+import { useRef, useEffect, useState } from "react";
 import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
 import FieldAttribute from "./FieldAttribute";
@@ -14,16 +11,20 @@ import FieldAttribute from "./FieldAttribute";
 
 const Attributes = ({ onChangeHandler, quiz }) => {
 
-    useEffect(() => {
-        // document.querySelector(".react-datetime-picker").classList.add("react-datetime-picker--open");
-        // document.querySelector(".react-datetime-picker").classList.remove("react-datetime-picker--closed");
-        // document.querySelector(".react-datetime-picker__calendar").classList.add(".react-datetime-picker__calendar--open");
-        // document.querySelector(".react-datetime-picker__calendar").classList.remove(".react-datetime-picker__calendar--closed");
-    }, [])
-
     const domainRef = React.createRef();
     const typeRef = React.createRef();
     const timePerQRef = React.createRef();
+
+    const [ domain, setDomain ] = useState(false);
+    const [ type, setType ] = useState(false);
+
+    useEffect(() => {
+        if (quiz.domain === "public") setDomain(false);
+        else setDomain(true);
+
+        if (quiz.type === "standard") setType(false);
+        else setType(true);
+    }, [quiz])
 
     return ( 
         <div className="attributes">
@@ -32,21 +33,21 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                 <div className="attributes-left-top">
                     <div className="quiz-title-container">
                         <div className="quiz-title-label" htmlFor="quiz-title">Quiz Title: </div>
-                        <input type="text" name="quiz-title" placeholder="My Quiz" onChange={option => (onChangeHandler("title", option.target.value))}/>
+                        <input type="text" name="quiz-title" placeholder="My Quiz" value={quiz.title} onChange={option => (onChangeHandler("title", option.target.value))}/>
                     </div>
 
 
 
                     <div className="quiz-category-container">
                         <div className="quiz-category-label" htmlFor="quiz-category">Main Theme/Category: </div>
-                        <input type="text" name="quiz-category" placeholder="General Knowledge" onChange={option => (onChangeHandler("category", option.target.value))}/>
+                        <input type="text" name="quiz-category" placeholder="General Knowledge" value={quiz.category} onChange={option => (onChangeHandler("category", option.target.value))}/>
                     </div>
 
                     <div className="main-toggle-container">
                         <div className="domain-container">
                             <div className="domain-label" htmlFor="quiz-domain"> <HelpIcon ref={domainRef}><strong>Private Quizzes</strong> can only be played by users with the ID. <strong>Public Quizzes</strong> can be joined by anyone.</HelpIcon> Quiz Domain: </div>
                             <div className="domain-picker-container">
-                                <input onChange={change => (onChangeHandler("domain", change.target.checked))} id="domain-toggle" className="display-none" type="checkbox"/>
+                                <input checked={ domain } onChange={change => {onChangeHandler("domain", change.target.checked); setDomain(change.target.checked)}} id="domain-toggle" className="display-none" type="checkbox"/>
                                 <span className="toggle-label">
                                     Public
                                 </span>
@@ -62,7 +63,7 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                         <div className="type-container">
                             <div className="type-label" htmlFor="quiz-type"> <HelpIcon ref={typeRef}><strong>Seasonal Quizzes</strong> repeat every week on the same day. <strong>Standard Quizzes</strong> can be played once.</HelpIcon> Quiz Type: </div>
                             <div className="type-picker-container">
-                                <input onChange={change => (onChangeHandler("type", change.target.checked))} id="type-toggle" className="display-none" type="checkbox"/>
+                                <input checked= { type } onChange={change => {onChangeHandler("type", change.target.checked); setType(change.target.checked)}} id="type-toggle" className="display-none" type="checkbox"/>
                                 <span className="toggle-label">
                                     Standard
                                 </span>

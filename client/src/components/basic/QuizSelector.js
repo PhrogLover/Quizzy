@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { useState } from "react";
 import GetUniqueId from "../../scripts/GetUniqueId";
 
-const QuizSelector = ({ socket, user, creator = false }) => {
+const QuizSelector = ({ socket, user, creator = false, setQuiz }) => {
     let history = useHistory();
 
     const quizUrl = `http://localhost:5000/api/quizzes/profile/${user.id}`;
@@ -100,7 +100,7 @@ const QuizSelector = ({ socket, user, creator = false }) => {
                                 </div>
                             </div>
                             <div className="quiz-item-buttons">
-                                <button className="edit-quiz-button">
+                                <button className="edit-quiz-button" onClick={() => (setQuiz(quiz.id))}>
                                     <i className="fas fa-edit"></i>
                                     Edit
                                 </button>           

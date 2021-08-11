@@ -8,6 +8,7 @@ import SlideEditor from "./SlideEditor";
 import GetUniqueId from "../../scripts/GetUniqueId";
 // import { OverlayTrigger , Tooltip } from "react-bootstrap";
 import HelpIcon from "../basic/HelpIcon";
+import useFetch from "../../hooks/useFetch";
 import { Button } from "../basic/Button";
 import QuizSelector from "../basic/QuizSelector";
 
@@ -154,6 +155,18 @@ const Creator = ({ user, socket }) => {
         return template;
     }
 
+    function changeQuiz(id) {
+        const quizUrl = "http://localhost:5000/api/quizzes/quiz/full/" + id;
+        
+        fetch(quizUrl)
+        .then(res => {return res.json()})
+        .then(quiz => {
+            setSlides(quiz.slides);
+            quiz.slides = [];
+            setQuiz(quiz);
+        });
+    }
+
     function timePropagate() {
         let template = [...slides];
         for (let i = 1; i <= quiz.numberOfRounds; i++) {
@@ -221,7 +234,7 @@ const Creator = ({ user, socket }) => {
             </div>
             <form className="creator-form" onSubmit={ submitHandler }>
                     <div className="input-uniqueid-container">
-                        <QuizSelector user = { user } socket = { socket } creator = { true }/>
+                        <QuizSelector user = { user } socket = { socket } creator = { true } setQuiz = { changeQuiz }/>
                     </div>
                     <div className="main-form">
                         <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } GetUniqueId = { GetUniqueId }/>
