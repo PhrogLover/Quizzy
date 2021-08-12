@@ -25,6 +25,28 @@ router.post('/newQuiz', (req, res) => {
     }
 })
 
+router.put('/newQuiz', (req, res) => {
+    if (req.body) {
+        let newQuiz = req.body.quiz;
+        let newSlides = req.body.slides;
+        console.log("HELLO")
+        
+        for (let i = 0; i < quizzes.length; i++) {
+            if (quizzes[i].id === newQuiz.id) {
+                quizzes[i] = newQuiz;
+                break;
+            }
+        }
+
+        for (let i = 0; i < slides.length; i++) {
+            if (slides[i].quizId === newQuiz.id) {
+                slides[i] = newSlides;
+                break;
+            }
+        }
+    }
+})
+
 router.get('/quiz/:id', (req, res) => {
     const found = quizzes.some(quiz => (quiz.id === req.params.id));
     if (found) {

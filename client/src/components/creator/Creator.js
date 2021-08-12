@@ -20,6 +20,7 @@ const Creator = ({ user, socket }) => {
         window.scrollTo(0, 0)
       }, [])
     
+    const [ editing, setEditing ] = useState(false);
     const [ isPending, setIsPending ] = useState(false);
     const [ quiz, setQuiz] = useState({
         id: GetUniqueId(),
@@ -157,14 +158,15 @@ const Creator = ({ user, socket }) => {
 
     function changeQuiz(id) {
         const quizUrl = "http://localhost:5000/api/quizzes/quiz/full/" + id;
-        
+
         fetch(quizUrl)
         .then(res => {return res.json()})
         .then(quiz => {
             setSlides(quiz.slides);
             quiz.slides = [];
             setQuiz(quiz);
-        });
+        })
+        .then(setEditing(true));
     }
 
     function timePropagate() {
@@ -196,25 +198,63 @@ const Creator = ({ user, socket }) => {
         setQuiz(temp);
     }
 
+    function saveChanges() {
+        setIsPending(true);
+        if (editing) {
+            fetch('http://localhost:5000/api/quizzes/newQuiz', {
+                method: 'PUT',
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(
+                    {
+                        quiz: quiz,
+                        slides: slides
+                    })
+            }).then(setIsPending(false));
+        }
+        else {
+            fetch('http://localhost:5000/api/quizzes/newQuiz', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(
+                    {
+                        quiz: quiz,
+                        slides: slides
+                    })
+            }).then(setIsPending(false));
+        }
+    }
+
     function submitHandler(e) {
-        console.log("")
         e.preventDefault();
         setIsPending(true);
-        fetch('http://localhost:5000/api/quizzes/newQuiz', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify(
-                {
-                    quiz: quiz,
-                    slides: slides
-                })
-        }).then(setIsPending(false))
-        .then(history.push("/"));
+        if (editing) {
+            fetch('http://localhost:5000/api/quizzes/newQuiz', {
+                method: 'PUT',
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(
+                    {
+                        quiz: quiz,
+                        slides: slides
+                    })
+            }).then(setIsPending(false))
+            .then(history.push("/"));
+        }
+        else {
+            fetch('http://localhost:5000/api/quizzes/newQuiz', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(
+                    {
+                        quiz: quiz,
+                        slides: slides
+                    })
+            }).then(setIsPending(false))
+            .then(history.push("/"));
+        }
     }
 
     useEffect(() => {
         setSlides(slidesState());
-        console.log(quiz);
     }, [quiz.id, quiz.title, quiz.category, quiz.family, quiz.type, quiz.domain, quiz.numberOfPlayers, quiz.numberOfQuestions, quiz.numberOfRounds, quiz.numberOfTeams, quiz.time, quiz.seasonFreq, quiz.showAns])
 
     useEffect(() => {
@@ -249,13 +289,19 @@ const Creator = ({ user, socket }) => {
                                 </Button>
                             </div>
                             <div className="button-gap"/>
-                            <Button buttonType="submit" buttonStyle="btn--solid" buttonColour="btn--primary-colour">
-                                <i className="fas fa-save"></i> Save Draft & Exit 
-                            </Button>
+                            <div onClick={ saveChanges }>
+                                <Button buttonType="button" buttonStyle="btn--solid" buttonColour="btn--primary-colour">
+                                    <i className="fas fa-save"></i> Save Changes
+                                </Button>
+                            </div>
                             <div className="button-gap"/>
-                            <Button buttonType="submit" buttonStyle="btn--solid" buttonColour="btn--green-colour">
+                            { !editing && <Button buttonType="submit" buttonStyle="btn--solid" buttonColour="btn--green-colour">
                                 Submit <i className="fas fa-share"></i>
-                            </Button>
+                            </Button>}
+                            { editing && <Button buttonType="submit" buttonStyle="btn--solid" buttonColour="btn--green-colour">
+                                Save & Exit <i className="fas fa-share"></i>
+                            </Button>}
+
                         </div>
                         
                         }

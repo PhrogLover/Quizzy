@@ -3,7 +3,7 @@ import "./attributes.css";
 import "./reactDateTime.css";
 import HelpIcon from "../basic/HelpIcon";
 import React from "react";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
 import FieldAttribute from "./FieldAttribute";
@@ -129,9 +129,11 @@ const Attributes = ({ onChangeHandler, quiz }) => {
                         /> */}
                         <DatePicker 
                             isOpen={ true }
+                            value = { quiz.time.toInteger }
                         />
                         <TimePicker 
                             isOpen={ true }
+                            value = { quiz.time.toInteger }
                         />
                     </div>
                 </div> 
