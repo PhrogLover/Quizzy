@@ -29,7 +29,7 @@ const FieldAttribute = ({ onChangeHandler, title, name, start = 1, finish, selec
                 { title }:
             </div>
             <div className="select-container">
-                <input type="text" value={ selected } onChange={(selecteded) => { setCheckVal(selecteded.target.value); setError("") }}></input>
+                <input type="text" size={1} value={ selected } onChange={(selecteded) => { setCheckVal(selecteded.target.value); setError("") }}></input>
             </div>
             <div>
                 { error }

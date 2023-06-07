@@ -273,9 +273,9 @@ const Creator = ({ user, socket }) => {
                 <h1>Welcome to the Quiz Creator!</h1>
             </div>
             <form className="creator-form" onSubmit={ submitHandler }>
-                    <div className="input-uniqueid-container">
+                    {/* <div className="input-uniqueid-container">
                         <QuizSelector user = { user } socket = { socket } creator = { true } setQuiz = { changeQuiz }/>
-                    </div>
+                    </div> */}
                     <div className="main-form">
                         <Attributes quiz = { quiz } onChangeHandler = { onChangeHandler } GetUniqueId = { GetUniqueId }/>
                     
