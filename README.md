@@ -16,11 +16,11 @@ This webapp was born out of a need for connection and collaboration during the C
 
 ## Features
 
-- *Real-time quiz sessions* using WebRTC Socket.IO which allow for voice and video communication, text chat, transmission of slides, answer sheets and results, enveloping the full experience of what makes a quiz fun and engaging
-- *Quiz creation and editing tools* which offer a large amount of flexibility by allowing to change the type of the quiz, number of teams, players per team, rounds, questions per round and many other nuanses. The quizzes are then saved in the user's profile, where they can be edited at a moment's notice or set to air at a specific date and time.
-- *Profiles* which store quizzes and statistics about how many quizzes were participated, created, won, etc.
-- *Quiz lobby* format where every player is allowed multiple layers of interaction: with every player part of the quiz via the quiz chat, with teammates via voice and video and group chat. The lobby also affords important messages to be conveyed by the host, quiz flow controls and a judging system, which helps the host judge answers after each round/quiz.
-- *Authentication with Google OAuth 2.0* API for easier registration and login.
+- **Real-time quiz sessions** using WebRTC Socket.IO which allow for voice and video communication, text chat, transmission of slides, answer sheets and results, enveloping the full experience of what makes a quiz fun and engaging
+- **Quiz creation and editing tools** which offer a large amount of flexibility by allowing to change the type of the quiz, number of teams, players per team, rounds, questions per round and many other nuanses. The quizzes are then saved in the user's profile, where they can be edited at a moment's notice or set to air at a specific date and time.
+- **Profiles** which store quizzes and statistics about how many quizzes were participated, created, won, etc.
+- **Quiz lobby** format where every player is allowed multiple layers of interaction: with every player part of the quiz via the quiz chat, with teammates via voice and video and group chat. The lobby also affords important messages to be conveyed by the host, quiz flow controls and a judging system, which helps the host judge answers after each round/quiz.
+- **Authentication with Google OAuth 2.0** API for easier registration and login.
 
 *Preview of quiz lobby:*
 ![Quiz lobby Img](https://github.com/PhrogLover/QuizWebApp/blob/main/img/Lobby-screen.png?raw=true)
