@@ -27,6 +27,8 @@ This webapp was born out of a need for connection and collaboration during the C
 
 *Preview of team lobby:*
 ![Team lobby Img](https://github.com/PhrogLover/QuizWebApp/blob/main/img/Lobby.png?raw=true)
+*Note that lobby is not activated along with the lobby chat as that is dependent on OpenVidu server to be active.*
+
 
 ## Installation & Usage
 Clone the repository and navigate to the project directory. Run the following commands:
