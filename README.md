@@ -23,7 +23,7 @@ This webapp was born out of a need for connection and collaboration during the C
 - *Authentication with Google OAuth 2.0* API for easier registration and login.
 
 *Preview of quiz lobby:*
-![Quiz lobby Img](https://github.com/PhrogLover/QuizWebApp/blob/main/img/Quiz-screen.png?raw=true)
+![Quiz lobby Img](https://github.com/PhrogLover/QuizWebApp/blob/main/img/Lobby-screen.png?raw=true)
 
 *Preview of team lobby:*
 ![Team lobby Img](https://github.com/PhrogLover/QuizWebApp/blob/main/img/Lobby.png?raw=true)
